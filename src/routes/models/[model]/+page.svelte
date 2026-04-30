@@ -37,7 +37,8 @@
 	}
 
 	async function copyCommand(repo: string, quant: string) {
-		const cmd = `llama serve -hf ${repo}:${quant}`;
+		const cmd = `llama-server -hf ${repo}:${quant}`;
+		// TODO: should be  `llama serve -hf ${repo}:${quant}`
 		const ok = await copyToClipboard(cmd);
 		if (!ok) {
 			toast.error('Could not copy to clipboard');
