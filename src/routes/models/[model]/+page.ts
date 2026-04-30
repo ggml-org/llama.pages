@@ -49,7 +49,7 @@ function quantsFromSiblings(siblings: { rfilename: string }[]): string[] {
 		if (partMatch && partMatch[1] !== '00001') continue;
 		const stripped = partMatch ? base.replace(/-\d{5}-of-\d{5}$/, '') : base;
 		const m = stripped.match(/(?:^|-)((?:UD-|i1-)?(?:IQ\d|Q\d|BF\d+|F\d+|MXFP\d+|TQ\d)[\w-]*)$/i);
-		const label = m ? m[1] : stripped;
+		const label = (m ? m[1] : stripped).toUpperCase();
 		if (label.length >= 10) continue;
 		if (!seen.has(label)) {
 			seen.add(label);
