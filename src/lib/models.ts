@@ -1,15 +1,9 @@
-export type ModelRepo = {
-	name: string;
-	quants?: string[];
-};
-
 export type Model = {
 	id: string;
 	slug: string;
 	name: string;
 	params: string;
 	description: string;
-	repos: ModelRepo[];
 };
 
 export const ORG_AVATARS: Record<string, string> = {
@@ -36,83 +30,48 @@ export function repoAuthor(name: string) {
 	return name.split('/')[0];
 }
 
-export const DEFAULT_QUANTS = ['Q4_0', 'Q4_K_M', 'Q5_K_M', 'Q6_K', 'Q8_0'];
-
 export const MODELS: Model[] = [
 	{
 		id: 'Qwen/Qwen3.6-27B',
 		slug: 'Qwen3.6-27B',
 		name: 'Qwen3.6-27B',
 		params: '27B params',
-		description: 'Coding & reasoning. Single-GPU sweet spot.',
-		repos: [
-			{ name: 'unsloth/Qwen3.6-27B-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'bartowski/Qwen_Qwen3.6-27B-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'lmstudio-community/Qwen3.6-27B-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'ggml-org/Qwen3.6-27B-GGUF', quants: DEFAULT_QUANTS }
-		]
+		description: 'Coding & reasoning. Single-GPU sweet spot.'
 	},
 	{
 		id: 'Qwen/Qwen3.6-35B-A3B',
 		slug: 'Qwen3.6-35B-A3B',
 		name: 'Qwen3.6-35B-A3B',
 		params: '35B MoE · 3B active',
-		description: 'MoE: 35B-class quality at 3B-class speed.',
-		repos: [
-			{ name: 'unsloth/Qwen3.6-35B-A3B-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'bartowski/Qwen_Qwen3.6-35B-A3B-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'lmstudio-community/Qwen3.6-35B-A3B-GGUF', quants: DEFAULT_QUANTS }
-		]
+		description: 'MoE: 35B-class quality at 3B-class speed.'
 	},
 	{
 		id: 'google/gemma-4-26B-A4B-it',
 		slug: 'gemma-4-26B-A4B',
 		name: 'Gemma-4-26B-A4B',
 		params: '26B MoE · 4B active',
-		description: "Google's desktop MoE. Strong reasoning, fast inference.",
-		repos: [
-			{ name: 'unsloth/gemma-4-26B-A4B-it-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'ggml-org/gemma-4-26B-A4B-it-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'bartowski/google_gemma-4-26B-A4B-it-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'lmstudio-community/gemma-4-26B-A4B-it-GGUF', quants: DEFAULT_QUANTS }
-		]
+		description: "Google's desktop MoE. Strong reasoning, fast inference."
 	},
 	{
 		id: 'google/gemma-4-E4B-it',
 		slug: 'Gemma-4-E4B',
 		name: 'Gemma-4-E4B',
 		params: '4B effective',
-		description: 'Tiny footprint. Runs on phones and low-end laptops.',
-		repos: [
-			{ name: 'unsloth/gemma-4-E4B-it-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'bartowski/google_gemma-4-E4B-it-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'lmstudio-community/gemma-4-E4B-it-GGUF', quants: DEFAULT_QUANTS }
-		]
+		description: 'Tiny footprint. Runs on phones and low-end laptops.'
 	},
 	{
 		id: 'openai/gpt-oss-20b',
 		slug: 'gpt-oss-20b',
 		name: 'gpt-oss-20b',
 		params: '20B params',
-		description: "OpenAI's open weights. Frontier reasoning, local.",
-		repos: [
-			{ name: 'unsloth/gpt-oss-20b-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'ggml-org/gpt-oss-20b-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'lmstudio-community/gpt-oss-20b-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'bartowski/openai_gpt-oss-20b-GGUF', quants: DEFAULT_QUANTS }
-		]
+		description: "OpenAI's open weights. Frontier reasoning, local."
 	},
 	{
 		id: 'stepfun-ai/Step-3.5-Flash',
 		slug: 'Step-3.5-Flash',
 		name: 'Step-3.5-Flash',
 		params: 'Flash variant',
-		description: 'Snappy generalist for everyday chat and writing.',
-		repos: [
-			{ name: 'bartowski/stepfun-ai_Step-3.5-Flash-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'ggml-org/Step-3.5-Flash-GGUF', quants: DEFAULT_QUANTS },
-			{ name: 'ubergarm/Step-3.5-Flash-GGUF', quants: DEFAULT_QUANTS }
-		]
+		description: 'Snappy generalist for everyday chat and writing.'
 	}
 ];
 
