@@ -8,7 +8,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		headers: { 'user-agent': 'curl/8.0' }
 	});
 	if (!res.ok) {
-		error(502, `Failed to fetch installama.sh: ${res.status}`);
+		throw error(502, `Failed to fetch installama.sh: ${res.status}`);
 	}
 	const body = await res.text();
 	return new Response(body, {
