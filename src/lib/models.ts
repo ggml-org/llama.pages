@@ -13,17 +13,7 @@ export const ORG_AVATARS: Record<string, string> = {
 	openai:
 		'https://cdn-avatars.huggingface.co/v1/production/uploads/68783facef79a05727260de3/UPX5RQxiPGA-ZbBmArIKq.png',
 	'stepfun-ai':
-		'https://cdn-avatars.huggingface.co/v1/production/uploads/644f7e6233ac8f46fa0b9e26/CmF2ocXhkr2UtHXgmwq7-.png',
-	unsloth:
-		'https://cdn-avatars.huggingface.co/v1/production/uploads/62ecdc18b72a69615d6bd857/E4lkPz1TZNLzIFr_dR273.png',
-	'ggml-org':
-		'https://cdn-avatars.huggingface.co/v1/production/uploads/63148d3b996c52bf0142cdbe/HXyNkyB0_nHI5WDNdiKHZ.png',
-	bartowski:
-		'https://cdn-avatars.huggingface.co/v1/production/uploads/6435718aaaef013d1aec3b8b/XKf-8MA47tjVAM6SCX0MP.jpeg',
-	'lmstudio-community':
-		'https://cdn-avatars.huggingface.co/v1/production/uploads/64445e5f1bc692d87b27e183/Quwh3tlKXa1y7aduVfxZi.png',
-	ubergarm:
-		'https://cdn-avatars.huggingface.co/v1/production/uploads/65d3e4b45bea2700d1f7b89e/xJhcJFQlo-_TvAPbCxyqE.jpeg'
+		'https://cdn-avatars.huggingface.co/v1/production/uploads/644f7e6233ac8f46fa0b9e26/CmF2ocXhkr2UtHXgmwq7-.png'
 };
 
 export function repoAuthor(name: string) {

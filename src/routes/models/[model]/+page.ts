@@ -106,9 +106,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
 					authorInfos.set(a, await fetchAuthorInfo(a));
 				})
 			);
+			const seenAuthors = new Set<string>();
 			repos = data.flatMap((m) => {
 				const info = authorInfos.get(m.author);
 				if (!info) return [];
+				if (seenAuthors.has(m.author)) return [];
+				seenAuthors.add(m.author);
 				return [
 					{
 						id: m.id,
