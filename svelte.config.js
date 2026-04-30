@@ -18,6 +18,9 @@ const config = {
 		adapter: adapter(),
 		output: {
 			bundleStrategy: 'single'
+		},
+		prerender: {
+			entries: ['*', '/install.sh']
 		}
 	},
 	preprocess: [mdsvex({ extensions: ['.svx', '.md'] })],
