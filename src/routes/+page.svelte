@@ -3,7 +3,7 @@
 	import { toast } from 'svelte-sonner';
 	import { resolve } from '$app/paths';
 	import SiteHeader from '$lib/components/SiteHeader.svelte';
-	import { MODELS, ORG_AVATARS } from '$lib/models';
+	import { MODELS, ORG_AVATARS, repoAuthor } from '$lib/models';
 
 	const HW = 'https://huggingface.co/front/assets/hardware';
 	const HARDWARE_ROWS = [
@@ -216,8 +216,8 @@ pi</code
 					class="group bg-foreground/[0.04] hover:bg-foreground/[0.07] flex items-center gap-2 rounded-xl px-5 py-4 transition-colors"
 				>
 					<img
-						src={ORG_AVATARS[model.org]}
-						alt="{model.org} avatar"
+						src={ORG_AVATARS[repoAuthor(model.id)]}
+						alt="{repoAuthor(model.id)} avatar"
 						class="size-4 shrink-0 rounded-md"
 					/>
 					<div class="flex shrink-0 items-center gap-2">

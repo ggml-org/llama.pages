@@ -2,7 +2,7 @@
 	import { Play, Check, ArrowUpRight } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
 	import SiteHeader from '$lib/components/SiteHeader.svelte';
-	import { ORG_AVATARS, repoOrg } from '$lib/models';
+	import { ORG_AVATARS, repoAuthor } from '$lib/models';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -63,7 +63,11 @@
 	<SiteHeader />
 
 	<section class="pt-16 pb-12">
-		<img src={ORG_AVATARS[model.org]} alt="{model.org} avatar" class="mb-3 size-10 rounded-md" />
+		<img
+			src={ORG_AVATARS[repoAuthor(model.id)]}
+			alt="{repoAuthor(model.id)} avatar"
+			class="mb-3 size-10 rounded-md"
+		/>
 		<h1 class="text-foreground text-2xl font-semibold tracking-tight">{model.name}</h1>
 		<div class="mt-1.5 mb-3">
 			<span
@@ -82,10 +86,10 @@
 			{#each model.repos as repo (repo.name)}
 				<div class="flex items-center justify-between gap-4 px-3.5 py-3">
 					<div class="flex items-center gap-2.5">
-						{#if ORG_AVATARS[repoOrg(repo.name)]}
+						{#if ORG_AVATARS[repoAuthor(repo.name)]}
 							<img
-								src={ORG_AVATARS[repoOrg(repo.name)]}
-								alt="{repoOrg(repo.name)} avatar"
+								src={ORG_AVATARS[repoAuthor(repo.name)]}
+								alt="{repoAuthor(repo.name)} avatar"
 								class="size-5 shrink-0 rounded-sm"
 							/>
 						{/if}

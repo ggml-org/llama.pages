@@ -4,9 +4,9 @@ export type ModelRepo = {
 };
 
 export type Model = {
+	id: string;
 	slug: string;
 	name: string;
-	org: string;
 	params: string;
 	description: string;
 	repos: ModelRepo[];
@@ -32,7 +32,7 @@ export const ORG_AVATARS: Record<string, string> = {
 		'https://cdn-avatars.huggingface.co/v1/production/uploads/65d3e4b45bea2700d1f7b89e/xJhcJFQlo-_TvAPbCxyqE.jpeg'
 };
 
-export function repoOrg(name: string) {
+export function repoAuthor(name: string) {
 	return name.split('/')[0];
 }
 
@@ -40,9 +40,9 @@ export const DEFAULT_QUANTS = ['Q4_0', 'Q4_K_M', 'Q5_K_M', 'Q6_K', 'Q8_0'];
 
 export const MODELS: Model[] = [
 	{
+		id: 'Qwen/Qwen3.6-27B',
 		slug: 'Qwen3.6-27B',
 		name: 'Qwen3.6-27B',
-		org: 'Qwen',
 		params: '27B params',
 		description: 'Coding & reasoning. Single-GPU sweet spot.',
 		repos: [
@@ -53,9 +53,9 @@ export const MODELS: Model[] = [
 		]
 	},
 	{
+		id: 'Qwen/Qwen3.6-35B-A3B',
 		slug: 'Qwen3.6-35B-A3B',
 		name: 'Qwen3.6-35B-A3B',
-		org: 'Qwen',
 		params: '35B MoE · 3B active',
 		description: 'MoE: 35B-class quality at 3B-class speed.',
 		repos: [
@@ -65,9 +65,9 @@ export const MODELS: Model[] = [
 		]
 	},
 	{
+		id: 'google/gemma-4-26B-A4B-it',
 		slug: 'gemma-4-26B-A4B',
 		name: 'Gemma-4-26B-A4B',
-		org: 'google',
 		params: '26B MoE · 4B active',
 		description: "Google's desktop MoE. Strong reasoning, fast inference.",
 		repos: [
@@ -78,9 +78,9 @@ export const MODELS: Model[] = [
 		]
 	},
 	{
+		id: 'google/gemma-4-E4B-it',
 		slug: 'Gemma-4-E4B',
 		name: 'Gemma-4-E4B',
-		org: 'google',
 		params: '4B effective',
 		description: 'Tiny footprint. Runs on phones and low-end laptops.',
 		repos: [
@@ -90,9 +90,9 @@ export const MODELS: Model[] = [
 		]
 	},
 	{
+		id: 'openai/gpt-oss-20b',
 		slug: 'gpt-oss-20b',
 		name: 'gpt-oss-20b',
-		org: 'openai',
 		params: '20B params',
 		description: "OpenAI's open weights. Frontier reasoning, local.",
 		repos: [
@@ -103,9 +103,9 @@ export const MODELS: Model[] = [
 		]
 	},
 	{
+		id: 'stepfun-ai/Step-3.5-Flash',
 		slug: 'Step-3.5-Flash',
 		name: 'Step-3.5-Flash',
-		org: 'stepfun-ai',
 		params: 'Flash variant',
 		description: 'Snappy generalist for everyday chat and writing.',
 		repos: [
