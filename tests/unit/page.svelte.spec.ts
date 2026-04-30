@@ -15,16 +15,19 @@ describe('+page.svelte', () => {
 			.toBeInTheDocument();
 
 		const githubLink = page.getByRole('link', { name: 'download from GitHub' });
-		await expect.element(githubLink).toHaveAttribute(
-			'href',
-			'https://github.com/ggml-org/llama.cpp/releases'
-		);
+		await expect
+			.element(githubLink)
+			.toHaveAttribute('href', 'https://github.com/ggml-org/llama.cpp/releases');
 	});
 
 	it('copies install command and toggles icon after click', async () => {
 		const writeText = vi.fn().mockResolvedValue(undefined);
 
-		if (navigator.clipboard && 'writeText' in navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+		if (
+			navigator.clipboard &&
+			'writeText' in navigator.clipboard &&
+			typeof navigator.clipboard.writeText === 'function'
+		) {
 			vi.spyOn(navigator.clipboard, 'writeText').mockImplementation(writeText);
 		} else {
 			Object.defineProperty(navigator, 'clipboard', {
