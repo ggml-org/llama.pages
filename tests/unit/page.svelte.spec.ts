@@ -3,21 +3,18 @@ import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import HomePage from '../../src/routes/+page.svelte';
 
+const INSTALL_COMMAND = 'curl -fsSL https://llama.app/install.sh | bash';
+
 describe('+page.svelte', () => {
-	it('renders install command and GitHub download link', async () => {
+	it('renders install command and package manager link', async () => {
 		render(HomePage);
 
-		await expect
-			.element(page.getByRole('heading', { level: 1 }))
-			.toHaveTextContent('Install llama.cpp on your system');
-		await expect
-			.element(page.getByText('curl -fsSL https://installama.sh | bash'))
-			.toBeInTheDocument();
+		await expect.element(page.getByText(INSTALL_COMMAND)).toBeInTheDocument();
 
-		const githubLink = page.getByRole('link', { name: 'download from GitHub' });
+		const packageManagersLink = page.getByRole('link', { name: 'Package managers' });
 		await expect
-			.element(githubLink)
-			.toHaveAttribute('href', 'https://github.com/ggml-org/llama.cpp/releases');
+			.element(packageManagersLink)
+			.toHaveAttribute('href', 'https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md');
 	});
 
 	it('copies install command and toggles icon after click', async () => {
@@ -42,7 +39,7 @@ describe('+page.svelte', () => {
 		await expect.element(copyButton).toBeInTheDocument();
 		await copyButton.click();
 
-		expect(writeText).toHaveBeenCalledWith('curl -fsSL https://installama.sh | bash');
+		expect(writeText).toHaveBeenCalledWith(INSTALL_COMMAND);
 		await expect.element(page.getByRole('button', { name: 'Copied command' })).toBeInTheDocument();
 	});
 });
