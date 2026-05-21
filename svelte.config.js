@@ -20,7 +20,7 @@ const config = {
 			bundleStrategy: 'single'
 		},
 		prerender: {
-			entries: ['*', '/install.sh']
+			entries: ['*']
 		}
 	},
 	preprocess: [mdsvex({ extensions: ['.svx', '.md'] })],
