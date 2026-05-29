@@ -73,7 +73,7 @@
 	}
 </script>
 
-<main class="mx-auto w-full max-w-5xl px-8 md:px-16">
+<main class="mx-auto w-full max-w-5xl px-6 md:px-16">
 	<SiteHeader />
 
 	<section class="flex flex-col items-center pt-16 pb-12">
@@ -90,11 +90,13 @@
 			/></svg
 		>
 
-		<div class="bg-foreground/[0.04] w-full max-w-2xl rounded-xl">
+		<div class="bg-foreground/[0.04] w-full max-w-2xl rounded-xl border border-secondary">
 			<div class="flex items-center justify-between gap-4 px-6 py-5">
-				<code class="text-foreground/90 font-mono text-[15px]">{installCommand}</code>
+				<code class="text-foreground/90 min-w-0 flex-1 truncate font-mono text-[15px]"
+					>{installCommand}</code
+				>
 				<button
-					class="text-foreground/70 hover:text-foreground cursor-pointer"
+					class="text-foreground/70 hover:text-foreground shrink-0 cursor-pointer"
 					aria-label={copied ? 'Copied command' : 'Copy command'}
 					onclick={handleCopy}
 				>
@@ -151,9 +153,9 @@
 	</section>
 
 	<section class="grid grid-cols-1 items-center gap-12 pt-12 pb-24 md:grid-cols-2">
-		<div class="relative md:order-1">
+		<div class="relative md:order-1 bg-foreground/[0.04] rounded-xl overflow-hidden border border-secondary">
 			<pre
-				class="bg-foreground/[0.04] text-foreground/90 overflow-x-auto rounded-xl p-6 font-mono text-[15px]"><code
+				class="text-foreground/90 overflow-x-auto p-6 font-mono text-[15px]"><code
 					><span class="opacity-50"># 1. Serve a model</span>
 llama serve
 
@@ -200,7 +202,7 @@ pi</code
 				models, same hand-tuned kernels for every GPU and CPU.
 			</p>
 		</div>
-		<div class="bg-foreground/[0.04] space-y-2 overflow-hidden rounded-xl p-6">
+		<div class="bg-foreground/[0.04] space-y-2 overflow-hidden rounded-xl p-6 border border-secondary">
 			{#each HARDWARE_ROWS as row, i (i)}
 				<div class="flex flex-nowrap gap-2" style="padding-left: {row.indent}px">
 					{#each row.items as hw (hw.name)}
@@ -233,7 +235,7 @@ pi</code
 					<div class="flex shrink-0 items-center gap-2">
 						<h3 class="text-foreground text-base font-semibold">{model.name}</h3>
 						<span
-							class="bg-foreground/8 text-foreground/70 rounded-md px-1.5 py-0.5 font-mono text-[11px]"
+							class="bg-foreground/8 text-foreground/70 rounded-md px-1.5 py-0.5 font-mono text-[9px] sm:text-[11px]"
 						>
 							{model.params}
 						</span>
