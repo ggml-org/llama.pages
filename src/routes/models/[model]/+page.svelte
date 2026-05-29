@@ -60,7 +60,7 @@
 	<title>{model.name} · llama.app</title>
 </svelte:head>
 
-<main class="mx-auto w-full max-w-5xl px-8 md:px-16">
+<main class="mx-auto w-full max-w-5xl px-6 md:px-16">
 	<SiteHeader />
 
 	<section class="pt-16 pb-12">
