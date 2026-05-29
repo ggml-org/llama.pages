@@ -6,46 +6,36 @@
 	import { MODELS, ORG_AVATARS, repoAuthor } from '$lib/models';
 
 	const HW = 'https://huggingface.co/front/assets/hardware';
-	const HARDWARE_ROWS = [
+	const HARDWARE_REELS = [
 		{
-			indent: 96,
+			duration: 18,
 			items: [
 				{ name: 'Apple Silicon', img: `${HW}/apple-silicon.svg` },
 				{ name: 'M Ultra', img: `${HW}/m-ultra.webp` },
-				{ name: 'RTX 5090', img: `${HW}/rtx-series.webp` }
+				{ name: 'RTX 5090', img: `${HW}/rtx-series.webp` },
+				{ name: 'CPU', img: `${HW}/cpu.webp` },
+				{ name: 'Jetson', img: `${HW}/jetson.webp` }
 			]
 		},
 		{
-			indent: 144,
+			duration: 21,
 			items: [
 				{ name: 'H100', img: `${HW}/h100.webp` },
 				{ name: 'MI300', img: `${HW}/mi300.webp` },
-				{ name: 'RTX 4090', img: `${HW}/rtx-series.webp` }
+				{ name: 'RTX 4090', img: `${HW}/rtx-series.webp` },
+				{ name: 'A100', img: `${HW}/gpu.webp` },
+				{ name: 'M Pro', img: `${HW}/m-pro.webp` }
 			]
 		},
 		{
-			indent: 60,
+			duration: 19,
 			items: [
 				{ name: 'M Max', img: `${HW}/m-max.webp` },
-				{ name: 'A100', img: `${HW}/gpu.webp` },
 				{ name: 'DGX Spark', img: `${HW}/spark.webp` },
-				{ name: 'T4', img: `${HW}/t4.webp` }
-			]
-		},
-		{
-			indent: 148,
-			items: [
-				{ name: 'Jetson', img: `${HW}/jetson.webp` },
-				{ name: 'B200', img: `${HW}/h100.webp` },
-				{ name: 'Intel Arc', img: `${HW}/arc.webp` }
-			]
-		},
-		{
-			indent: 64,
-			items: [
-				{ name: 'CPU', img: `${HW}/cpu.webp` },
+				{ name: 'T4', img: `${HW}/t4.webp` },
 				{ name: 'Radeon RX', img: `${HW}/amd-rx.webp` },
-				{ name: 'M Pro', img: `${HW}/m-pro.webp` },
+				{ name: 'B200', img: `${HW}/h100.webp` },
+				{ name: 'Intel Arc', img: `${HW}/arc.webp` },
 				{ name: 'RTX 3090', img: `${HW}/rtx-series.webp` }
 			]
 		}
@@ -203,17 +193,26 @@ pi</code
 				models, same hand-tuned kernels for every GPU and CPU.
 			</p>
 		</div>
-		<div class="bg-foreground/[0.04] space-y-2 overflow-hidden rounded-xl p-6 border border-secondary">
-			{#each HARDWARE_ROWS as row, i (i)}
-				<div class="flex flex-nowrap gap-2" style="padding-left: {row.indent}px">
-					{#each row.items as hw (hw.name)}
-						<span
-							class="bg-background text-foreground inline-flex shrink-0 items-center gap-0.5 rounded-full py-1 pr-3 pl-1 text-sm whitespace-nowrap shadow-sm"
-						>
-							<img src={hw.img} alt="" class="size-6 rounded-full bg-white object-contain p-0.5" />
-							{hw.name}
-						</span>
-					{/each}
+		<div class="hardware-slots relative grid h-[17rem] grid-cols-2 gap-3 overflow-hidden sm:grid-cols-3">
+			{#each HARDWARE_REELS as reel, reelIndex (reelIndex)}
+				<div
+					class="overflow-hidden {reelIndex === 2 ? 'hidden sm:block' : ''}"
+					style="--reel-duration: {reel.duration}s; --reel-delay: -{reelIndex * 2}s"
+				>
+					<div class="hardware-reel-track flex flex-col">
+						{#each Array(2) as _, copyIndex (copyIndex)}
+							<div class="flex flex-col gap-2 pb-2" aria-hidden={copyIndex === 1}>
+								{#each reel.items as hw (copyIndex + hw.name)}
+									<div
+										class="text-foreground flex min-h-12 items-center gap-2.5 rounded-md bg-foreground/6 px-3 py-2.5 text-sm whitespace-nowrap"
+									>
+										<img src={hw.img} alt="" class="size-7 shrink-0 rounded-md bg-white object-contain p-1" />
+										<span>{hw.name}</span>
+									</div>
+								{/each}
+							</div>
+						{/each}
+					</div>
 				</div>
 			{/each}
 		</div>
@@ -261,3 +260,46 @@ pi</code
 		</div>
 	</section>
 </main>
+
+<style>
+	.hardware-slots::before,
+	.hardware-slots::after {
+		position: absolute;
+		right: 0;
+		left: 0;
+		z-index: 1;
+		height: 4rem;
+		content: '';
+		pointer-events: none;
+	}
+
+	.hardware-slots::before {
+		top: 0;
+		background: linear-gradient(to bottom, var(--background) 0%, transparent 100%);
+	}
+
+	.hardware-slots::after {
+		bottom: 0;
+		background: linear-gradient(to top, var(--background) 0%, transparent 100%);
+	}
+
+	.hardware-reel-track {
+		animation: hardware-reel-spin var(--reel-duration) linear var(--reel-delay) infinite;
+	}
+
+	@keyframes hardware-reel-spin {
+		from {
+			transform: translateY(0);
+		}
+
+		to {
+			transform: translateY(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hardware-reel-track {
+			animation: none;
+		}
+	}
+</style>
