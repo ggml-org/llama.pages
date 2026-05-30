@@ -90,20 +90,21 @@
 			/></svg
 		>
 
-		<div class="bg-foreground/[0.04] w-full max-w-2xl rounded-xl border border-secondary">
-			<div class="flex items-center justify-between gap-4 px-6 py-5">
-				<code class="text-foreground/90 min-w-0 flex-1 truncate font-mono text-[15px]"
+		<div class="bg-foreground/[0.04] w-full max-w-2xl overflow-hidden rounded-xl border border-secondary">
+			<div class="flex items-stretch justify-between">
+				<code
+					class="text-foreground/90 block min-w-0 flex-1 overflow-x-auto whitespace-nowrap p-4 font-mono text-[15px]"
 					>{installCommand}</code
 				>
 				<button
-					class="text-foreground/70 hover:text-foreground shrink-0 cursor-pointer"
+					class="text-foreground/70 hover:text-foreground flex shrink-0 cursor-pointer items-center border-l border-secondary px-4"
 					aria-label={copied ? 'Copied command' : 'Copy command'}
 					onclick={handleCopy}
 				>
 					{#if copied}
-						<Check class="size-5" />
+						<Check class="size-4" />
 					{:else}
-						<Copy class="size-5" />
+						<Copy class="size-4" />
 					{/if}
 				</button>
 			</div>
