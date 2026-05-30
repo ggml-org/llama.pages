@@ -8,7 +8,7 @@
 	const HW = 'https://huggingface.co/front/assets/hardware';
 	const HARDWARE_REELS = [
 		{
-			duration: 18,
+			duration: 30,
 			items: [
 				{ name: 'Apple Silicon', img: `${HW}/apple-silicon.svg` },
 				{ name: 'M Ultra', img: `${HW}/m-ultra.webp` },
@@ -18,7 +18,7 @@
 			]
 		},
 		{
-			duration: 21,
+			duration: 35,
 			items: [
 				{ name: 'H100', img: `${HW}/h100.webp` },
 				{ name: 'MI300', img: `${HW}/mi300.webp` },
@@ -28,7 +28,7 @@
 			]
 		},
 		{
-			duration: 19,
+			duration: 32,
 			items: [
 				{ name: 'M Max', img: `${HW}/m-max.webp` },
 				{ name: 'DGX Spark', img: `${HW}/spark.webp` },
