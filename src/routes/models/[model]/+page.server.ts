@@ -13,10 +13,8 @@ const HF_HEADERS: Record<string, string> = env.HF_TOKEN
 	? { Authorization: `Bearer ${env.HF_TOKEN}` }
 	: {};
 
-// Fetch the HF API with auth, retrying on rate-limit / 5xx and throwing if it persists, so a
-// throttled prerender FAILS the build (deploy is skipped, prod keeps the last good site) instead
-// of silently baking empty results. Non-429 4xx (e.g. a real 404) are returned for the caller's
-// .ok check, so legitimately-empty results still build fine.
+// Authenticated HF fetch that retries on 429/5xx and throws if throttling persists, so a
+// throttled prerender fails the build instead of silently baking empty results.
 async function hfFetch(url: string): Promise<Response> {
 	const RETRIES = 3;
 	for (let attempt = 0; ; attempt++) {
