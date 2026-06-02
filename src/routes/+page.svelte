@@ -135,12 +135,21 @@
 				AI that lives on your computer.<br />
 				Open-source, private, always local.
 			</h2>
-			<p class="text-foreground text-base leading-relaxed">
+			<p class="text-foreground/70 text-base leading-relaxed">
 				Run frontier AI entirely on your machine. No API keys, no telemetry, no limits. Take AI
 				back.
 			</p>
 		</div>
-		<img src="/local-ai.png" alt="AI running on your computer" class="h-auto w-full rounded-md" />
+		<img
+			src="/local-ai.png"
+			alt="AI running on your computer"
+			class="h-auto w-full rounded-md dark:hidden"
+		/>
+		<img
+			src="/local-ai-dark.png"
+			alt="AI running on your computer"
+			class="hidden h-auto w-full rounded-md dark:block"
+		/>
 	</section>
 
 	<section class="grid grid-cols-1 items-center gap-12 pt-12 pb-24 md:grid-cols-2">
@@ -170,7 +179,7 @@ pi</code
 			<h2 class="text-foreground text-2xl font-semibold tracking-tight">
 				Pair it with a local coding agent.
 			</h2>
-			<p class="text-foreground text-base leading-relaxed">
+			<p class="text-foreground/70 text-base leading-relaxed">
 				Run <code class="font-mono text-sm">llama serve</code>, then launch
 				<a
 					href="https://github.com/badlogic/pi-mono"
@@ -188,7 +197,7 @@ pi</code
 			<h2 class="text-foreground text-2xl font-semibold tracking-tight">
 				Optimized for any hardware.
 			</h2>
-			<p class="text-foreground text-base leading-relaxed">
+			<p class="text-foreground/70 text-base leading-relaxed">
 				From your laptop to a cluster, llama.cpp runs on whatever you have. Same binary, same
 				models, same hand-tuned kernels for every GPU and CPU.
 			</p>
