@@ -143,12 +143,12 @@
 		<img
 			src="/local-ai.png"
 			alt="AI running on your computer"
-			class="h-auto w-full rounded-md dark:hidden"
+			class="h-auto w-full rounded-xl dark:hidden"
 		/>
 		<img
 			src="/local-ai-dark.png"
 			alt="AI running on your computer"
-			class="hidden h-auto w-full rounded-md dark:block"
+			class="hidden h-auto w-full rounded-xl dark:block"
 		/>
 	</section>
 
