@@ -157,7 +157,7 @@ pi install git:github.com/huggingface/pi-llama
 pi</code
 				></pre>
 			<div
-				class="absolute top-4 right-4 flex size-12 items-center justify-center rounded-md bg-white p-2 shadow-sm"
+				class="absolute top-4 right-4 flex size-12 items-center justify-center rounded-md bg-white p-2 shadow-sm dark:bg-muted-foreground"
 			>
 				<img
 					src="https://huggingface.co/buckets/julien-c/my-training-bucket/resolve/pi-logo-dark.svg"
@@ -206,7 +206,7 @@ pi</code
 									<div
 										class="text-foreground flex min-h-12 items-center gap-2.5 rounded-md bg-foreground/6 px-3 py-2.5 text-sm whitespace-nowrap"
 									>
-										<img src={hw.img} alt="" class="size-7 shrink-0 rounded-md bg-white object-contain p-1" />
+										<img src={hw.img} alt="" class="size-7 shrink-0 rounded-md bg-white object-contain p-1 dark:bg-foreground/8" />
 										<span>{hw.name}</span>
 									</div>
 								{/each}

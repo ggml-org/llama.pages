@@ -100,7 +100,7 @@
 							target="_blank"
 							rel="noreferrer"
 							aria-label="Open {repo.id} on Hugging Face"
-							class="text-foreground/60 hover:bg-foreground/10 hover:text-foreground inline-flex h-6 items-center gap-1 rounded-md bg-gray-200/60 px-1.5 transition-colors"
+							class="text-foreground/60 hover:bg-foreground/15 hover:text-foreground inline-flex h-6 items-center gap-1 rounded-md bg-foreground/8 px-1.5 transition-colors"
 						>
 							<img
 								src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
