@@ -111,7 +111,7 @@
 					href="https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md"
 					target="_blank"
 					rel="noreferrer"
-					class="font-medium underline underline-offset-4"
+					class="hover:text-foreground font-medium underline underline-offset-4"
 				>
 					Package managers
 				</a>
@@ -123,7 +123,7 @@
 					href="https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md"
 					target="_blank"
 					rel="noreferrer"
-					class="font-medium underline underline-offset-4"
+					class="hover:text-foreground font-medium underline underline-offset-4"
 				>
 					Follow instructions
 				</a>
@@ -158,7 +158,7 @@
 		<div
 			class="bg-foreground/[0.04] border-secondary relative overflow-hidden rounded-xl border md:order-1"
 		>
-			<pre class="text-foreground/90 overflow-x-auto p-6 font-mono text-[15px]"><code
+			<pre class="text-foreground/90 overflow-x-auto p-6 pr-4 font-mono text-[14px] lg:pr-0 [scrollbar-width:thin]"><code
 					><span class="opacity-50"># 1. Serve a model</span>
 llama serve
 
@@ -169,7 +169,7 @@ pi install git:github.com/huggingface/pi-llama
 pi</code
 				></pre>
 			<div
-				class="dark:bg-muted-foreground absolute top-4 right-4 flex size-12 items-center justify-center rounded-md bg-white p-2 shadow-sm"
+				class="dark:bg-muted-foreground absolute top-4 right-4 flex size-[2.4rem] items-center justify-center rounded-md bg-white p-[0.4rem] shadow-sm"
 			>
 				<img
 					src="https://huggingface.co/buckets/julien-c/my-training-bucket/resolve/pi-logo-dark.svg"
