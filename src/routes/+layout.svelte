@@ -1,11 +1,17 @@
 <script lang="ts">
 	import '../app.css';
+	import { onMount } from 'svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Toaster } from '$lib/components/ui/sonner/index.js';
+	import * as deviceStore from '$lib/stores/device/index.svelte';
 	import iconLight from '$lib/assets/icon-light.svg?url';
 	import iconDark from '$lib/assets/icon-dark.svg?url';
 
 	let { children } = $props();
+
+	onMount(() => {
+		deviceStore.init();
+	});
 
 	function updateFavicon() {
 		const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
