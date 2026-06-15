@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { Copy, Check } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
+	import { deviceInfo } from '$lib/stores/device/index.svelte';
 
 	let copied = $state(false);
-	let isWindows = $state(false);
+
 	const installCommand = $derived(
-		isWindows
+		deviceInfo.isWindows
 			? 'irm https://llama.app/install.ps1 | iex'
 			: 'curl -LsSf https://llama.app/install.sh | sh'
 	);
-
-	$effect(() => {
-		isWindows = navigator.userAgent.toLowerCase().includes('windows');
-	});
 
 	async function handleCopy() {
 		navigator.clipboard.writeText(installCommand);
@@ -27,12 +24,12 @@
 <section class="flex flex-col items-center gap-16 py-24 md:py-48">
 	<div class="flex flex-col items-center gap-8 text-center">
 		<h1 class="text-foreground text-2xl leading-tight font-semibold sm:text-4xl">
-			AI that lives on your computer.<br class="hidden md:inline" />
-			Open-source, private, always local.
+			AI that lives on {deviceInfo.osName}.<br class="hidden md:inline" />
+			Open-source, private & always local.
 		</h1>
 
 		<p class="text-foreground/70 max-w-xl text-lg leading-relaxed">
-			Run frontier AI entirely on your machine. <br />No API keys, no telemetry, no limits. Own your
+			Run frontier AI entirely on your machine. No API keys, no telemetry, no limits. Own your
 			models and conversation data.
 		</p>
 	</div>
