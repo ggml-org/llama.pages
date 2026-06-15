@@ -6,7 +6,7 @@
 <a class="logo flex items-center gap-3 text-foreground" href={resolve('/')}>
 	<span class="mark text-foreground">{@html logoSvg}</span>
 
-	<span class="font-mono font-medium">llama.app</span>
+	<span class="font-mono font-medium">llama<span class="text-accent">.cpp</span></span>
 </a>
 
 <style>
