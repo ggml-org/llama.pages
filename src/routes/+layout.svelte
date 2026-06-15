@@ -10,7 +10,11 @@
 	let { children } = $props();
 
 	onMount(() => {
-		deviceStore.init();
+		try {
+			deviceStore.init();
+		} catch (e) {
+			console.error('[device] init failed:', e);
+		}
 	});
 
 	function updateFavicon() {

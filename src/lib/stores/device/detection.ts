@@ -7,22 +7,19 @@ export function getAppleSiliconRenderer(): string | null {
 			(canvas.getContext('webgl') as WebGLRenderingContext) ||
 			(canvas.getContext('experimental-webgl') as WebGLRenderingContext);
 		if (!gl) {
-			console.log('[device] getAppleSiliconRenderer: WebGL not supported');
 			return null;
 		}
 
 		const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
 		if (!debugInfo) {
-			console.log('[device] getAppleSiliconRenderer: WEBGL_debug_renderer_info unavailable');
 			return null;
 		}
 
-		const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-		console.log('[device] getAppleSiliconRenderer: renderer =', renderer);
-		return renderer;
+		return gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 	} catch (e) {
-		console.log('[device] getAppleSiliconRenderer error:', e);
-		return null;
+		throw e instanceof Error
+			? e
+			: new Error(String(e));
 	}
 }
 
@@ -34,7 +31,6 @@ export function getChromeDeviceModel(): Promise<string | null> {
 		};
 	};
 	if (!nav.userAgentData?.getHighEntropyValues) {
-		console.log('[device] getChromeDeviceModel: getHighEntropyValues not available');
 		return Promise.resolve(null);
 	}
 
@@ -48,13 +44,12 @@ export function getChromeDeviceModel(): Promise<string | null> {
 			'fullVersionList',
 		])
 		.then((values: Record<string, unknown>) => {
-			const model = values.model as string | undefined;
-			console.log('[device] getChromeDeviceModel: model =', model);
-			return model || null;
+			return (values.model as string | undefined) || null;
 		})
-		.catch((e: any) => {
-			console.log('[device] getChromeDeviceModel error:', e?.message || e);
-			return null;
+		.catch((e) => {
+			throw e instanceof Error
+				? e
+				: new Error(String(e));
 		});
 }
 

@@ -63,23 +63,18 @@ export const MAC_MODEL_MAP: Record<string, { type: MacDeviceType; chip: string }
 
 export function parseMacModelFromRenderer(renderer: string): { type: MacDeviceType; chip: string } | null {
 	if (renderer.toLowerCase().includes('or similar')) {
-		console.log('[device] parseMacModelFromRenderer: rejected "or similar"');
 		return null;
 	}
 	if (/^Apple\s*GPU$/i.test(renderer)) {
-		console.log('[device] parseMacModelFromRenderer: rejected generic "Apple GPU"');
 		return null;
 	}
 
 	const m = renderer.match(/Apple\s+(M\d+(?:\s+(?:Max|Ultra|Pro))?)/i);
 	if (!m) {
-		console.log('[device] parseMacModelFromRenderer: no match in', renderer);
 		return null;
 	}
 
 	const chip = m[1].trim();
-	console.log('[device] parseMacModelFromRenderer: matched chip =', chip);
-
 	const isMaxOrUltra = chip.includes('Max') || chip.includes('Ultra');
 	return { type: isMaxOrUltra ? 'desktop' : 'macbook', chip: `Apple ${chip}` };
 }
