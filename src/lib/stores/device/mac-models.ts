@@ -58,10 +58,12 @@ export const MAC_MODEL_MAP: Record<string, { type: MacDeviceType; chip: string }
 	'MacStudio4,2': { type: 'desktop', chip: 'M4 Ultra' },
 
 	// Mac Pro
-	'MacPro7,1': { type: 'desktop', chip: 'Intel' },
+	'MacPro7,1': { type: 'desktop', chip: 'Intel' }
 };
 
-export function parseMacModelFromRenderer(renderer: string): { type: MacDeviceType; chip: string } | null {
+export function parseMacModelFromRenderer(
+	renderer: string
+): { type: MacDeviceType; chip: string } | null {
 	if (renderer.toLowerCase().includes('or similar')) {
 		return null;
 	}
@@ -81,7 +83,7 @@ export function parseMacModelFromRenderer(renderer: string): { type: MacDeviceTy
 
 export function getMacModelFromHeuristics(
 	deviceMemory: number | undefined,
-	hardwareConcurrency: number | undefined,
+	hardwareConcurrency: number | undefined
 ): MacDeviceType | null {
 	if (!deviceMemory || !hardwareConcurrency) return null;
 	if (hardwareConcurrency >= 24 && deviceMemory >= 100) return 'desktop';

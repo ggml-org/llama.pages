@@ -17,9 +17,7 @@ export function getAppleSiliconRenderer(): string | null {
 
 		return gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 	} catch (e) {
-		throw e instanceof Error
-			? e
-			: new Error(String(e));
+		throw e instanceof Error ? e : new Error(String(e));
 	}
 }
 
@@ -41,15 +39,13 @@ export function getChromeDeviceModel(): Promise<string | null> {
 			'platformVersion',
 			'architecture',
 			'bitness',
-			'fullVersionList',
+			'fullVersionList'
 		])
 		.then((values: Record<string, unknown>) => {
 			return (values.model as string | undefined) || null;
 		})
 		.catch((e) => {
-			throw e instanceof Error
-				? e
-				: new Error(String(e));
+			throw e instanceof Error ? e : new Error(String(e));
 		});
 }
 

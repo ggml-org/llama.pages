@@ -7,7 +7,7 @@
 	import Logo from '$lib/components/Logo.svelte';
 	import GitHubLink from '$lib/components/GitHubLink.svelte';
 
-	const stars = page.data.stars as number | null | undefined;
+	const stars = $derived(page.data.stars as number | null | undefined);
 
 	const NEXT_MODE = { light: 'dark', dark: 'system', system: 'light' } as const;
 	function cycleMode() {

@@ -36,14 +36,16 @@
 	];
 </script>
 
-<div class="hardware-slots relative grid h-[17rem] grid-cols-2 gap-3 overflow-hidden sm:grid-cols-3">
+<div
+	class="hardware-slots relative grid h-[17rem] grid-cols-2 gap-3 overflow-hidden sm:grid-cols-3"
+>
 	{#each HARDWARE_REELS as reel, reelIndex (reelIndex)}
 		<div
 			class="overflow-hidden {reelIndex === 2 ? 'hidden sm:block' : ''}"
 			style="--reel-duration: {reel.duration}s; --reel-delay: -{reelIndex * 2}s"
 		>
 			<div class="hardware-reel-track flex flex-col">
-				{#each Array(2) as _, copyIndex (copyIndex)}
+				{#each [0, 1] as copyIndex (copyIndex)}
 					<div class="flex flex-col gap-2 pb-2" aria-hidden={copyIndex === 1}>
 						{#each reel.items as hw (copyIndex + hw.name)}
 							<div

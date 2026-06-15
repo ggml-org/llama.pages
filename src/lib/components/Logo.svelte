@@ -3,7 +3,7 @@
 	import logoSvg from '$lib/assets/icon-light.svg?raw';
 </script>
 
-<a class="logo flex items-center gap-3 text-foreground" href={resolve('/')}>
+<a class="logo text-foreground flex items-center gap-3" href={resolve('/')}>
 	<span class="mark text-foreground">{@html logoSvg}</span>
 
 	<span class="font-mono font-medium">llama<span class="text-accent">.cpp</span></span>

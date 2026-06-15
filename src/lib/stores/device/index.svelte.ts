@@ -2,7 +2,12 @@ import type { MacDeviceType } from './mac-models';
 
 export type { MacDeviceType };
 import { parseMacModelFromRenderer, getMacModelFromHeuristics } from './mac-models';
-import { getAppleSiliconRenderer, getChromeDeviceModel, detectBrowser, detectFormFactor } from './detection';
+import {
+	getAppleSiliconRenderer,
+	getChromeDeviceModel,
+	detectBrowser,
+	detectFormFactor
+} from './detection';
 
 export type OsKind = 'mac' | 'windows' | 'linux' | 'ios' | 'android' | 'unknown';
 export type DeviceFormFactor = 'desktop' | 'mobile' | 'tablet';
@@ -28,7 +33,7 @@ const deviceInfo = $state<DeviceInfo>({
 	isWindows: false,
 	isLinux: false,
 	isMobile: false,
-	browser: 'Unknown',
+	browser: 'Unknown'
 });
 
 let _initialized = false;
@@ -53,7 +58,15 @@ async function detectAndSet() {
 	const isWindows = /Windows/i.test(platformFromData);
 	const isLinuxDesktop = !isAndroid && !isIOS && /Linux/i.test(platformFromData);
 
-	deviceInfo.os = isIOS ? 'ios' : isMacDesktop ? 'mac' : isWindows ? 'windows' : isLinuxDesktop ? 'linux' : 'unknown';
+	deviceInfo.os = isIOS
+		? 'ios'
+		: isMacDesktop
+			? 'mac'
+			: isWindows
+				? 'windows'
+				: isLinuxDesktop
+					? 'linux'
+					: 'unknown';
 	deviceInfo.osName = isIOS
 		? 'your computer'
 		: isMacDesktop
@@ -63,6 +76,7 @@ async function detectAndSet() {
 				: isLinuxDesktop
 					? 'your Linux machine'
 					: 'your device';
+
 	deviceInfo.isMac = isMacDesktop;
 	deviceInfo.isWindows = isWindows;
 	deviceInfo.isLinux = isLinuxDesktop;
@@ -74,16 +88,21 @@ async function detectAndSet() {
 		await getChromeDeviceModel();
 
 		// Step 2: Battery Status API
-		const batteryNav = navigator as Navigator & { getBattery?: () => Promise<any> };
+		const batteryNav = navigator as Navigator & {
+			getBattery?: () => Promise<{
+				charging: boolean;
+				chargingTime: number;
+				dischargingTime: number;
+				level: number;
+			}>;
+		};
 		if ('getBattery' in batteryNav && batteryNav.getBattery) {
 			try {
 				const battery = await batteryNav.getBattery();
 				const isDesktop = battery.chargingTime === 0 && battery.dischargingTime === Infinity;
 				deviceInfo.macDeviceType = isDesktop ? 'desktop' : 'macbook';
 			} catch (e) {
-				throw e instanceof Error
-					? e
-					: new Error('Battery API failed');
+				throw e instanceof Error ? e : new Error('Battery API failed');
 			}
 		}
 
@@ -101,8 +120,16 @@ async function detectAndSet() {
 
 		// Step 4: Heuristics
 		if (deviceInfo.macDeviceType === 'unknown') {
-			const memNav = navigator as Navigator & { deviceMemory?: number; hardwareConcurrency?: number };
-			const heuristicType = getMacModelFromHeuristics(memNav.deviceMemory, memNav.hardwareConcurrency);
+			const memNav = navigator as Navigator & {
+				deviceMemory?: number;
+				hardwareConcurrency?: number;
+			};
+
+			const heuristicType = getMacModelFromHeuristics(
+				memNav.deviceMemory,
+				memNav.hardwareConcurrency
+			);
+
 			if (heuristicType) {
 				deviceInfo.macDeviceType = heuristicType;
 			}
