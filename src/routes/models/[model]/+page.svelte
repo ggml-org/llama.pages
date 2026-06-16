@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Play, Check, ArrowUpRight } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
-	import SiteHeader from '$lib/components/SiteHeader.svelte';
+	import SiteHeader from '$lib/components/app/navigation/SiteHeader.svelte';
 	import { ORG_AVATARS, repoAuthor } from '$lib/models';
 	import type { PageProps } from './$types';
 
@@ -100,7 +100,7 @@
 							target="_blank"
 							rel="noreferrer"
 							aria-label="Open {repo.id} on Hugging Face"
-							class="text-foreground/60 hover:bg-foreground/15 hover:text-foreground inline-flex h-6 items-center gap-1 rounded-md bg-foreground/8 px-1.5 transition-colors"
+							class="text-foreground/60 hover:bg-foreground/15 hover:text-foreground bg-foreground/8 inline-flex h-6 items-center gap-1 rounded-md px-1.5 transition-colors"
 						>
 							<img
 								src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
