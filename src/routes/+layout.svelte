@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../app.css';
+	import 'prismjs/themes/prism.css';
+	import 'prismjs/themes/prism-dark.css';
 	import { onMount } from 'svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Toaster } from '$lib/components/ui/sonner/index.js';

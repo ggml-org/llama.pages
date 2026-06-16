@@ -1,0 +1,27 @@
+<script lang="ts">
+    import ShowCaseSection from './ShowcaseSection.svx';
+	import HardwareReels from './HardwareReels.svelte';
+	import InstallationCommands from './InstallationCommands.svx';
+</script>
+
+<div class="space-y-12 py-12 md:py-24">
+    <ShowCaseSection>
+
+        ## Pair it with a local coding agent.
+       	Run `llama serve`, then launch Pi and it will automatically discover your local model. No config, no API keys. Files stay on your machine, requests never leave it.
+
+        {#snippet mediaContent()}
+		    <InstallationCommands />
+		{/snippet}
+    </ShowCaseSection>
+
+	<ShowCaseSection position="left">
+
+        ## Optimized for any hardware.
+       	From your laptop to a cluster, llama.cpp runs on whatever you have. Same binary, same models, same hand-tuned kernels for every GPU and CPU.
+
+        {#snippet mediaContent()}
+            <HardwareReels />
+        {/snippet}
+	</ShowCaseSection>
+</div>

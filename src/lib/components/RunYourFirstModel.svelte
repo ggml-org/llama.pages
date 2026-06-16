@@ -7,28 +7,36 @@
 <section class="py-24">
 	<h2 class="text-foreground mb-8 text-2xl font-semibold">Run your first model</h2>
 
-	<div class="flex flex-col gap-2">
+	<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 		{#each MODELS as model (model.slug)}
 			<a
 				href={resolve('/models/[model]', { model: model.slug })}
-				class="group bg-foreground/[0.04] hover:bg-foreground/[0.07] flex items-center gap-2 rounded-xl px-5 py-4 transition-colors"
+				class="group border-foreground/[0.06] bg-foreground/[0.02] hover:border-foreground/[0.12] hover:bg-foreground/[0.04] relative flex flex-col justify-between rounded-2xl border p-6 transition-all"
 			>
-				<img
-					src={ORG_AVATARS[repoAuthor(model.id)]}
-					alt="{repoAuthor(model.id)} avatar"
-					class="size-4 shrink-0 rounded-md"
-				/>
-				<div class="flex shrink-0 items-center gap-2">
-					<h3 class="text-foreground text-base font-semibold">{model.name}</h3>
-					<span
-						class="bg-foreground/8 text-foreground/70 rounded-md px-1.5 py-0.5 font-mono text-[9px] sm:text-[11px]"
-					>
-						{model.params}
-					</span>
+				<div class="flex items-start gap-3">
+					<img
+						src={ORG_AVATARS[repoAuthor(model.id)]}
+						alt="{repoAuthor(model.id)} avatar"
+						class="mt-0.5 size-8 shrink-0 rounded-lg object-cover"
+					/>
+					<div class="min-w-0 flex-1">
+						<h3 class="text-foreground truncate text-base font-semibold">{model.name}</h3>
+						<span
+							class="bg-foreground/5 text-foreground/60 mt-1 inline-flex rounded-md px-2 py-0.5 font-mono text-[10px] sm:text-xs"
+						>
+							{model.params}
+						</span>
+					</div>
 				</div>
-				<p class="text-foreground/70 hidden flex-1 truncate text-sm md:block">
-					{model.description}
-				</p>
+				<p class="text-foreground/60 mt-4 text-sm leading-relaxed">{model.description}</p>
+				<div
+					class="text-foreground/40 group-hover:text-foreground/70 mt-4 flex items-center gap-1.5 text-xs transition-colors"
+				>
+					Run model
+					<ArrowUpRight
+						class="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+					/>
+				</div>
 			</a>
 		{/each}
 	</div>
@@ -38,7 +46,7 @@
 			href="https://huggingface.co/models?apps=llama.cpp"
 			target="_blank"
 			rel="noreferrer"
-			class="text-foreground/70 hover:text-foreground inline-flex items-center gap-1.5 text-sm underline underline-offset-4"
+			class="text-foreground/70 hover:text-foreground inline-flex items-center gap-1.5 text-sm underline underline-offset-4 transition-colors"
 		>
 			Discover more models on Hugging Face
 			<ArrowUpRight class="size-3.5" />

@@ -1,0 +1,40 @@
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	interface Props {
+		title: string;
+		description: string;
+		mediaContent: Snippet;
+		children: Snippet;
+		position?: 'left' | 'right';
+	}
+
+	let { title, description, mediaContent, children, position = 'right' }: Props = $props();
+</script>
+
+<section class="grid grid-cols-1 items-center gap-16 py-12 md:grid-cols-2">
+	{#if position === 'left'}
+        <div class="order-1 md:order-0">
+			{@render mediaContent()}
+		</div>
+
+        <div class="flex flex-col gap-6">
+            {@render children?.()}
+        </div>
+	{:else}
+		<div class="flex flex-col gap-6">
+    		{@render children?.()}
+		</div>
+
+		<div>
+			{@render mediaContent()}
+		</div>
+	{/if}
+</section>
+
+<style>
+    section :global(h2) {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+</style>

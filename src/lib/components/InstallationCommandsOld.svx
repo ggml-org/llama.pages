@@ -1,0 +1,21 @@
+<div class="overflow-auto text-[14px]">
+
+```bash
+# 1. Serve a model
+llama serve
+
+# 2. Install the pi-llama plugin
+pi install git:github.com/huggingface/pi-llama
+
+# 3. Run Pi, everything is set
+pi
+```
+
+</div>
+
+
+<style>
+div pre {
+    padding: 1.25rem !important;
+}
+</style>
