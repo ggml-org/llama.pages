@@ -136,7 +136,7 @@ pre[class*='language-'] {
 .token.cdata {
 	&,
 	:is(.dark) & {
-		color: var(--muted-foreground) !important;
+		color: var(--color-ring) !important;
 	}
 }
 

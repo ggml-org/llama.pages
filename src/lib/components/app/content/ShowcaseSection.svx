@@ -32,9 +32,18 @@
 	{/if}
 </section>
 
-<style>
+<style lang="postcss">
+    @reference 'tailwindcss';
+
     section :global(h2) {
-        font-size: 1.5rem;
-        font-weight: 600;
+        @apply text-2xl font-semibold;
+    }
+
+    section :global(p) {
+        color: var(--muted-foreground);
+    }
+
+    section :global(code) {
+        color: var(--color-foreground) !important;
     }
 </style>
