@@ -17,7 +17,7 @@
 					<img
 						src={ORG_AVATARS[repoAuthor(model.id)]}
 						alt="{repoAuthor(model.id)} avatar"
-						class="mt-0.5 size-8 shrink-0 rounded-lg object-cover"
+						class="mt-0.5 size-8 shrink-0 rounded-lg object-cover {repoAuthor(model.id).includes('openai') ? 'dark:invert' : ''}"
 					/>
 					<div class="min-w-0 flex-1">
 						<h3 class="text-foreground truncate text-base font-semibold">{model.name}</h3>
