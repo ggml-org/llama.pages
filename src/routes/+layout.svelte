@@ -6,6 +6,8 @@
 	import { ModeWatcher } from 'mode-watcher';
 	import { Toaster } from '$lib/components/ui/sonner/index.js';
 	import * as deviceStore from '$lib/stores/device/index.svelte';
+	import { SITE_TITLE, SITE_DESCRIPTION } from '$lib/constants/site';
+	import SeoMetadata from '$lib/components/app/misc/SeoMetadata.svelte';
 	import iconLight from '$lib/assets/icon-light.svg?url';
 	import iconDark from '$lib/assets/icon-dark.svg?url';
 
@@ -46,10 +48,12 @@
 <svelte:head>
 	<link rel="icon" href={iconLight} />
 
-	<title>llama.app - Official home for llama.cpp</title>
+	<title>{SITE_TITLE}</title>
 
-	<meta name="description" content="Official website for the llama.cpp project" />
+	<meta name="description" content={SITE_DESCRIPTION} />
 </svelte:head>
+
+<SeoMetadata />
 
 <ModeWatcher />
 <Toaster />
