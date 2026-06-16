@@ -15,7 +15,7 @@
 		{/snippet}
     </ShowCaseSection>
 
-	<ShowCaseSection position="left">
+	<ShowCaseSection>
 
         ## Optimized for any hardware.
        	From your laptop to a cluster, llama.cpp runs on whatever you have. Same binary, same models, same hand-tuned kernels for every GPU and CPU.

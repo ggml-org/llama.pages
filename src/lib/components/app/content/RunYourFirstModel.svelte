@@ -11,7 +11,7 @@
 		{#each MODELS as model (model.slug)}
 			<a
 				href={resolve('/models/[model]', { model: model.slug })}
-				class="group border-foreground/[0.06] bg-foreground/[0.02] hover:border-foreground/[0.12] hover:bg-foreground/[0.04] relative flex flex-col justify-between rounded-2xl border p-6 transition-all"
+				class="group border-foreground/6 bg-foreground/2 hover:border-foreground/12 hover:bg-foreground/4 relative flex flex-col justify-between rounded-2xl border p-6 transition-all"
 			>
 				<div class="flex items-start gap-3">
 					<img
