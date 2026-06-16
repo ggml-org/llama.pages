@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Play, Check, ArrowUpRight } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
-	import SiteHeader from '$lib/components/SiteHeader.svelte';
+	import SiteHeader from '$lib/components/app/navigation/SiteHeader.svelte';
 	import { ORG_AVATARS, repoAuthor } from '$lib/models';
 	import type { PageProps } from './$types';
 

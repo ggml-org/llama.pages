@@ -4,8 +4,8 @@
 	import Sun from '@lucide/svelte/icons/sun';
 	import Moon from '@lucide/svelte/icons/moon';
 	import Monitor from '@lucide/svelte/icons/monitor';
-	import Logo from '$lib/components/Logo.svelte';
-	import GitHubLink from '$lib/components/GitHubLink.svelte';
+	import Logo from '$lib/components/app/misc/Logo.svelte';
+	import GitHubLink from '$lib/components/app/navigation/GitHubLink.svelte';
 
 	const stars = $derived(page.data.stars as number | null | undefined);
 
