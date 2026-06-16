@@ -30,7 +30,11 @@
         color: var(--muted-foreground);
     }
 
-    section :global(code) {
+    section :global(:is(code, a)) {
         color: var(--color-foreground) !important;
+    }
+
+    section :global(a) {
+        text-decoration: underline;
     }
 </style>

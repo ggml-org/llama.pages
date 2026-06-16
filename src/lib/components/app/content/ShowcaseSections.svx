@@ -8,7 +8,7 @@
     <ShowCaseSection>
 
         ## Pair it with a local coding agent.
-       	Run `llama serve`, then launch Pi and it will automatically discover your local model. No config, no API keys. Files stay on your machine, requests never leave it.
+       	Run `llama serve`, install the `pi-llama` plugin and launch [Pi](https://github.com/earendil-works/pi). It will automatically discover your local model. No config, no API keys. Files stay on your machine, requests never leave it.
 
         {#snippet mediaContent()}
 		    <PiLlamaInstallationCommands />

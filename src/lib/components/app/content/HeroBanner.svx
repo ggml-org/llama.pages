@@ -1,8 +1,21 @@
 <script lang="ts">
 	import InstallCommand from './InstallCommand.svelte';
+	import Logo from '$lib/components/app/misc/Logo.svelte';
+
+	const iconSvg = $derived(
+		mode.current === 'dark'
+			? iconDarkSvg
+			: typeof window === 'undefined'
+				? iconLightSvg
+				: window.matchMedia('(prefers-color-scheme: dark)').matches
+					? iconDarkSvg
+					: iconLightSvg
+	);
 </script>
 
-<section class="flex flex-col items-center gap-16 py-24 md:py-48 text-balance">
+<section class="flex flex-col items-center gap-16 py-16 text-balance">
+	<Logo --logo-height="4rem" />
+
 	<div class="flex flex-col items-center gap-6 text-center">
 
         # AI that lives on your computer. Open-source, private &amp; always local.
@@ -17,8 +30,13 @@
 <style>
     @reference "tailwindcss";
 
+    section :global(.hero-mark svg) {
+        @apply h-16 w-auto;
+        fill: currentColor;
+    }
+
     section :global(h1) {
-        @apply text-2xl leading-tight font-semibold sm:text-4xl;
+        @apply text-3xl leading-tight font-semibold sm:text-4xl;
     }
 
     section :global(p) {

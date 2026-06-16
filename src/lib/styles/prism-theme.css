@@ -82,7 +82,7 @@ code[class*='language-'],
 pre[class*='language-'] {
 	color: var(--foreground) !important;
 	text-shadow: none !important;
-	font-family: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Monaco, Consolas, monospace;
+	font-family: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Monaco, Consolas, monospace !important;
 	font-size: 14px;
 	text-shadow: none;
 	direction: ltr;

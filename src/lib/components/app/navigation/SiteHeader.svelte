@@ -10,13 +10,14 @@
 	const stars = $derived(page.data.stars as number | null | undefined);
 
 	const NEXT_MODE = { light: 'dark', dark: 'system', system: 'light' } as const;
+
 	function cycleMode() {
 		setMode(NEXT_MODE[userPrefersMode.current]);
 	}
 </script>
 
 <header class="flex items-center justify-between py-6">
-	<Logo />
+	<Logo showName />
 
 	<div class="flex items-center gap-4">
 		<GitHubLink {stars} />
