@@ -1,4 +1,4 @@
-import type { MacDeviceType } from './index.svelte';
+export type MacDeviceType = 'macbook' | 'desktop' | 'unknown';
 
 export const MAC_MODEL_MAP: Record<string, { type: MacDeviceType; chip: string }> = {
 	// MacBook Pro
