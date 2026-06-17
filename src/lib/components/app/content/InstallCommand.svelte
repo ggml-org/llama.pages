@@ -25,8 +25,10 @@
 <div class="w-full max-w-2xl">
 	<div class="bg-foreground/4 border-secondary w-full overflow-hidden rounded-xl border">
 		<div class="flex items-stretch justify-between">
-			<code class="text-foreground/90 block min-w-0 flex-1 overflow-x-auto p-4 font-mono text-[15px] whitespace-nowrap">
-    			{installCommand}
+			<code
+				class="text-foreground/90 block min-w-0 flex-1 overflow-x-auto p-4 font-mono text-[15px] whitespace-nowrap"
+			>
+				{installCommand}
 			</code>
 
 			<button

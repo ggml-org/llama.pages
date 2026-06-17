@@ -1,16 +1,6 @@
 <script lang="ts">
 	import InstallCommand from './InstallCommand.svelte';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
-
-	const iconSvg = $derived(
-		mode.current === 'dark'
-			? iconDarkSvg
-			: typeof window === 'undefined'
-				? iconLightSvg
-				: window.matchMedia('(prefers-color-scheme: dark)').matches
-					? iconDarkSvg
-					: iconLightSvg
-	);
 </script>
 
 <section class="flex flex-col items-center gap-12 md:gap-14 py-16 text-balance">
@@ -27,7 +17,7 @@
 	<InstallCommand />
 </section>
 
-<style>
+<style lang="postcss">
     @reference "tailwindcss";
 
     section {

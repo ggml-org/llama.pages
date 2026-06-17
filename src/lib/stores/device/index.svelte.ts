@@ -1,5 +1,4 @@
 import type { MacDeviceType } from './mac-models';
-
 export type { MacDeviceType };
 import { parseMacModelFromRenderer, getMacModelFromHeuristics } from './mac-models';
 import {
