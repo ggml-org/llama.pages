@@ -6,6 +6,7 @@
 	import Monitor from '@lucide/svelte/icons/monitor';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import GitHubLink from '$lib/components/app/navigation/GitHubLink.svelte';
+	import { resolve } from '$app/paths';
 
 	const stars = $derived(page.data.stars as number | null | undefined);
 
@@ -17,7 +18,9 @@
 </script>
 
 <header class="flex items-center justify-between py-6">
-	<Logo showName />
+    <a href={resolve('/')}>
+        <Logo --logo-height="1.5rem" />
+    </a>
 
 	<div class="flex items-center gap-4">
 		<GitHubLink {stars} />
