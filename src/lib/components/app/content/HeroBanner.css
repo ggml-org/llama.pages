@@ -1,0 +1,27 @@
+@reference "tailwindcss";
+
+section {
+    --logo-height: 2.75rem;
+    --logo-font-size: 2rem;
+    --logo-gap: 1.5rem;
+
+    @media (min-width: 600px) {
+        --logo-height: 3.125rem;
+        --logo-font-size: 2.25rem;
+        --logo-gap: 1.5rem;
+    }
+}
+
+section .hero-mark svg {
+    @apply h-16 w-auto;
+    fill: currentColor;
+}
+
+section h1 {
+    @apply text-3xl leading-tight font-semibold sm:text-4xl;
+}
+
+section p {
+    @apply text-lg leading-relaxed max-w-xl;
+    color: var(--muted-foreground);
+}

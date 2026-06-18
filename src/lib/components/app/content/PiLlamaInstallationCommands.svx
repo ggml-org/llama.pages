@@ -1,4 +1,6 @@
 <script lang="ts">
+	import './PiLlamaInstallationCommands.css';
+
 	const PI_LOGO =
 		'https://huggingface.co/buckets/julien-c/my-training-bucket/resolve/pi-logo-dark.svg';
 </script>
@@ -7,7 +9,6 @@
 	class="bg-foreground/4 border-secondary relative w-full overflow-hidden rounded-xl border"
 >
 	<div class="overflow-auto text-[14px]">
-
 ```bash
 # 1. Serve a model
 llama serve
@@ -26,9 +27,3 @@ pi
 		<img src={PI_LOGO} alt="Pi" class="h-full w-auto" />
 	</div>
 </div>
-
-<style>
-	div pre {
-		padding: 1.25rem !important;
-	}
-</style>
