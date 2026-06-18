@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="bg-foreground/4 border-secondary relative w-full overflow-hidden rounded-xl border"
+	class="pi-llama-installation-commands bg-foreground/4 border-secondary relative w-full overflow-hidden rounded-xl border"
 >
 	<div class="overflow-auto text-[14px]">
 ```bash

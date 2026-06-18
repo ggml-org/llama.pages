@@ -1,0 +1,22 @@
+@reference "tailwindcss";
+
+.showcase-section {
+    h2 {
+        @apply text-2xl font-semibold;
+        color: var(--color-foreground);
+        margin-bottom: 1.5rem;
+    }
+
+    p {
+        color: var(--muted-foreground);
+        @apply text-[16px] leading-normal;
+    }
+
+    :is(code, a) {
+        color: var(--color-foreground) !important;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+}

@@ -4,7 +4,7 @@
 	import './HeroBanner.css';
 </script>
 
-<section class="flex flex-col items-center gap-12 md:gap-14 py-16 text-balance">
+<section class="hero-banner flex flex-col items-center gap-12 md:gap-14 py-16 text-balance">
 	<Logo  showName />
 
 	<div class="flex flex-col items-center gap-6 text-center">

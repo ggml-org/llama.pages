@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SiteHeader from '$lib/components/app/navigation/SiteHeader.svelte';
-	import HeroBanner from '$lib/components/app/content/HeroBanner.svx';
-	import ShowcaseSections from '$lib/components/app/content/ShowcaseSections.svx';
+	import HeroBanner from '$lib/components/app/content/HeroBanner/HeroBanner.svx';
+	import ShowcaseSections from '$lib/components/app/content/ShowcaseSections/ShowcaseSections.svx';
 	import RunYourFirstModel from '$lib/components/app/content/RunYourFirstModel.svelte';
 </script>
 
