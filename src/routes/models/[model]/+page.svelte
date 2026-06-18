@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Play, Check, ArrowUpRight } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
-	import SiteHeader from '$lib/components/app/navigation/SiteHeader.svelte';
 	import { ORG_AVATARS, repoAuthor } from '$lib/models';
 	import type { PageProps } from './$types';
 
@@ -61,8 +60,6 @@
 </svelte:head>
 
 <main class="mx-auto w-full max-w-6xl px-6 md:px-16">
-	<SiteHeader />
-
 	<section class="pt-16 pb-12">
 		<img
 			src={ORG_AVATARS[repoAuthor(model.id)]}
