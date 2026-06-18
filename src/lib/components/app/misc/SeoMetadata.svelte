@@ -7,7 +7,7 @@
 		OG_IMAGE_ALT
 	} from '$lib/constants/site';
 	import iconLight from '$lib/assets/icon-light.svg?url';
-	import iconDark from '$lib/assets/icon-light.svg?url';
+	import iconDark from '$lib/assets/icon-dark.svg?url';
 
 	function updateFavicon() {
 		const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
