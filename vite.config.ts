@@ -2,9 +2,10 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { mdsvex } from 'mdsvex';
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()],
+	plugins: [mdsvex({ extensions: ['.svx', '.md'] }), tailwindcss(), sveltekit()],
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

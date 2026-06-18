@@ -1,4 +1,3 @@
-import { mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-static';
 import { relative, sep } from 'node:path';
 
@@ -23,7 +22,6 @@ const config = {
 			entries: ['*']
 		}
 	},
-	preprocess: [mdsvex({ extensions: ['.svx', '.md'] })],
 	extensions: ['.svelte', '.svx', '.md']
 };
 
