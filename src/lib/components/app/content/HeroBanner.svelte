@@ -29,7 +29,7 @@
                 <span class="opacity-50 ml-2">v{version}</span>
            	</Button>
 
-           	<span>or install from Terminal</span>
+           	<span>or install the CLI</span>
     	</div>
     {/if}
 
