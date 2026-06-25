@@ -26,9 +26,7 @@
 	}
 </script>
 
-<header
-	class="sticky top-0 z-9999 mx-auto flex w-full max-w-5xl items-center justify-between p-6 backdrop-blur-md md:px-12"
->
+<header class="mx-auto flex w-full max-w-5xl items-center justify-between p-6 md:px-12">
 	<!-- Left: a breadcrumb trail. It starts as just the logo (home) and grows a
 	     crumb at a time as you descend: "Models" once you're in the catalog, then
 	     the open family's name on a detail page. Crumbs are separated by a subtle
