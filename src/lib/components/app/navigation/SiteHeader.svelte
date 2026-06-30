@@ -15,7 +15,9 @@
 	}
 </script>
 
-<header class="flex items-center justify-between p-6 mx-auto w-full max-w-5xl sticky top-0 md:px-12 backdrop-blur-md z-9999">
+<header
+	class="sticky top-0 z-9999 mx-auto flex w-full max-w-5xl items-center justify-between p-6 backdrop-blur-md md:px-12"
+>
 	<a href={resolve('/')}>
 		<Logo --logo-height="1.5rem" />
 	</a>

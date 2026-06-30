@@ -34,10 +34,10 @@
 </script>
 
 <svelte:head>
-    <link rel="icon" href={iconLight} />
+	<link rel="icon" href={iconLight} />
 
 	<title>{SITE_TITLE}</title>
-    <meta name="description" content={SITE_DESCRIPTION} />
+	<meta name="description" content={SITE_DESCRIPTION} />
 
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={SITE_TITLE} />
