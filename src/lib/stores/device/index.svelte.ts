@@ -53,7 +53,7 @@ async function detectAndSet() {
 
 	const isIOS = /(iPhone|iPad|iPod)/i.test(ua);
 	const isAndroid = /Android/i.test(ua);
-	const isMacDesktop = !isIOS && /Macintosh|Mac OS X/i.test(platformFromData);
+	const isMacDesktop = !isIOS && /Macintosh|Mac OS X|macOS/i.test(platformFromData);
 	const isWindows = /Windows/i.test(platformFromData);
 	const isLinuxDesktop = !isAndroid && !isIOS && /Linux/i.test(platformFromData);
 

@@ -7,7 +7,7 @@
 	import { Toaster } from '$lib/components/ui/sonner/index.js';
 	import * as deviceStore from '$lib/stores/device/index.svelte';
 	import SeoMetadata from '$lib/components/app/misc/SeoMetadata.svelte';
-    import SiteHeader from '$lib/components/app/navigation/SiteHeader.svelte';
+	import SiteHeader from '$lib/components/app/navigation/SiteHeader.svelte';
 
 	let { children } = $props();
 
