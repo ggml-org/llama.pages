@@ -111,6 +111,16 @@ export function releasedFor(f: Family): string {
 	return `${month} ${y}`;
 }
 
+// Normalize an authored download size for display. Sizes are authored as
+// "812 MB" or "2.0 GB"; showing a single unit keeps the column comparable
+// at a glance, so MB values are converted to GB (e.g. "812 MB" → "0.8 GB").
+export function displaySize(size: string | undefined): string {
+	if (!size) return '—';
+	const m = size.match(/^([\d.]+)\s*MB$/i);
+	if (!m) return size;
+	return `${(Number(m[1]) / 1000).toFixed(1)} GB`;
+}
+
 // URL scheme the install deeplinks target. Production points at the shipping
 // app (`llama://`); switch to `llama-dev` when testing against a dev build.
 const INSTALL_SCHEME = 'llama';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { type Size, deeplink, cliCommand } from '$lib/catalog';
+	import { type Size, deeplink, cliCommand, displaySize } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 
 	let { size }: { size: Size } = $props();
@@ -60,7 +60,9 @@
 		{/if}
 	</td>
 
-	<td class="py-1.5 pr-3 tabular-nums">{build.size ?? '—'}</td>
+	<!-- Download size, right-aligned and normalized to GB so the column lines
+	     up and reads as one unit. -->
+	<td class="py-1.5 pr-3 text-right tabular-nums">{displaySize(build.size)}</td>
 
 	<td class="py-1.5">
 		<div class="flex justify-end gap-2">
@@ -131,7 +133,7 @@
 						{size.name}
 						<span class="text-muted-foreground font-normal tabular-nums">
 							{#if build.quant}· {build.quant}{/if}
-							{#if build.size}· {build.size}{/if}
+							{#if build.size}· {displaySize(build.size)}{/if}
 						</span>
 					</p>
 
