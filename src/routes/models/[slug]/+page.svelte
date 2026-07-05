@@ -14,9 +14,8 @@
 </svelte:head>
 
 <!-- Same outer container as the rest of the site so the pages share margins and
-     left edge. Unlike the catalog grid, the detail page splits into two columns
-     on wide screens: the family prose on the left, the per-size download table
-     on the right. They stack on narrow screens. -->
+     left edge. The per-size download table spans the full width, followed by
+     the family prose. -->
 <main class="mx-auto w-full max-w-5xl px-6 pt-8 pb-24 md:px-12">
 	<!-- Header: a compact brand logo tile beside a bordered identity card with
 	     just the title and a metadata line (publisher · release date). The full
@@ -50,28 +49,25 @@
 		</div>
 	</header>
 
-	<!-- The download table is the primary content, so it takes the wider left
-	     column (~60%); the longer prose sits on the right (~40%). Stacks on
-	     narrow screens. -->
-	<div class="mt-10 grid items-start gap-x-12 gap-y-10 lg:grid-cols-[1.5fr_1fr]">
-		<!-- Left: per-size download table. -->
-		<section>
-			<table class="w-full text-left">
-				<tbody>
-					{#each family.sizes as s (s.name)}
-						<SizeRow size={s} />
-					{/each}
-				</tbody>
-			</table>
-		</section>
-
-		<!-- Right: the longer family description, one <p> per authored paragraph. -->
-		<section>
-			<div class="text-muted-foreground space-y-3 text-[15px] leading-relaxed">
-				{#each detailsFor(family) as para}
-					<p>{para}</p>
+	<!-- The download table is the primary content: it spans the full width, with
+	     the family description below it. -->
+	<section class="mt-10">
+		<table class="w-full text-left">
+			<tbody>
+				{#each family.sizes as s (s.name)}
+					<SizeRow size={s} />
 				{/each}
-			</div>
-		</section>
-	</div>
+			</tbody>
+		</table>
+	</section>
+
+	<!-- The longer family description, one <p> per authored paragraph. Capped in
+	     width for comfortable line length. -->
+	<section class="mt-10">
+		<div class="text-muted-foreground max-w-2xl space-y-3 text-[15px] leading-relaxed">
+			{#each detailsFor(family) as para}
+				<p>{para}</p>
+			{/each}
+		</div>
+	</section>
 </main>

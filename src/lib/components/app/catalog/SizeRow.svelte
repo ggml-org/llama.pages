@@ -28,11 +28,10 @@
 </script>
 
 <tr class="border-border border-t">
-	<!-- Row label: the params suffix (the size name minus its family prefix),
-	     plus a vision badge when applicable. -->
+	<!-- Row label: the full size name, plus a vision badge when applicable. -->
 	<td class="py-1.5 pr-3">
 		<span class="inline-flex items-center gap-1.5 tabular-nums">
-			{size.params ?? size.name}
+			{size.name}
 			{#if size.vision}
 				<VisionBadge />
 			{/if}
