@@ -1,30 +1,20 @@
 <script lang="ts">
 	import { ArrowUpRight } from '@lucide/svelte';
-	import { familyGroups } from '$lib/catalog';
+	import { families } from '$lib/catalog';
 	import FamilyCard from '$lib/components/app/catalog/FamilyCard.svelte';
 
 	// A teaser of the catalog on the homepage: the featured families, newest
-	// first. The full, browsable catalog lives at /models.
-	const featured = $derived(
-		familyGroups()
-			.filter((g) => g.featured)
-			.sort((a, b) => b.sortKey.localeCompare(a.sortKey))
-	);
+	// first (`families` is already in that order). The full, browsable catalog
+	// lives at /models.
+	const featured = families.filter((f) => f.featured);
 </script>
 
 <section class="py-24">
 	<h2 class="text-foreground mb-8 text-2xl font-semibold">Run your first model</h2>
 
 	<div class="grid grid-cols-1 items-start gap-3 sm:grid-cols-2 lg:grid-cols-3">
-		{#each featured as g (g.family)}
-			<FamilyCard
-				href="/models/{g.slug}"
-				family={g.family}
-				brand={g.brand}
-				description={g.description}
-				released={g.released}
-				sizes={g.sizes}
-			/>
+		{#each featured as f (f.name)}
+			<FamilyCard family={f} />
 		{/each}
 	</div>
 

@@ -5,7 +5,7 @@
 	import { page } from '$app/state';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import GitHubLink from '$lib/components/app/navigation/GitHubLink.svelte';
-	import type { FamilyGroup } from '$lib/catalog';
+	import type { Family } from '$lib/catalog';
 
 	const stars = $derived(page.data.stars as number | null | undefined);
 
@@ -15,9 +15,9 @@
 		page.url.pathname === '/models' || page.url.pathname.startsWith('/models/')
 	);
 
-	// On a family detail page the loaded group gives us the open model's name, the
-	// last crumb in the trail. Undefined elsewhere (incl. the catalog index).
-	const group = $derived(page.data.group as FamilyGroup | undefined);
+	// On a family detail page the loaded family gives us the open model's name,
+	// the last crumb in the trail. Undefined elsewhere (incl. the catalog index).
+	const family = $derived(page.data.family as Family | undefined);
 
 	const NEXT_MODE = { light: 'dark', dark: 'system', system: 'light' } as const;
 
@@ -40,8 +40,8 @@
 			<ChevronRight class="text-foreground/30 size-4" aria-hidden="true" />
 			<a
 				href="/models"
-				aria-current={group ? undefined : 'page'}
-				class="transition-colors {group
+				aria-current={family ? undefined : 'page'}
+				class="transition-colors {family
 					? 'text-foreground/70 hover:text-foreground'
 					: 'text-foreground'}"
 			>
@@ -49,9 +49,9 @@
 			</a>
 		{/if}
 
-		{#if group}
+		{#if family}
 			<ChevronRight class="text-foreground/30 size-4" aria-hidden="true" />
-			<span aria-current="page" class="text-foreground">{group.family}</span>
+			<span aria-current="page" class="text-foreground">{family.name}</span>
 		{/if}
 	</nav>
 

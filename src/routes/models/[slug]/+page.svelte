@@ -1,18 +1,16 @@
 <script lang="ts">
+	import { detailsFor, publisherFor, releasedFor } from '$lib/catalog';
 	import { logoFor, tintFor } from '$lib/logos';
 	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-	const group = $derived(data.group);
-
-	// Logo tile tint, matching the cards on the index.
-	const tile = $derived(tintFor(group.brand));
+	const family = $derived(data.family);
 </script>
 
 <svelte:head>
-	<title>{group.family} — llama.app</title>
-	<meta name="description" content={group.description} />
+	<title>{family.name} — llama.app</title>
+	<meta name="description" content={family.description} />
 </svelte:head>
 
 <!-- Same outer container as the rest of the site so the pages share margins and
@@ -29,22 +27,24 @@
 		     derive a square width from a stretched height (which it won't here). -->
 		<span
 			aria-hidden="true"
-			class="flex size-20 shrink-0 items-center justify-center rounded-2xl border border-black/5 {tile} [&>svg]:h-9 [&>svg]:w-9"
+			class="flex size-20 shrink-0 items-center justify-center rounded-2xl border border-black/5 {tintFor(
+				family.brand
+			)} [&>svg]:h-9 [&>svg]:w-9"
 		>
-			{@html logoFor(group.brand)}
+			{@html logoFor(family.brand)}
 		</span>
 
 		<!-- Identity card, same height as the tile. -->
 		<div
 			class="border-border bg-card flex flex-1 flex-col justify-center rounded-2xl border px-4"
 		>
-			<h1 class="text-[26px] font-semibold tracking-tight">{group.family}</h1>
+			<h1 class="text-[26px] font-semibold tracking-tight">{family.name}</h1>
 			<!-- Metadata line: publisher, then release date, separated by a dot. -->
 			<p class="text-muted-foreground text-[13px]">
-				{group.publisher}
-				{#if group.released}
+				{publisherFor(family.brand)}
+				{#if releasedFor(family)}
 					<span class="mx-0.5">·</span>
-					<span class="tabular-nums">{group.released}</span>
+					<span class="tabular-nums">{releasedFor(family)}</span>
 				{/if}
 			</p>
 		</div>
@@ -58,7 +58,7 @@
 		<section>
 			<table class="w-full text-left">
 				<tbody>
-					{#each group.sizes as s (s.name)}
+					{#each family.sizes as s (s.name)}
 						<SizeRow size={s} />
 					{/each}
 				</tbody>
@@ -68,7 +68,7 @@
 		<!-- Right: the longer family description, one <p> per authored paragraph. -->
 		<section>
 			<div class="text-muted-foreground space-y-3 text-[15px] leading-relaxed">
-				{#each group.details as para}
+				{#each detailsFor(family) as para}
 					<p>{para}</p>
 				{/each}
 			</div>

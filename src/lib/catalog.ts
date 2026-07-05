@@ -52,21 +52,12 @@ export type Catalog = Family[];
 
 export const catalog = data as Catalog;
 
-// A family with its derived/display fields resolved once. This is the unit the
-// UI works in: the grid shows one card per group, and the detail route renders
-// one group.
-export type FamilyGroup = {
-	family: string;
-	brand: string;
-	publisher: string; // org that publishes the family, e.g. "Google" for Gemma
-	description: string; // one-line summary, for cards
-	details: string[]; // longer prose split into paragraphs, for the family page
-	released: string; // human-friendly, e.g. "Mar 2026"
-	sortKey: string; // raw "YYYY-MM" for ordering
-	slug: string; // URL-safe id, e.g. "gemma-4"
-	featured: boolean; // whether the family is featured
-	sizes: Size[];
-};
+// The catalog in display order: newest first. The website always lists
+// families this way, so we sort once here; `catalog` itself keeps the
+// authored order, since it's served verbatim as the API.
+export const families: Family[] = [...catalog].sort((a, b) =>
+	b.released.localeCompare(a.released)
+);
 
 // URL-safe id for a family name, e.g. "Qwen 3.6" → "qwen-3-6". Lossy but stable,
 // and unique across the catalog since family names are.
@@ -77,31 +68,9 @@ export function slugify(family: string): string {
 		.replace(/^-+|-+$/g, '');
 }
 
-// Resolve a family's derived/display fields once, for the UI to consume.
-export function resolveFamily(f: Family): FamilyGroup {
-	return {
-		family: f.name,
-		brand: f.brand,
-		publisher: publisherFor(f.brand),
-		description: f.description,
-		details: detailsFor(f),
-		released: releasedFor(f),
-		sortKey: f.released,
-		slug: slugify(f.name),
-		featured: f.featured ?? false,
-		sizes: f.sizes
-	};
-}
-
-// Every family as a resolved group, in catalog order.
-export function familyGroups(): FamilyGroup[] {
-	return catalog.map(resolveFamily);
-}
-
-// The family group for a given slug, or undefined if no family matches.
-export function familyGroupBySlug(slug: string): FamilyGroup | undefined {
-	const f = catalog.find((f) => slugify(f.name) === slug);
-	return f && resolveFamily(f);
+// The family for a given slug, or undefined if no family matches.
+export function familyBySlug(slug: string): Family | undefined {
+	return catalog.find((f) => slugify(f.name) === slug);
 }
 
 // The org that publishes a brand. `brand` is the logo-grouping key (e.g.
@@ -122,8 +91,7 @@ export function publisherFor(brand: string): string {
 // back to the one-line summary when no `details` is authored, so the page
 // always has something to show.
 export function detailsFor(f: Family): string[] {
-	const text = f.details ?? f.description ?? '';
-	return text
+	return (f.details ?? f.description)
 		.split('\n\n')
 		.map((p) => p.trim())
 		.filter(Boolean);
