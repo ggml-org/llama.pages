@@ -32,7 +32,7 @@
 				</span>
 				<div class="min-w-0 flex-1">
 					<div class="flex flex-wrap items-baseline gap-x-2.5">
-						<h3 class="flex items-baseline gap-1.5 text-[16px] font-medium group-hover:underline">
+						<h3 class="flex items-baseline gap-1.5 text-[16px] font-medium">
 							{g.family}
 							{#if g.sizes.some((s) => s.vision)}
 								<VisionBadge class="self-center" />
