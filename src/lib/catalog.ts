@@ -16,7 +16,9 @@ import data from './catalog.json';
 // orgs (e.g. Q4 under mistralai, Q8 mirrored under ggml-org).
 export type Build = {
 	quant?: string;
-	size?: string;
+	// Download size in bytes, as reported by the Hugging Face tree API
+	// (the sum of the build's GGUF files for split models).
+	size?: number;
 	repo: string;
 };
 
@@ -111,14 +113,15 @@ export function releasedFor(f: Family): string {
 	return `${month} ${y}`;
 }
 
-// Normalize an authored download size for display. Sizes are authored as
-// "812 MB" or "2.0 GB"; showing a single unit keeps the column comparable
-// at a glance, so MB values are converted to GB (e.g. "812 MB" → "0.8 GB").
-export function displaySize(size: string | undefined): string {
+// Format a download size (bytes) for display. A single unit (GB, decimal,
+// matching what Hugging Face and Finder show) keeps the column comparable
+// at a glance, so sub-GB sizes render as fractions (e.g. "0.24 GB").
+export function displaySize(size: number | undefined): string {
 	if (!size) return '—';
-	const m = size.match(/^([\d.]+)\s*MB$/i);
-	if (!m) return size;
-	return `${(Number(m[1]) / 1000).toFixed(1)} GB`;
+	const gb = size / 1e9;
+	// Two decimals under 10 GB so small models still differ visibly;
+	// one decimal above, where the extra digit is noise.
+	return `${gb.toFixed(gb < 10 ? 2 : 1)} GB`;
 }
 
 // URL scheme the install deeplinks target. Production points at the shipping
