@@ -38,7 +38,9 @@
 		</span>
 	</td>
 
-	<!-- Quant: a picker when the size ships more than one build, else text. -->
+	<!-- Builds: a picker when the size ships more than one, else text. Each
+	     chip carries its own download size, so the quant-vs-size tradeoff is
+	     visible before picking. -->
 	<td class="py-1.5 pr-3">
 		{#if size.builds.length > 1}
 			<div class="flex flex-wrap gap-1.5">
@@ -52,17 +54,19 @@
 							: 'border-border text-muted-foreground'}"
 					>
 						{b.quant ?? 'auto'}
+						<span class={selected === i ? 'text-sky-900/60' : 'text-muted-foreground/70'}>
+							· {displaySize(b.sizeBytes)}
+						</span>
 					</button>
 				{/each}
 			</div>
 		{:else}
-			<span class="tabular-nums">{build.quant ?? 'auto'}</span>
+			<span class="tabular-nums">
+				{build.quant ?? 'auto'}
+				<span class="text-muted-foreground">· {displaySize(build.sizeBytes)}</span>
+			</span>
 		{/if}
 	</td>
-
-	<!-- Download size, right-aligned and normalized to GB so the column lines
-	     up and reads as one unit. -->
-	<td class="py-1.5 pr-3 text-right tabular-nums">{displaySize(build.sizeBytes)}</td>
 
 	<td class="py-1.5">
 		<div class="flex justify-end gap-2">
