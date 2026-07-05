@@ -58,9 +58,8 @@
 		<section>
 			<table class="w-full text-left">
 				<tbody>
-					<!-- RAM budget is gone in this layout, so pass 0 (everything fits). -->
 					{#each group.sizes as s (s.name)}
-						<SizeRow size={s} ramGB={0} />
+						<SizeRow size={s} />
 					{/each}
 				</tbody>
 			</table>

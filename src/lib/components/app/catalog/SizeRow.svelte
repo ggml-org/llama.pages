@@ -1,24 +1,16 @@
 <script lang="ts">
-	import { type Size, type Build, deeplink, fitsInRam } from '$lib/catalog';
+	import { type Size, deeplink } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 
-	let { size, ramGB }: { size: Size; ramGB: number } = $props();
+	let { size }: { size: Size } = $props();
 
-	// Which quant build is currently selected. Defaults to the first
-	// (smallest/lowest-precision) build listed for the size.
+	// Which quant build is currently selected. Defaults to the first build
+	// listed for the size (highest-precision first in the catalog).
 	let selected = $state(0);
 	const build = $derived(size.builds[selected]);
-
-	// Availability is per-build: a size may fit at Q4 but not Q8. 0 = no RAM
-	// budget selected, so everything fits. The row stays available as long as
-	// any quant fits; only the individual quants that don't fit get marked.
-	function fits(b: Build): boolean {
-		return ramGB === 0 || fitsInRam(b, ramGB);
-	}
-	const anyFits = $derived(size.builds.some(fits));
 </script>
 
-<tr class="border-border border-t {anyFits ? '' : 'opacity-40'}">
+<tr class="border-border border-t">
 	<!-- Row label: the params suffix (the size name minus its family prefix),
 	     plus a vision badge when applicable. -->
 	<td class="py-1.5 pr-3">
@@ -38,11 +30,10 @@
 					<button
 						type="button"
 						aria-pressed={selected === i}
-						title={fits(b) ? undefined : "Doesn't fit the selected RAM"}
 						onclick={() => (selected = i)}
 						class="cursor-pointer rounded-md border px-2 py-0.5 text-[12px] tabular-nums {selected === i
 							? 'border-sky-500 bg-sky-50 text-sky-900'
-							: 'border-border text-muted-foreground'} {fits(b) ? '' : 'opacity-40'}"
+							: 'border-border text-muted-foreground'}"
 					>
 						{b.quant ?? 'auto'}
 					</button>

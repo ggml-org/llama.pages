@@ -143,31 +143,6 @@ export function releasedFor(f: Family): string {
 	return `${month} ${y}`;
 }
 
-// Parse strings like "2.5 GB", "806 MB", "18 GB" into gigabytes.
-// Returns null if the input is missing or unparseable.
-export function sizeGB(s: string | undefined): number | null {
-	if (!s) return null;
-	const m = s.trim().match(/^([\d.]+)\s*(GB|MB|G|M)$/i);
-	if (!m) return null;
-	const n = parseFloat(m[1]);
-	const unit = m[2].toUpperCase();
-	return unit.startsWith('M') ? n / 1024 : n;
-}
-
-// Whether a build is likely to run on a machine with `ramGB` of RAM.
-// Heuristic: file size should fit within ~70% of total RAM, leaving headroom
-// for OS, KV cache, and context. Unknown size → assume it fits (don't hide).
-export function fitsInRam(b: Build, ramGB: number): boolean {
-	const s = sizeGB(b.size);
-	if (s == null) return true;
-	return s <= ramGB * 0.7;
-}
-
-// A size is shown when any of its builds fits in the available RAM.
-export function sizeFitsInRam(s: Size, ramGB: number): boolean {
-	return s.builds.some((b) => fitsInRam(b, ramGB));
-}
-
 // URL scheme the install deeplinks target. Production points at the shipping
 // app (`llama://`); switch to `llama-dev` when testing against a dev build.
 const INSTALL_SCHEME = 'llama';
