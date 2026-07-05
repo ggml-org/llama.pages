@@ -16,7 +16,7 @@
      supports cmd/middle-click to open in a new tab, "copy link", etc. -->
 <a
 	href="/models/{slugify(family.name)}"
-	class="border-border bg-card hover:border-foreground/20 flex w-full flex-col gap-3 rounded-2xl border p-4 text-left transition-colors"
+	class="border-foreground/6 bg-foreground/2 hover:border-foreground/12 flex w-full flex-col gap-3 rounded-2xl border p-4 text-left transition-colors"
 >
 	<div class="flex items-start gap-3">
 		<!-- Brand logo on a tinted square tile. -->

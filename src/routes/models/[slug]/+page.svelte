@@ -36,7 +36,7 @@
 
 		<!-- Identity card, same height as the tile. -->
 		<div
-			class="border-border bg-card flex flex-1 flex-col justify-center rounded-2xl border px-4"
+			class="border-foreground/6 bg-foreground/2 flex flex-1 flex-col justify-center rounded-2xl border px-4"
 		>
 			<h1 class="text-[26px] font-semibold tracking-tight">{family.name}</h1>
 			<!-- Metadata line: publisher, then release date, separated by a dot. -->
