@@ -122,6 +122,7 @@
     "description": "Alibaba's compact natively multimodal reasoning models. Supports thinking/non-thinking modes for text and vision tasks across 201 languages.",
     "details": "The small tier of Qwen 3.5 is Alibaba's set of compact, natively multimodal models built for on-device and latency-sensitive use. Ranging from 0.8B to 9B parameters, they understand both text and images out of the box.\n\nEach model supports switchable thinking and non-thinking modes, letting you turn step-by-step reasoning on for hard problems or off for fast replies, with language coverage spanning 201 languages.",
     "released": "2026-01",
+    "featured": true,
     "sizes": [
       {
         "name": "Qwen 3.5 Small 0.8B",
@@ -303,6 +304,7 @@
     "description": "Zhipu AI's agentic reasoning and coding models. Built for software engineering, browser automation, and multi-turn tool use.",
     "details": "GLM 4.7 is Zhipu AI's lineup of agentic models built for software engineering and tool use. It's trained for multi-turn workflows like browsing, code editing, and orchestrating external tools.\n\nThe Flash variant balances capability and footprint so the model's agentic strengths stay within reach of a single high-memory GPU.",
     "released": "2026-02",
+    "featured": true,
     "sizes": [
       {
         "name": "GLM 4.7 Flash",
