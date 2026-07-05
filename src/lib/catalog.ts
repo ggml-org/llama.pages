@@ -16,9 +16,12 @@ import data from './catalog.json';
 // orgs (e.g. Q4 under mistralai, Q8 mirrored under ggml-org).
 export type Build = {
 	quant?: string;
+	// Human size label, e.g. "5.0 GB". Kept for compatibility: shipped app
+	// versions decode `size` as a string from the published catalog.
+	size?: string;
 	// Download size in bytes, as reported by the Hugging Face tree API
 	// (the sum of the build's GGUF files for split models).
-	size?: number;
+	sizeBytes?: number;
 	repo: string;
 };
 

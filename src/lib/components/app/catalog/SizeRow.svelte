@@ -62,7 +62,7 @@
 
 	<!-- Download size, right-aligned and normalized to GB so the column lines
 	     up and reads as one unit. -->
-	<td class="py-1.5 pr-3 text-right tabular-nums">{displaySize(build.size)}</td>
+	<td class="py-1.5 pr-3 text-right tabular-nums">{displaySize(build.sizeBytes)}</td>
 
 	<td class="py-1.5">
 		<div class="flex justify-end gap-2">
@@ -133,7 +133,7 @@
 						{size.name}
 						<span class="text-muted-foreground font-normal tabular-nums">
 							{#if build.quant}· {build.quant}{/if}
-							{#if build.size}· {displaySize(build.size)}{/if}
+							{#if build.sizeBytes}· {displaySize(build.sizeBytes)}{/if}
 						</span>
 					</p>
 

@@ -13,7 +13,8 @@
         "builds": [
           {
             "quant": "mxfp4",
-            "size": 12109566560,
+            "size": "12.1 GB",
+            "sizeBytes": 12109566560,
             "repo": "ggml-org/gpt-oss-20b-GGUF"
           }
         ]
@@ -24,7 +25,8 @@
         "builds": [
           {
             "quant": "mxfp4",
-            "size": 63387346464,
+            "size": "63.4 GB",
+            "sizeBytes": 63387346464,
             "repo": "ggml-org/gpt-oss-120b-GGUF"
           }
         ]
@@ -45,7 +47,8 @@
         "builds": [
           {
             "quant": "Q4_0",
-            "size": 241410624,
+            "size": "241 MB",
+            "sizeBytes": 241410624,
             "repo": "ggml-org/gemma-3-270m-it-qat-GGUF"
           }
         ]
@@ -56,7 +59,8 @@
         "builds": [
           {
             "quant": "Q4_0",
-            "size": 720425600,
+            "size": "720 MB",
+            "sizeBytes": 720425600,
             "repo": "ggml-org/gemma-3-1b-it-qat-GGUF"
           }
         ]
@@ -68,7 +72,8 @@
         "builds": [
           {
             "quant": "Q4_0",
-            "size": 2526080992,
+            "size": "2.5 GB",
+            "sizeBytes": 2526080992,
             "repo": "ggml-org/gemma-3-4b-it-qat-GGUF"
           }
         ]
@@ -80,7 +85,8 @@
         "builds": [
           {
             "quant": "Q4_0",
-            "size": 7131017792,
+            "size": "7.1 GB",
+            "sizeBytes": 7131017792,
             "repo": "ggml-org/gemma-3-12b-it-qat-GGUF"
           }
         ]
@@ -92,7 +98,8 @@
         "builds": [
           {
             "quant": "Q4_0",
-            "size": 15908791488,
+            "size": "15.9 GB",
+            "sizeBytes": 15908791488,
             "repo": "ggml-org/gemma-3-27b-it-qat-GGUF"
           }
         ]
@@ -114,7 +121,8 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 5524862368,
+            "size": "5.5 GB",
+            "sizeBytes": 5524862368,
             "repo": "ggml-org/gemma-4-E2B-it-GGUF"
           }
         ]
@@ -126,12 +134,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 8591114688,
+            "size": "8.6 GB",
+            "sizeBytes": 8591114688,
             "repo": "ggml-org/gemma-4-E4B-it-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 5335289824,
+            "size": "5.3 GB",
+            "sizeBytes": 5335289824,
             "repo": "ggml-org/gemma-4-E4B-it-GGUF"
           }
         ]
@@ -143,12 +153,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 27666266464,
+            "size": "27.7 GB",
+            "sizeBytes": 27666266464,
             "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 16796015136,
+            "size": "16.8 GB",
+            "sizeBytes": 16796015136,
             "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
           }
         ]
@@ -160,12 +172,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 33445215840,
+            "size": "33.4 GB",
+            "sizeBytes": 33445215840,
             "repo": "ggml-org/gemma-4-31B-it-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 18687061792,
+            "size": "18.7 GB",
+            "sizeBytes": 18687061792,
             "repo": "ggml-org/gemma-4-31B-it-GGUF"
           }
         ]
@@ -187,12 +201,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 811843840,
+            "size": "812 MB",
+            "sizeBytes": 811843840,
             "repo": "unsloth/Qwen3.5-0.8B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 532517120,
+            "size": "533 MB",
+            "sizeBytes": 532517120,
             "repo": "unsloth/Qwen3.5-0.8B-GGUF"
           }
         ]
@@ -204,12 +220,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 2012012800,
+            "size": "2.0 GB",
+            "sizeBytes": 2012012800,
             "repo": "unsloth/Qwen3.5-2B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 1280835840,
+            "size": "1.3 GB",
+            "sizeBytes": 1280835840,
             "repo": "unsloth/Qwen3.5-2B-GGUF"
           }
         ]
@@ -221,12 +239,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 4482403488,
+            "size": "4.5 GB",
+            "sizeBytes": 4482403488,
             "repo": "unsloth/Qwen3.5-4B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 2740937888,
+            "size": "2.7 GB",
+            "sizeBytes": 2740937888,
             "repo": "unsloth/Qwen3.5-4B-GGUF"
           }
         ]
@@ -238,12 +258,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 9527502048,
+            "size": "9.5 GB",
+            "sizeBytes": 9527502048,
             "repo": "unsloth/Qwen3.5-9B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 5680522464,
+            "size": "5.7 GB",
+            "sizeBytes": 5680522464,
             "repo": "unsloth/Qwen3.5-9B-GGUF"
           }
         ]
@@ -264,12 +286,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 28595763104,
+            "size": "28.6 GB",
+            "sizeBytes": 28595763104,
             "repo": "unsloth/Qwen3.5-27B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 16740812704,
+            "size": "16.7 GB",
+            "sizeBytes": 16740812704,
             "repo": "unsloth/Qwen3.5-27B-GGUF"
           }
         ]
@@ -281,12 +305,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 36903139968,
+            "size": "36.9 GB",
+            "sizeBytes": 36903139968,
             "repo": "unsloth/Qwen3.5-35B-A3B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 22016023168,
+            "size": "22.0 GB",
+            "sizeBytes": 22016023168,
             "repo": "unsloth/Qwen3.5-35B-A3B-GGUF"
           }
         ]
@@ -298,12 +324,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 129871935104,
+            "size": "129.9 GB",
+            "sizeBytes": 129871935104,
             "repo": "unsloth/Qwen3.5-122B-A10B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 76536964608,
+            "size": "76.5 GB",
+            "sizeBytes": 76536964608,
             "repo": "unsloth/Qwen3.5-122B-A10B-GGUF"
           }
         ]
@@ -315,12 +343,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 421507365824,
+            "size": "421.5 GB",
+            "sizeBytes": 421507365824,
             "repo": "unsloth/Qwen3.5-397B-A17B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 244093630912,
+            "size": "244.1 GB",
+            "sizeBytes": 244093630912,
             "repo": "unsloth/Qwen3.5-397B-A17B-GGUF"
           }
         ]
@@ -342,12 +372,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 28595763424,
+            "size": "28.6 GB",
+            "sizeBytes": 28595763424,
             "repo": "unsloth/Qwen3.6-27B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 16817244384,
+            "size": "16.8 GB",
+            "sizeBytes": 16817244384,
             "repo": "unsloth/Qwen3.6-27B-GGUF"
           }
         ]
@@ -359,12 +391,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 36903140320,
+            "size": "36.9 GB",
+            "sizeBytes": 36903140320,
             "repo": "unsloth/Qwen3.6-35B-A3B-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 22134528992,
+            "size": "22.1 GB",
+            "sizeBytes": 22134528992,
             "repo": "unsloth/Qwen3.6-35B-A3B-GGUF"
           }
         ]
@@ -385,12 +419,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 4099964832,
+            "size": "4.1 GB",
+            "sizeBytes": 4099964832,
             "repo": "ggml-org/Ministral-3-3B-Instruct-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 2147023008,
+            "size": "2.1 GB",
+            "sizeBytes": 2147023008,
             "repo": "mistralai/Ministral-3-3B-Instruct-2512-GGUF"
           }
         ]
@@ -402,12 +438,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 4099963264,
+            "size": "4.1 GB",
+            "sizeBytes": 4099963264,
             "repo": "ggml-org/Ministral-3-3B-Reasoning-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 2147021472,
+            "size": "2.1 GB",
+            "sizeBytes": 2147021472,
             "repo": "mistralai/Ministral-3-3B-Reasoning-2512-GGUF"
           }
         ]
@@ -419,12 +457,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 9486069920,
+            "size": "9.5 GB",
+            "sizeBytes": 9486069920,
             "repo": "ggml-org/Ministral-3-8B-Instruct-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 5198911904,
+            "size": "5.2 GB",
+            "sizeBytes": 5198911904,
             "repo": "mistralai/Ministral-3-8B-Instruct-2512-GGUF"
           }
         ]
@@ -436,12 +476,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 9486068384,
+            "size": "9.5 GB",
+            "sizeBytes": 9486068384,
             "repo": "ggml-org/Ministral-3-8B-Reasoning-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 5198910368,
+            "size": "5.2 GB",
+            "sizeBytes": 5198910368,
             "repo": "mistralai/Ministral-3-8B-Reasoning-2512-GGUF"
           }
         ]
@@ -453,12 +495,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 14827658560,
+            "size": "14.8 GB",
+            "sizeBytes": 14827658560,
             "repo": "ggml-org/Ministral-3-14B-Instruct-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 8239593024,
+            "size": "8.2 GB",
+            "sizeBytes": 8239593024,
             "repo": "mistralai/Ministral-3-14B-Instruct-2512-GGUF"
           }
         ]
@@ -470,12 +514,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 14827657024,
+            "size": "14.8 GB",
+            "sizeBytes": 14827657024,
             "repo": "ggml-org/Ministral-3-14B-Reasoning-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 8239591488,
+            "size": "8.2 GB",
+            "sizeBytes": 8239591488,
             "repo": "mistralai/Ministral-3-14B-Reasoning-2512-GGUF"
           }
         ]
@@ -496,12 +542,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 31842799232,
+            "size": "31.8 GB",
+            "sizeBytes": 31842799232,
             "repo": "ggml-org/GLM-4.7-Flash-GGUF"
           },
           {
             "quant": "Q4_K",
-            "size": 18244193920,
+            "size": "18.2 GB",
+            "sizeBytes": 18244193920,
             "repo": "ggml-org/GLM-4.7-Flash-GGUF"
           }
         ]
@@ -522,12 +570,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 25055308352,
+            "size": "25.1 GB",
+            "sizeBytes": 25055308352,
             "repo": "ggml-org/Devstral-Small-2-24B-Instruct-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 14334446752,
+            "size": "14.3 GB",
+            "sizeBytes": 14334446752,
             "repo": "unsloth/Devstral-Small-2-24B-Instruct-2512-GGUF"
           }
         ]
@@ -538,12 +588,14 @@
         "builds": [
           {
             "quant": "Q8_0",
-            "size": 132854938656,
+            "size": "132.9 GB",
+            "sizeBytes": 132854938656,
             "repo": "ggml-org/Devstral-2-123B-Instruct-2512-GGUF"
           },
           {
             "quant": "Q4_K_M",
-            "size": 74897662400,
+            "size": "74.9 GB",
+            "sizeBytes": 74897662400,
             "repo": "unsloth/Devstral-2-123B-Instruct-2512-GGUF"
           }
         ]
