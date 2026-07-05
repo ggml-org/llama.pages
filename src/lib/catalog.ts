@@ -154,3 +154,9 @@ export function deeplink(b: Build): string {
 	if (b.quant) params.set('quant', b.quant);
 	return `${INSTALL_SCHEME}://install?${params.toString()}`;
 }
+
+// CLI equivalent of the install deeplink. llama.cpp resolves `-hf` specs of
+// the form {org}/{repo}[:{QUANT}] against Hugging Face.
+export function cliCommand(b: Build): string {
+	return `llama serve -hf ${b.repo}${b.quant ? `:${b.quant}` : ''}`;
+}
