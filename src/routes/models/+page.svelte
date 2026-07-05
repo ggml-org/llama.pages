@@ -51,4 +51,17 @@
 			</a>
 		{/each}
 	</div>
+
+	<!-- The catalog is curated, not exhaustive -- point people at the full GGUF
+	     ecosystem for anything we don't list. -->
+	<p class="border-border/60 mt-0 border-t pt-6 text-center text-[14px]">
+		<a
+			href="https://huggingface.co/models?library=gguf"
+			target="_blank"
+			rel="noopener"
+			class="text-muted-foreground hover:text-foreground hover:underline"
+		>
+			Discover more models on Hugging Face ↗
+		</a>
+	</p>
 </main>
