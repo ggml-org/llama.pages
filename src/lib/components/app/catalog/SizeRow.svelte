@@ -3,6 +3,7 @@
 	// app deeplink itself, and the CLI button beside it copies the pull command
 	// -- the fallback for machines without the app, where a bare deeplink fails
 	// silently.
+	import { toast } from 'svelte-sonner';
 	import { type Size, deeplink, cliCommand, displaySize, minMemForBuild } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 
@@ -21,6 +22,19 @@
 
 	async function copyCli(cmd: string, i: number) {
 		await navigator.clipboard.writeText(cmd);
+		// Toast echoing the copied command -- the button itself never shows it,
+		// so this is where the user sees what actually landed on the clipboard.
+		// Same convention as the homepage install snippet. The description is
+		// styled as a code block: monospace on a subtle tinted background.
+		// Inline style because the Toaster hardcodes --width; per-toast inline
+		// wins over the stylesheet. Sized to the command so it stays on one
+		// line, wrapping only when a long repo name outgrows the viewport cap.
+		toast.success('Copied to clipboard!', {
+			description: cmd,
+			descriptionClass: 'bg-muted mt-1.5 block rounded-md px-2.5 py-2 font-mono text-[12px]',
+			style:
+				'width: fit-content; min-width: 356px; max-width: calc(100vw - 2rem); font-size: 14px'
+		});
 		copiedIdx = i;
 		setTimeout(() => (copiedIdx = null), 1500);
 	}
