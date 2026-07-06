@@ -1,23 +1,18 @@
 <script lang="ts">
 	import { userPrefersMode, setMode } from 'mode-watcher';
-	import { Sun, Moon, Monitor, ChevronRight } from '@lucide/svelte';
+	import { Sun, Moon, Monitor } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import GitHubLink from '$lib/components/app/navigation/GitHubLink.svelte';
-	import type { Family } from '$lib/catalog';
 
 	const stars = $derived(page.data.stars as number | null | undefined);
 
 	// Whether we're anywhere in the Models section (the catalog index or a family
-	// detail page), which is what turns the header's left side into a breadcrumb.
+	// detail page), which highlights the permanent "Models" nav link.
 	const onModels = $derived(
 		page.url.pathname === '/models' || page.url.pathname.startsWith('/models/')
 	);
-
-	// On a family detail page the loaded family gives us the open model's name,
-	// the last crumb in the trail. Undefined elsewhere (incl. the catalog index).
-	const family = $derived(page.data.family as Family | undefined);
 
 	const NEXT_MODE = { light: 'dark', dark: 'system', system: 'light' } as const;
 
@@ -27,26 +22,25 @@
 </script>
 
 <header class="mx-auto flex w-full max-w-5xl items-center justify-between p-6 md:px-12">
-	<!-- Left: a breadcrumb trail. It starts as just the logo (home) and grows a
-	     crumb at a time as you descend: "Models" once you're in the catalog, then
-	     the open family's name on a detail page. Crumbs are separated by a
-	     chevron. -->
-	<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-base">
+	<!-- Left: the logo (home) plus permanent site nav. A vertical hairline after
+	     the logo separates brand from nav, so the link doesn't read as part of
+	     the wordmark. "Models" always links to the catalog and lights up while
+	     you're anywhere in the section; the page itself names where you are
+	     (each page leads with its own h1). -->
+	<nav class="flex items-center gap-4 text-[15px]">
 		<a href={resolve('/')}>
 			<Logo --logo-height="1.5rem" />
 		</a>
 
-		{#if onModels}
-			<ChevronRight class="size-4" aria-hidden="true" />
-			<a href="/models" aria-current={family ? undefined : 'page'} class="text-foreground">
-				Models
-			</a>
-		{/if}
+		<span aria-hidden="true" class="bg-border h-5 w-px"></span>
 
-		{#if family}
-			<ChevronRight class="size-4" aria-hidden="true" />
-			<span aria-current="page" class="text-foreground">{family.name}</span>
-		{/if}
+		<a
+			href="/models"
+			aria-current={onModels ? 'page' : undefined}
+			class={onModels ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}
+		>
+			Models
+		</a>
 	</nav>
 
 	<div class="flex items-center gap-4">
