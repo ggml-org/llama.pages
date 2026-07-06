@@ -41,7 +41,7 @@
 </script>
 
 {#each shown as build, i (build.repo + (build.quant ?? ''))}
-	<tr class="border-border border-t {i > 0 ? 'border-dashed' : ''}">
+	<tr class="border-border/40 border-t {i > 0 ? 'border-dashed' : ''}">
 		<!-- Row label: the full size name plus a vision badge, repeated on every
 		     build row so each reads as a complete entry. Below it, the build's
 		     memory requirement -- same formula the app uses, so the site never
@@ -61,7 +61,7 @@
 				{/if}
 			</span>
 			{#if minMemForBuild(build)}
-				<span class="text-muted-foreground/70 block text-[12px] tabular-nums">
+				<span class="text-muted-foreground/70 block text-[13px] tabular-nums">
 					requires {minMemForBuild(build)} GB+ memory
 				</span>
 			{/if}
