@@ -38,12 +38,16 @@ export type Family = {
 	brand: string;
 	// One-line summary, shown on the catalog cards where space is tight.
 	description: string;
-	// Longer prose for the family page, where there's room for a couple of
-	// paragraphs. Paragraphs are separated by a blank line ("\n\n"). Optional;
-	// the family page falls back to `description` when it's missing.
+	// Longer prose about the family, paragraphs separated by a blank line
+	// ("\n\n"). Kept in the published catalog for consumers, but the website
+	// no longer renders it -- the header's one-line summary covers the page.
 	details?: string;
 	// Approximate release month as "YYYY-MM". Not meant to be precise.
 	released: string;
+	// Weights license, as a short display string (e.g. "Apache 2.0", "MIT",
+	// "Gemma license"). Families whose sizes ship under different licenses
+	// list both (e.g. "Apache 2.0 / Modified MIT").
+	license: string;
 	// Whether this family is featured. Exposed in the published catalog API for
 	// consumers to highlight; the website doesn't surface it. Absent means false.
 	featured?: boolean;
@@ -76,30 +80,6 @@ export function slugify(family: string): string {
 // The family for a given slug, or undefined if no family matches.
 export function familyBySlug(slug: string): Family | undefined {
 	return catalog.find((f) => slugify(f.name) === slug);
-}
-
-// The org that publishes a brand. `brand` is the logo-grouping key (e.g.
-// "Gemma"), which isn't always the publisher's name, so we map it explicitly.
-// Falls back to the brand itself for orgs whose brand and name coincide.
-export function publisherFor(brand: string): string {
-	const publishers: Record<string, string> = {
-		Gemma: 'Google',
-		Qwen: 'Alibaba',
-		Mistral: 'Mistral AI',
-		GLM: 'Zhipu AI',
-		OpenAI: 'OpenAI'
-	};
-	return publishers[brand] ?? brand;
-}
-
-// The longer family prose, split into paragraphs for the family page. Falls
-// back to the one-line summary when no `details` is authored, so the page
-// always has something to show.
-export function detailsFor(f: Family): string[] {
-	return (f.details ?? f.description)
-		.split('\n\n')
-		.map((p) => p.trim())
-		.filter(Boolean);
 }
 
 // Human-friendly release date for a family, e.g. "Mar 2026".

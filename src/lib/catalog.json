@@ -5,6 +5,7 @@
     "description": "OpenAI's first open-weight models since GPT-2. Built for reasoning, agentic tasks, and developer use with function calling and tool use capabilities.",
     "details": "OpenAI's first open-weight release since GPT-2, GPT-OSS brings frontier-style reasoning to models you can run on your own hardware. Both sizes are trained for chain-of-thought reasoning, function calling, and tool use, with adjustable reasoning effort so you can trade latency for depth.\n\nThe 20B model targets a single consumer GPU, while the 120B model is built for high-memory workstations and servers. Both ship in the efficient MXFP4 format and are released under a permissive license for commercial use.",
     "released": "2025-08",
+    "license": "Apache 2.0",
     "featured": true,
     "sizes": [
       {
@@ -39,6 +40,7 @@
     "description": "Google's multimodal models built from Gemini technology. Supports 140+ languages, vision, and text tasks with up to 128K context for edge to cloud deployment.",
     "details": "Gemma 3 is Google's family of open multimodal models, distilled from the same research behind Gemini. The lineup spans from a 270M model light enough for phones to a 27B model that holds its own against far larger systems, with vision support arriving at 4B and above.\n\nEvery size handles text and understands 140+ languages, and the larger ones add image input, with context windows up to 128K tokens. That makes Gemma 3 a flexible base for everything from on-device assistants to cloud deployments.",
     "released": "2025-03",
+    "license": "Gemma license",
     "featured": true,
     "sizes": [
       {
@@ -112,6 +114,7 @@
     "description": "Google's most capable open models, built from Gemini 3 technology. Supports multimodal reasoning, agentic workflows, and 140+ languages.",
     "details": "Gemma 4 is Google's most capable open release, built from Gemini 3 technology. It pushes multimodal reasoning and agentic workflows further while keeping the efficient, deployable footprint the Gemma line is known for.\n\nThe family mixes dense and mixture-of-experts designs, so you can choose between the always-on E-series models for edge use and the larger MoE variants for heavier reasoning, all with vision and 140+ language support.",
     "released": "2026-03",
+    "license": "Apache 2.0",
     "featured": true,
     "sizes": [
       {
@@ -192,6 +195,7 @@
     "description": "Alibaba's compact natively multimodal reasoning models. Supports thinking/non-thinking modes for text and vision tasks across 201 languages.",
     "details": "The small tier of Qwen 3.5 is Alibaba's set of compact, natively multimodal models built for on-device and latency-sensitive use. Ranging from 0.8B to 9B parameters, they understand both text and images out of the box.\n\nEach model supports switchable thinking and non-thinking modes, letting you turn step-by-step reasoning on for hard problems or off for fast replies, with language coverage spanning 201 languages.",
     "released": "2026-01",
+    "license": "Apache 2.0",
     "featured": true,
     "sizes": [
       {
@@ -278,6 +282,7 @@
     "description": "Alibaba's flagship natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
     "details": "The medium tier of Qwen 3.5 is Alibaba's flagship open lineup, offering both dense and mixture-of-experts models that punch well above their parameter counts on coding, math, and vision benchmarks.\n\nFrom a 27B dense model to a 397B MoE, the range scales from single-GPU setups to multi-GPU servers, all natively multimodal and with switchable reasoning modes.",
     "released": "2026-01",
+    "license": "Apache 2.0",
     "sizes": [
       {
         "name": "Qwen 3.5 Medium 27B",
@@ -363,6 +368,7 @@
     "description": "Alibaba's next-gen natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
     "details": "Qwen 3.6 is Alibaba's next-generation multimodal lineup, refining the dense and MoE recipes from 3.5 with stronger coding and agentic performance.\n\nNatively multimodal and reasoning-capable, the models continue to rival systems many times their size while staying practical to run locally.",
     "released": "2026-04",
+    "license": "Apache 2.0",
     "featured": true,
     "sizes": [
       {
@@ -411,6 +417,7 @@
     "description": "Mistral AI's compact edge models with vision capabilities. Offers best cost-to-performance ratio for on-device deployment in 3B, 8B, 14B sizes.",
     "details": "Ministral 3 is Mistral AI's family of compact edge models, offered in 3B, 8B, and 14B sizes with both instruct and reasoning variants. Each size is multimodal and tuned for the best cost-to-performance ratio on local hardware.\n\nThe reasoning variants add explicit step-by-step thinking for harder tasks, while the instruct models stay fast and direct, giving you a consistent family to deploy from laptops to small servers.",
     "released": "2025-12",
+    "license": "Apache 2.0",
     "sizes": [
       {
         "name": "Ministral 3 3B",
@@ -534,6 +541,7 @@
     "description": "Zhipu AI's agentic reasoning and coding models. Built for software engineering, browser automation, and multi-turn tool use.",
     "details": "GLM 4.7 is Zhipu AI's lineup of agentic models built for software engineering and tool use. It's trained for multi-turn workflows like browsing, code editing, and orchestrating external tools.\n\nThe Flash variant balances capability and footprint so the model's agentic strengths stay within reach of a single high-memory GPU.",
     "released": "2026-02",
+    "license": "MIT",
     "featured": true,
     "sizes": [
       {
@@ -562,6 +570,7 @@
     "description": "Mistral AI's agentic coding models for software engineering tasks. Excels at exploring codebases, multi-file editing, and powering code agents.",
     "details": "Devstral 2 is Mistral AI's agentic coding family, purpose-built for real software engineering rather than isolated snippets. The models excel at exploring large codebases, editing across many files, and driving autonomous code agents.\n\nOffered in a 24B size for local development and a 123B size for maximum capability, Devstral 2 plugs into agent scaffolds and IDE tooling to handle multi-step engineering tasks.",
     "released": "2026-01",
+    "license": "Apache 2.0 / Modified MIT",
     "sizes": [
       {
         "name": "Devstral 2 24B",
