@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { type Size, deeplink, cliCommand, displaySize } from '$lib/catalog';
+	import { type Size, deeplink, cliCommand, displaySize, minMemForBuild } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 
 	let { size }: { size: Size } = $props();
@@ -28,7 +28,10 @@
 </script>
 
 <tr class="border-border border-t">
-	<!-- Row label: the full size name, plus a vision badge when applicable. -->
+	<!-- Row label: the full size name, plus a vision badge when applicable.
+	     Below it, the memory requirement of the selected build — quant-specific,
+	     so it updates with the picker. Same formula the app uses, so the site
+	     never promises something the app would reject. -->
 	<td class="py-1.5 pr-3">
 		<span class="inline-flex items-center gap-1.5 tabular-nums">
 			{size.name}
@@ -36,6 +39,11 @@
 				<VisionBadge />
 			{/if}
 		</span>
+		{#if minMemForBuild(build)}
+			<span class="text-muted-foreground/70 block text-[12px] tabular-nums">
+				requires {minMemForBuild(build)} GB+
+			</span>
+		{/if}
 	</td>
 
 	<!-- Builds: a picker when the size ships more than one, else text. Each

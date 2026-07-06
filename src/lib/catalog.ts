@@ -127,6 +127,36 @@ export function displaySize(size: number | undefined): string {
 	return `${gb.toFixed(gb < 10 ? 2 : 1)} GB`;
 }
 
+// Memory tiers Macs actually ship with (GB). Used to express minimum memory
+// as a real configuration ("16 GB+") rather than a raw computed number.
+const MAC_MEM_TIERS = [8, 16, 24, 32, 48, 64, 96, 128, 192, 256, 512];
+
+// The smallest Mac memory tier (GB) that can run a build of the given download
+// size, or null if the size is unknown or nothing fits even the largest tier.
+// Mirrors the app's compatibility check (Model+Compatibility.swift):
+// budget = RAM × 0.75 − 2 GB overhead, and a build fits when
+// fileSize × 1.05 ≤ budget — so the website and the app never disagree.
+export function minMemForBuild(b: Build): number | null {
+	if (!b.sizeBytes) return null;
+	const weightMb = (b.sizeBytes / 1_048_576) * 1.05;
+	for (const tier of MAC_MEM_TIERS) {
+		const budgetMb = tier * 1024 * 0.75 - 2048;
+		if (weightMb <= budgetMb) return tier;
+	}
+	return null;
+}
+
+// The family's entry bar: the smallest tier that runs *any* of its builds
+// (i.e. the smallest quant of the smallest size). A floor, not a guarantee
+// for the whole family — the list page renders it as "from N GB".
+export function minMemGB(f: Family): number | null {
+	const tiers = f.sizes
+		.flatMap((s) => s.builds)
+		.map(minMemForBuild)
+		.filter((n): n is number => n !== null);
+	return tiers.length ? Math.min(...tiers) : null;
+}
+
 // URL scheme the install deeplinks target. Production points at the shipping
 // app (`llama://`); switch to `llama-dev` when testing against a dev build.
 const INSTALL_SCHEME = 'llama';

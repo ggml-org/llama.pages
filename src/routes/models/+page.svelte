@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { families, releasedFor, slugify } from '$lib/catalog';
+	import { families, minMemGB, releasedFor, slugify } from '$lib/catalog';
 	import { logoFor, tintFor } from '$lib/logos';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 </script>
@@ -37,11 +37,19 @@
 					</div>
 					<p class="text-muted-foreground mt-0.5 line-clamp-1 text-[14px]">{f.description}</p>
 				</div>
-				<!-- Sizes as quiet text on the right edge, aligned with the title. -->
-				<span
-					class="text-muted-foreground/70 mt-1 hidden shrink-0 text-[12px] tabular-nums sm:inline"
-				>
-					{f.sizes.map((s) => s.params ?? s.name).join(' · ')}
+				<!-- Right edge, aligned with the title: sizes on the first line, and
+				     below them the family's memory entry bar. "from N GB" reads as a
+				     floor — the smallest build runs there, larger sizes need more;
+				     exact per-build requirements live on the detail page. -->
+				<span class="mt-1 hidden shrink-0 flex-col items-end text-[12px] sm:flex">
+					<span class="text-muted-foreground/70 tabular-nums">
+						{f.sizes.map((s) => s.params ?? s.name).join(' · ')}
+					</span>
+					{#if minMemGB(f)}
+						<span class="text-muted-foreground/50 mt-0.5 tabular-nums">
+							from {minMemGB(f)} GB
+						</span>
+					{/if}
 				</span>
 			</a>
 		{/each}
