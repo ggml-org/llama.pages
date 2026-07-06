@@ -6,6 +6,12 @@
 
 	let { data }: { data: PageData } = $props();
 	const family = $derived(data.family);
+
+	// Whether to also show each size's smaller quantized builds. Off by default:
+	// every size leads with its canonical (highest-precision) build, and lower
+	// quants are opt-in -- mirroring the app, where they're strictly fallbacks.
+	let showQuantized = $state(false);
+	const hasQuantized = $derived(family.sizes.some((s) => s.builds.length > 1));
 </script>
 
 <svelte:head>
@@ -53,10 +59,25 @@
 		<table class="w-full text-left">
 			<tbody>
 				{#each family.sizes as s (s.name)}
-					<SizeRow size={s} />
+					<SizeRow size={s} {showQuantized} />
 				{/each}
 			</tbody>
 		</table>
+
+		<!-- Quantized-builds toggle, shown only when the family actually has
+		     smaller builds to reveal. This is also the one place the site
+		     explains what quantization is -- the rows themselves stay jargon-free. -->
+		{#if hasQuantized}
+			<label
+				class="text-muted-foreground border-border mt-0 flex cursor-pointer items-baseline gap-2 border-t pt-3 text-[13px]"
+			>
+				<input type="checkbox" bind:checked={showQuantized} class="accent-sky-500" />
+				<span>
+					Show quantized builds — smaller downloads that trade a little quality to run in less
+					memory.
+				</span>
+			</label>
+		{/if}
 	</section>
 
 	<!-- The longer family description, one <p> per authored paragraph. Capped in
