@@ -26,20 +26,3 @@ const fallback = `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www
 export function logoFor(brand: string): string {
 	return byBrand[brand] ?? fallback;
 }
-
-// Per-brand tint for the logo tile (background + glyph color). Kept as explicit
-// brand colors (not theme tokens) so the chips stay on-brand in both light and
-// dark mode. Brands without an entry fall back to a neutral treatment.
-const tints: Record<string, string> = {
-	Gemma: 'bg-blue-100 text-blue-700',
-	Qwen: 'bg-purple-100 text-purple-700',
-	Mistral: 'bg-orange-100 text-orange-700',
-	OpenAI: 'bg-teal-100 text-teal-700',
-	NVIDIA: 'bg-green-100 text-green-700',
-	GLM: 'bg-sky-100 text-sky-700'
-};
-
-// Tailwind classes tinting a brand's logo tile.
-export function tintFor(brand: string): string {
-	return tints[brand] ?? 'bg-muted text-muted-foreground';
-}

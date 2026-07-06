@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { families, minMemGB, releasedFor, slugify } from '$lib/catalog';
-	import { logoFor, tintFor } from '$lib/logos';
+	import { logoFor } from '$lib/logos';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 </script>
 
@@ -27,9 +27,7 @@
 			<a href="/models/{slugify(f.name)}" class="group flex items-start gap-3.5 py-3.5">
 				<span
 					aria-hidden="true"
-					class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg {tintFor(
-						f.brand
-					)} [&>svg]:h-4.5 [&>svg]:w-4.5"
+					class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground [&>svg]:h-4.5 [&>svg]:w-4.5"
 				>
 					{@html logoFor(f.brand)}
 				</span>

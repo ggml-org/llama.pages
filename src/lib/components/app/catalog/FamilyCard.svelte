@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type Family, releasedFor, slugify } from '$lib/catalog';
-	import { logoFor, tintFor } from '$lib/logos';
+	import { logoFor } from '$lib/logos';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 
 	let { family }: { family: Family } = $props();
@@ -19,12 +19,10 @@
 	class="border-foreground/6 bg-foreground/2 hover:border-foreground/12 flex w-full flex-col gap-3 rounded-2xl border p-4 text-left transition-colors"
 >
 	<div class="flex items-start gap-3">
-		<!-- Brand logo on a tinted square tile. -->
+		<!-- Brand logo on a neutral square tile. -->
 		<span
 			aria-hidden="true"
-			class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl {tintFor(
-				family.brand
-			)} [&>svg]:h-5 [&>svg]:w-5"
+			class="bg-muted text-muted-foreground flex h-10 w-10 shrink-0 items-center justify-center rounded-xl [&>svg]:h-5 [&>svg]:w-5"
 		>
 			{@html logoFor(family.brand)}
 		</span>

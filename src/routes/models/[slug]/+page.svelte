@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { detailsFor, publisherFor, releasedFor } from '$lib/catalog';
-	import { logoFor, tintFor } from '$lib/logos';
+	import { logoFor } from '$lib/logos';
 	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
 	import type { PageData } from './$types';
 
@@ -26,9 +26,7 @@
 		     derive a square width from a stretched height (which it won't here). -->
 		<span
 			aria-hidden="true"
-			class="flex size-20 shrink-0 items-center justify-center rounded-2xl border border-black/5 {tintFor(
-				family.brand
-			)} [&>svg]:h-9 [&>svg]:w-9"
+			class="flex size-20 shrink-0 items-center justify-center rounded-2xl border border-black/5 bg-muted text-muted-foreground [&>svg]:h-9 [&>svg]:w-9"
 		>
 			{@html logoFor(family.brand)}
 		</span>
