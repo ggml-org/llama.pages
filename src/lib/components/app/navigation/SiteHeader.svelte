@@ -29,7 +29,7 @@
 <header class="mx-auto flex w-full max-w-5xl items-center justify-between p-6 md:px-12">
 	<!-- Left: a breadcrumb trail. It starts as just the logo (home) and grows a
 	     crumb at a time as you descend: "Models" once you're in the catalog, then
-	     the open family's name on a detail page. Crumbs are separated by a subtle
+	     the open family's name on a detail page. Crumbs are separated by a
 	     chevron. -->
 	<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-base">
 		<a href={resolve('/')}>
@@ -37,20 +37,14 @@
 		</a>
 
 		{#if onModels}
-			<ChevronRight class="text-foreground/30 size-4" aria-hidden="true" />
-			<a
-				href="/models"
-				aria-current={family ? undefined : 'page'}
-				class="transition-colors {family
-					? 'text-foreground/70 hover:text-foreground'
-					: 'text-foreground'}"
-			>
+			<ChevronRight class="size-4" aria-hidden="true" />
+			<a href="/models" aria-current={family ? undefined : 'page'} class="text-foreground">
 				Models
 			</a>
 		{/if}
 
 		{#if family}
-			<ChevronRight class="text-foreground/30 size-4" aria-hidden="true" />
+			<ChevronRight class="size-4" aria-hidden="true" />
 			<span aria-current="page" class="text-foreground">{family.name}</span>
 		{/if}
 	</nav>
