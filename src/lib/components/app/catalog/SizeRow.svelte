@@ -39,18 +39,20 @@
 		<td class="py-1.5 pr-3">
 			<span class="inline-flex items-center gap-1.5 tabular-nums">
 				{size.name}
-				{#if size.vision}
-					<VisionBadge />
-				{/if}
 				<!-- Quant chip, matching the app's model-list styling. Always
 				     shown -- every build is a quant, including the canonical
-				     ones, and the app tags them all too. -->
+				     ones, and the app tags them all too. It sits right after
+				     the name (before the vision badge) since the quant is part
+				     of the model ID. -->
 				{#if build.quant}
 					<span
 						class="bg-muted text-muted-foreground rounded-md px-1.5 py-0.5 text-[11px] tabular-nums uppercase"
 					>
 						{build.quant}
 					</span>
+				{/if}
+				{#if size.vision}
+					<VisionBadge />
 				{/if}
 			</span>
 			{#if minMemForBuild(build)}
