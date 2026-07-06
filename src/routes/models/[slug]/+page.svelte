@@ -52,7 +52,7 @@
 		     explanation lives in the info icon's tooltip -- the one place the
 		     site explains what quantization is. -->
 		<div class="mb-2 flex items-center justify-between">
-			<h2 class="text-[17px] font-semibold tracking-tight">Models</h2>
+			<h2 class="text-[17px] font-semibold tracking-tight">Sizes</h2>
 			{#if hasQuantized}
 				<div class="flex items-center gap-1.5">
 					<label
