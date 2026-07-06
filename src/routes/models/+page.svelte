@@ -10,6 +10,14 @@
 </svelte:head>
 
 <main class="mx-auto w-full max-w-5xl px-6 pt-8 pb-24 md:px-12">
+	<!-- Page intro: states what the catalog is (a curated shortlist, everything
+	     runs in the app) so the list below reads as a recommendation, not an
+	     attempt at completeness. No h1 -- the breadcrumb in the site header
+	     already names the page, so a title here would just repeat it. -->
+	<p class="text-muted-foreground mb-10 max-w-2xl text-[15px]">
+		A curated selection of open models — every one runs in llama.app.
+	</p>
+
 	<!-- All families in one flat list, newest first. The publisher is already
 	     legible from each row's name and icon, so we don't group by publisher.
 	     Flush rows: no background, no rounding, no side padding -- just hairline
