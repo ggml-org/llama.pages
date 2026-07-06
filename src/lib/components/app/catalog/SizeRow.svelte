@@ -7,9 +7,9 @@
 
 	// Builds to display, one table row each. The top build (highest precision,
 	// listed first in the catalog) is the size's canonical version and is always
-	// shown without a quant label -- it's just "the model", matching the app's
-	// convention where lower quants are strictly fallbacks. Smaller quantized
-	// builds only appear when the page-level toggle asks for them.
+	// shown, matching the app's convention where lower quants are strictly
+	// fallbacks. The smaller, more heavily quantized builds only appear when the
+	// page-level toggle asks for them.
 	const shown = $derived(showQuantized ? size.builds : size.builds.slice(0, 1));
 
 	// Install modal state: index into `shown` of the build whose modal is open,
@@ -42,10 +42,10 @@
 				{#if size.vision}
 					<VisionBadge />
 				{/if}
-				<!-- Quant chip, matching the app's model-list styling. Only shown
-				     with quantized builds visible; in the default view the
-				     canonical builds stay label-free. -->
-				{#if showQuantized && build.quant}
+				<!-- Quant chip, matching the app's model-list styling. Always
+				     shown -- every build is a quant, including the canonical
+				     ones, and the app tags them all too. -->
+				{#if build.quant}
 					<span
 						class="bg-muted text-muted-foreground rounded-md px-1.5 py-0.5 text-[11px] tabular-nums uppercase"
 					>
@@ -55,7 +55,7 @@
 			</span>
 			{#if minMemForBuild(build)}
 				<span class="text-muted-foreground/70 block text-[12px] tabular-nums">
-					requires {minMemForBuild(build)} GB+
+					requires {minMemForBuild(build)} GB+ memory
 				</span>
 			{/if}
 		</td>

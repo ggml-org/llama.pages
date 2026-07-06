@@ -68,17 +68,18 @@
 				</tbody>
 			</table>
 
-			<!-- Quantized-builds toggle, shown only when the family actually has
+			<!-- Smaller-builds toggle, shown only when the family actually has
 			     smaller builds to reveal. This is also the one place the site
-			     explains what quantization is -- the rows themselves stay jargon-free. -->
+			     explains what quantization is -- the rows themselves keep it to
+			     the quant chips. -->
 			{#if hasQuantized}
 				<label
 					class="text-muted-foreground border-border mt-0 flex cursor-pointer items-baseline gap-2 border-t pt-3 text-[13px]"
 				>
 					<input type="checkbox" bind:checked={showQuantized} class="accent-sky-500" />
 					<span>
-						Show quantized builds — smaller downloads that trade a little quality to run in less
-						memory.
+						Show smaller builds — quantized further to run in less memory, at a small cost in
+						quality.
 					</span>
 				</label>
 			{/if}
