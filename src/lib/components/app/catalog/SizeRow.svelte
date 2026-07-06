@@ -32,36 +32,31 @@
 
 {#each shown as build, i (build.repo + (build.quant ?? ''))}
 	<tr class="border-border border-t {i > 0 ? 'border-dashed' : ''}">
-		<!-- Row label. The size's first row carries the full name plus a vision
-		     badge; follow-up rows (quantized fallbacks, shown only when toggled
-		     on) get a muted "quantized" label instead of repeating the name.
-		     Below either, the build's memory requirement -- same formula the app
-		     uses, so the site never promises something the app would reject. -->
+		<!-- Row label: the full size name plus a vision badge, repeated on every
+		     build row so each reads as a complete entry. Below it, the build's
+		     memory requirement -- same formula the app uses, so the site never
+		     promises something the app would reject. -->
 		<td class="py-1.5 pr-3">
-			{#if i === 0}
-				<span class="inline-flex items-center gap-1.5 tabular-nums">
-					{size.name}
-					{#if size.vision}
-						<VisionBadge />
-					{/if}
-				</span>
-			{:else}
-				<span class="text-muted-foreground">quantized</span>
-			{/if}
+			<span class="inline-flex items-center gap-1.5 tabular-nums">
+				{size.name}
+				{#if size.vision}
+					<VisionBadge />
+				{/if}
+				<!-- Quant chip, matching the app's model-list styling. Only shown
+				     with quantized builds visible; in the default view the
+				     canonical builds stay label-free. -->
+				{#if showQuantized && build.quant}
+					<span
+						class="bg-muted text-muted-foreground rounded-md px-1.5 py-0.5 text-[11px] tabular-nums uppercase"
+					>
+						{build.quant}
+					</span>
+				{/if}
+			</span>
 			{#if minMemForBuild(build)}
 				<span class="text-muted-foreground/70 block text-[12px] tabular-nums">
 					requires {minMemForBuild(build)} GB+
 				</span>
-			{/if}
-		</td>
-
-		<!-- Quant label, in its own column so the download sizes next to it stay
-		     aligned regardless of label width. Only populated with quantized
-		     builds shown; in the default view the canonical builds stay
-		     label-free and the column collapses. -->
-		<td class="py-1.5 pr-3">
-			{#if showQuantized && build.quant}
-				<span class="text-muted-foreground tabular-nums">{build.quant}</span>
 			{/if}
 		</td>
 

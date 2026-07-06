@@ -56,7 +56,7 @@
 	<!-- The download table is the primary content, so it takes the wider left
 	     column (~60%); the longer prose sits on the right (~40%). Stacks on
 	     narrow screens. -->
-	<div class="mt-10 grid items-start gap-x-12 gap-y-10 lg:grid-cols-[1.5fr_1fr]">
+	<div class="mt-10 grid items-start gap-10 lg:grid-cols-[1.5fr_1fr]">
 		<!-- Left: per-size download table, with the quantized-builds toggle
 		     tucked under it. -->
 		<section>
