@@ -53,40 +53,44 @@
 		</div>
 	</header>
 
-	<!-- The download table is the primary content: it spans the full width, with
-	     the family description below it. -->
-	<section class="mt-10">
-		<table class="w-full text-left">
-			<tbody>
-				{#each family.sizes as s (s.name)}
-					<SizeRow size={s} {showQuantized} />
+	<!-- The download table is the primary content, so it takes the wider left
+	     column (~60%); the longer prose sits on the right (~40%). Stacks on
+	     narrow screens. -->
+	<div class="mt-10 grid items-start gap-x-12 gap-y-10 lg:grid-cols-[1.5fr_1fr]">
+		<!-- Left: per-size download table, with the quantized-builds toggle
+		     tucked under it. -->
+		<section>
+			<table class="w-full text-left">
+				<tbody>
+					{#each family.sizes as s (s.name)}
+						<SizeRow size={s} {showQuantized} />
+					{/each}
+				</tbody>
+			</table>
+
+			<!-- Quantized-builds toggle, shown only when the family actually has
+			     smaller builds to reveal. This is also the one place the site
+			     explains what quantization is -- the rows themselves stay jargon-free. -->
+			{#if hasQuantized}
+				<label
+					class="text-muted-foreground border-border mt-0 flex cursor-pointer items-baseline gap-2 border-t pt-3 text-[13px]"
+				>
+					<input type="checkbox" bind:checked={showQuantized} class="accent-sky-500" />
+					<span>
+						Show quantized builds — smaller downloads that trade a little quality to run in less
+						memory.
+					</span>
+				</label>
+			{/if}
+		</section>
+
+		<!-- Right: the longer family description, one <p> per authored paragraph. -->
+		<section>
+			<div class="text-muted-foreground space-y-3 text-[15px] leading-relaxed">
+				{#each detailsFor(family) as para}
+					<p>{para}</p>
 				{/each}
-			</tbody>
-		</table>
-
-		<!-- Quantized-builds toggle, shown only when the family actually has
-		     smaller builds to reveal. This is also the one place the site
-		     explains what quantization is -- the rows themselves stay jargon-free. -->
-		{#if hasQuantized}
-			<label
-				class="text-muted-foreground border-border mt-0 flex cursor-pointer items-baseline gap-2 border-t pt-3 text-[13px]"
-			>
-				<input type="checkbox" bind:checked={showQuantized} class="accent-sky-500" />
-				<span>
-					Show quantized builds — smaller downloads that trade a little quality to run in less
-					memory.
-				</span>
-			</label>
-		{/if}
-	</section>
-
-	<!-- The longer family description, one <p> per authored paragraph. Capped in
-	     width for comfortable line length. -->
-	<section class="mt-10">
-		<div class="text-muted-foreground max-w-2xl space-y-3 text-[15px] leading-relaxed">
-			{#each detailsFor(family) as para}
-				<p>{para}</p>
-			{/each}
-		</div>
-	</section>
+			</div>
+		</section>
+	</div>
 </main>
