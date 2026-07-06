@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { releasedFor } from '$lib/catalog';
-	import { logoFor } from '$lib/logos';
 	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
 	import type { PageData } from './$types';
 
@@ -23,27 +22,18 @@
      left edge. The per-size download table spans the full width, followed by
      the family prose. -->
 <main class="mx-auto w-full max-w-5xl px-6 pt-8 pb-24 md:px-12">
-	<!-- Header, model-card style: a bordered brand logo tile on the left,
-	     top-aligned; beside it a metadata line (publisher · release date)
-	     above the title, with the one-line summary under it. -->
-	<header class="flex items-start gap-5">
-		<span
-			aria-hidden="true"
-			class="border-border/60 flex size-24 shrink-0 items-center justify-center rounded-xl border [&>svg]:h-11 [&>svg]:w-11"
-		>
-			{@html logoFor(family.brand)}
-		</span>
-
-		<div class="min-w-0 py-0.5">
-			<!-- Metadata line: just the release date -- the publisher would be
-			     redundant, since every family's summary below opens by naming it.
-			     (The license is in the data too, but not surfaced here yet.) -->
-			{#if releasedFor(family)}
-				<p class="text-muted-foreground text-[13px] tabular-nums">{releasedFor(family)}</p>
-			{/if}
-			<h1 class="mt-1 text-[26px] font-semibold tracking-tight">{family.name}</h1>
-			<p class="text-muted-foreground mt-1 max-w-xl text-[15px]">{family.description}</p>
+	<!-- Header, title-first: the family name leads at full size, with a byline
+	     meta row (release date | license) under it and the one-line summary
+	     last -- headline / byline / standfirst. The brand isn't repeated here:
+	     the title contains it and the summary opens by naming the publisher. -->
+	<header>
+		<h1 class="text-[30px] font-semibold tracking-tight">{family.name}</h1>
+		<div class="text-muted-foreground mt-2.5 flex items-center gap-2 text-[13px]">
+			<span class="tabular-nums">{releasedFor(family)}</span>
+			<span class="text-border select-none">|</span>
+			<span>{family.license}</span>
 		</div>
+		<p class="text-muted-foreground mt-3 max-w-xl text-[15px]">{family.description}</p>
 	</header>
 
 	<section class="mt-10">
