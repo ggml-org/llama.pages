@@ -42,12 +42,10 @@
 		     explanation lives in the info icon's tooltip -- the one place the
 		     site explains what quantization is. -->
 		<div class="mb-2 flex items-center justify-between">
-			<h2 class="text-muted-foreground text-[13px] font-medium">Sizes</h2>
+			<h2 class="text-muted-foreground text-[13px]">Sizes</h2>
 			{#if hasQuantized}
 				<div class="flex items-center gap-1.5">
-					<label
-						class="text-muted-foreground flex cursor-pointer items-baseline gap-2 text-[13px]"
-					>
+					<label class="text-muted-foreground flex cursor-pointer items-baseline gap-2 text-[13px]">
 						<input type="checkbox" bind:checked={showQuantized} class="accent-sky-500" />
 						<span>Show smaller quantizations</span>
 					</label>
