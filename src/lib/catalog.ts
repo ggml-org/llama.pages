@@ -107,9 +107,12 @@ export function displaySize(size: number | undefined): string {
 	return `${gb.toFixed(gb < 10 ? 2 : 1)} GB`;
 }
 
-// Memory tiers Macs actually ship with (GB). Used to express minimum memory
-// as a real configuration ("16 GB+") rather than a raw computed number.
-const MAC_MEM_TIERS = [8, 16, 24, 32, 48, 64, 96, 128, 192, 256, 512];
+// Memory tiers Macs ship with (GB), used to express minimum memory as a
+// real configuration ("16 GB+") rather than a raw computed number. The tiers
+// past 512 don't exist yet -- they extrapolate Apple's step pattern so that
+// builds too big for any current Mac still show an honest requirement
+// instead of silently omitting the line.
+const MAC_MEM_TIERS = [8, 16, 24, 32, 48, 64, 96, 128, 192, 256, 512, 768, 1024];
 
 // The smallest Mac memory tier (GB) that can run a build of the given download
 // size, or null if the size is unknown or nothing fits even the largest tier.
