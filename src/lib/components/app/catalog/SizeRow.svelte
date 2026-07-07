@@ -1,13 +1,23 @@
 <script lang="ts">
-	// Fully inline install actions, nothing expands: the Install button is the
-	// app deeplink itself, and the CLI button beside it copies the pull command
-	// -- the fallback for machines without the app, where a bare deeplink fails
-	// silently.
-	import { toast } from 'svelte-sonner';
-	import { type Size, deeplink, cliCommand, displaySize, minMemForBuild } from '$lib/catalog';
+	// Fully inline install actions, nothing expands: the Install button fires
+	// the app deeplink and hands the build to the page's install dialog, which
+	// carries the fallbacks (app download, CLI command) for machines without
+	// the app.
+	import { type Size, type Build, deeplink, displaySize, minMemForBuild } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 
-	let { size, showQuantized = false }: { size: Size; showQuantized?: boolean } = $props();
+	let {
+		size,
+		showQuantized = false,
+		oninstall
+	}: { size: Size; showQuantized?: boolean; oninstall: (b: Build) => void } = $props();
+
+	// Fire the deeplink (a no-op without the app -- the dialog covers that
+	// case) and open the dialog with this build's fallbacks.
+	function install(b: Build) {
+		location.href = deeplink(b);
+		oninstall(b);
+	}
 
 	// Builds to display, one table row each. The top build (highest precision,
 	// listed first in the catalog) is the size's canonical version and is always
@@ -15,29 +25,6 @@
 	// fallbacks. The smaller, more heavily quantized builds only appear when the
 	// page-level toggle asks for them.
 	const shown = $derived(showQuantized ? size.builds : size.builds.slice(0, 1));
-
-	// Index of the row whose CLI command was just copied, for the transient
-	// check-mark feedback; null when none.
-	let copiedIdx = $state<number | null>(null);
-
-	async function copyCli(cmd: string, i: number) {
-		await navigator.clipboard.writeText(cmd);
-		// Toast echoing the copied command -- the button itself never shows it,
-		// so this is where the user sees what actually landed on the clipboard.
-		// Same convention as the homepage install snippet. The description is
-		// styled as a code block: monospace on a subtle tinted background.
-		// Inline style because the Toaster hardcodes --width; per-toast inline
-		// wins over the stylesheet. Sized to the command so it stays on one
-		// line, wrapping only when a long repo name outgrows the viewport cap.
-		toast.success('Copied to clipboard!', {
-			description: cmd,
-			descriptionClass: 'bg-muted mt-1.5 block rounded-md px-2.5 py-2 font-mono text-[12px]',
-			style:
-				'width: fit-content; min-width: 356px; max-width: calc(100vw - 2rem); font-size: 14px'
-		});
-		copiedIdx = i;
-		setTimeout(() => (copiedIdx = null), 1500);
-	}
 </script>
 
 {#each shown as build, i (build.repo + (build.quant ?? ''))}
@@ -98,51 +85,9 @@
 					</svg>
 				</a>
 
-				<!-- Copy the CLI command. The native title tooltip shows the full
-				     command, so hovering reveals what will land on the clipboard. -->
 				<button
 					type="button"
-					aria-label="Copy CLI command"
-					title={cliCommand(build)}
-					onclick={() => copyCli(cliCommand(build), i)}
-					class="bg-muted text-foreground flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5"
-				>
-					{#if copiedIdx === i}
-						<svg
-							aria-hidden="true"
-							viewBox="0 0 16 16"
-							class="h-3.5 w-3.5"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.75"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							<path d="M3 8.5L6.5 12 13 4.5" />
-						</svg>
-					{:else}
-						<!-- Terminal prompt icon: reads as "CLI" at a glance. -->
-						<svg
-							aria-hidden="true"
-							viewBox="0 0 16 16"
-							class="h-3.5 w-3.5"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.75"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						>
-							<path d="M3 4.5L6.5 8 3 11.5" />
-							<path d="M8.5 11.5H13" />
-						</svg>
-					{/if}
-					CLI
-				</button>
-
-				<!-- Direct deeplink: on machines without the app this fails
-				     silently, which the CLI button covers as the fallback. -->
-				<a
-					href={deeplink(build)}
+					onclick={() => install(build)}
 					class="flex cursor-pointer items-center gap-1.5 rounded-lg bg-sky-500 px-3.5 py-1.5 text-center text-white"
 				>
 					<svg
@@ -159,8 +104,8 @@
 						<path d="M4.5 7L8 10.5 11.5 7" />
 						<path d="M3 13.5h10" />
 					</svg>
-					Install in Llama
-				</a>
+					Install
+				</button>
 			</div>
 		</td>
 	</tr>

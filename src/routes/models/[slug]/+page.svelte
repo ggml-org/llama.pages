@@ -1,10 +1,16 @@
 <script lang="ts">
-	import { releasedFor } from '$lib/catalog';
+	import { type Build, releasedFor } from '$lib/catalog';
 	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
+	import InstallDialog from '$lib/components/app/catalog/InstallDialog.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 	const family = $derived(data.family);
+
+	// The build whose install dialog is open, shared across all rows; null
+	// when closed. The rows set it (after firing the deeplink) and the dialog
+	// clears it on close.
+	let installing = $state<Build | null>(null);
 
 	// Whether to also show each size's smaller quantized builds. Off by default:
 	// every size leads with its canonical (highest-precision) build, and lower
@@ -78,9 +84,11 @@
 		<table class="w-full text-left">
 			<tbody>
 				{#each family.sizes as s (s.name)}
-					<SizeRow size={s} {showQuantized} />
+					<SizeRow size={s} {showQuantized} oninstall={(b) => (installing = b)} />
 				{/each}
 			</tbody>
 		</table>
 	</section>
 </main>
+
+<InstallDialog bind:build={installing} />
