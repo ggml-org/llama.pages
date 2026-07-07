@@ -35,16 +35,14 @@
      left edge. The per-size download table spans the full width, followed by
      the family prose. -->
 <main class="mx-auto w-full max-w-5xl px-6 pt-8 pb-24 md:px-12">
-	<!-- Header, title-first: the family name leads at full size, with a byline
-	     meta row (release date | license) under it and the one-line summary
-	     last -- headline / byline / standfirst. The brand isn't repeated here:
-	     the title contains it and the summary opens by naming the publisher. -->
+	<!-- Header, title-first: the family name leads at full size, with the
+	     release date as a byline under it and the one-line summary last --
+	     headline / byline / standfirst. The brand isn't repeated here: the
+	     title contains it and the summary opens by naming the publisher. -->
 	<header>
 		<h1 class="text-[30px] font-semibold tracking-tight">{family.name}</h1>
-		<div class="text-muted-foreground mt-2.5 flex items-center gap-2 text-[13px]">
+		<div class="text-muted-foreground mt-2.5 text-[13px]">
 			<span class="tabular-nums">{releasedFor(family)}</span>
-			<span class="text-border select-none">|</span>
-			<span>{family.license}</span>
 		</div>
 		<p class="text-muted-foreground mt-3 max-w-xl text-[15px]">{family.description}</p>
 	</header>
