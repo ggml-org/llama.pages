@@ -21,22 +21,8 @@
 		<p class="text-muted-foreground mt-2.5 text-[13px] tabular-nums">
 			Updated {releasedFor(families[0])}
 		</p>
-		<!-- The standfirst doubles as the escape hatch: the catalog is curated,
-		     not exhaustive, so the same sentence points at the full GGUF
-		     ecosystem for anything we don't list. -->
 		<p class="text-muted-foreground mt-3 max-w-2xl text-[15px]">
-			A curated selection of open models — every one runs in llama.app. Find thousands more
-			GGUF models on
-			<!-- whitespace-nowrap so the link never breaks across lines ("Hugging /
-			     Face ↗" reads badly and strands the arrow). -->
-			<a
-				href="https://huggingface.co/models?library=gguf"
-				target="_blank"
-				rel="noopener"
-				class="hover:text-foreground underline underline-offset-4 whitespace-nowrap"
-			>
-				Hugging Face ↗
-			</a>
+			A curated selection of open models — every one runs in llama.app.
 		</p>
 	</header>
 
@@ -86,4 +72,20 @@
 		{/each}
 	</div>
 
+	<!-- Closing escape hatch: the catalog is curated, not exhaustive, so after
+	     the list ends we point at the full GGUF ecosystem for anything we
+	     don't carry. -->
+	<p class="text-muted-foreground mt-10 text-[15px]">
+		Find thousands more GGUF models on
+		<!-- whitespace-nowrap so the link never breaks across lines ("Hugging /
+		     Face ↗" reads badly and strands the arrow). -->
+		<a
+			href="https://huggingface.co/models?library=gguf"
+			target="_blank"
+			rel="noopener"
+			class="hover:text-foreground underline underline-offset-4 whitespace-nowrap"
+		>
+			Hugging Face ↗
+		</a>
+	</p>
 </main>
