@@ -17,31 +17,33 @@
 	<link rel="alternate" type="text/markdown" href="/docs/{data.version}/{data.local}.md" />
 </svelte:head>
 
-<div class="mx-auto flex w-full max-w-7xl items-start gap-10 px-6 md:px-12">
+<div class="flex w-full">
 	<aside
-		class="sticky top-20 hidden max-h-[calc(100vh-6rem)] w-60 shrink-0 overflow-y-auto py-8 md:block"
+		class="border-border/70 sticky top-20 hidden h-[calc(100vh-5rem)] w-[19rem] shrink-0 overflow-y-auto border-r px-7 py-6 lg:block"
 	>
 		<DocsSidebar version={data.version} toctree={data.toctree} active={data.local} />
 	</aside>
 
-	<main class="min-w-0 flex-1 py-8">
-		<details class="border-border mb-6 rounded-md border md:hidden">
-			<summary class="cursor-pointer px-3 py-2 text-sm font-medium">Documentation</summary>
-			<div class="px-3 pb-3">
-				<DocsSidebar version={data.version} toctree={data.toctree} active={data.local} />
-			</div>
-		</details>
+	<div class="flex min-h-screen w-full min-w-0 grow gap-x-8 px-4 pt-6 lg:pt-10 lg:pr-10 lg:pl-16">
+		<main class="mx-auto w-full max-w-xl min-w-0 pb-10 xl:w-[calc(100%-28rem)] 2xl:max-w-2xl">
+			<details class="border-border mb-6 rounded-md border lg:hidden">
+				<summary class="cursor-pointer px-3 py-2 text-sm font-medium">Documentation</summary>
+				<div class="px-3 pb-3">
+					<DocsSidebar version={data.version} toctree={data.toctree} active={data.local} />
+				</div>
+			</details>
 
-		<article bind:this={article} class="prose max-w-none dark:prose-invert">
-			<Content />
-		</article>
+			<article bind:this={article} class="prose max-w-none dark:prose-invert">
+				<Content />
+			</article>
 
-		<DocsFooterNav version={data.version} prev={data.prev} next={data.next} />
-	</main>
+			<DocsFooterNav version={data.version} prev={data.prev} next={data.next} />
+		</main>
 
-	<aside
-		class="sticky top-20 hidden max-h-[calc(100vh-6rem)] w-52 shrink-0 overflow-y-auto py-8 xl:block"
-	>
-		<DocsToc {article} {pageKey} />
-	</aside>
+		<aside
+			class="sticky top-20 hidden max-h-[calc(100vh-6rem)] w-[19rem] shrink-0 self-start overflow-y-auto pb-4 pl-10 xl:block"
+		>
+			<DocsToc {article} {pageKey} />
+		</aside>
+	</div>
 </div>

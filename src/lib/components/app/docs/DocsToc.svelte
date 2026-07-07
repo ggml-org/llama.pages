@@ -48,7 +48,7 @@
 </script>
 
 {#if headings.length > 0}
-	<nav aria-label="On this page" class="flex flex-col gap-2 text-sm">
+	<nav aria-label="On this page" class="flex w-[16.5rem] flex-col gap-2 text-sm leading-6">
 		<span class="text-foreground/80 font-semibold">On this page</span>
 
 		{#each headings as heading (heading.id)}
