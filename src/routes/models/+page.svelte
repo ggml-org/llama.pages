@@ -59,23 +59,28 @@
 					{@html logoFor(f.brand)}
 				</span>
 				<div class="min-w-0 flex-1">
-					<div class="flex flex-wrap items-baseline gap-x-2.5">
-						<h3 class="flex items-baseline gap-2 text-[16px] font-medium">
-							{f.name}
-							{#if f.sizes.some((s) => s.vision)}
-								<VisionBadge class="self-center" />
-							{/if}
-						</h3>
-						<span class="text-muted-foreground/70 ml-auto text-[13px] tabular-nums">
-						{releasedFor(f)}
-					</span>
-					</div>
+					<!-- Name line: family name followed inline by its size pills, so
+					     "name + configurations" reads as one unit and each row stays
+					     two lines tall. The pills are one bounded chip per size so
+					     they read as discrete configurations rather than a run-on
+					     string; fully rounded rather than rounded-md, because the
+					     rounded-md filled chip is the quant badge on the detail
+					     pages and sizes get a distinct silhouette. Memory
+					     requirements live on the detail page. -->
+					<h3 class="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[16px] font-medium">
+						<span class="mr-0.5">{f.name}</span>
+						{#if f.sizes.some((s) => s.vision)}
+							<VisionBadge />
+						{/if}
+						{#each f.sizes as s (s.name)}
+							<span
+								class="bg-muted text-muted-foreground rounded-full px-2 py-1 text-[11px] leading-none font-normal tabular-nums"
+							>
+								{s.params ?? s.name}
+							</span>
+						{/each}
+					</h3>
 					<p class="text-muted-foreground mt-0.5 line-clamp-1 text-[15px]">{f.description}</p>
-					<!-- Footer line: the family's sizes. Memory requirements live on
-					     the detail page. -->
-					<p class="text-muted-foreground/70 mt-1.5 text-[13px] tabular-nums">
-						{f.sizes.map((s) => s.params ?? s.name).join(' · ')}
-					</p>
 				</div>
 			</a>
 		{/each}
