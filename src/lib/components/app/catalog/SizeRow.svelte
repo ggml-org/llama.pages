@@ -1,8 +1,7 @@
 <script lang="ts">
 	// Fully inline install actions, nothing expands: the Install button fires
-	// the app deeplink and hands the build to the page's install dialog, which
-	// carries the fallbacks (app download, CLI command) for machines without
-	// the app.
+	// the app deeplink and reports the build to the page, which shows a toast
+	// with the confirmation and the fallbacks for machines without the app.
 	import { type Size, type Build, deeplink, displaySize, minMemForBuild } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 
@@ -12,8 +11,8 @@
 		oninstall
 	}: { size: Size; showQuantized?: boolean; oninstall: (b: Build) => void } = $props();
 
-	// Fire the deeplink (a no-op without the app -- the dialog covers that
-	// case) and open the dialog with this build's fallbacks.
+	// Fire the deeplink (a no-op without the app -- the toast's fallbacks
+	// cover that case) and let the page confirm.
 	function install(b: Build) {
 		location.href = deeplink(b);
 		oninstall(b);

@@ -1,16 +1,23 @@
 <script lang="ts">
+	import { toast } from 'svelte-sonner';
 	import { type Build, releasedFor } from '$lib/catalog';
 	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
-	import InstallDialog from '$lib/components/app/catalog/InstallDialog.svelte';
+	import InstallToast from '$lib/components/app/catalog/InstallToast.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 	const family = $derived(data.family);
 
-	// The build whose install dialog is open, shared across all rows; null
-	// when closed. The rows set it (after firing the deeplink) and the dialog
-	// clears it on close.
-	let installing = $state<Build | null>(null);
+	// Install is fire-and-forget: the row already sent the deeplink, and on
+	// success Llama (a menu bar app) shows its own bubble -- there is nothing
+	// to wait for, so a self-dismissing toast fits the weight of the event.
+	// The one toast carries everything up front -- confirmation plus the
+	// fallbacks for machines without the app (unobservable from the browser).
+	// Longer duration than default: a user without the app needs time to
+	// notice that nothing happened and read the fallbacks.
+	function installed(b: Build) {
+		toast.custom(InstallToast, { componentProps: { build: b }, duration: 15000 });
+	}
 
 	// Whether to also show each size's smaller quantized builds. Off by default:
 	// every size leads with its canonical (highest-precision) build, and lower
@@ -84,11 +91,10 @@
 		<table class="w-full text-left">
 			<tbody>
 				{#each family.sizes as s (s.name)}
-					<SizeRow size={s} {showQuantized} oninstall={(b) => (installing = b)} />
+					<SizeRow size={s} {showQuantized} oninstall={installed} />
 				{/each}
 			</tbody>
 		</table>
 	</section>
 </main>
 
-<InstallDialog bind:build={installing} />
