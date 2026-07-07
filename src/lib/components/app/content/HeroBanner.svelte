@@ -4,8 +4,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import appleIcon from '$lib/assets/apple-icon.svg?raw';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
-
-	const version = '0.32.0';
+	import { APP_VERSION as version } from '$lib/constants/site';
 </script>
 
 <section class="flex flex-col items-center gap-12 py-16 text-balance md:gap-14 md:py-24">
