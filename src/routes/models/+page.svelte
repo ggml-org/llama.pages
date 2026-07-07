@@ -49,16 +49,18 @@
 				<div aria-hidden="true" class="border-border/40 border-t"></div>
 			{/if}
 			<a href="/models/{slugify(f.name)}" class="group flex items-start gap-3.5 py-3.5">
+				<!-- Brand mark in its own leading column, like a bullet: fixed width
+				     so every row's text block starts at the same x, vertically
+				     centered against the 16px name line. -->
+				<span
+					aria-hidden="true"
+					class="mt-0.5 flex h-6 w-4.5 shrink-0 items-center [&>svg]:h-4.5 [&>svg]:w-4.5"
+				>
+					{@html logoFor(f.brand)}
+				</span>
 				<div class="min-w-0 flex-1">
 					<div class="flex flex-wrap items-baseline gap-x-2.5">
 						<h3 class="flex items-baseline gap-2 text-[16px] font-medium">
-							<!-- Brand mark inline with the name, sized to the text. -->
-							<span
-								aria-hidden="true"
-								class="flex self-center [&>svg]:h-4.5 [&>svg]:w-4.5"
-							>
-								{@html logoFor(f.brand)}
-							</span>
 							{f.name}
 							{#if f.sizes.some((s) => s.vision)}
 								<VisionBadge class="self-center" />
