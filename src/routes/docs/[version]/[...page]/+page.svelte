@@ -19,7 +19,7 @@
 
 <div class="flex w-full">
 	<aside
-		class="border-border/70 sticky top-20 hidden h-[calc(100vh-5rem)] w-[19rem] shrink-0 overflow-y-auto border-r px-7 py-6 lg:block"
+		class="sticky top-20 hidden h-[calc(100vh-5rem)] w-[19rem] shrink-0 overflow-y-auto px-7 py-6 lg:block"
 	>
 		<DocsSidebar version={data.version} toctree={data.toctree} active={data.local} />
 	</aside>
