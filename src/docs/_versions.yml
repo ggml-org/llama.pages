@@ -2,3 +2,4 @@
 # every other entry must be a git tag of this repo — its docs are extracted
 # from `<tag>:src/docs/main` at build time by scripts/extract-docs.js.
 - main
+- v0.0.1
