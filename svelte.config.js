@@ -1,4 +1,5 @@
 import { mdsvex } from 'mdsvex';
+import rehypeSlug from 'rehype-slug';
 import adapter from '@sveltejs/adapter-static';
 import { relative, sep } from 'node:path';
 
@@ -23,7 +24,7 @@ const config = {
 			entries: ['*']
 		}
 	},
-	preprocess: [mdsvex({ extensions: ['.svx', '.md'] })],
+	preprocess: [mdsvex({ extensions: ['.svx', '.md'], rehypePlugins: [rehypeSlug] })],
 	extensions: ['.svelte', '.svx', '.md']
 };
 
