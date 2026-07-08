@@ -1,5 +1,6 @@
-# Ordered list of docs versions. `main` is built from the working tree;
-# every other entry must be a git tag of this repo — its docs are extracted
-# from `<tag>:src/docs/main` at build time by scripts/extract-docs.js.
-- main
-- v0.0.1
+# Ordered list of docs versions; each must be a git tag of this repo — its
+# docs are extracted from `<tag>:src/docs/main` at build time by
+# scripts/extract-docs.js. Exception: the version matching APP_VERSION
+# (src/lib/constants/site.ts) falls back to the working tree until its tag
+# is created.
+- v0.32.0

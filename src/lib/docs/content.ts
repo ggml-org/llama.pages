@@ -4,17 +4,18 @@ import type { FlatTocEntry, TocItem } from './types';
 
 type MdModule = { default: Component };
 
-// `main` docs come from the working tree; tagged versions are extracted into
-// .docs-build/ by scripts/extract-docs.js before vite starts.
-const pageModules: Record<string, () => Promise<MdModule>> = {
-	...import.meta.glob<MdModule>('/src/docs/main/**/*.md'),
-	...import.meta.glob<MdModule>('/.docs-build/*/**/*.md')
-};
-
-const toctreeFiles: Record<string, string> = import.meta.glob(
-	['/src/docs/main/_toctree.yml', '/.docs-build/*/_toctree.yml'],
-	{ query: '?raw', import: 'default', eager: true }
+// All versions are extracted into .docs-build/ by scripts/extract-docs.js
+// before vite starts (from git tags, or the working tree for the not-yet-
+// tagged current release).
+const pageModules: Record<string, () => Promise<MdModule>> = import.meta.glob<MdModule>(
+	'/.docs-build/*/**/*.md'
 );
+
+const toctreeFiles: Record<string, string> = import.meta.glob('/.docs-build/*/_toctree.yml', {
+	query: '?raw',
+	import: 'default',
+	eager: true
+});
 
 const versionsFile: Record<string, string> = import.meta.glob('/src/docs/_versions.yml', {
 	query: '?raw',
@@ -22,12 +23,9 @@ const versionsFile: Record<string, string> = import.meta.glob('/src/docs/_versio
 	eager: true
 });
 
-/** '/src/docs/main/foo/bar.md' | '/.docs-build/v1/foo/bar.md' → '<version>/<local>' */
+/** '/.docs-build/v1/foo/bar.md' → 'v1/foo/bar' */
 function normalizeKey(globPath: string): string {
-	return globPath
-		.replace(/^\/src\/docs\//, '')
-		.replace(/^\/\.docs-build\//, '')
-		.replace(/\.md$/, '');
+	return globPath.replace(/^\/\.docs-build\//, '').replace(/\.md$/, '');
 }
 
 const pages = Object.fromEntries(

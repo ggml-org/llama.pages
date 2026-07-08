@@ -4,3 +4,11 @@
       title: Introduction
     - local: installation
       title: Installation
+    - local: quickstart
+      title: Quickstart
+- title: Usage
+  sections:
+    - local: models
+      title: Obtaining models
+    - local: llama-server
+      title: llama-server
