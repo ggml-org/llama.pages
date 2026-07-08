@@ -1,6 +1,7 @@
-# Ordered list of docs versions; each must be a git tag of this repo — its
+# Docs versions, newest first; each must be a git tag of this repo — its
 # docs are extracted from `<tag>:src/docs/main` at build time by
 # scripts/extract-docs.js. Exception: the version matching APP_VERSION
 # (src/lib/constants/site.ts) falls back to the working tree until its tag
-# is created.
+# is created. Maintained by `npm run docs:release` — run it after bumping
+# APP_VERSION to freeze the outgoing release and register the new one.
 - v0.32.0

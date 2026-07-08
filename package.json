@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"docs:extract": "node scripts/extract-docs.js",
+		"docs:release": "node scripts/docs-release.js",
 		"dev": "npm run docs:extract && vite dev --host 0.0.0.0",
 		"build": "npm run docs:extract && vite build",
 		"preview": "vite preview",
