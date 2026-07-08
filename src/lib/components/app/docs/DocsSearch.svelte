@@ -106,6 +106,8 @@
 			if (results.length === 0) return;
 			const delta = event.key === 'ArrowDown' ? 1 : -1;
 			active = (active + delta + results.length) % results.length;
+			// Keyboard-only: pointer hover also sets `active` and must not scroll.
+			document.getElementById(results[active].id)?.scrollIntoView({ block: 'nearest' });
 		} else if (event.key === 'Enter' && results[active]) {
 			event.preventDefault();
 			open(results[active]);
