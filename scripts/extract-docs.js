@@ -78,6 +78,13 @@ function mirrorMarkdown(srcDir, version) {
 for (const version of versions) {
 	mirrorMarkdown(path.join(BUILD_DIR, version), version);
 }
+
+// The default version (served at unversioned /docs/{page} URLs) is also
+// mirrored at the static/docs root so /docs/{page}.md works.
+const defaultVersion = versions.includes(`v${appVersion}`) ? `v${appVersion}` : versions[0];
+if (defaultVersion) {
+	mirrorMarkdown(path.join(BUILD_DIR, defaultVersion), '.');
+}
 console.log(
 	`[extract-docs] mirrored raw markdown for ${versions.length} version(s) into static/docs`
 );

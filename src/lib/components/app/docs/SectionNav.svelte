@@ -2,16 +2,18 @@
 	import Self from './SectionNav.svelte';
 	import { ChevronRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
+	import { docLinkParams } from '$lib/docs/content';
 	import type { TocItem } from '$lib/docs/types';
 
 	interface Props {
 		item: TocItem;
 		version: string;
 		active: string;
+		unversioned?: boolean;
 		depth?: number;
 	}
 
-	let { item, version, active, depth = 0 }: Props = $props();
+	let { item, version, active, unversioned = false, depth = 0 }: Props = $props();
 
 	function hasActive(node: TocItem): boolean {
 		return node.local === active || (node.sections?.some(hasActive) ?? false);
@@ -39,13 +41,13 @@
 	{#if expanded}
 		<div class="ml-3 flex flex-col border-l pl-1">
 			{#each item.sections as section (section.title)}
-				<Self item={section} {version} {active} depth={depth + 1} />
+				<Self item={section} {version} {active} {unversioned} depth={depth + 1} />
 			{/each}
 		</div>
 	{/if}
 {:else if item.local}
 	<a
-		href={resolve('/docs/[version]/[...page]', { version, page: item.local })}
+		href={resolve('/docs/[version]/[...page]', docLinkParams(version, item.local, unversioned))}
 		aria-current={isActive ? 'page' : undefined}
 		class="rounded-md px-2 py-1.5 text-sm transition-colors {isActive
 			? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
