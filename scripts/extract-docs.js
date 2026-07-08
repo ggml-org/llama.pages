@@ -1,10 +1,17 @@
-// Extracts versioned docs from git tags into .docs-build/ and mirrors every
-// version's raw markdown into static/docs/ so `/docs/{version}/{page}.md`
-// URLs are served as plain static files. Runs via the predev/prebuild hooks.
+// Extracts versioned docs into .docs-build/ and mirrors raw markdown into
+// static/docs/ so `/docs/{version}/{page}.md` URLs are served as plain
+// static files. Runs as part of `npm run dev` / `npm run build`.
+//
+// The version list is dynamic — no registry file:
+//   - every `vX.Y.Z` git tag is a frozen version, extracted from
+//     `<tag>:src/docs/main`
+//   - v{APP_VERSION} (src/lib/constants/site.ts) is the living version,
+//     served from the working tree until its tag exists (then the tag wins)
+// The computed list (newest first) is written to .docs-build/_versions.json
+// for the app to import.
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { parse } from 'yaml';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DOCS_SRC = 'src/docs/main';
@@ -15,54 +22,53 @@ function git(...args) {
 	return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
 }
 
-function tagExists(tag) {
-	try {
-		git('rev-parse', '--verify', '--quiet', `${tag}^{commit}`);
-		return true;
-	} catch {
-		return false;
-	}
-}
-
-const versions = parse(fs.readFileSync(path.join(ROOT, 'src/docs/_versions.yml'), 'utf8'));
-if (!Array.isArray(versions) || versions.some((v) => typeof v !== 'string')) {
-	throw new Error('src/docs/_versions.yml must be a YAML list of version strings');
+function semverDesc(a, b) {
+	const pa = a.slice(1).split('.').map(Number);
+	const pb = b.slice(1).split('.').map(Number);
+	return pb[0] - pa[0] || pb[1] - pa[1] || pb[2] - pa[2];
 }
 
 const appVersion = fs
 	.readFileSync(path.join(ROOT, 'src/lib/constants/site.ts'), 'utf8')
 	.match(/APP_VERSION\s*=\s*'([^']+)'/)?.[1];
+if (!appVersion) {
+	throw new Error('could not read APP_VERSION from src/lib/constants/site.ts');
+}
+const living = `v${appVersion}`;
+
+const tags = git('tag', '--list', 'v*')
+	.split('\n')
+	.filter((tag) => /^v\d+\.\d+\.\d+$/.test(tag));
+
+const versions = [...new Set([living, ...tags])].sort(semverDesc);
 
 fs.rmSync(BUILD_DIR, { recursive: true, force: true });
 fs.rmSync(STATIC_DIR, { recursive: true, force: true });
 
-// Extract each tagged version's docs from git history.
 for (const version of versions) {
-	if (!tagExists(version)) {
-		// The current release's docs are authored in the working tree; serve
-		// them from there until the tag is cut (then the tag wins).
-		if (version === `v${appVersion}`) {
-			fs.cpSync(path.join(ROOT, DOCS_SRC), path.join(BUILD_DIR, version), { recursive: true });
-			console.log(`[extract-docs] ${version}: no tag yet, using working tree ${DOCS_SRC}`);
+	if (tags.includes(version)) {
+		const files = git('ls-tree', '-r', '--name-only', version, '--', DOCS_SRC)
+			.split('\n')
+			.filter(Boolean);
+		if (files.length === 0) {
+			console.warn(`[extract-docs] warning: tag "${version}" has no files under ${DOCS_SRC}`);
 			continue;
 		}
-		console.warn(`[extract-docs] warning: tag "${version}" not found, skipping`);
-		continue;
+		for (const file of files) {
+			const dest = path.join(BUILD_DIR, version, path.relative(DOCS_SRC, file));
+			fs.mkdirSync(path.dirname(dest), { recursive: true });
+			fs.writeFileSync(dest, git('show', `${version}:${file}`));
+		}
+		console.log(`[extract-docs] ${version}: extracted ${files.length} files from tag`);
+	} else {
+		// The living version: not yet tagged, served from the working tree.
+		fs.cpSync(path.join(ROOT, DOCS_SRC), path.join(BUILD_DIR, version), { recursive: true });
+		console.log(`[extract-docs] ${version}: no tag yet, using working tree ${DOCS_SRC}`);
 	}
-	const files = git('ls-tree', '-r', '--name-only', version, '--', DOCS_SRC)
-		.split('\n')
-		.filter(Boolean);
-	if (files.length === 0) {
-		console.warn(`[extract-docs] warning: tag "${version}" has no files under ${DOCS_SRC}`);
-		continue;
-	}
-	for (const file of files) {
-		const dest = path.join(BUILD_DIR, version, path.relative(DOCS_SRC, file));
-		fs.mkdirSync(path.dirname(dest), { recursive: true });
-		fs.writeFileSync(dest, git('show', `${version}:${file}`));
-	}
-	console.log(`[extract-docs] extracted ${files.length} files for ${version}`);
 }
+
+const built = versions.filter((version) => fs.existsSync(path.join(BUILD_DIR, version)));
+fs.writeFileSync(path.join(BUILD_DIR, '_versions.json'), JSON.stringify(built));
 
 // Mirror raw markdown into static/ for /docs/{version}/{page}.md URLs.
 function mirrorMarkdown(srcDir, version) {
@@ -75,16 +81,12 @@ function mirrorMarkdown(srcDir, version) {
 	}
 }
 
-for (const version of versions) {
+for (const version of built) {
 	mirrorMarkdown(path.join(BUILD_DIR, version), version);
 }
-
 // The default version (served at unversioned /docs/{page} URLs) is also
 // mirrored at the static/docs root so /docs/{page}.md works.
-const defaultVersion = versions.includes(`v${appVersion}`) ? `v${appVersion}` : versions[0];
-if (defaultVersion) {
-	mirrorMarkdown(path.join(BUILD_DIR, defaultVersion), '.');
+if (built[0]) {
+	mirrorMarkdown(path.join(BUILD_DIR, built[0]), '.');
 }
-console.log(
-	`[extract-docs] mirrored raw markdown for ${versions.length} version(s) into static/docs`
-);
+console.log(`[extract-docs] versions (newest first): ${built.join(', ')}`);

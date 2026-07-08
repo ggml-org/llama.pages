@@ -1,17 +1,13 @@
-// Cuts a docs release. Run AFTER bumping APP_VERSION (src/lib/constants/
-// site.ts) and committing:
-//   1. tags the previous release (newest _versions.yml entry) at HEAD,
-//      freezing its docs — until now it was served from the working tree
-//   2. pushes the tag (skip with --no-push)
-//   3. prepends the new v{APP_VERSION} to src/docs/_versions.yml
-// Then commit the _versions.yml change and push master to deploy.
+// Freezes the current docs version: tags v{APP_VERSION} at HEAD and pushes
+// the tag (skip with --no-push). Until now that version was served from the
+// working tree; from here the tag wins and master edits no longer change
+// /docs — bump APP_VERSION in src/lib/constants/site.ts to start the next
+// version. The version list itself is dynamic (see scripts/extract-docs.js).
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { parse } from 'yaml';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const VERSIONS_PATH = path.join(ROOT, 'src/docs/_versions.yml');
 const push = !process.argv.includes('--no-push');
 
 function git(...args) {
@@ -24,35 +20,18 @@ function fail(message) {
 }
 
 if (git('status', '--porcelain').trim() !== '') {
-	fail('working tree is dirty — commit your changes (including the APP_VERSION bump) first');
+	fail('working tree is dirty — commit your changes first so the tag pins the right content');
 }
 
 const appVersion = fs
 	.readFileSync(path.join(ROOT, 'src/lib/constants/site.ts'), 'utf8')
 	.match(/APP_VERSION\s*=\s*'([^']+)'/)?.[1];
 if (!appVersion) fail('could not read APP_VERSION from src/lib/constants/site.ts');
-const next = `v${appVersion}`;
+const tag = `v${appVersion}`;
 
-const versionsYml = fs.readFileSync(VERSIONS_PATH, 'utf8');
-const versions = parse(versionsYml);
-if (!Array.isArray(versions) || versions.length === 0) {
-	fail('src/docs/_versions.yml must be a non-empty YAML list (newest first)');
-}
-
-if (versions[0] === next) {
-	console.log(
-		`[docs:release] ${next} is already the current release — nothing to do.\n` +
-			`Bump APP_VERSION in src/lib/constants/site.ts when the next app version ships, then re-run.`
-	);
-	process.exit(0);
-}
-
-// Freeze the outgoing release: its docs were served from the working tree
-// until now, so tag HEAD to pin them.
-const previous = versions[0];
 const tagExists = (() => {
 	try {
-		git('rev-parse', '--verify', '--quiet', `${previous}^{commit}`);
+		git('rev-parse', '--verify', '--quiet', `${tag}^{commit}`);
 		return true;
 	} catch {
 		return false;
@@ -60,31 +39,30 @@ const tagExists = (() => {
 })();
 
 if (tagExists) {
-	console.log(`[docs:release] tag ${previous} already exists, leaving it as is`);
-} else {
-	git('tag', previous);
-	console.log(`[docs:release] tagged ${previous} at HEAD`);
+	console.log(
+		`[docs:release] ${tag} is already frozen — nothing to do.\n` +
+			`Bump APP_VERSION in src/lib/constants/site.ts to start the next version.`
+	);
+	process.exit(0);
 }
+
+git('tag', tag);
+console.log(`[docs:release] tagged ${tag} at HEAD — its docs are now frozen`);
 
 if (push) {
 	try {
-		git('push', 'origin', `refs/tags/${previous}`);
-		console.log(`[docs:release] pushed tag ${previous} to origin`);
+		git('push', 'origin', `refs/tags/${tag}`);
+		console.log(`[docs:release] pushed tag ${tag} to origin`);
 	} catch {
 		console.warn(
-			`[docs:release] warning: could not push tag — push it manually: git push origin ${previous}`
+			`[docs:release] warning: could not push tag — push it manually: git push origin ${tag}`
 		);
 	}
 } else {
-	console.log(`[docs:release] --no-push: remember to run  git push origin ${previous}`);
+	console.log(`[docs:release] --no-push: remember to run  git push origin ${tag}`);
 }
 
-// Prepend the new version above the first list entry, preserving comments.
-const updated = versionsYml.replace(/^- /m, `- ${next}\n- `);
-fs.writeFileSync(VERSIONS_PATH, updated);
-console.log(`[docs:release] added ${next} to src/docs/_versions.yml`);
-
 console.log(
-	`\n[docs:release] done. Now commit and push to deploy:\n` +
-		`  git add src/docs/_versions.yml && git commit -m "docs: release ${next}" && git push`
+	`\n[docs:release] done. Bump APP_VERSION in src/lib/constants/site.ts to start the next ` +
+		`version — until then, master edits no longer change /docs.`
 );
