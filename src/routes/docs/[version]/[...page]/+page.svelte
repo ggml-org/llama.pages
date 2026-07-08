@@ -3,6 +3,7 @@
 	import CodeCopyButton from '$lib/components/app/docs/CodeCopyButton.svelte';
 	import DocsCopyPage from '$lib/components/app/docs/DocsCopyPage.svelte';
 	import DocsFooterNav from '$lib/components/app/docs/DocsFooterNav.svelte';
+	import DocsSearch from '$lib/components/app/docs/DocsSearch.svelte';
 	import DocsSidebar from '$lib/components/app/docs/DocsSidebar.svelte';
 	import DocsToc from '$lib/components/app/docs/DocsToc.svelte';
 	import { SITE_TITLE, SITE_URL } from '$lib/constants/site';
@@ -54,6 +55,8 @@
 	<link rel="canonical" href="{SITE_URL}{canonicalPath}" />
 	<link rel="alternate" type="text/markdown" href={mdPath} />
 </svelte:head>
+
+<DocsSearch />
 
 <div class="flex w-full">
 	<aside
