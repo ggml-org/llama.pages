@@ -12,6 +12,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import GithubSlugger from 'github-slugger';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DOCS_SRC = 'src/docs/main';
@@ -88,5 +89,72 @@ for (const version of built) {
 // mirrored at the static/docs root so /docs/{page}.md works.
 if (built[0]) {
 	mirrorMarkdown(path.join(BUILD_DIR, built[0]), '.');
+}
+
+/** Markdown inline syntax → plain text. */
+function plainText(markdown) {
+	return markdown
+		.replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+		.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+		.replace(/[`*_>|]/g, '')
+		.replace(/\s+/g, ' ')
+		.trim();
+}
+
+/**
+ * Section-level search index of the default version, consumed by the ⌘K
+ * search modal (MiniSearch). Anchors replicate rehype-slug: one slugger per
+ * page, fed every heading in document order so duplicate suffixes match.
+ */
+function buildSearchIndex(dir) {
+	const sections = [];
+	for (const entry of fs.readdirSync(dir, { recursive: true })) {
+		if (!entry.endsWith('.md')) continue;
+		const local = entry.replace(/\.md$/, '');
+		const slugger = new GithubSlugger();
+		let title = local;
+		let heading = '';
+		let anchor = '';
+		let inFence = false;
+		let buffer = [];
+		const flush = () => {
+			const text = plainText(buffer.join(' '));
+			if (text || heading) {
+				sections.push({ id: sections.length, local, title, heading, anchor, text });
+			}
+			buffer = [];
+		};
+		for (const line of fs.readFileSync(path.join(dir, entry), 'utf8').split('\n')) {
+			if (/^\s*```/.test(line)) {
+				inFence = !inFence;
+				continue;
+			}
+			const match = !inFence && line.match(/^(#{1,6})\s+(.*)$/);
+			if (match) {
+				const level = match[1].length;
+				const text = plainText(match[2]);
+				const slug = slugger.slug(text);
+				if (level === 1) {
+					title = text;
+				} else if (level <= 3) {
+					flush();
+					heading = text;
+					anchor = slug;
+				} else {
+					buffer.push(text);
+				}
+				continue;
+			}
+			buffer.push(line);
+		}
+		flush();
+	}
+	return sections;
+}
+
+if (built[0]) {
+	const index = buildSearchIndex(path.join(BUILD_DIR, built[0]));
+	fs.writeFileSync(path.join(STATIC_DIR, 'search-index.json'), JSON.stringify(index));
+	console.log(`[extract-docs] search index: ${index.length} sections from ${built[0]}`);
 }
 console.log(`[extract-docs] versions (newest first): ${built.join(', ')}`);

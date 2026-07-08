@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { Search } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { hasPage, versions } from '$lib/docs/content';
+	import { searchState } from '$lib/docs/search.svelte';
 	import SectionNav from './SectionNav.svelte';
 	import type { TocItem } from '$lib/docs/types';
 
@@ -21,6 +23,16 @@
 		goto(resolve('/docs/[version]/[...page]', { version: target, page: local }));
 	}
 </script>
+
+<button
+	type="button"
+	onclick={() => (searchState.open = true)}
+	class="border-input text-foreground/40 hover:text-foreground/70 mb-3 flex w-full cursor-pointer items-center gap-2 rounded-md border px-2 py-1.5 text-sm transition-colors"
+>
+	<Search class="size-3.5 shrink-0" />
+	Search docs
+	<kbd class="border-border ml-auto rounded border px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd>
+</button>
 
 <select
 	value={version}
