@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Search } from '@lucide/svelte';
+	import { ChevronDown, Search } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { hasPage, versions } from '$lib/docs/content';
@@ -27,25 +27,39 @@
 <button
 	type="button"
 	onclick={() => (searchState.open = true)}
-	class="border-input text-foreground/40 hover:text-foreground/70 mb-3 flex w-full cursor-pointer items-center gap-2 rounded-md border px-2 py-1.5 text-sm transition-colors"
+	class="bg-foreground/4 text-foreground/45 hover:bg-foreground/7 hover:text-foreground/70 flex w-full cursor-pointer items-center gap-2 rounded-lg px-2.5 py-2 text-sm transition-colors"
 >
 	<Search class="size-3.5 shrink-0" />
 	Search docs
-	<kbd class="border-border ml-auto rounded border px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd>
+	<kbd
+		class="bg-foreground/6 text-foreground/40 ml-auto rounded px-1.5 py-0.5 font-mono text-[10px]"
+	>
+		⌘K
+	</kbd>
 </button>
 
-<select
-	value={version}
-	onchange={switchVersion}
-	aria-label="Documentation version"
-	class="border-input bg-background w-full cursor-pointer rounded-md border px-2 py-1.5 text-sm"
->
-	{#each versions as v (v)}
-		<option value={v}>{v}</option>
-	{/each}
-</select>
+<div class="mt-3 flex items-center justify-between px-1">
+	<span class="text-foreground/40 text-xs font-medium tracking-wide uppercase">Version</span>
 
-<nav class="mt-4 flex flex-col gap-0.5" aria-label="Documentation">
+	<span
+		class="text-foreground/70 hover:bg-foreground/6 hover:text-foreground relative inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 font-mono text-xs transition-colors"
+	>
+		{version}
+		<ChevronDown class="size-3 opacity-60" />
+		<select
+			value={version}
+			onchange={switchVersion}
+			aria-label="Documentation version"
+			class="absolute inset-0 cursor-pointer opacity-0"
+		>
+			{#each versions as v (v)}
+				<option value={v}>{v}</option>
+			{/each}
+		</select>
+	</span>
+</div>
+
+<nav class="mt-3 flex flex-col gap-0.5" aria-label="Documentation">
 	{#key `${version}/${active}`}
 		{#each toctree as item (item.title)}
 			<SectionNav {item} {version} {active} {unversioned} />
