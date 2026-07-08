@@ -1,76 +1,28 @@
 # Installation
 
-There are several ways to install llama.cpp, depending on your platform and preferences.
-
-| Install via | Windows | Mac | Linux |
-| ----------- | ------- | --- | ----- |
-| conda-forge | ✅      | ✅  | ✅    |
-| Winget      | ✅      |     |       |
-| Homebrew    |         | ✅  | ✅    |
-| MacPorts    |         | ✅  |       |
-| Nix         |         | ✅  | ✅    |
-
-## Homebrew (macOS / Linux)
+## Homebrew
 
 ```sh
-brew install llama.cpp
+brew install --cask llama-app
 ```
 
-The formula is automatically updated with new llama.cpp releases.
+## Direct download
 
-## Winget (Windows)
+Download `Llama.dmg` from the [releases page](https://github.com/ggml-org/Llama-macOS/releases), open it and drag Llama into your Applications folder.
 
-```sh
-winget install llama.cpp
-```
+## The llama.cpp engine
 
-## conda-forge (Windows, macOS, Linux)
+Llama shares one llama.cpp install with your command line:
 
-conda-forge provides builds for CUDA (Windows and Linux), Vulkan (Windows and Linux) and Apple Metal (macOS):
+- If you already have llama.cpp (via Homebrew or the [install script](https://llama.app)), the app uses it.
+- If the app installs it, `llama-cli` and `llama-server` become available in your terminal too.
 
-```sh
-conda install -c conda-forge llama-cpp
-```
+The llama.cpp build in use is shown in the footer of the app's menu.
 
-## MacPorts (macOS)
+## Updates
 
-```sh
-sudo port install llama.cpp
-```
+Llama updates automatically. Release notes for every version are published on the [releases page](https://github.com/ggml-org/Llama-macOS/releases).
 
-## Nix (macOS / Linux)
+## Uninstall
 
-```sh
-nix profile install nixpkgs#llama-cpp
-```
-
-## Docker
-
-Official images are available for CPU and GPU backends — see the [Docker documentation](https://github.com/ggml-org/llama.cpp/blob/master/docs/docker.md).
-
-```sh
-docker run -v /path/to/models:/models ghcr.io/ggml-org/llama.cpp:light -m /models/model.gguf -p "Hello"
-```
-
-## Pre-built binaries
-
-Pre-built binaries for every release are available on the [releases page](https://github.com/ggml-org/llama.cpp/releases).
-
-## Build from source
-
-Clone the repository and build with CMake:
-
-```sh
-git clone https://github.com/ggml-org/llama.cpp
-cd llama.cpp
-cmake -B build
-cmake --build build --config Release
-```
-
-Enable a GPU backend by passing the corresponding CMake flag, for example `-DGGML_METAL=ON` on Apple Silicon or `-DGGML_CUDA=ON` for NVIDIA GPUs. See the full [build guide](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md) for all backends and options.
-
-## Verify the installation
-
-```sh
-llama-cli --version
-```
+Quit Llama, delete the app from Applications, and optionally remove downloaded models from the Hugging Face cache at `~/.cache/huggingface/hub`.

@@ -1,36 +1,33 @@
-# Obtaining models
+# Managing models
 
-llama.cpp requires models in the [GGUF](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md) file format.
+## The catalog
 
-## Download from Hugging Face
+The menu's **Recommended for your Mac** section shows every model size that fits your machine, with its quantization next to the name. For the full curated catalog, use **Browse models** in the menu or visit [llama.app](https://llama.app).
 
-The [Hugging Face](https://huggingface.co) platform hosts [thousands of GGUF models](https://huggingface.co/models?library=gguf&sort=trending) compatible with llama.cpp. Any of them can be downloaded and run directly with the `-hf <user>/<model>[:quant]` argument:
+## Downloads
 
-```sh
-llama-cli -hf ggml-org/gemma-3-1b-it-GGUF
-```
+- Progress shows as a ring with pause/play inside
+- Downloads survive app restarts and resume as paused rows
+- Dropped connections pause the download and auto-resume when you're back online
 
-```sh
-# pick a specific quantization
-llama-cli -hf ggml-org/gemma-3-1b-it-GGUF:Q8_0
-```
+## Installing from Hugging Face
 
-Downloaded models are stored in the standard Hugging Face cache directory, so they are shared with other Hugging Face tools. Set the `MODEL_ENDPOINT` environment variable to download from a different Hugging Face-compatible endpoint.
+Models can be installed via `llama://` deeplinks, for example from a model page on Hugging Face. (The legacy `llamabarn://` scheme still works.)
 
-## Convert to GGUF
+## Storage
 
-Models in other formats can be converted with the `convert_*.py` scripts in the [llama.cpp repository](https://github.com/ggml-org/llama.cpp), or with online tools:
-
-- [GGUF-my-repo](https://huggingface.co/spaces/ggml-org/gguf-my-repo) — convert to GGUF and quantize weights to smaller sizes
-- [GGUF-my-LoRA](https://huggingface.co/spaces/ggml-org/gguf-my-lora) — convert LoRA adapters to GGUF
-- [GGUF editor](https://huggingface.co/spaces/CISCai/gguf-editor) — edit GGUF metadata in the browser
-
-## Quantization
-
-Quantization reduces model size and memory use at a small cost in quality. llama.cpp supports 1.5-bit through 8-bit integer quantization; common choices are `Q4_K_M` (good balance) and `Q8_0` (near-lossless). Quantize an existing GGUF with:
+Models live in the standard Hugging Face cache:
 
 ```sh
-llama-quantize model-f16.gguf model-q4_k_m.gguf Q4_K_M
+~/.cache/huggingface/hub
 ```
 
-To learn more, read the [quantization documentation](https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md).
+The cache is shared with llama.cpp and other Hugging Face-aware tools — a model downloaded in the app is available to `llama-cli -hf`, and vice versa.
+
+## Sideloaded models
+
+Models already present in the Hugging Face cache (including subdirectories) are picked up automatically, with memory requirements measured to check compatibility with your Mac.
+
+## Loading and unloading
+
+Models load when an API request or chat needs them and unload when idle. Model names in the menu match the IDs used in the API (`http://localhost:8080/v1/models`).
