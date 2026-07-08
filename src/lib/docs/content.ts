@@ -1,6 +1,5 @@
 import { parse } from 'yaml';
 import type { Component } from 'svelte';
-import { APP_VERSION } from '$lib/constants/site';
 import type { FlatTocEntry, TocItem } from './types';
 
 type MdModule = { default: Component };
@@ -18,8 +17,9 @@ const toctreeFiles: Record<string, string> = import.meta.glob('/.docs-build/*/_t
 	eager: true
 });
 
-const versionsFile: Record<string, string> = import.meta.glob('/src/docs/_versions.yml', {
-	query: '?raw',
+// Ordered version list (newest first) computed by scripts/extract-docs.js
+// from git tags + the working tree.
+const versionsFile: Record<string, string[]> = import.meta.glob('/.docs-build/_versions.json', {
 	import: 'default',
 	eager: true
 });
@@ -40,18 +40,12 @@ const toctrees: Record<string, TocItem[]> = Object.fromEntries(
 	])
 );
 
-/** Versions listed in _versions.yml that actually have extracted content. */
-export const versions: string[] = (parse(Object.values(versionsFile)[0]) as string[]).filter(
+export const versions: string[] = (Object.values(versionsFile)[0] ?? []).filter(
 	(v) => v in toctrees
 );
 
-/**
- * The version served at unversioned URLs (/docs/{page}): the current app
- * release when available, else the first listed version.
- */
-export const defaultVersion: string | undefined = versions.includes(`v${APP_VERSION}`)
-	? `v${APP_VERSION}`
-	: versions[0];
+/** The version served at unversioned URLs (/docs/{page}): the newest one. */
+export const defaultVersion: string | undefined = versions[0];
 
 export function getToctree(version: string): TocItem[] | undefined {
 	return toctrees[version];
