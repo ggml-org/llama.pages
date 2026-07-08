@@ -1,56 +1,30 @@
 # Quickstart
 
-Once llama.cpp is [installed](installation), you can chat with a model in a single command.
+Once Llama is [installed](installation), you're a couple of clicks away from chatting with a local model.
 
-## Run your first model
+## 1. Install a model
 
-Download and run a model directly from Hugging Face:
+Click the llama icon in your menu bar. The **Recommended for your Mac** section suggests models that fit your hardware — every listed model is auto-configured with optimal settings, so just click one to download it. Download progress shows as a ring with pause/play controls.
 
-```sh
-llama-cli -hf ggml-org/gemma-3-1b-it-GGUF
-```
+## 2. Chat
 
-Or use a local GGUF file:
+Open the built-in web UI at [http://localhost:8080](http://localhost:8080) — or open the chat UI for a model straight from its expanded details in the menu.
 
-```sh
-llama-cli -m my_model.gguf
-```
+## 3. Use it from anywhere
 
-Models with a built-in chat template automatically start in conversation mode:
-
-```
-> hi, who are you?
-Hi there! I'm your helpful assistant! ...
-
-> what is 1+1?
-Easy peasy! The answer to 1+1 is... 2!
-```
-
-## Start an API server
-
-`llama-server` exposes an OpenAI-compatible HTTP API and a built-in web UI:
+Llama serves an OpenAI-compatible API, so any client can talk to it:
 
 ```sh
-llama-server -hf ggml-org/gemma-3-1b-it-GGUF
+curl http://localhost:8080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model": "gemma-3-4b", "messages": [{"role": "user", "content": "Hello"}]}'
 ```
 
-- Web UI: `http://localhost:8080`
-- Chat completions endpoint: `http://localhost:8080/v1/chat/completions`
+Replace `gemma-3-4b` with any model ID from `http://localhost:8080/v1/models`.
 
-See the [llama-server](llama-server) page for more configuration options.
-
-## Constrain the output with a grammar
-
-```sh
-llama-cli -m model.gguf -n 256 --grammar-file grammars/json.gbnf \
-  -p 'Request: schedule a call at 8pm; Command:'
-
-# {"appointmentTime": "8pm", "appointmentDetails": "schedule a call"}
-```
-
-The [grammars/](https://github.com/ggml-org/llama.cpp/tree/master/grammars) folder contains sample grammars; see the [GBNF Guide](https://github.com/ggml-org/llama.cpp/blob/master/grammars/README.md) to write your own.
+Models load automatically when requested and unload when idle — no manual starting or stopping.
 
 ## Next steps
 
-- Learn how to [find and quantize models](models)
-- Explore all CLI options with `llama-cli -h`
+- Learn more about [managing models](models)
+- Connect your editor or chat app via the [API server](api)

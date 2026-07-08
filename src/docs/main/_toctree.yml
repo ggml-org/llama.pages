@@ -9,6 +9,8 @@
 - title: Usage
   sections:
     - local: models
-      title: Obtaining models
-    - local: llama-server
-      title: llama-server
+      title: Managing models
+    - local: api
+      title: API server
+    - local: settings
+      title: Settings

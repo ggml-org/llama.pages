@@ -1,45 +1,37 @@
 # Introduction
 
-llama.cpp enables LLM inference with minimal setup and state-of-the-art performance on a wide range of hardware — locally and in the cloud.
+Llama is a macOS menu bar app for running local LLMs. AI that lives on your computer — open-source, private and always local.
 
-## Highlights
+## How it works
 
-- Plain C/C++ implementation without any dependencies
-- Apple Silicon is a first-class citizen — optimized via ARM NEON, Accelerate and Metal frameworks
-- AVX, AVX2, AVX512 and AMX support for x86 architectures
-- 1.5-bit, 2-bit, 3-bit, 4-bit, 5-bit, 6-bit, and 8-bit integer quantization for faster inference and reduced memory use
-- Custom CUDA kernels for running LLMs on NVIDIA GPUs (support for AMD GPUs via HIP and Moore Threads GPUs via MUSA)
-- Vulkan and SYCL backend support
-- CPU+GPU hybrid inference to partially accelerate models larger than the total VRAM capacity
+Llama runs a local, OpenAI-compatible server at `http://localhost:8080/v1`.
 
-The llama.cpp project is the main playground for developing new features for the [ggml](https://github.com/ggml-org/ggml) library.
+- **Install models** — from the built-in catalog, sized to fit your Mac
+- **Connect any app** — chat UIs, editors, CLI tools, scripts
+- **Models load when requested** — and unload when idle
 
-## Supported backends
+## Features
 
-| Backend | Target devices    |
-| ------- | ----------------- |
-| Metal   | Apple Silicon     |
-| CUDA    | NVIDIA GPU        |
-| HIP     | AMD GPU           |
-| Vulkan  | GPU               |
-| SYCL    | Intel GPU         |
-| MUSA    | Moore Threads GPU |
-| CANN    | Ascend NPU        |
-| OpenCL  | Adreno GPU        |
-| WebGPU  | All               |
-| BLAS    | All               |
-| RPC     | All               |
+- **100% local** — models run on your device; no data leaves your Mac
+- **Small footprint** — a ~4 MB native macOS app
+- **Zero configuration** — models are auto-configured with optimal settings for your Mac
+- **Recommended for your Mac** — suggests models sized to fit your hardware
+- **Standard storage** — models live in the Hugging Face cache, shared with llama.cpp and other HF-aware tools
+- **Built on [llama.cpp](https://github.com/ggml-org/llama.cpp)** — from the GGML org, developed alongside llama.cpp
 
-See the [build guide](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md) for how to enable each backend.
+## Works with
 
-## Ecosystem
+Llama works with any OpenAI-compatible client:
 
-- [llama-server](llama-server) — OpenAI-compatible HTTP server with a built-in web UI
-- [llama.vscode](https://github.com/ggml-org/llama.vscode) — VS Code extension for local FIM completions
-- [llama.vim](https://github.com/ggml-org/llama.vim) — Vim/Neovim plugin for local FIM completions
-- Thousands of [GGUF models on Hugging Face](https://huggingface.co/models?library=gguf&sort=trending) ready to run
+- **Chat UIs** — Chatbox, Open WebUI, BoltAI
+- **Editors** — VS Code, Zed, Xcode
+- **Editor extensions** — Cline, Continue
+- **CLI tools** — OpenCode, Claude Code
+- **Custom scripts** — curl, AI SDK, and more
+
+You can also use the built-in web UI at `http://localhost:8080` while Llama is running.
 
 ## Next steps
 
-- [Install llama.cpp](installation) on your machine
+- [Install Llama](installation) on your Mac
 - Run your first model in the [Quickstart](quickstart)
