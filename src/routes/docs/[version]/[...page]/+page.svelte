@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { mount, unmount } from 'svelte';
+	import CodeCopyButton from '$lib/components/app/docs/CodeCopyButton.svelte';
+	import DocsCopyPage from '$lib/components/app/docs/DocsCopyPage.svelte';
 	import DocsFooterNav from '$lib/components/app/docs/DocsFooterNav.svelte';
 	import DocsSidebar from '$lib/components/app/docs/DocsSidebar.svelte';
 	import DocsToc from '$lib/components/app/docs/DocsToc.svelte';
@@ -10,6 +13,32 @@
 	const pageKey = $derived(`${data.version}/${data.local}`);
 
 	let article = $state<HTMLElement>();
+
+	// Give every code block a hover copy button. The markdown HTML is rendered
+	// by <Content />, so the buttons are mounted imperatively onto each <pre>.
+	$effect(() => {
+		void pageKey;
+		if (!article) return;
+
+		const buttons = [...article.querySelectorAll('pre')].map((pre) => {
+			const wrapper = document.createElement('div');
+			wrapper.className = 'group relative';
+			pre.replaceWith(wrapper);
+			wrapper.appendChild(pre);
+			const button = mount(CodeCopyButton, {
+				target: wrapper,
+				props: { getText: () => pre.innerText }
+			});
+			return { wrapper, pre, button };
+		});
+
+		return () => {
+			for (const { wrapper, pre, button } of buttons) {
+				unmount(button);
+				if (wrapper.isConnected) wrapper.replaceWith(pre);
+			}
+		};
+	});
 </script>
 
 <svelte:head>
@@ -33,6 +62,10 @@
 				</div>
 			</details>
 
+			<div class="mb-4 flex justify-end">
+				<DocsCopyPage version={data.version} local={data.local} />
+			</div>
+
 			<article bind:this={article} class="prose max-w-none dark:prose-invert">
 				<Content />
 			</article>
@@ -47,3 +80,16 @@
 		</aside>
 	</div>
 </div>
+
+<style lang="postcss">
+	/* The global prism theme strips pre box styling with !important (the
+	   homepage install widget provides its own container), so docs code
+	   blocks restore it here with higher specificity. */
+	article :global(pre) {
+		background: var(--code-background) !important;
+		color: var(--code-foreground);
+		border: 1px solid var(--border) !important;
+		border-radius: calc(var(--radius) + 2px) !important;
+		padding: 1rem !important;
+	}
+</style>

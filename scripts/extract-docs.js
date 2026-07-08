@@ -29,13 +29,23 @@ if (!Array.isArray(versions) || versions.some((v) => typeof v !== 'string')) {
 	throw new Error('src/docs/_versions.yml must be a YAML list of version strings');
 }
 
+const appVersion = fs
+	.readFileSync(path.join(ROOT, 'src/lib/constants/site.ts'), 'utf8')
+	.match(/APP_VERSION\s*=\s*'([^']+)'/)?.[1];
+
 fs.rmSync(BUILD_DIR, { recursive: true, force: true });
 fs.rmSync(STATIC_DIR, { recursive: true, force: true });
 
 // Extract each tagged version's docs from git history.
 for (const version of versions) {
-	if (version === 'main') continue;
 	if (!tagExists(version)) {
+		// The current release's docs are authored in the working tree; serve
+		// them from there until the tag is cut (then the tag wins).
+		if (version === `v${appVersion}`) {
+			fs.cpSync(path.join(ROOT, DOCS_SRC), path.join(BUILD_DIR, version), { recursive: true });
+			console.log(`[extract-docs] ${version}: no tag yet, using working tree ${DOCS_SRC}`);
+			continue;
+		}
 		console.warn(`[extract-docs] warning: tag "${version}" not found, skipping`);
 		continue;
 	}
@@ -66,10 +76,7 @@ function mirrorMarkdown(srcDir, version) {
 }
 
 for (const version of versions) {
-	mirrorMarkdown(
-		version === 'main' ? path.join(ROOT, DOCS_SRC) : path.join(BUILD_DIR, version),
-		version
-	);
+	mirrorMarkdown(path.join(BUILD_DIR, version), version);
 }
 console.log(
 	`[extract-docs] mirrored raw markdown for ${versions.length} version(s) into static/docs`
