@@ -1,5 +1,6 @@
 import { parse } from 'yaml';
 import type { Component } from 'svelte';
+import { APP_VERSION } from '$lib/constants/site';
 import type { FlatTocEntry, TocItem } from './types';
 
 type MdModule = { default: Component };
@@ -44,6 +45,14 @@ export const versions: string[] = (parse(Object.values(versionsFile)[0]) as stri
 	(v) => v in toctrees
 );
 
+/**
+ * The version served at unversioned URLs (/docs/{page}): the current app
+ * release when available, else the first listed version.
+ */
+export const defaultVersion: string | undefined = versions.includes(`v${APP_VERSION}`)
+	? `v${APP_VERSION}`
+	: versions[0];
+
 export function getToctree(version: string): TocItem[] | undefined {
 	return toctrees[version];
 }
@@ -68,13 +77,36 @@ export function hasPage(version: string, local: string): boolean {
 }
 
 /**
+ * Route params for a docs link. On unversioned URLs (/docs/{page}, serving
+ * the default version) links stay unversioned, so the page local itself
+ * fills the [version]/[...page] segments.
+ */
+export function docLinkParams(
+	version: string,
+	local: string,
+	unversioned: boolean
+): { version: string; page: string } {
+	if (!unversioned) return { version, page: local };
+	const [first, ...rest] = local.split('/');
+	return { version: first, page: rest.join('/') };
+}
+
+/**
  * All prerender entries for /docs/[version]/[...page]. Every page (including
  * 'index') gets an explicit URL; the bare `/docs/{version}` entry prerenders
- * as a redirect to its index, keeping relative markdown links working.
+ * as a redirect to its index, keeping relative markdown links working. The
+ * default version's pages are additionally prerendered at unversioned URLs.
  */
 export function listAllEntries(): { version: string; page: string }[] {
-	return versions.flatMap((version) => [
-		{ version, page: '' },
-		...flattenToc(toctrees[version]).map(({ local }) => ({ version, page: local }))
-	]);
+	return [
+		...versions.flatMap((version) => [
+			{ version, page: '' },
+			...flattenToc(toctrees[version]).map(({ local }) => ({ version, page: local }))
+		]),
+		...(defaultVersion
+			? flattenToc(toctrees[defaultVersion]).map(({ local }) =>
+					docLinkParams(defaultVersion, local, true)
+				)
+			: [])
+	];
 }

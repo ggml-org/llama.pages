@@ -9,9 +9,10 @@
 		version: string;
 		toctree: TocItem[];
 		active: string;
+		unversioned?: boolean;
 	}
 
-	let { version, toctree, active }: Props = $props();
+	let { version, toctree, active, unversioned = false }: Props = $props();
 
 	function switchVersion(event: Event) {
 		const target = (event.currentTarget as HTMLSelectElement).value;
@@ -35,7 +36,7 @@
 <nav class="mt-4 flex flex-col gap-0.5" aria-label="Documentation">
 	{#key `${version}/${active}`}
 		{#each toctree as item (item.title)}
-			<SectionNav {item} {version} {active} />
+			<SectionNav {item} {version} {active} {unversioned} />
 		{/each}
 	{/key}
 </nav>
