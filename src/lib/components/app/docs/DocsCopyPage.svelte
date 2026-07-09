@@ -56,6 +56,12 @@
 		if (await probeLlamaServer(llamaBase)) llamaStatus = 'up';
 	}
 
+	// A function read defeats TS's control-flow narrowing, which can't see
+	// that awaited calls above mutate llamaStatus.
+	function llamaIsUp(): boolean {
+		return llamaStatus === 'up';
+	}
+
 	async function toggleMenu() {
 		open = !open;
 		if (!open) return;
@@ -64,21 +70,57 @@
 		markdown = (await fetchMarkdown()).slice(0, LLAMA_PROMPT_MAX_CHARS);
 	}
 
-	async function editLlamaServer() {
+	/** Prompt for a port/URL; returns whether a value was saved. */
+	async function editLlamaServer(message?: string): Promise<boolean> {
 		const input = window.prompt(
-			'Enter the port of your local Llama app, or the full URL of a llama-server\n' +
+			(message ? `${message}\n` : '') +
+				'Enter the port of your local Llama app, or the full URL of a llama-server\n' +
 				'(e.g. 8080 or https://llama.example.com):',
 			llamaBase === DEFAULT_LLAMA_SERVER_URL ? '8080' : llamaBase
 		);
-		if (input === null) return;
+		if (input === null) return false;
 		const base = parseLlamaServerInput(input);
 		if (!base) {
 			window.alert(`"${input}" is not a valid port or URL.`);
-			return;
+			return false;
 		}
 		saveLlamaServerUrl(base);
 		llamaBase = base;
 		await probe();
+		return true;
+	}
+
+	/** When the server is unverified, ask for it before navigating. */
+	async function openInLlama(event: MouseEvent) {
+		if (llamaStatus === 'up') {
+			open = false;
+			return; // let the <a> navigate normally
+		}
+		event.preventDefault();
+		const saved = await editLlamaServer(
+			`Couldn't verify a Llama server at ${llamaServerLabel(llamaBase)}.`
+		);
+		if (!saved) return;
+		if (
+			!llamaIsUp() &&
+			!window.confirm(
+				`Still couldn't verify a Llama server at ${llamaBase} — your browser may be ` +
+					`blocking local checks. Open anyway?`
+			)
+		) {
+			return;
+		}
+		open = false;
+		// No 'noopener' feature: it makes window.open return null even on
+		// success, which would break the popup-blocked fallback below.
+		const popup = window.open(llamaHref, '_blank');
+		if (popup) {
+			popup.opener = null;
+		} else {
+			// Popup blockers may eat window.open this long after the click;
+			// fall back to navigating the current tab.
+			window.location.assign(llamaHref);
+		}
 	}
 
 	function onWindowClick(event: MouseEvent) {
@@ -143,7 +185,7 @@
 					href={llamaHref}
 					target="_blank"
 					rel="noopener"
-					onclick={() => (open = false)}
+					onclick={openInLlama}
 					class="flex min-w-0 grow items-center gap-2 px-2 py-1.5"
 				>
 					<span class="flex size-3.5 shrink-0 items-center justify-center">
@@ -165,7 +207,7 @@
 
 				<button
 					type="button"
-					onclick={editLlamaServer}
+					onclick={() => editLlamaServer()}
 					aria-label="Set Llama server port or URL"
 					title="Set Llama server port or URL"
 					class="text-foreground/40 hover:text-foreground cursor-pointer py-1.5 pr-2 pl-1 transition-colors"
