@@ -23,10 +23,6 @@
 	</a>
 
 	<div class="flex items-center gap-4">
-		<a href={resolve('/docs')} class="text-foreground text-base">
-			<span class="decoration-foreground/30 underline underline-offset-4">Docs</span>
-		</a>
-
 		<GitHubLink {stars} />
 
 		<button
