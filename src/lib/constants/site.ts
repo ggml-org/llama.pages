@@ -1,5 +1,5 @@
 // Current Llama macOS app release (ggml-org/Llama-macOS). Source of truth for
-// the download button and the default docs version (as tag `v${APP_VERSION}`).
+// the download button.
 export const APP_VERSION = '0.32.0';
 
 export const SITE_TITLE = 'llama.app - Official home for llama.cpp';

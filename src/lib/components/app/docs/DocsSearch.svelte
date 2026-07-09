@@ -3,7 +3,6 @@
 	import { CornerDownLeft, Search } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { defaultVersion, docLinkParams } from '$lib/docs/content';
 	import { searchState } from '$lib/docs/search.svelte';
 
 	interface Section {
@@ -17,7 +16,7 @@
 
 	interface Result {
 		id: string;
-		params: { version: string; page: string };
+		page: string;
 		hash: string;
 		title: string;
 		heading: string;
@@ -67,7 +66,7 @@
 				const section = sections[hit.id as number];
 				return {
 					id: `docs-search-result-${hit.id}`,
-					params: docLinkParams(defaultVersion!, section.local, true),
+					page: section.local,
 					hash: section.anchor ? `#${section.anchor}` : '',
 					title: section.title,
 					heading: section.heading,
@@ -117,7 +116,7 @@
 	function open(result: Result) {
 		searchState.open = false;
 		// eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() can't express the #anchor fragment
-		goto(resolve('/docs/[version]/[...page]', result.params) + result.hash);
+		goto(resolve('/docs/[...page]', { page: result.page }) + result.hash);
 	}
 
 	function onDialogClick(event: MouseEvent) {
@@ -171,7 +170,7 @@
 					id={result.id}
 					role="option"
 					aria-selected={i === active}
-					href={resolve('/docs/[version]/[...page]', result.params) + result.hash}
+					href={resolve('/docs/[...page]', { page: result.page }) + result.hash}
 					onclick={() => (searchState.open = false)}
 					onpointerenter={() => (active = i)}
 					class="flex flex-col gap-0.5 rounded-md px-3 py-2 {i === active
@@ -207,7 +206,6 @@
 		>
 			<span><kbd class="font-mono">↑↓</kbd> navigate</span>
 			<span><kbd class="font-mono">↵</kbd> open</span>
-			<span class="ml-auto">searching {defaultVersion} docs</span>
 		</div>
 	</div>
 </dialog>

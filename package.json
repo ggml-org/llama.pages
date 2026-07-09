@@ -4,10 +4,9 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"docs:extract": "node scripts/extract-docs.js",
-		"docs:release": "node scripts/docs-release.js",
-		"dev": "npm run docs:extract && vite dev --host 0.0.0.0",
-		"build": "npm run docs:extract && vite build",
+		"docs:prepare": "node scripts/prepare-docs.js",
+		"dev": "npm run docs:prepare && vite dev --host 0.0.0.0",
+		"build": "npm run docs:prepare && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

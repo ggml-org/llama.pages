@@ -2,7 +2,6 @@ node_modules
 
 # Output
 .output
-/.docs-build
 /static/docs
 .vercel
 .netlify
