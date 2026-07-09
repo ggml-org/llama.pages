@@ -1,21 +1,28 @@
 <script lang="ts">
-	// Fully inline install actions, nothing expands: the Install button fires
-	// the app deeplink and reports the build to the page, which shows a toast
-	// with the confirmation and the fallbacks for machines without the app.
+	// Fully inline install actions, nothing expands: the primary button reports
+	// the build to the page, which follows up per platform -- on a Mac the
+	// button also fires the app deeplink and the page confirms with a toast
+	// (with fallbacks for machines without the app); elsewhere the page opens
+	// the CLI dialog.
 	import { type Size, type Build, deeplink, displaySize, minMemForBuild } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import { Terminal } from '@lucide/svelte';
 
 	let {
 		size,
 		showQuantized = false,
 		oninstall
-	}: { size: Size; showQuantized?: boolean; oninstall: (b: Build) => void } = $props();
+	}: { size: Size; showQuantized?: boolean; oninstall: (b: Build, s: Size) => void } = $props();
 
-	// Fire the deeplink (a no-op without the app -- the toast's fallbacks
-	// cover that case) and let the page confirm.
+	// One primary action per row, platform-dependent behind the same label
+	// intent: on a Mac, fire the app deeplink (a no-op without the app -- the
+	// toast's fallbacks cover that case); elsewhere the app can't exist, so
+	// skip the deeplink and let the page open the CLI dialog instead. Either
+	// way the page owns the follow-up via oninstall.
 	function install(b: Build) {
-		location.href = deeplink(b);
-		oninstall(b);
+		if (deviceInfo.isMac) location.href = deeplink(b);
+		oninstall(b, size);
 	}
 
 	// Builds to display, one table row each. The top build (highest precision,
@@ -37,7 +44,7 @@
 				{size.name}
 				{#if build.quant}
 					<span
-						class="bg-muted text-muted-foreground rounded-md px-1.5 py-0.5 text-[11px] tabular-nums uppercase"
+						class="bg-muted text-muted-foreground rounded-md px-1.5 py-0.5 text-[11px] uppercase tabular-nums"
 					>
 						{build.quant}
 					</span>
@@ -84,26 +91,39 @@
 					</svg>
 				</a>
 
+				<!-- One primary button, worded by platform: "Install" on a Mac (the
+				     deeplink installs into the app), "Run…" elsewhere -- the site's
+				     established verb for a build's CLI action, with the ellipsis
+				     signalling (per the classic menu convention) that a dialog
+				     follows rather than an immediate action. isMac is false during
+				     SSR, so non-Mac visitors get the Run… wording from first paint. -->
 				<button
 					type="button"
 					onclick={() => install(build)}
 					class="flex cursor-pointer items-center gap-1.5 rounded-lg bg-sky-500 px-3.5 py-1.5 text-center text-white"
 				>
-					<svg
-						aria-hidden="true"
-						viewBox="0 0 16 16"
-						class="h-3.5 w-3.5"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.75"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M8 2v8" />
-						<path d="M4.5 7L8 10.5 11.5 7" />
-						<path d="M3 13.5h10" />
-					</svg>
-					Install
+					{#if deviceInfo.isMac}
+						<svg
+							aria-hidden="true"
+							viewBox="0 0 16 16"
+							class="h-3.5 w-3.5"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.75"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M8 2v8" />
+							<path d="M4.5 7L8 10.5 11.5 7" />
+							<path d="M3 13.5h10" />
+						</svg>
+						Install
+					{:else}
+						<!-- Terminal prompt icon: hints before the click that the CLI is
+						     involved, matching the dialog's "run this in your terminal". -->
+						<Terminal class="size-3.5" aria-hidden="true" />
+						Run…
+					{/if}
 				</button>
 			</div>
 		</td>

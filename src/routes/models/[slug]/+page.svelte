@@ -1,22 +1,32 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
-	import { type Build, releasedFor } from '$lib/catalog';
+	import { type Build, type Size, releasedFor } from '$lib/catalog';
 	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
 	import InstallToast from '$lib/components/app/catalog/InstallToast.svelte';
+	import CliDialog from '$lib/components/app/catalog/CliDialog.svelte';
+	import { deviceInfo } from '$lib/stores/device/index.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 	const family = $derived(data.family);
 
-	// Install is fire-and-forget: the row already sent the deeplink, and on
-	// success Llama (a menu bar app) shows its own bubble -- there is nothing
-	// to wait for, so a self-dismissing toast fits the weight of the event.
-	// The one toast carries everything up front -- confirmation plus the
-	// fallbacks for machines without the app (unobservable from the browser).
-	// Longer duration than default: a user without the app needs time to
-	// notice that nothing happened and read the fallbacks.
-	function installed(b: Build) {
-		toast.custom(InstallToast, { componentProps: { build: b }, duration: 15000 });
+	// The build (plus its size, for the title) whose CLI command is showing
+	// in the modal (non-Mac flow); null when closed.
+	let cliRun = $state<{ build: Build; size: Size } | null>(null);
+
+	// On a Mac, install is fire-and-forget: the row already sent the deeplink,
+	// and on success Llama (a menu bar app) shows its own bubble -- there is
+	// nothing to wait for, so a self-dismissing toast fits the weight of the
+	// event, carrying the confirmation plus the fallbacks for machines without
+	// the app (unobservable from the browser). Off-Mac, the click's whole
+	// point is to see the CLI command, so it gets a modal instead of a
+	// corner toast.
+	function installed(b: Build, s: Size) {
+		if (deviceInfo.isMac) {
+			toast.custom(InstallToast, { componentProps: { build: b }, duration: 15000 });
+		} else {
+			cliRun = { build: b, size: s };
+		}
 	}
 
 	// Whether to also show each size's smaller quantized builds. Off by default:
@@ -96,3 +106,4 @@
 	</section>
 </main>
 
+<CliDialog bind:run={cliRun} />
