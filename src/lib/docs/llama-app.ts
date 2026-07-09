@@ -1,11 +1,11 @@
 // Talking to the user's Llama server (the local menu bar app by default, or
 // any self-hosted llama-server) from the docs pages.
 //
-// Detection is ADVISORY ONLY — a failed probe never blocks navigation,
+// Detection is ADVISORY ONLY — a failed probe never hard-blocks navigation,
 // because it is ambiguous: the server may be down, on another port, or the
-// browser may have blocked the request (Safari treats http://localhost from
-// https pages as mixed content; Chrome gates it behind the Local Network
-// Access permission). See https://github.com/ggml-org/llama.pages/pull/30#discussion_r3551723116
+// browser may have blocked the request (e.g. Chrome 142+ gates local
+// requests behind the Local Network Access permission).
+// See https://github.com/ggml-org/llama.pages/pull/30#discussion_r3551723116
 
 export const DEFAULT_LLAMA_SERVER_URL = 'http://localhost:8080';
 const STORAGE_KEY = 'llama-server-url';
