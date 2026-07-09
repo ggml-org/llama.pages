@@ -32,6 +32,13 @@ export function parseLlamaServerInput(input: string): string | null {
 	const withProtocol = /^https?:\/\//.test(trimmed) ? trimmed : `https://${trimmed}`;
 	try {
 		const url = new URL(withProtocol);
+		// new URL() accepts almost any string as a single-label hostname
+		// (e.g. a port typo like "8080x"), so require a plausible host:
+		// localhost, a dotted name/IP, or a bracketed IPv6 address.
+		const host = url.hostname;
+		if (host !== 'localhost' && !host.includes('.') && !host.startsWith('[')) {
+			return null;
+		}
 		return url.origin + (url.pathname === '/' ? '' : url.pathname);
 	} catch {
 		return null;
