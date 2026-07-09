@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Check, ChevronDown, Copy, ExternalLink, FileText } from '@lucide/svelte';
+	import { Check, ChevronDown, Copy, FileText } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
-	import { SITE_URL } from '$lib/constants/site';
 
 	interface Props {
 		local: string;
@@ -12,8 +11,6 @@
 
 	// A prerendered static asset (see scripts/prepare-docs.js), not a route.
 	const mdPath = $derived(`/docs/${local}.md` as Pathname);
-	const mdUrl = $derived(`${SITE_URL}${mdPath}`);
-	const llmPrompt = $derived(encodeURIComponent(`Read ${mdUrl} so I can ask questions about it.`));
 
 	let open = $state(false);
 	let copied = $state(false);
@@ -82,28 +79,6 @@
 			>
 				<FileText class="size-3.5 shrink-0" />
 				View as Markdown
-			</a>
-
-			<a
-				href="https://claude.ai/new?q={llmPrompt}"
-				target="_blank"
-				rel="noopener"
-				onclick={() => (open = false)}
-				class="hover:bg-foreground/5 flex items-center gap-2 rounded px-2 py-1.5 transition-colors"
-			>
-				<ExternalLink class="size-3.5 shrink-0" />
-				Open in Claude
-			</a>
-
-			<a
-				href="https://chatgpt.com/?q={llmPrompt}"
-				target="_blank"
-				rel="noopener"
-				onclick={() => (open = false)}
-				class="hover:bg-foreground/5 flex items-center gap-2 rounded px-2 py-1.5 transition-colors"
-			>
-				<ExternalLink class="size-3.5 shrink-0" />
-				Open in ChatGPT
 			</a>
 		</div>
 	{/if}
