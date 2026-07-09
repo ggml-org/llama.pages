@@ -7,26 +7,18 @@
 	import DocsSidebar from '$lib/components/app/docs/DocsSidebar.svelte';
 	import DocsToc from '$lib/components/app/docs/DocsToc.svelte';
 	import { SITE_TITLE, SITE_URL } from '$lib/constants/site';
-	import { defaultVersion } from '$lib/docs/content';
 
 	let { data } = $props();
 
 	const Content = $derived(data.component);
-	const pageKey = $derived(`${data.version}/${data.local}`);
-	const mdPath = $derived(
-		data.unversioned ? `/docs/${data.local}.md` : `/docs/${data.version}/${data.local}.md`
-	);
-	// The default version's canonical URL is the unversioned one.
-	const canonicalPath = $derived(
-		data.version === defaultVersion ? `/docs/${data.local}` : `/docs/${data.version}/${data.local}`
-	);
+	const mdPath = $derived(`/docs/${data.local}.md`);
 
 	let article = $state<HTMLElement>();
 
 	// Give every code block a hover copy button. The markdown HTML is rendered
 	// by <Content />, so the buttons are mounted imperatively onto each <pre>.
 	$effect(() => {
-		void pageKey;
+		void data.local;
 		if (!article) return;
 
 		const buttons = [...article.querySelectorAll('pre')].map((pre) => {
@@ -52,7 +44,7 @@
 
 <svelte:head>
 	<title>{data.title} - {SITE_TITLE}</title>
-	<link rel="canonical" href="{SITE_URL}{canonicalPath}" />
+	<link rel="canonical" href="{SITE_URL}/docs/{data.local}" />
 	<link rel="alternate" type="text/markdown" href={mdPath} />
 </svelte:head>
 
@@ -62,12 +54,7 @@
 	<aside
 		class="sticky top-20 hidden h-[calc(100vh-5rem)] w-[19rem] shrink-0 overflow-y-auto px-7 py-6 lg:block"
 	>
-		<DocsSidebar
-			version={data.version}
-			toctree={data.toctree}
-			active={data.local}
-			unversioned={data.unversioned}
-		/>
+		<DocsSidebar toctree={data.toctree} active={data.local} />
 	</aside>
 
 	<div class="flex min-h-screen w-full min-w-0 grow gap-x-8 px-4 pt-6 lg:pt-10 lg:pr-10 lg:pl-16">
@@ -75,35 +62,25 @@
 			<details class="border-border mb-6 rounded-md border lg:hidden">
 				<summary class="cursor-pointer px-3 py-2 text-sm font-medium">Documentation</summary>
 				<div class="px-3 pb-3">
-					<DocsSidebar
-						version={data.version}
-						toctree={data.toctree}
-						active={data.local}
-						unversioned={data.unversioned}
-					/>
+					<DocsSidebar toctree={data.toctree} active={data.local} />
 				</div>
 			</details>
 
 			<div class="mb-4 flex justify-end">
-				<DocsCopyPage version={data.version} local={data.local} unversioned={data.unversioned} />
+				<DocsCopyPage local={data.local} />
 			</div>
 
 			<article bind:this={article} class="prose max-w-none dark:prose-invert">
 				<Content />
 			</article>
 
-			<DocsFooterNav
-				version={data.version}
-				prev={data.prev}
-				next={data.next}
-				unversioned={data.unversioned}
-			/>
+			<DocsFooterNav prev={data.prev} next={data.next} />
 		</main>
 
 		<aside
 			class="sticky top-20 hidden max-h-[calc(100vh-6rem)] w-[19rem] shrink-0 self-start overflow-y-auto pb-4 pl-10 xl:block"
 		>
-			<DocsToc {article} {pageKey} />
+			<DocsToc {article} pageKey={data.local} />
 		</aside>
 	</div>
 </div>

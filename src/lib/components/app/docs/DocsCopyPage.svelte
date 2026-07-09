@@ -5,17 +5,13 @@
 	import { SITE_URL } from '$lib/constants/site';
 
 	interface Props {
-		version: string;
 		local: string;
-		unversioned?: boolean;
 	}
 
-	let { version, local, unversioned = false }: Props = $props();
+	let { local }: Props = $props();
 
-	// A prerendered static asset (see scripts/extract-docs.js), not a route.
-	const mdPath = $derived(
-		(unversioned ? `/docs/${local}.md` : `/docs/${version}/${local}.md`) as Pathname
-	);
+	// A prerendered static asset (see scripts/prepare-docs.js), not a route.
+	const mdPath = $derived(`/docs/${local}.md` as Pathname);
 	const mdUrl = $derived(`${SITE_URL}${mdPath}`);
 	const llmPrompt = $derived(encodeURIComponent(`Read ${mdUrl} so I can ask questions about it.`));
 

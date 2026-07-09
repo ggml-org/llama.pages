@@ -31,9 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          # Full history so scripts/extract-docs.js can read docs from version tags
-          fetch-depth: 0
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
