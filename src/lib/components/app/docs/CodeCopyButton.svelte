@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Check, Copy } from '@lucide/svelte';
+	import { COPY_FEEDBACK_MS } from '$lib/constants/docs';
 
 	interface Props {
 		getText: () => string;
@@ -12,7 +13,7 @@
 	async function copy() {
 		await navigator.clipboard.writeText(getText());
 		copied = true;
-		setTimeout(() => (copied = false), 2000);
+		setTimeout(() => (copied = false), COPY_FEEDBACK_MS);
 	}
 </script>
 

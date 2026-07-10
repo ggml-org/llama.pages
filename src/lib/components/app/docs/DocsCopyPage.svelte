@@ -3,6 +3,7 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
+	import { LLAMA_PROMPT_MAX_CHARS } from '$lib/constants/docs';
 	import {
 		DEFAULT_LLAMA_SERVER_URL,
 		getLlamaServerUrl,
@@ -17,10 +18,6 @@
 	}
 
 	let { local }: Props = $props();
-
-	// The local webui can't fetch URLs, so the page content is inlined into
-	// the ?q= prompt — capped well under cpp-httplib's request-line limit.
-	const LLAMA_PROMPT_MAX_CHARS = 6000;
 
 	// A prerendered static asset (see scripts/prepare-docs.js), not a route.
 	const mdPath = $derived(`/docs/${local}.md` as Pathname);
