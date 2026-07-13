@@ -100,7 +100,7 @@
 				<button
 					type="button"
 					onclick={() => install(build)}
-					class="flex cursor-pointer items-center gap-1.5 rounded-lg bg-sky-500 px-3.5 py-1.5 text-center text-white"
+					class="flex cursor-pointer items-center gap-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/80 px-3.5 py-1.5 text-center"
 				>
 					{#if deviceInfo.isMac}
 						<svg
