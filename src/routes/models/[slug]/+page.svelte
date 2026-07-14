@@ -1,0 +1,109 @@
+<script lang="ts">
+	import { toast } from 'svelte-sonner';
+	import { type Build, type Size, releasedFor } from '$lib/catalog';
+	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
+	import InstallToast from '$lib/components/app/catalog/InstallToast.svelte';
+	import CliDialog from '$lib/components/app/catalog/CliDialog.svelte';
+	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+	const family = $derived(data.family);
+
+	// The build (plus its size, for the title) whose CLI command is showing
+	// in the modal (non-Mac flow); null when closed.
+	let cliRun = $state<{ build: Build; size: Size } | null>(null);
+
+	// On a Mac, install is fire-and-forget: the row already sent the deeplink,
+	// and on success Llama (a menu bar app) shows its own bubble -- there is
+	// nothing to wait for, so a self-dismissing toast fits the weight of the
+	// event, carrying the confirmation plus the fallbacks for machines without
+	// the app (unobservable from the browser). Off-Mac, the click's whole
+	// point is to see the CLI command, so it gets a modal instead of a
+	// corner toast.
+	function installed(b: Build, s: Size) {
+		if (deviceInfo.isMac) {
+			toast.custom(InstallToast, { componentProps: { build: b }, duration: 15000 });
+		} else {
+			cliRun = { build: b, size: s };
+		}
+	}
+
+	// Whether to also show each size's smaller quantized builds. Off by default:
+	// every size leads with its canonical (highest-precision) build, and lower
+	// quants are opt-in -- mirroring the app, where they're strictly fallbacks.
+	let showQuantized = $state(false);
+	const hasQuantized = $derived(family.sizes.some((s) => s.builds.length > 1));
+</script>
+
+<svelte:head>
+	<title>{family.name} — llama.app</title>
+	<meta name="description" content={family.description} />
+</svelte:head>
+
+<!-- Same outer container as the rest of the site so the pages share margins and
+     left edge. The per-size download table spans the full width, followed by
+     the family prose. -->
+<main class="mx-auto w-full max-w-5xl px-6 pt-8 pb-24 md:px-12">
+	<!-- Header, title-first: the family name leads at full size, with the
+	     release date as a byline under it and the one-line summary last --
+	     headline / byline / standfirst. The brand isn't repeated here: the
+	     title contains it and the summary opens by naming the publisher. -->
+	<header>
+		<h1 class="text-[30px] font-semibold tracking-tight">{family.name}</h1>
+		<div class="text-muted-foreground mt-2.5 text-[13px]">
+			<span class="tabular-nums">{releasedFor(family)}</span>
+		</div>
+		<p class="text-muted-foreground mt-3 max-w-xl text-[15px]">{family.description}</p>
+	</header>
+
+	<section class="mt-10">
+		<!-- Section header line: a heading on the left anchors the row, with the
+		     quantization toggle as the right-aligned control. The toggle's full
+		     explanation lives in the info icon's tooltip -- the one place the
+		     site explains what quantization is. -->
+		<div class="mb-2 flex items-center justify-between">
+			<h2 class="text-muted-foreground text-[13px]">Sizes</h2>
+			{#if hasQuantized}
+				<div class="flex items-center gap-1.5">
+					<label class="text-muted-foreground flex cursor-pointer items-baseline gap-2 text-[13px]">
+						<input type="checkbox" bind:checked={showQuantized} class="accent-sky-500" />
+						<span>Show smaller quantizations</span>
+					</label>
+					<!-- Info icon carrying the quantization explainer. A native title
+					     tooltip on hover; explicit rather than hiding the hint on the
+					     label itself, so it's discoverable. -->
+					<span
+						class="text-muted-foreground/70 cursor-help"
+						title="Quantized further to run in less memory, at a small cost in quality."
+					>
+						<svg
+							aria-label="What are smaller quantizations?"
+							role="img"
+							viewBox="0 0 16 16"
+							class="h-3.5 w-3.5"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+						>
+							<circle cx="8" cy="8" r="6.5" />
+							<path d="M6.3 6.2a1.8 1.8 0 1 1 2.4 1.7c-.5.2-.7.5-.7 1v.3" />
+							<circle cx="8" cy="11.3" r="0.1" stroke-width="1.6" />
+						</svg>
+					</span>
+				</div>
+			{/if}
+		</div>
+
+		<table class="w-full text-left">
+			<tbody>
+				{#each family.sizes as s (s.name)}
+					<SizeRow size={s} {showQuantized} oninstall={installed} />
+				{/each}
+			</tbody>
+		</table>
+	</section>
+</main>
+
+<CliDialog bind:run={cliRun} />

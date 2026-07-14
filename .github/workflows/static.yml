@@ -40,8 +40,6 @@ jobs:
         run: npm ci
       - name: Build static site
         run: npm run build
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

@@ -1,0 +1,35 @@
+<script lang="ts">
+	// One family as a homepage grid tile: brand mark, name, vision badge and a
+	// two-line description. No size pills here -- on the tile's tinted
+	// background the muted chips lose contrast, and the teaser's job is to
+	// invite a click, not carry specs; sizes live on the index and detail
+	// pages.
+	import { type Family, slugify } from '$lib/catalog';
+	import { logoFor } from '$lib/logos';
+	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+
+	let { family }: { family: Family } = $props();
+</script>
+
+<!-- The whole tile is a link to the family's detail page. As a real <a href>
+     it supports cmd/middle-click to open in a new tab, "copy link", etc. -->
+<a
+	href="/models/{slugify(family.name)}"
+	class="border-foreground/6 bg-foreground/2 hover:border-foreground/12 flex h-full flex-col rounded-2xl border p-5 transition-colors"
+>
+	<!-- Brand mark on its own row at the top, so the name and description
+	     below share the same left edge -- no inline icon pushing the title
+	     over. -->
+	<span aria-hidden="true" class="mb-3 flex items-center [&>svg]:h-5 [&>svg]:w-5">
+		{@html logoFor(family.brand)}
+	</span>
+
+	<h3 class="flex min-w-0 items-center gap-1.5 text-[16px] font-medium">
+		<span class="truncate">{family.name}</span>
+		{#if family.sizes.some((s) => s.vision)}
+			<VisionBadge />
+		{/if}
+	</h3>
+
+	<p class="text-muted-foreground mt-1 line-clamp-2 text-[14px]">{family.description}</p>
+</a>

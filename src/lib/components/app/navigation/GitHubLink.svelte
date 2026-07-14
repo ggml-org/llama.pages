@@ -12,7 +12,7 @@
 	href="https://github.com/ggml-org/llama.cpp"
 	target="_blank"
 	rel="noreferrer"
-	class="text-foreground inline-flex items-center gap-2 text-base"
+	class="text-foreground inline-flex items-center gap-2 text-[15px]"
 >
 	<span class="decoration-foreground/30 underline underline-offset-4">GitHub</span>
 

@@ -5,20 +5,31 @@
     "description": "OpenAI's first open-weight models since GPT-2. Built for reasoning, agentic tasks, and developer use with function calling and tool use capabilities.",
     "details": "OpenAI's first open-weight release since GPT-2, GPT-OSS brings frontier-style reasoning to models you can run on your own hardware. Both sizes are trained for chain-of-thought reasoning, function calling, and tool use, with adjustable reasoning effort so you can trade latency for depth.\n\nThe 20B model targets a single consumer GPU, while the 120B model is built for high-memory workstations and servers. Both ship in the efficient MXFP4 format and are released under a permissive license for commercial use.",
     "released": "2025-08",
+    "license": "Apache 2.0",
     "featured": true,
     "sizes": [
       {
         "name": "GPT-OSS 20B",
         "params": "20B",
         "builds": [
-          { "quant": "mxfp4", "size": "12.1 GB", "repo": "ggml-org/gpt-oss-20b-GGUF" }
+          {
+            "quant": "mxfp4",
+            "size": "12.1 GB",
+            "sizeBytes": 12109566560,
+            "repo": "ggml-org/gpt-oss-20b-GGUF"
+          }
         ]
       },
       {
         "name": "GPT-OSS 120B",
         "params": "120B",
         "builds": [
-          { "quant": "mxfp4", "size": "63.4 GB", "repo": "ggml-org/gpt-oss-120b-GGUF" }
+          {
+            "quant": "mxfp4",
+            "size": "63.4 GB",
+            "sizeBytes": 63387346464,
+            "repo": "ggml-org/gpt-oss-120b-GGUF"
+          }
         ]
       }
     ]
@@ -29,20 +40,31 @@
     "description": "Google's multimodal models built from Gemini technology. Supports 140+ languages, vision, and text tasks with up to 128K context for edge to cloud deployment.",
     "details": "Gemma 3 is Google's family of open multimodal models, distilled from the same research behind Gemini. The lineup spans from a 270M model light enough for phones to a 27B model that holds its own against far larger systems, with vision support arriving at 4B and above.\n\nEvery size handles text and understands 140+ languages, and the larger ones add image input, with context windows up to 128K tokens. That makes Gemma 3 a flexible base for everything from on-device assistants to cloud deployments.",
     "released": "2025-03",
+    "license": "Gemma license",
     "featured": true,
     "sizes": [
       {
         "name": "Gemma 3 270M",
         "params": "270M",
         "builds": [
-          { "quant": "Q4_0", "size": "241 MB", "repo": "ggml-org/gemma-3-270m-it-qat-GGUF" }
+          {
+            "quant": "Q4_0",
+            "size": "241 MB",
+            "sizeBytes": 241410624,
+            "repo": "ggml-org/gemma-3-270m-it-qat-GGUF"
+          }
         ]
       },
       {
         "name": "Gemma 3 1B",
         "params": "1B",
         "builds": [
-          { "quant": "Q4_0", "size": "720 MB", "repo": "ggml-org/gemma-3-1b-it-qat-GGUF" }
+          {
+            "quant": "Q4_0",
+            "size": "720 MB",
+            "sizeBytes": 720425600,
+            "repo": "ggml-org/gemma-3-1b-it-qat-GGUF"
+          }
         ]
       },
       {
@@ -50,7 +72,12 @@
         "params": "4B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_0", "size": "2.5 GB", "repo": "ggml-org/gemma-3-4b-it-qat-GGUF" }
+          {
+            "quant": "Q4_0",
+            "size": "2.5 GB",
+            "sizeBytes": 2526080992,
+            "repo": "ggml-org/gemma-3-4b-it-qat-GGUF"
+          }
         ]
       },
       {
@@ -58,7 +85,12 @@
         "params": "12B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_0", "size": "7.1 GB", "repo": "ggml-org/gemma-3-12b-it-qat-GGUF" }
+          {
+            "quant": "Q4_0",
+            "size": "7.1 GB",
+            "sizeBytes": 7131017792,
+            "repo": "ggml-org/gemma-3-12b-it-qat-GGUF"
+          }
         ]
       },
       {
@@ -66,7 +98,12 @@
         "params": "27B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_0", "size": "15.9 GB", "repo": "ggml-org/gemma-3-27b-it-qat-GGUF" }
+          {
+            "quant": "Q4_0",
+            "size": "15.9 GB",
+            "sizeBytes": 15908791488,
+            "repo": "ggml-org/gemma-3-27b-it-qat-GGUF"
+          }
         ]
       }
     ]
@@ -77,6 +114,7 @@
     "description": "Google's most capable open models, built from Gemini 3 technology. Supports multimodal reasoning, agentic workflows, and 140+ languages.",
     "details": "Gemma 4 is Google's most capable open release, built from Gemini 3 technology. It pushes multimodal reasoning and agentic workflows further while keeping the efficient, deployable footprint the Gemma line is known for.\n\nThe family mixes dense and mixture-of-experts designs, so you can choose between the always-on E-series models for edge use and the larger MoE variants for heavier reasoning, all with vision and 140+ language support.",
     "released": "2026-03",
+    "license": "Apache 2.0",
     "featured": true,
     "sizes": [
       {
@@ -84,7 +122,12 @@
         "params": "E2B",
         "vision": true,
         "builds": [
-          { "quant": "Q8_0", "size": "5.0 GB", "repo": "ggml-org/gemma-4-E2B-it-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "5.5 GB",
+            "sizeBytes": 5524862368,
+            "repo": "ggml-org/gemma-4-E2B-it-GGUF"
+          }
         ]
       },
       {
@@ -92,8 +135,18 @@
         "params": "E4B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "5.3 GB", "repo": "ggml-org/gemma-4-E4B-it-GGUF" },
-          { "quant": "Q8_0", "size": "8.0 GB", "repo": "ggml-org/gemma-4-E4B-it-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "8.6 GB",
+            "sizeBytes": 8591114688,
+            "repo": "ggml-org/gemma-4-E4B-it-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "5.3 GB",
+            "sizeBytes": 5335289824,
+            "repo": "ggml-org/gemma-4-E4B-it-GGUF"
+          }
         ]
       },
       {
@@ -101,8 +154,18 @@
         "params": "26B-A4B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "16.8 GB", "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF" },
-          { "quant": "Q8_0", "size": "26.9 GB", "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "27.7 GB",
+            "sizeBytes": 27666266464,
+            "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "16.8 GB",
+            "sizeBytes": 16796015136,
+            "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
+          }
         ]
       },
       {
@@ -110,8 +173,18 @@
         "params": "31B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "18.7 GB", "repo": "ggml-org/gemma-4-31B-it-GGUF" },
-          { "quant": "Q8_0", "size": "32.6 GB", "repo": "ggml-org/gemma-4-31B-it-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "33.4 GB",
+            "sizeBytes": 33445215840,
+            "repo": "ggml-org/gemma-4-31B-it-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "18.7 GB",
+            "sizeBytes": 18687061792,
+            "repo": "ggml-org/gemma-4-31B-it-GGUF"
+          }
         ]
       }
     ]
@@ -122,14 +195,26 @@
     "description": "Alibaba's compact natively multimodal reasoning models. Supports thinking/non-thinking modes for text and vision tasks across 201 languages.",
     "details": "The small tier of Qwen 3.5 is Alibaba's set of compact, natively multimodal models built for on-device and latency-sensitive use. Ranging from 0.8B to 9B parameters, they understand both text and images out of the box.\n\nEach model supports switchable thinking and non-thinking modes, letting you turn step-by-step reasoning on for hard problems or off for fast replies, with language coverage spanning 201 languages.",
     "released": "2026-01",
+    "license": "Apache 2.0",
+    "featured": true,
     "sizes": [
       {
         "name": "Qwen 3.5 Small 0.8B",
         "params": "0.8B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "533 MB", "repo": "unsloth/Qwen3.5-0.8B-GGUF" },
-          { "quant": "Q8_0", "size": "812 MB", "repo": "unsloth/Qwen3.5-0.8B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "812 MB",
+            "sizeBytes": 811843840,
+            "repo": "unsloth/Qwen3.5-0.8B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "533 MB",
+            "sizeBytes": 532517120,
+            "repo": "unsloth/Qwen3.5-0.8B-GGUF"
+          }
         ]
       },
       {
@@ -137,8 +222,18 @@
         "params": "2B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "1.3 GB", "repo": "unsloth/Qwen3.5-2B-GGUF" },
-          { "quant": "Q8_0", "size": "2.0 GB", "repo": "unsloth/Qwen3.5-2B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "2.0 GB",
+            "sizeBytes": 2012012800,
+            "repo": "unsloth/Qwen3.5-2B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "1.3 GB",
+            "sizeBytes": 1280835840,
+            "repo": "unsloth/Qwen3.5-2B-GGUF"
+          }
         ]
       },
       {
@@ -146,8 +241,18 @@
         "params": "4B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "2.7 GB", "repo": "unsloth/Qwen3.5-4B-GGUF" },
-          { "quant": "Q8_0", "size": "4.5 GB", "repo": "unsloth/Qwen3.5-4B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "4.5 GB",
+            "sizeBytes": 4482403488,
+            "repo": "unsloth/Qwen3.5-4B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "2.7 GB",
+            "sizeBytes": 2740937888,
+            "repo": "unsloth/Qwen3.5-4B-GGUF"
+          }
         ]
       },
       {
@@ -155,8 +260,18 @@
         "params": "9B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "5.7 GB", "repo": "unsloth/Qwen3.5-9B-GGUF" },
-          { "quant": "Q8_0", "size": "9.5 GB", "repo": "unsloth/Qwen3.5-9B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "9.5 GB",
+            "sizeBytes": 9527502048,
+            "repo": "unsloth/Qwen3.5-9B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "5.7 GB",
+            "sizeBytes": 5680522464,
+            "repo": "unsloth/Qwen3.5-9B-GGUF"
+          }
         ]
       }
     ]
@@ -167,14 +282,25 @@
     "description": "Alibaba's flagship natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
     "details": "The medium tier of Qwen 3.5 is Alibaba's flagship open lineup, offering both dense and mixture-of-experts models that punch well above their parameter counts on coding, math, and vision benchmarks.\n\nFrom a 27B dense model to a 397B MoE, the range scales from single-GPU setups to multi-GPU servers, all natively multimodal and with switchable reasoning modes.",
     "released": "2026-01",
+    "license": "Apache 2.0",
     "sizes": [
       {
         "name": "Qwen 3.5 Medium 27B",
         "params": "27B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "16.7 GB", "repo": "unsloth/Qwen3.5-27B-GGUF" },
-          { "quant": "Q8_0", "size": "28.6 GB", "repo": "unsloth/Qwen3.5-27B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "28.6 GB",
+            "sizeBytes": 28595763104,
+            "repo": "unsloth/Qwen3.5-27B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "16.7 GB",
+            "sizeBytes": 16740812704,
+            "repo": "unsloth/Qwen3.5-27B-GGUF"
+          }
         ]
       },
       {
@@ -182,8 +308,18 @@
         "params": "35B-A3B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "22.0 GB", "repo": "unsloth/Qwen3.5-35B-A3B-GGUF" },
-          { "quant": "Q8_0", "size": "36.9 GB", "repo": "unsloth/Qwen3.5-35B-A3B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "36.9 GB",
+            "sizeBytes": 36903139968,
+            "repo": "unsloth/Qwen3.5-35B-A3B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "22.0 GB",
+            "sizeBytes": 22016023168,
+            "repo": "unsloth/Qwen3.5-35B-A3B-GGUF"
+          }
         ]
       },
       {
@@ -191,8 +327,18 @@
         "params": "122B-A10B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "76.5 GB", "repo": "unsloth/Qwen3.5-122B-A10B-GGUF" },
-          { "quant": "Q8_0", "size": "129.9 GB", "repo": "unsloth/Qwen3.5-122B-A10B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "129.9 GB",
+            "sizeBytes": 129871935104,
+            "repo": "unsloth/Qwen3.5-122B-A10B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "76.5 GB",
+            "sizeBytes": 76536964608,
+            "repo": "unsloth/Qwen3.5-122B-A10B-GGUF"
+          }
         ]
       },
       {
@@ -200,8 +346,18 @@
         "params": "397B-A17B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "244.1 GB", "repo": "unsloth/Qwen3.5-397B-A17B-GGUF" },
-          { "quant": "Q8_0", "size": "421.5 GB", "repo": "unsloth/Qwen3.5-397B-A17B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "421.5 GB",
+            "sizeBytes": 421507365824,
+            "repo": "unsloth/Qwen3.5-397B-A17B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "244.1 GB",
+            "sizeBytes": 244093630912,
+            "repo": "unsloth/Qwen3.5-397B-A17B-GGUF"
+          }
         ]
       }
     ]
@@ -212,6 +368,7 @@
     "description": "Alibaba's next-gen natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
     "details": "Qwen 3.6 is Alibaba's next-generation multimodal lineup, refining the dense and MoE recipes from 3.5 with stronger coding and agentic performance.\n\nNatively multimodal and reasoning-capable, the models continue to rival systems many times their size while staying practical to run locally.",
     "released": "2026-04",
+    "license": "Apache 2.0",
     "featured": true,
     "sizes": [
       {
@@ -219,8 +376,18 @@
         "params": "27B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "16.8 GB", "repo": "unsloth/Qwen3.6-27B-GGUF" },
-          { "quant": "Q8_0", "size": "28.6 GB", "repo": "unsloth/Qwen3.6-27B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "28.6 GB",
+            "sizeBytes": 28595763424,
+            "repo": "unsloth/Qwen3.6-27B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "16.8 GB",
+            "sizeBytes": 16817244384,
+            "repo": "unsloth/Qwen3.6-27B-GGUF"
+          }
         ]
       },
       {
@@ -228,8 +395,18 @@
         "params": "35B-A3B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "22.1 GB", "repo": "unsloth/Qwen3.6-35B-A3B-GGUF" },
-          { "quant": "Q8_0", "size": "36.9 GB", "repo": "unsloth/Qwen3.6-35B-A3B-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "36.9 GB",
+            "sizeBytes": 36903140320,
+            "repo": "unsloth/Qwen3.6-35B-A3B-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "22.1 GB",
+            "sizeBytes": 22134528992,
+            "repo": "unsloth/Qwen3.6-35B-A3B-GGUF"
+          }
         ]
       }
     ]
@@ -240,14 +417,25 @@
     "description": "Mistral AI's compact edge models with vision capabilities. Offers best cost-to-performance ratio for on-device deployment in 3B, 8B, 14B sizes.",
     "details": "Ministral 3 is Mistral AI's family of compact edge models, offered in 3B, 8B, and 14B sizes with both instruct and reasoning variants. Each size is multimodal and tuned for the best cost-to-performance ratio on local hardware.\n\nThe reasoning variants add explicit step-by-step thinking for harder tasks, while the instruct models stay fast and direct, giving you a consistent family to deploy from laptops to small servers.",
     "released": "2025-12",
+    "license": "Apache 2.0",
     "sizes": [
       {
         "name": "Ministral 3 3B",
         "params": "3B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "2.1 GB", "repo": "mistralai/Ministral-3-3B-Instruct-2512-GGUF" },
-          { "quant": "Q8_0", "size": "3.9 GB", "repo": "ggml-org/Ministral-3-3B-Instruct-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "4.1 GB",
+            "sizeBytes": 4099964832,
+            "repo": "ggml-org/Ministral-3-3B-Instruct-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "2.1 GB",
+            "sizeBytes": 2147023008,
+            "repo": "mistralai/Ministral-3-3B-Instruct-2512-GGUF"
+          }
         ]
       },
       {
@@ -255,8 +443,18 @@
         "params": "3B Reasoning",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "2.1 GB", "repo": "mistralai/Ministral-3-3B-Reasoning-2512-GGUF" },
-          { "quant": "Q8_0", "size": "3.9 GB", "repo": "ggml-org/Ministral-3-3B-Reasoning-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "4.1 GB",
+            "sizeBytes": 4099963264,
+            "repo": "ggml-org/Ministral-3-3B-Reasoning-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "2.1 GB",
+            "sizeBytes": 2147021472,
+            "repo": "mistralai/Ministral-3-3B-Reasoning-2512-GGUF"
+          }
         ]
       },
       {
@@ -264,8 +462,18 @@
         "params": "8B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "5.2 GB", "repo": "mistralai/Ministral-3-8B-Instruct-2512-GGUF" },
-          { "quant": "Q8_0", "size": "9.7 GB", "repo": "ggml-org/Ministral-3-8B-Instruct-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "9.5 GB",
+            "sizeBytes": 9486069920,
+            "repo": "ggml-org/Ministral-3-8B-Instruct-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "5.2 GB",
+            "sizeBytes": 5198911904,
+            "repo": "mistralai/Ministral-3-8B-Instruct-2512-GGUF"
+          }
         ]
       },
       {
@@ -273,8 +481,18 @@
         "params": "8B Reasoning",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "5.2 GB", "repo": "mistralai/Ministral-3-8B-Reasoning-2512-GGUF" },
-          { "quant": "Q8_0", "size": "9.7 GB", "repo": "ggml-org/Ministral-3-8B-Reasoning-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "9.5 GB",
+            "sizeBytes": 9486068384,
+            "repo": "ggml-org/Ministral-3-8B-Reasoning-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "5.2 GB",
+            "sizeBytes": 5198910368,
+            "repo": "mistralai/Ministral-3-8B-Reasoning-2512-GGUF"
+          }
         ]
       },
       {
@@ -282,8 +500,18 @@
         "params": "14B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "8.2 GB", "repo": "mistralai/Ministral-3-14B-Instruct-2512-GGUF" },
-          { "quant": "Q8_0", "size": "14.4 GB", "repo": "ggml-org/Ministral-3-14B-Instruct-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "14.8 GB",
+            "sizeBytes": 14827658560,
+            "repo": "ggml-org/Ministral-3-14B-Instruct-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "8.2 GB",
+            "sizeBytes": 8239593024,
+            "repo": "mistralai/Ministral-3-14B-Instruct-2512-GGUF"
+          }
         ]
       },
       {
@@ -291,8 +519,18 @@
         "params": "14B Reasoning",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "8.2 GB", "repo": "mistralai/Ministral-3-14B-Reasoning-2512-GGUF" },
-          { "quant": "Q8_0", "size": "14.4 GB", "repo": "ggml-org/Ministral-3-14B-Reasoning-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "14.8 GB",
+            "sizeBytes": 14827657024,
+            "repo": "ggml-org/Ministral-3-14B-Reasoning-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "8.2 GB",
+            "sizeBytes": 8239591488,
+            "repo": "mistralai/Ministral-3-14B-Reasoning-2512-GGUF"
+          }
         ]
       }
     ]
@@ -303,13 +541,25 @@
     "description": "Zhipu AI's agentic reasoning and coding models. Built for software engineering, browser automation, and multi-turn tool use.",
     "details": "GLM 4.7 is Zhipu AI's lineup of agentic models built for software engineering and tool use. It's trained for multi-turn workflows like browsing, code editing, and orchestrating external tools.\n\nThe Flash variant balances capability and footprint so the model's agentic strengths stay within reach of a single high-memory GPU.",
     "released": "2026-02",
+    "license": "MIT",
+    "featured": true,
     "sizes": [
       {
         "name": "GLM 4.7 Flash",
         "params": "Flash",
         "builds": [
-          { "quant": "Q4_K", "size": "18.2 GB", "repo": "ggml-org/GLM-4.7-Flash-GGUF" },
-          { "quant": "Q8_0", "size": "31.8 GB", "repo": "ggml-org/GLM-4.7-Flash-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "31.8 GB",
+            "sizeBytes": 31842799232,
+            "repo": "ggml-org/GLM-4.7-Flash-GGUF"
+          },
+          {
+            "quant": "Q4_K",
+            "size": "18.2 GB",
+            "sizeBytes": 18244193920,
+            "repo": "ggml-org/GLM-4.7-Flash-GGUF"
+          }
         ]
       }
     ]
@@ -320,22 +570,43 @@
     "description": "Mistral AI's agentic coding models for software engineering tasks. Excels at exploring codebases, multi-file editing, and powering code agents.",
     "details": "Devstral 2 is Mistral AI's agentic coding family, purpose-built for real software engineering rather than isolated snippets. The models excel at exploring large codebases, editing across many files, and driving autonomous code agents.\n\nOffered in a 24B size for local development and a 123B size for maximum capability, Devstral 2 plugs into agent scaffolds and IDE tooling to handle multi-step engineering tasks.",
     "released": "2026-01",
+    "license": "Apache 2.0 / Modified MIT",
     "sizes": [
       {
         "name": "Devstral 2 24B",
         "params": "24B",
         "vision": true,
         "builds": [
-          { "quant": "Q4_K_M", "size": "14.3 GB", "repo": "unsloth/Devstral-Small-2-24B-Instruct-2512-GGUF" },
-          { "quant": "Q8_0", "size": "25.1 GB", "repo": "ggml-org/Devstral-Small-2-24B-Instruct-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "25.1 GB",
+            "sizeBytes": 25055308352,
+            "repo": "ggml-org/Devstral-Small-2-24B-Instruct-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "14.3 GB",
+            "sizeBytes": 14334446752,
+            "repo": "unsloth/Devstral-Small-2-24B-Instruct-2512-GGUF"
+          }
         ]
       },
       {
         "name": "Devstral 2 123B",
         "params": "123B",
         "builds": [
-          { "quant": "Q4_K_M", "size": "74.9 GB", "repo": "unsloth/Devstral-2-123B-Instruct-2512-GGUF" },
-          { "quant": "Q8_0", "size": "132.9 GB", "repo": "ggml-org/Devstral-2-123B-Instruct-2512-GGUF" }
+          {
+            "quant": "Q8_0",
+            "size": "132.9 GB",
+            "sizeBytes": 132854938656,
+            "repo": "ggml-org/Devstral-2-123B-Instruct-2512-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "74.9 GB",
+            "sizeBytes": 74897662400,
+            "repo": "unsloth/Devstral-2-123B-Instruct-2512-GGUF"
+          }
         ]
       }
     ]

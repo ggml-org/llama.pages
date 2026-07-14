@@ -8,6 +8,12 @@
 
 	const stars = $derived(page.data.stars as number | null | undefined);
 
+	// Whether we're anywhere in the Models section (the catalog index or a family
+	// detail page), which highlights the permanent "Models" nav link.
+	const onModels = $derived(
+		page.url.pathname === '/models' || page.url.pathname.startsWith('/models/')
+	);
+
 	const NEXT_MODE = { light: 'dark', dark: 'system', system: 'light' } as const;
 
 	function cycleMode() {
@@ -15,12 +21,27 @@
 	}
 </script>
 
-<header
-	class="sticky top-0 z-9999 mx-auto flex w-full max-w-5xl items-center justify-between p-6 backdrop-blur-md md:px-12"
->
-	<a href={resolve('/')}>
-		<Logo --logo-height="1.5rem" />
-	</a>
+<header class="mx-auto flex w-full max-w-5xl items-center justify-between p-6 md:px-12">
+	<!-- Left: the logo (home) plus permanent site nav. A vertical hairline after
+	     the logo separates brand from nav, so the link doesn't read as part of
+	     the wordmark. "Models" always links to the catalog and lights up while
+	     you're anywhere in the section; the page itself names where you are
+	     (each page leads with its own h1). -->
+	<nav class="flex items-center gap-4 text-[15px]">
+		<a href={resolve('/')}>
+			<Logo --logo-height="1.5rem" />
+		</a>
+
+		<span aria-hidden="true" class="bg-border h-5 w-px"></span>
+
+		<a
+			href="/models"
+			aria-current={onModels ? 'page' : undefined}
+			class={onModels ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}
+		>
+			Models
+		</a>
+	</nav>
 
 	<div class="flex items-center gap-4">
 		<GitHubLink {stars} />
