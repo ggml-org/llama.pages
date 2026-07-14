@@ -1,0 +1,4 @@
+- title: Getting started
+  sections:
+    - local: index
+      title: Introduction

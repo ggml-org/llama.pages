@@ -2,6 +2,7 @@ node_modules
 
 # Output
 .output
+/static/docs
 .vercel
 .netlify
 .wrangler

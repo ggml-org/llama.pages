@@ -4,6 +4,8 @@
 
 @import 'shadcn-svelte/tailwind.css';
 
+@plugin '@tailwindcss/typography';
+
 @custom-variant dark (&:is(.dark *));
 
 @import '$lib/styles/prism-theme.css';
