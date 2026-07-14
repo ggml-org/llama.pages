@@ -220,35 +220,6 @@
     ]
   },
   {
-    "name": "Qwen 3.5 Medium",
-    "brand": "Qwen",
-    "description": "Alibaba's flagship natively multimodal reasoning models. MoE variants that rival models many times their size on coding and vision tasks.",
-    "details": "The medium tier of Qwen 3.5 is Alibaba's flagship open lineup, offering mixture-of-experts models that punch well above their parameter counts on coding, math, and vision benchmarks.\n\nThe models are natively multimodal, with switchable reasoning modes, and stay practical to run on high-memory local machines.",
-    "released": "2026-01",
-    "license": "Apache 2.0",
-    "sizes": [
-      {
-        "name": "Qwen 3.5 Medium 35B-A3B",
-        "params": "35B-A3B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "36.9 GB",
-            "sizeBytes": 36903139584,
-            "repo": "ggml-org/Qwen3.5-35B-A3B-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "22.0 GB",
-            "sizeBytes": 22016023168,
-            "repo": "unsloth/Qwen3.5-35B-A3B-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "name": "Qwen 3.6",
     "brand": "Qwen",
     "description": "Alibaba's next-gen natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
