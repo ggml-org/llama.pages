@@ -402,7 +402,7 @@
             "repo": "unsloth/Qwen3.6-35B-A3B-GGUF"
           },
           {
-            "quant": "Q4_K_M",
+            "quant": "UD-Q4_K_M",
             "size": "22.1 GB",
             "sizeBytes": 22134528992,
             "repo": "unsloth/Qwen3.6-35B-A3B-GGUF"
