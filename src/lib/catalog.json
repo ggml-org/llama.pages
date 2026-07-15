@@ -150,6 +150,25 @@
         ]
       },
       {
+        "name": "Gemma 4 12B",
+        "params": "12B",
+        "vision": true,
+        "builds": [
+          {
+            "quant": "Q8_0",
+            "size": "12.7 GB",
+            "sizeBytes": 12669645728,
+            "repo": "ggml-org/gemma-4-12b-it-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "7.4 GB",
+            "sizeBytes": 7381382048,
+            "repo": "ggml-org/gemma-4-12b-it-GGUF"
+          }
+        ]
+      },
+      {
         "name": "Gemma 4 26B-A4B",
         "params": "26B-A4B",
         "vision": true,
