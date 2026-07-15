@@ -4,7 +4,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import appleIcon from '$lib/assets/apple-icon.svg?raw';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
-	import { MACOS_APP_VERSION } from '$lib/constants/site';
+	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
 </script>
 
 <section class="flex flex-col items-center gap-12 py-16 text-balance md:gap-14 md:py-24">
@@ -21,15 +21,10 @@
 
 	{#if deviceInfo.isMac}
 		<div class="-mb-8 flex flex-col items-center gap-6">
-			<Button
-				href="https://github.com/ggml-org/Llama-macOS/releases/download/{MACOS_APP_VERSION}/Llama.dmg"
-				size="lg"
-			>
+			<Button href={MACOS_DOWNLOAD_URL} size="lg">
 				<div class="mb-0.5">{@html appleIcon}</div>
 
 				Download for Mac
-
-				<span class="ml-2 opacity-50">v{MACOS_APP_VERSION}</span>
 			</Button>
 
 			<span>or install the CLI</span>

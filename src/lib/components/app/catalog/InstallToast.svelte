@@ -13,16 +13,12 @@
 	// mirrors the default toasts: popover colors, border, shadow.
 	import { Copy, Check, X } from '@lucide/svelte';
 	import { type Build, cliCommand } from '$lib/catalog';
+	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
 
 	// closeToast is injected by sonner for custom components -- optional in
 	// the type only so the toast.custom() call site (which passes just
 	// `build`) type-checks; at render it's always provided.
 	let { build, closeToast }: { build: Build; closeToast?: () => void } = $props();
-
-	// Direct dmg download; `latest` redirects to the newest release so no
-	// version is hardcoded here.
-	const DOWNLOAD_URL =
-		'https://github.com/ggml-org/Llama-macOS/releases/latest/download/Llama.dmg';
 
 	// Transient check-mark feedback on the copy button. No confirmation toast
 	// on top -- the check is enough, and we're already inside a toast.
@@ -51,7 +47,7 @@
 
 	<p class="text-muted-foreground mt-2 pr-5 text-[13px]">
 		Don’t have Llama?
-		<a href={DOWNLOAD_URL} class="text-foreground underline underline-offset-4">
+		<a href={MACOS_DOWNLOAD_URL} class="text-foreground underline underline-offset-4">
 			Download Llama for Mac
 		</a>
 	</p>
