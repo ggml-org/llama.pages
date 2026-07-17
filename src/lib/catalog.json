@@ -260,9 +260,9 @@
           },
           {
             "quant": "Q4_K_M",
-            "size": "16.8 GB",
-            "sizeBytes": 16817244384,
-            "repo": "unsloth/Qwen3.6-27B-GGUF"
+            "size": "19.1 GB",
+            "sizeBytes": 19095766304,
+            "repo": "ggml-org/Qwen3.6-27B-GGUF"
           }
         ]
       },
@@ -278,10 +278,10 @@
             "repo": "ggml-org/Qwen3.6-35B-A3B-GGUF"
           },
           {
-            "quant": "UD-Q4_K_M",
-            "size": "22.1 GB",
-            "sizeBytes": 22134528992,
-            "repo": "unsloth/Qwen3.6-35B-A3B-GGUF"
+            "quant": "Q4_K_M",
+            "size": "20.4 GB",
+            "sizeBytes": 20419565568,
+            "repo": "ggml-org/Qwen3.6-35B-A3B-GGUF"
           }
         ]
       }
