@@ -42,6 +42,7 @@
     "released": "2025-03",
     "license": "Gemma license",
     "featured": true,
+    "maxMemGb": 8,
     "sizes": [
       {
         "name": "Gemma 3 270M",

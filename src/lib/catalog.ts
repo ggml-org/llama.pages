@@ -51,6 +51,10 @@ export type Family = {
 	// Whether this family is featured. Exposed in the published catalog API for
 	// consumers to highlight; the website doesn't surface it. Absent means false.
 	featured?: boolean;
+	// Memory cap (in GB) for featuring: consumers should not suggest this family
+	// on machines with more RAM than this. Marks a family as a low-memory pick
+	// (e.g. Gemma 3 for 8 GB Macs). Absent means no cap.
+	maxMemGb?: number;
 	sizes: Size[];
 };
 
