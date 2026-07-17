@@ -216,7 +216,6 @@
     "details": "The small tier of Qwen 3.5 is Alibaba's set of compact, natively multimodal models built for on-device and latency-sensitive use. They understand both text and images out of the box.\n\nEach model supports switchable thinking and non-thinking modes, letting you turn step-by-step reasoning on for hard problems or off for fast replies, with language coverage spanning 201 languages.",
     "released": "2026-01",
     "license": "Apache 2.0",
-    "featured": true,
     "sizes": [
       {
         "name": "Qwen 3.5 Small 0.8B",
