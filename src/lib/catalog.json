@@ -420,7 +420,6 @@
     "details": "GLM 4.7 is Zhipu AI's lineup of agentic models built for software engineering and tool use. It's trained for multi-turn workflows like browsing, code editing, and orchestrating external tools.\n\nThe Flash variant balances capability and footprint so the model's agentic strengths stay within reach of a single high-memory GPU.",
     "released": "2026-02",
     "license": "MIT",
-    "featured": true,
     "sizes": [
       {
         "name": "GLM 4.7 Flash",
