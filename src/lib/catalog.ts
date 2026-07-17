@@ -29,6 +29,11 @@ export type Size = {
 	name: string;
 	params?: string;
 	vision?: boolean;
+	// Memory cap (in GB) for featuring, like Family.maxMemGb but for one size:
+	// consumers should not suggest this size on machines with more RAM than
+	// this (e.g. the small Gemma 4 E-series on 32 GB+ Macs). Absent means the
+	// family's cap (if any) applies.
+	maxMemGb?: number;
 	builds: Build[];
 };
 

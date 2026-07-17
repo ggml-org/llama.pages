@@ -122,6 +122,7 @@
         "name": "Gemma 4 E2B",
         "params": "E2B",
         "vision": true,
+        "maxMemGb": 24,
         "builds": [
           {
             "quant": "Q8_0",
@@ -135,6 +136,7 @@
         "name": "Gemma 4 E4B",
         "params": "E4B",
         "vision": true,
+        "maxMemGb": 24,
         "builds": [
           {
             "quant": "Q8_0",
