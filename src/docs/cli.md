@@ -54,10 +54,8 @@ Few tips for the launch:
 llama cli -m model.gguf -sys "You are a concise assistant that answers in bullet points."
 
 # Ask one question and exit when the answer finishes
-llama cli -m model.gguf -st -p "Explain RAII in C++"
+llama cli -m model.gguf -st -p "Give me a baklava recipe"
 
-# Paste multi-line input without escaping newlines
-llama cli -m model.gguf -mli
 ```
 
 For raw text completion without any chat formatting (base models, or when you want full control of the prompt), disable conversation mode:
