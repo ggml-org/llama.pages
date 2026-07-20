@@ -58,12 +58,6 @@ llama cli -m model.gguf -st -p "Give me a baklava recipe"
 
 ```
 
-For raw text completion without any chat formatting (base models, or when you want full control of the prompt), disable conversation mode:
-
-```sh
-llama-cli -m model.gguf -no-cnv -p "The meaning of life is"
-```
-
 ## Controlling generation
 
 Sampling parameters shape how the model picks tokens:
@@ -87,7 +81,7 @@ llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --temp 0.2 --top-k 40 --top-p 0.
 # Set the context window (0 = model's native maximum)
 llama cli -m model.gguf -c 16384
 
-# Keep MoE expert weights on the CPU — handy for big MoE models on small GPUs
+# Keep MoE expert weights on the CPU handy for big MoE models on small GPUs
 llama cli -m model.gguf -cmoe
 ```
 
