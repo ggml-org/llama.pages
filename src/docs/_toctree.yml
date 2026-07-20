@@ -2,3 +2,17 @@
   sections:
     - local: index
       title: Introduction
+    - local: installation
+      title: Installation
+    - local: quickstart
+      title: Quickstart
+- title: Usage
+  sections:
+    - local: cli
+      title: Using the CLI
+    - local: serve
+      title: Running a server
+    - local: webui
+      title: Web UI
+    - local: api
+      title: API server
