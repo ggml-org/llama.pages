@@ -99,7 +99,7 @@ Loaded media from 'image.png'
 > describe this image
 ```
 
-For one-off media-text prompts, pass media files alongside your prompt. When you use `-hf`, the multimodal projector file is downloaded automatically:
+For one-off media-text prompts, pass media files alongside your prompt. 
 
 ```sh
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --image "image.png" -p "Describe this image."
@@ -129,13 +129,13 @@ llama cli -m model.gguf --reasoning-budget 1024
 
 ## Speculative decoding
 
-Speed up generation by letting a small draft model propose tokens that the main model verifies:
+Speed up generation by using speculative decoding assistant models. Note that this applies to models with speculative decoding checkpoints only.
 
 ```bash
 llama cli -m big-model.gguf -md small-draft-model.gguf --spec-type draft-simple
 ```
 
-For Hugging Face Hub GGUF repositories you can point to large model and small model repositories. In some repositories, they are put together.
+For Hugging Face Hub GGUF repositories, you can point to large model and small model repositories. In some repositories, they are put together, in others, you can point to repositories containing main and assistant models separately.
 
 ```bash
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --hf-repo-draft ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --spec-type draft-mtp
