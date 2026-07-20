@@ -78,7 +78,7 @@ llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --temp 0.2 --top-k 40 --top-p 0.
 ## Performance and memory
 
 ```sh
-# Set the context window (0 = model's native maximum)
+# Set the context window (0 = max context size model allows)
 llama cli -m model.gguf -c 16384
 
 # Keep MoE expert weights on the CPU handy for big MoE models on small GPUs
