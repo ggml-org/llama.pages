@@ -145,4 +145,4 @@ Note that `--spec-type` defaults to `none`, you need draft-simple (or `draft-eag
 
 ## Getting help
 
-`llama-cli -h` prints every option. The flags shown here are the ones you'll use most; the [full reference](https://github.com/ggml-org/llama.cpp/blob/master/tools/cli/README.md) documents more advanced settings. 
+`llama cli -h` prints every option. The flags shown here are the ones you'll use most; the [full reference](https://github.com/ggml-org/llama.cpp/blob/master/tools/cli/README.md) documents more advanced settings. 
