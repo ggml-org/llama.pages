@@ -93,17 +93,17 @@ curl http://127.0.0.1:8080/v1/embeddings \
 Similarly, you can serve reranking models with llama serve as follows.
 
 ```sh
-# reranker (use with the /v1/# endpoint)
-llama serve -m reranker-model.gguf --#
+# reranker (use with the /v1/rerank endpoint)
+llama serve -m reranker-model.gguf --rerank
 
 # rerankers on Hugging Face Hub
 llama serve \
-  -hf ggml-org/Qwen3-#er-0.6B-Q8_0-GGUF:Q8_0 \
-  --embedding --# --pooling rank \
+  -hf ggml-org/Qwen3-reranker-0.6B-Q8_0-GGUF:Q8_0 \
+  --embedding --rerank --pooling rank \
   --port 8080
 
 # query rerank endpoint
-curl http://127.0.0.1:8080/v1/# \
+curl http://127.0.0.1:8080/v1/rerank \
   -H 'Content-Type: application/json' \
   -d '{
     "query": "What is panda?",
@@ -123,7 +123,7 @@ You can search for [rerankers](https://huggingface.co/models?pipeline_tag=text-r
 You can run any multimodal model like text-only models.
 
 ```sh
-llama serve -hf ggml-org/gemma-3-4b-it-GGUF
+llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
 ```
 
 ##TODO: Improve
