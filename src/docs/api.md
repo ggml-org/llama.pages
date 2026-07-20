@@ -2,9 +2,9 @@
 
 `llama serve` exposes a REST API on `http://localhost:8080` in various formats:
 
-- **OpenAI-compatible** endpoints under `/v1/...` — works with existing OpenAI SDKs and apps
+- **OpenAI-compatible** endpoints under `/v1/...` works with existing OpenAI SDKs and apps
 - An **Anthropic-compatible** `/v1/messages` endpoint
-- **llama.cpp endpoints** with extra capabilities (tokenization, slots, low-level sampling options)
+- **llama.cpp endpoints** with extra capabilities (lower level options)
 
 If the server was started with `--api-key`, pass it as a Bearer token: `Authorization: Bearer YOUR_KEY`.
 
@@ -37,7 +37,7 @@ completion = client.chat.completions.create(
 print(completion.choices[0].message.content)
 ```
 
-On top of the OpenAI parameters, llama.cpp-specific sampling options (`min_p`, `mirostat`, `dry_multiplier`, ...) are accepted in the same request body.
+On top of the OpenAI parameters, llama.cpp-specific generation parameters are accepted in the same request body.
 
 ### Structured output
 
@@ -60,11 +60,11 @@ Constrain the response to valid JSON, or to a specific schema:
 }
 ```
 
-Use `{"type": "json_object"}` for free-form JSON. Native endpoints also accept GBNF grammars via the `grammar` field for non-JSON formats.
+Use `{"type": "json_object"}` for free-form JSON. 
 
 ### Tool calling
 
-OpenAI-style function calling works with any model — native formats are used for models trained on tool use, with a generic fallback for the rest. Pass `tools` and `tool_choice` as usual. See the [function calling docs](https://github.com/ggml-org/llama.cpp/blob/master/docs/function-calling.md) for supported model families.
+OpenAI-style function calling works with any model native formats are used for models trained on tool use, with a generic fallback for the rest. Pass `tools` and `tool_choice` as usual. See the [function calling docs](https://github.com/ggml-org/llama.cpp/blob/master/docs/function-calling.md) for supported model families.
 
 ### Multimodal input
 
