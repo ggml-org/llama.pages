@@ -90,19 +90,19 @@ curl http://127.0.0.1:8080/v1/embeddings \
   -d '{"input": ["The cat sat on the mat", "A feline rested on a rug"]}'
 ```
 
-Similarly, you can serve #ing models with llama serve as follows.
+Similarly, you can serve reranking models with llama serve as follows.
 
 ```sh
-# #er (use with the /v1/# endpoint)
-llama serve -m #er-model.gguf --#
+# reranker (use with the /v1/# endpoint)
+llama serve -m reranker-model.gguf --#
 
-# #ers on Hugging Face Hub
+# rerankers on Hugging Face Hub
 llama serve \
   -hf ggml-org/Qwen3-#er-0.6B-Q8_0-GGUF:Q8_0 \
   --embedding --# --pooling rank \
   --port 8080
 
-# query # endpoint
+# query rerank endpoint
 curl http://127.0.0.1:8080/v1/# \
   -H 'Content-Type: application/json' \
   -d '{
@@ -115,10 +115,10 @@ curl http://127.0.0.1:8080/v1/# \
     ]
   }'
 
-# {"model":"ggml-org/Qwen3-#er-0.6B-Q8_0-GGUF:Q8_0","object":"list","usage":{"prompt_tokens":241,"total_tokens":241},"results":[{"index":2,"relevance_score":0.14964470267295837},{"index":1,"relevance_score":0.0058668069541454315},{"index":0,"relevance_score":0.00028348760679364204}]}%    
+# {"model":"ggml-org/Qwen3-reranker-0.6B-Q8_0-GGUF:Q8_0","object":"list","usage":{"prompt_tokens":241,"total_tokens":241},"results":[{"index":2,"relevance_score":0.14964470267295837},{"index":1,"relevance_score":0.0058668069541454315},{"index":0,"relevance_score":0.00028348760679364204}]}%    
 ``` 
 
-You can search for [#ers](https://huggingface.co/models?pipeline_tag=text-ranking&apps=llama.cpp&sort=trending) and [embeddings](https://huggingface.co/models?pipeline_tag=sentence-similarity&apps=llama.cpp&sort=trending) that support llama.cpp on Hugging Face Hub.
+You can search for [rerankers](https://huggingface.co/models?pipeline_tag=text-ranking&apps=llama.cpp&sort=trending) and [embeddings](https://huggingface.co/models?pipeline_tag=sentence-similarity&apps=llama.cpp&sort=trending) that support llama.cpp on Hugging Face Hub.
 
 You can run any multimodal model like text-only models.
 
