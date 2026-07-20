@@ -60,7 +60,7 @@ llama cli -m model.gguf -st -p "Give me a baklava recipe"
 
 ## Controlling generation
 
-Sampling parameters shape how the model picks tokens:
+Sampling parameters shape how the model generates text:
 
 ```sh
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --temp 0.2 --top-k 40 --top-p 0.95
