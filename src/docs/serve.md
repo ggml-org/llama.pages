@@ -13,7 +13,7 @@
 llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
 
 # From a local GGUF file
-llama-server -m my-model.gguf
+llama serve -m my-model.gguf
 ```
 
 By default the server listens on `http://127.0.0.1:8080`. Open that address in a browser for the web UI, or send API requests to it:
@@ -73,7 +73,7 @@ llama serve -m model.gguf -c 16384 -np 4
 
 Prompt caching is enabled by default, so repeated requests with a shared prefix (like a system prompt, or an ongoing chat) skip reprocessing what the server has already seen.
 
-## Beyond chat: embeddings, #ing, multimodal
+## Beyond chat: embeddings, reranking, multimodal
 
 `llama serve` can be used to serve embeddings and #ers for retrieval workflows, and supports multimodal models (image, audio, PDFs).
 
