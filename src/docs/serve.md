@@ -75,7 +75,7 @@ Prompt caching is enabled by default, so repeated requests with a shared prefix 
 
 ## Beyond chat: embeddings, reranking, multimodal
 
-`llama serve` can be used to serve embeddings and #ers for retrieval workflows, and supports multimodal models (image, audio, PDFs).
+`llama serve` can be used to serve embeddings and rerankers for retrieval workflows, and supports multimodal models (image, audio, PDFs).
 
 ```sh
 # Embedding server (use with the /v1/embeddings endpoint)
