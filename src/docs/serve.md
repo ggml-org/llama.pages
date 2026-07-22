@@ -126,8 +126,7 @@ You can run any multimodal model like text-only models.
 llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
 ```
 
-##TODO: Improve
-Multimodal models accept images (and audio) through the standard OpenAI chat format, see the [API docs](api).
+Once served, you can send images through [webui](webui#attachments) with drag-and-drop or dropdown, or through the standard OpenAI chat format, see the [API docs](api).
 
 ## Speculative decoding
 
