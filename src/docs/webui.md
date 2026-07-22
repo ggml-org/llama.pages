@@ -15,7 +15,7 @@ Then visit http://localhost:8080 to start chatting. If the server cannot bind to
 A few launch tips:
 
 - `-c 0` uses the model's full context window.
-- Users can override parameters per conversation in the settings panel. ## TODO: CONFIRM
+- Users can override parameters per conversation in the settings panel.
 - To reach the WebUI from other devices on your network, add `--host 0.0.0.0` (e.g. serving a model remotely accessing WebUI on your laptop).
 
 ## Chatting
