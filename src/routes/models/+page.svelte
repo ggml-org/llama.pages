@@ -2,6 +2,7 @@
 	import { families, releasedFor, slugify } from '$lib/catalog';
 	import { logoFor } from '$lib/logos';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+	import { ChevronRight } from '@lucide/svelte';
 </script>
 
 <svelte:head>
@@ -68,6 +69,13 @@
 					</h3>
 					<p class="text-muted-foreground mt-0.5 line-clamp-1 text-[15px]">{f.description}</p>
 				</div>
+				<!-- Trailing chevron: signals each row is a link to a detail page.
+				     Centered against the whole row (self-center overrides the row's
+				     items-start). -->
+				<ChevronRight
+					aria-hidden="true"
+					class="text-muted-foreground/50 h-5 w-5 shrink-0 self-center"
+				/>
 			</a>
 		{/each}
 	</div>
