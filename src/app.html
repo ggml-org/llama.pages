@@ -19,10 +19,13 @@
 					(plausible.q = plausible.q || []).push(arguments);
 				};
 			plausible.init = plausible.init || function (i) { plausible.o = i || {}; };
-			// fileDownloads tracks clicks on links ending in a known file
-			// extension; .dmg is in Plausible's default list, so this covers the
-			// "Download for Mac" links without tagging them individually.
-			plausible.init({ fileDownloads: true });
+			// No options needed. The .dmg is hosted on github.com, and
+			// Plausible's click handler checks outbound links before file
+			// extensions and returns early -- so cross-domain downloads always
+			// land in the "Outbound Link: Click" goal, never "File Download".
+			// Find them there by breaking down on the url property. Outbound
+			// link tracking is enabled in the site settings, not here.
+			plausible.init();
 		</script>
 		%sveltekit.head%
 	</head>
