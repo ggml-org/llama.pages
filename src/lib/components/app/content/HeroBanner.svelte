@@ -21,8 +21,13 @@
 
 	{#if deviceInfo.isMac}
 		<div class="-mb-8 flex flex-col items-center gap-6">
-			<!-- plausible-event-name tags this click as the "Download" goal -->
-			<Button href={MACOS_DOWNLOAD_URL} size="lg" class="plausible-event-name=Download">
+			<!-- Tags the click as the "Download" goal; source separates it from
+			     the other download link in InstallToast -->
+			<Button
+				href={MACOS_DOWNLOAD_URL}
+				size="lg"
+				class="plausible-event-name=Download plausible-event-source=hero"
+			>
 				<div class="mb-0.5">{@html appleIcon}</div>
 
 				Download for Mac

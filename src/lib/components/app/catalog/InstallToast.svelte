@@ -47,10 +47,11 @@
 
 	<p class="text-muted-foreground mt-2 pr-5 text-[13px]">
 		Don’t have Llama?
-		<!-- plausible-event-name tags this click as the "Download" goal -->
+		<!-- Tags the click as the "Download" goal; source separates it from
+		     the other download link in HeroBanner -->
 		<a
 			href={MACOS_DOWNLOAD_URL}
-			class="text-foreground plausible-event-name=Download underline underline-offset-4"
+			class="text-foreground plausible-event-name=Download plausible-event-source=toast underline underline-offset-4"
 		>
 			Download Llama for Mac
 		</a>
