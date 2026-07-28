@@ -47,7 +47,11 @@
 
 	<p class="text-muted-foreground mt-2 pr-5 text-[13px]">
 		Don’t have Llama?
-		<a href={MACOS_DOWNLOAD_URL} class="text-foreground underline underline-offset-4">
+		<!-- plausible-event-name tags this click as the "Download" goal -->
+		<a
+			href={MACOS_DOWNLOAD_URL}
+			class="text-foreground plausible-event-name=Download underline underline-offset-4"
+		>
 			Download Llama for Mac
 		</a>
 	</p>

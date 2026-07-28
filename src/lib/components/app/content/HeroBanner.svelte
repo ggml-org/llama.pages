@@ -21,7 +21,8 @@
 
 	{#if deviceInfo.isMac}
 		<div class="-mb-8 flex flex-col items-center gap-6">
-			<Button href={MACOS_DOWNLOAD_URL} size="lg">
+			<!-- plausible-event-name tags this click as the "Download" goal -->
+			<Button href={MACOS_DOWNLOAD_URL} size="lg" class="plausible-event-name=Download">
 				<div class="mb-0.5">{@html appleIcon}</div>
 
 				Download for Mac
