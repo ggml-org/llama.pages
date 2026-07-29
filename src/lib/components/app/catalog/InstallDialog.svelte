@@ -1,22 +1,30 @@
 <script lang="ts">
-	// Non-Mac counterpart of the Mac install flow: the row's "Run…" button
-	// opens this modal with the build's CLI command. A modal rather than a
-	// toast because off-Mac the command *is* the payoff of the click -- the
-	// user asked to see it, so it belongs center stage, not in a corner.
+	// What every install click leads to, on both platforms. A modal rather
+	// than a corner toast because in both cases the click's payoff is
+	// something the user has to *act* on, and neither case can be confirmed
+	// from the browser:
+	//
+	//   Mac      -- the row already fired the `llama://` deeplink, but the app
+	//                is new and most visitors don't have it yet, so the common
+	//                outcome is that nothing happened. That makes "download
+	//                Llama" the main event, not a footnote in a toast that
+	//                auto-dismisses in a corner.
+	//   non-Mac  -- the app can't exist, so the CLI command *is* the result of
+	//                the click; the user asked to see it.
 	//
 	// Sheet-style content: the title echoes exactly which build was clicked
 	// (with quantizations expanded, neighboring rows differ only by quant, so
-	// the confirmation guards against copying the wrong one), and the footer
-	// answers the newcomer's actual next question -- "I don't have the llama
-	// command" -- with a link home, where the CLI install command is front
-	// and center.
+	// the confirmation guards against copying or installing the wrong one),
+	// and both variants end with the CLI command, which works either way.
 	//
 	// Built on the native <dialog> element: focus trapping, Escape-to-close
 	// and the backdrop come for free, no dialog dependency needed.
 	import { Copy, Check, X } from '@lucide/svelte';
 	import { type Build, type Size, cliCommand, displaySize, minMemForBuild } from '$lib/catalog';
+	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
+	import { deviceInfo } from '$lib/stores/device/index.svelte';
 
-	// The build being run plus its size (for the title), or null when the
+	// The build being installed plus its size (for the title), or null when the
 	// dialog is closed. Owned by the page (bindable) so closing the dialog
 	// clears it there too.
 	let { run = $bindable() }: { run: { build: Build; size: Size } | null } = $props();
@@ -73,12 +81,52 @@
 				<X class="size-4" />
 			</button>
 
-			<h2 class="text-[17px] font-semibold tracking-tight">Run {run.size.name}</h2>
+			<h2 class="text-[17px] font-semibold tracking-tight">
+				{deviceInfo.isMac ? 'Install' : 'Run'}
+				{run.size.name}
+			</h2>
 			{#if byline}
 				<p class="text-muted-foreground mt-1 text-[13px] tabular-nums">{byline}</p>
 			{/if}
 
-			<p class="text-muted-foreground mt-5 text-[13px]">In your terminal:</p>
+			{#if deviceInfo.isMac}
+				<!-- The deeplink is already away by the time this renders. Whether
+				     anything caught it is unobservable here, so the copy states the
+				     send (past tense, no promise) and then leads with the download,
+				     which is what the majority still needs. -->
+				<p class="text-muted-foreground mt-5 text-[13px]">
+					Sent to Llama. If you have the app, it’s downloading now.
+				</p>
+
+				<!-- Tagged as the "Download" goal; source separates this click from
+				     the hero banner's download link -->
+				<a
+					href={MACOS_DOWNLOAD_URL}
+					class="bg-primary text-primary-foreground hover:bg-primary/80 plausible-event-name=Download plausible-event-source=dialog mt-4 flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-[14px] font-medium"
+				>
+					<svg
+						aria-hidden="true"
+						viewBox="0 0 16 16"
+						class="h-3.5 w-3.5"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.75"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d="M8 2v8" />
+						<path d="M4.5 7L8 10.5 11.5 7" />
+						<path d="M3 13.5h10" />
+					</svg>
+					Download Llama for Mac
+				</a>
+
+				<p class="text-muted-foreground mt-5 text-[13px]">
+					Or use the <code class="bg-muted rounded px-1 py-0.5">llama</code> CLI:
+				</p>
+			{:else}
+				<p class="text-muted-foreground mt-5 text-[13px]">In your terminal:</p>
+			{/if}
 
 			<div class="bg-foreground/4 border-secondary mt-2 w-full overflow-hidden rounded-xl border">
 				<div class="flex items-stretch justify-between">
@@ -104,10 +152,16 @@
 			<p class="text-muted-foreground mt-4 text-[13px]">
 				Downloads the model on first run, then serves it locally.
 			</p>
-			<p class="text-muted-foreground mt-1 text-[13px]">
-				Don’t have the CLI?
-				<a href="/" class="text-foreground underline underline-offset-4">Install it first</a>.
-			</p>
+			{#if !deviceInfo.isMac}
+				<!-- Answers the newcomer's actual next question -- "I don't have the
+				     llama command" -- with a link home, where the CLI install command
+				     is front and center. Not on a Mac, where the download button above
+				     is already the answer and a second install link only competes. -->
+				<p class="text-muted-foreground mt-1 text-[13px]">
+					Don’t have the CLI?
+					<a href="/" class="text-foreground underline underline-offset-4">Install it first</a>.
+				</p>
+			{/if}
 		</div>
 	{/if}
 </dialog>

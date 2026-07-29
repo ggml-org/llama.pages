@@ -1,9 +1,8 @@
 <script lang="ts">
 	// Fully inline install actions, nothing expands: the primary button reports
-	// the build to the page, which follows up per platform -- on a Mac the
-	// button also fires the app deeplink and the page confirms with a toast
-	// (with fallbacks for machines without the app); elsewhere the page opens
-	// the CLI dialog.
+	// the build to the page, which opens the install dialog. On a Mac the
+	// button also fires the app deeplink first, so the dialog lands on top of
+	// an install that may already be underway.
 	import { type Size, type Build, deeplink, displaySize, minMemForBuild } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
@@ -17,9 +16,9 @@
 
 	// One primary action per row, platform-dependent behind the same label
 	// intent: on a Mac, fire the app deeplink (a no-op without the app -- the
-	// toast's fallbacks cover that case); elsewhere the app can't exist, so
-	// skip the deeplink and let the page open the CLI dialog instead. Either
-	// way the page owns the follow-up via oninstall.
+	// dialog's download button covers that case); elsewhere the app can't
+	// exist, so skip the deeplink. Either way the page owns the follow-up
+	// via oninstall.
 	function install(b: Build) {
 		if (deviceInfo.isMac) location.href = deeplink(b);
 		oninstall(b, size);
