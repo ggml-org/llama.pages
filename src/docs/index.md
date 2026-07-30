@@ -24,7 +24,7 @@ On top of this core, the project ships user-facing tools: `llama cli` for the te
 
 - [Installation](installation) — install prebuilt binaries, use a package manager, Docker, or build from source
 - [Quickstart](quickstart) — download a model and run it in minutes
-- [Using the CLI](cli) — chat and experiment from the terminal with `llama-cli`
-- [Running a server](serve) — serve models over HTTP with `llama-server`
+- [Using the CLI](cli) — chat and experiment from the terminal with `llama cli`
+- [Running a server](serve) — serve models over HTTP with `llama server`
 - [API server](api) — the OpenAI-compatible REST API reference
 - [Web UI](webui) — the built-in browser chat interface
