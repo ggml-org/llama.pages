@@ -17,7 +17,7 @@ Downloaded models are stored in the standard Hugging Face cache, so they are sha
 If you already have a `.gguf` file on disk, point at the file path with `-m`:
 
 ```sh
-llama-cli -m my-model.gguf
+llama cli -m my-model.gguf
 ```
 
 ## Chat in the terminal
