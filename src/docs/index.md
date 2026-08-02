@@ -12,11 +12,11 @@ llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
 llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
 ```
 
-`llama serve` starts a convenient chat UI (at the port 8080 by default, see [webui](webui)).
+`llama cli` is great for [experimentation and terminal use](cli), while `llama serve` exposes a [full-featured web UI](webui)).
 
 ## How it works
 
-llama.cpp runs models stored in the [GGUF](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md) file format. GGUF is a single-file that packages the model weights, tokenizer, and metadata together. Thousands of ready-to-use GGUF models are available on [Hugging Face](https://huggingface.co/models?library=gguf&sort=trending).
+llama.cpp runs models stored in the [GGUF](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md) file format. GGUF is a single file that packages everything you need together: model weights, tokenizer, metadata. Thousands of ready-to-use GGUF models are available on [Hugging Face](https://huggingface.co/models?library=gguf&sort=trending).
 
 On top of this core, the project ships user-facing tools: `llama cli` for the terminal, `llama server` for serving an HTTP API and web UI, plus utilities for benchmarking, quantizing, and evaluating models.
 

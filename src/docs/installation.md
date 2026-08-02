@@ -2,23 +2,23 @@
 
 There are several ways to get llama.cpp on your machine:
 
-- Install pre-built `llama` binary
-- Install with a package manager (the easiest way to stay up to date)
+- Recommended: one-line install command
+- Install with a package manager
 - Download prebuilt binaries from the releases page
 - Run with Docker
 - Build from source
 
 All of them give you the same set of tools (`llama cli`, `llama serve` and others).
 
-## Install pre-built binary
+## One-line install (recommended)
 
-Easiest way to get started with llama.cpp CLI is as follows. This detects your platform, fetches latest version of llama binary and installs it.
+This is the easiest way to get started with llama.cpp. The following command detects your platform, fetches the latest version of the llama binary and installs it.
 
 ```bash
 curl -LsSf https://llama.app/install.sh | sh
 ```
 
-Get more installation options with different package managers and platforms [here](https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md).
+To pair with a coding agent, install with a package manager or build yourself, please follow the instructions in [https://llama.app](https://llama.app).
 
 ## Verify the installation
 

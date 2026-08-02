@@ -26,12 +26,11 @@ llama cli -m model.gguf -sys "You are a concise assistant that answers in bullet
 
 # Ask one question and exit when the answer finishes
 llama cli -m model.gguf -st -p "Give me a baklava recipe"
-
 ```
 
 ## Controlling generation
 
-Sampling parameters shape how the model generates text:
+Sampling parameters shape how the model generates text. llama.cpp will choose sensible defaults for the model you are using, but you can experiment and tweak them yourself:
 
 ```sh
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --temp 0.2 --top-k 40 --top-p 0.95
@@ -52,7 +51,7 @@ llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --temp 0.2 --top-k 40 --top-p 0.
 # Set the context window (0 = max context size model allows)
 llama cli -m model.gguf -c 16384
 
-# Keep MoE expert weights on the CPU handy for big MoE models on small GPUs
+# Keep MoE expert weights on the CPU; handy for big MoE models on small GPUs
 llama cli -m model.gguf -cmoe
 ```
 
@@ -60,7 +59,7 @@ By default llama.cpp adjusts unset options to fit your available device memory (
 
 ## Multimodal input
 
-Once you kickoff CLI with `llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0` you can start conversation and provide multimodal input in two separate lines (first media, then text prompt): 
+Many LLMs support image or multimodal inputs. After you launch `llama cli` you can add and image to your prompt with the `/image` command (media comes first, then the text prompt that refers to the image):
 
 ```
 > /image image.png
@@ -76,7 +75,7 @@ For one-off media-text prompts, pass media files alongside your prompt.
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --image "image.png" -p "Describe this image."
 ```
 
-Use `/audio` to pass audio similar to passing image, or `--audio` for one-off audio-text pairs, and comma-separated paths for multiple files.
+Similarly, you can use `/audio` for audio inputs in the CLI, or `--audio` for one-off audio-text pairs. Multiple files are allowed via comma-separated paths.
 
 ```
 > /audio /Users/mervenoyan/Downloads/example_audio.mp3
@@ -100,7 +99,7 @@ llama cli -m model.gguf --reasoning-budget 1024
 
 ## Speculative decoding
 
-Speed up generation by using speculative decoding assistant models. Note that this applies to models with speculative decoding checkpoints only.
+Speed up generation using speculative decoding assistant (or draft) models. This applies to models that support this feature, and you need to specify both the main model and the drafter:
 
 ```bash
 llama cli -m big-model.gguf -md small-draft-model.gguf --spec-type draft-simple
@@ -112,7 +111,7 @@ For Hugging Face Hub GGUF repositories, you can point to large model and small m
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --hf-repo-draft ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --spec-type draft-mtp
 ```
 
-Note that `--spec-type` defaults to `none`, you need draft-simple (or `draft-eagle3` for EAGLE3 style speculative decoding, `draft-mtp` for MTP).
+`--spec-type` defaults to `none` (no drafting), usual choices are `draft-simple`, `draft-mtp`, or `draft-eagle3`, depending on the drafter style the model supports.
 
 ## Getting help
 

@@ -1,6 +1,6 @@
 # Quickstart
 
-This guide takes you from a fresh [installation](installation) to chatting with a model through CLI, UI and more.
+This guide takes you from a fresh [installation](installation) to chatting with a model in your terminal or through the Web UI.
 
 ## Download your first model
 
@@ -10,7 +10,7 @@ Pass a Hugging Face repository with the `-hf` flag. The model is downloaded auto
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
 ```
 
-We picked a 4-bit quantized version of Gemma-4 E4B, it's a model that can take image, text, audio input and only takes ~6GB memory when used with a context window of 16k tokens. For other models, browse the [GGUF models on Hugging Face](https://huggingface.co/models?library=gguf&sort=trending).
+We picked a 4-bit quantized version of Gemma-4 E4B, a model that can take image, text, and audio inputs, using just ~6GB of memory with a context window of 16k tokens. There are [thousands of GGUF models on Hugging Face](https://huggingface.co/models?library=gguf&sort=trending) to choose from.
 
 Downloaded models are stored in the standard Hugging Face cache, so they are shared with other tools. List what's in your cache with `llama cli -cl`.
 
@@ -48,7 +48,7 @@ See [Using the CLI](cli) for system prompts, sampling settings, multimodal input
 
 ## Serve a model
 
-`llama serve` command launches a server and exposes the same model over HTTP. The server also comes with a convenient chat UI.
+`llama serve` launches a server and exposes the model over HTTP. It comes with a full-featured chat UI.
 
 ```sh
 llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
@@ -66,7 +66,7 @@ curl http://localhost:8080/v1/chat/completions \
     }'
 ```
 
-Because the API is OpenAI-compatible, existing OpenAI SDKs work by just changing the base URL:
+Because the API is compatible with OpenAI endpoints, you can plug it in many different clients and harnesses.
 
 ```python
 import openai
@@ -82,7 +82,7 @@ print(response.choices[0].message.content)
 
 ## Common options
 
-Here's a few useful flags you can use with `llama cli` and `llama serve`:
+Here are a few useful flags you can use with `llama cli` and `llama serve`:
 
 | Flag | What it does |
 | --- | --- |
