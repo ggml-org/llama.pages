@@ -7,7 +7,7 @@ This guide takes you from a fresh [installation](installation) to chatting with 
 Pass a Hugging Face repository with the `-hf` flag. The model is downloaded automatically:
 
 ```sh
-llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
+llama cli -hf unsloth/gemma-4-E4B-it-GGUF:Q4_K_M
 ```
 
 We picked a 4-bit quantized version of Gemma-4 E4B, a model that can take image, text, and audio inputs, using just ~6GB of memory with a context window of 16k tokens. There are [thousands of GGUF models on Hugging Face](https://huggingface.co/models?library=gguf&sort=trending) to choose from.
