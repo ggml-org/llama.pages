@@ -16,36 +16,7 @@ llama cli -m my-model.gguf
 
 You will see available commands as well as inputs for your model.
 
-```
-(base) ➜  ~ llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0
-Downloading mmproj-gemma-4-E4B-it-Q8_0.gguf ──────────────────────── 100%
-Downloading gemma-4-E4B-it-Q4_0.gguf ─────────────────────────────── 100%
-
-Loading model...  
-
-
-▄▄ ▄▄
-██ ██
-██ ██  ▀▀█▄ ███▄███▄  ▀▀█▄    ▄████ ████▄ ████▄
-██ ██ ▄█▀██ ██ ██ ██ ▄█▀██    ██    ██ ██ ██ ██
-██ ██ ▀█▄██ ██ ██ ██ ▀█▄██ ██ ▀████ ████▀ ████▀
-                                    ██    ██
-                                    ▀▀    ▀▀
-
-build      : b9704-10786217e
-model      : ggml-org/gemma-4-e4b-it-GGUF:Q4_0
-modalities : text, vision, audio
-
-available commands:
-  /exit or Ctrl+C     stop or exit
-  /regen              regenerate the last response
-  /clear              clear the chat history
-  /read <file>        add a text file
-  /glob <pattern>     add text files using globbing pattern
-  /image <file>       add an image file
-  /audio <file>       add an audio file
-  /video <file>       add a video file
-```
+![llama cli output](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/llama.cpp/llama-cli.png)
 
 Few tips for the launch:
 
