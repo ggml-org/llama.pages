@@ -18,7 +18,7 @@ You will see available commands as well as inputs for your model.
 
 ![llama cli output](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/llama.cpp/llama-cli.png)
 
-Few tips for the launch:
+A few tips:
 
 ```sh
 # Set a system prompt
