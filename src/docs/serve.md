@@ -156,7 +156,32 @@ Models can come from three sources:
 2. **A models directory** — `llama serve --models-dir ./models_directory`
 3. **A preset file** — `llama serve --models-preset ./my-models.ini`
 
-####TODO: Improve router
+Note that when sending requests, you need to specify the model name.
+
+```sh
+curl http://localhost:8080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer no-key" \
+  -d '{
+    "model": "ggml-org/gemma-3-4b-it-qat-GGUF:Q4_0",
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
+```
+
+You can list the available model names as follows.
+
+```sh
+(base) ➜  ~ curl -s http://localhost:8080/v1/models | jq '.data[].id'
+"LiquidAI/LFM2.5-230M-GGUF:Q4_K_M"
+"ggml-org/Qwen3-Reranker-0.6B-Q8_0-GGUF:Q8_0"
+"ggml-org/gemma-3-4b-it-qat-GGUF:Q4_0"
+```
+
+Server will automatically load it for inference.
+
+![router](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/llama.cpp/router.png)
 
 
 For the complete flag reference, see [the server README](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md). Continue to the [API documentation](api) for the endpoints, or the [web UI guide](webui) for the browser interface.
