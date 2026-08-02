@@ -7,11 +7,11 @@
 Point it at a model, either a local file or a Hugging Face repo, and start chatting:
 
 ```sh
-# Local GGUF file
-llama cli -m my-model.gguf
-
 # Download from Hugging Face (cached after the first run)
 llama cli -hf unsloth/gemma-4-E4B-it-GGUF:Q4_0
+
+# Local GGUF file
+llama cli -m my-model.gguf
 ```
 
 You will see available commands as well as inputs for your model.
@@ -121,7 +121,7 @@ For models with thinking/reasoning support, you can control the thinking behavio
 
 ```sh
 # Disable thinking entirely
-llama cli -m model.gguf -rea off
+llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 -rea off
 
 # Cap thinking at 1024 tokens
 llama cli -m model.gguf --reasoning-budget 1024
