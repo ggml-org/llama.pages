@@ -7,6 +7,8 @@ import openai from './logos/openai.svg?raw';
 import nvidia from './logos/nvidia.svg?raw';
 // GLM models are made by Z.ai, so we use the Z brand logo for that brand.
 import glm from './logos/glm.svg?raw';
+// Laguna models are made by Poolside, so we use the Poolside logo for that brand.
+import poolside from './logos/poolside.svg?raw';
 
 // Keyed by the `brand` label used in catalog.json.
 const byBrand: Record<string, string> = {
@@ -15,7 +17,8 @@ const byBrand: Record<string, string> = {
 	Mistral: mistral,
 	OpenAI: openai,
 	NVIDIA: nvidia,
-	GLM: glm
+	GLM: glm,
+	Laguna: poolside
 };
 
 // Generic cube, shown for brands we have no logo for.
