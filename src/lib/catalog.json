@@ -515,5 +515,33 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Laguna S 2.1",
+    "brand": "Laguna",
+    "description": "Poolside's mid-size mixture-of-experts model for agentic coding. Built for long-horizon work with interleaved reasoning and a 1M context.",
+    "details": "Laguna S 2.1 is the bigger sibling of Laguna XS 2.1: 118B total parameters with 8B activated per token, a mixture-of-experts design with 256 routed experts. Like the XS, it targets agentic software engineering -- exploring repositories, editing across files, and driving terminal workflows over long sessions.\n\nThe model supports interleaved thinking between tool calls, which can be turned on or off per request, and handles a 1M token context via mixed sliding-window and global attention. At 118B total parameters it needs a high-memory Mac -- the Q4_K_M build wants roughly 70 GB of memory.",
+    "released": "2026-07",
+    "license": "OpenMDW 1.1",
+    "sizes": [
+      {
+        "name": "Laguna S 2.1 118B-A8B",
+        "params": "118B-A8B",
+        "builds": [
+          {
+            "quant": "Q8_0",
+            "size": "125 GB",
+            "sizeBytes": 125022858848,
+            "repo": "ggml-org/Laguna-S-2.1-GGUF"
+          },
+          {
+            "quant": "Q4_K_M",
+            "size": "67.7 GB",
+            "sizeBytes": 67661639264,
+            "repo": "ggml-org/Laguna-S-2.1-GGUF"
+          }
+        ]
+      }
+    ]
   }
 ]
