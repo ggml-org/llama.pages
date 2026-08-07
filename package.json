@@ -20,7 +20,6 @@
 	"devDependencies": {
 		"@eslint/compat": "^2.0.3",
 		"@eslint/js": "^10.0.1",
-		"@fontsource-variable/geist": "^5.2.8",
 		"@lucide/svelte": "^1.7.0",
 		"@playwright/test": "^1.58.2",
 		"@sveltejs/adapter-static": "^3.0.10",
@@ -59,7 +58,6 @@
 		"yaml": "^2.9.0"
 	},
 	"dependencies": {
-		"lucide-svelte": "^1.0.1",
 		"mode-watcher": "^1.1.0",
 		"svelte-sonner": "^1.1.0"
 	}
