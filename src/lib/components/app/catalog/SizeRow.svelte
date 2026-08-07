@@ -33,7 +33,7 @@
 </script>
 
 {#each shown as build, i (build.repo + (build.quant ?? ''))}
-	<tr class="border-border/40 border-t {i > 0 ? 'border-dashed' : ''}">
+	<tr class="border-t border-border/40 {i > 0 ? 'border-dashed' : ''}">
 		<!-- Row label: the full size name plus a vision badge, repeated on every
 		     build row so each reads as a complete entry. Below it, the build's
 		     memory requirement -- same formula the app uses, so the site never
@@ -43,7 +43,7 @@
 				{size.name}
 				{#if build.quant}
 					<span
-						class="bg-muted text-muted-foreground rounded-md px-1.5 py-0.5 text-[11px] uppercase tabular-nums"
+						class="rounded-md bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground uppercase tabular-nums"
 					>
 						{build.quant}
 					</span>
@@ -53,7 +53,7 @@
 				{/if}
 			</span>
 			{#if minMemForBuild(build)}
-				<span class="text-muted-foreground/70 block text-[13px] tabular-nums">
+				<span class="block text-[13px] text-muted-foreground/70 tabular-nums">
 					requires {minMemForBuild(build)} GB+ memory
 				</span>
 			{/if}
@@ -72,7 +72,7 @@
 					rel="noopener noreferrer"
 					aria-label="Open on Hugging Face"
 					title="Open on Hugging Face"
-					class="bg-muted text-foreground flex cursor-pointer items-center gap-1 rounded-lg px-2.5 py-1.5"
+					class="flex cursor-pointer items-center gap-1 rounded-lg bg-muted px-2.5 py-1.5 text-foreground"
 				>
 					<span aria-hidden="true">🤗</span>
 					<svg
@@ -99,7 +99,7 @@
 				<button
 					type="button"
 					onclick={() => install(build)}
-					class="flex cursor-pointer items-center gap-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/80 px-3.5 py-1.5 text-center"
+					class="flex cursor-pointer items-center gap-1.5 rounded-lg bg-primary px-3.5 py-1.5 text-center text-primary-foreground hover:bg-primary/80"
 				>
 					{#if deviceInfo.isMac}
 						<svg

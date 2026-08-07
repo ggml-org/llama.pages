@@ -131,11 +131,11 @@
 	bind:this={dialog}
 	onclose={() => (searchState.open = false)}
 	onclick={onDialogClick}
-	class="bg-background text-foreground border-border mx-auto mt-[12vh] w-full max-w-lg rounded-xl border p-0 shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-xs"
+	class="mx-auto mt-[12vh] w-full max-w-lg rounded-xl border border-border bg-background p-0 text-foreground shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-xs"
 >
 	<div class="flex flex-col">
-		<div class="border-border flex items-center gap-2 border-b px-4">
-			<Search class="text-foreground/40 size-4 shrink-0" />
+		<div class="flex items-center gap-2 border-b border-border px-4">
+			<Search class="size-4 shrink-0 text-foreground/40" />
 			<input
 				bind:this={input}
 				bind:value={query}
@@ -147,10 +147,10 @@
 				aria-expanded={results.length > 0}
 				aria-controls="docs-search-results"
 				aria-activedescendant={results[active]?.id}
-				class="placeholder:text-foreground/40 w-full bg-transparent py-3.5 text-sm outline-none"
+				class="w-full bg-transparent py-3.5 text-sm outline-none placeholder:text-foreground/40"
 			/>
 			<kbd
-				class="border-border text-foreground/40 rounded border px-1.5 py-0.5 font-mono text-[10px]"
+				class="rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-foreground/40"
 			>
 				esc
 			</kbd>
@@ -158,7 +158,7 @@
 
 		<div id="docs-search-results" role="listbox" class="max-h-80 overflow-y-auto p-2">
 			{#if query.trim() && results.length === 0}
-				<p class="text-foreground/50 px-2 py-6 text-center text-sm">
+				<p class="px-2 py-6 text-center text-sm text-foreground/50">
 					No results for “{query.trim()}”
 				</p>
 			{/if}
@@ -184,13 +184,13 @@
 							{result.heading}
 						{/if}
 						{#if i === active}
-							<CornerDownLeft class="text-foreground/30 ml-auto size-3.5 shrink-0" />
+							<CornerDownLeft class="ml-auto size-3.5 shrink-0 text-foreground/30" />
 						{/if}
 					</span>
-					<span class="text-foreground/50 truncate text-xs">
+					<span class="truncate text-xs text-foreground/50">
 						{#each result.fragment as part, j (j)}
 							{#if part.match}
-								<mark class="text-accent rounded-xs bg-transparent font-medium">{part.text}</mark>
+								<mark class="rounded-xs bg-transparent font-medium text-accent">{part.text}</mark>
 							{:else}
 								{part.text}
 							{/if}
@@ -202,7 +202,7 @@
 		</div>
 
 		<div
-			class="border-border text-foreground/40 flex items-center gap-3 border-t px-4 py-2 text-xs"
+			class="flex items-center gap-3 border-t border-border px-4 py-2 text-xs text-foreground/40"
 		>
 			<span><kbd class="font-mono">↑↓</kbd> navigate</span>
 			<span><kbd class="font-mono">↵</kbd> open</span>

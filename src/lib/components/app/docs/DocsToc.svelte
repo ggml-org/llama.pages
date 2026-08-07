@@ -49,13 +49,13 @@
 
 {#if headings.length > 0}
 	<nav aria-label="On this page" class="flex w-[16.5rem] flex-col gap-2 text-sm leading-6">
-		<span class="text-foreground/80 font-semibold">On this page</span>
+		<span class="font-semibold text-foreground/80">On this page</span>
 
 		{#each headings as heading (heading.id)}
 			<a
 				href="#{heading.id}"
 				class="transition-colors {heading.level === 3 ? 'pl-4' : ''} {activeId === heading.id
-					? 'text-accent font-medium'
+					? 'font-medium text-accent'
 					: 'text-foreground/60 hover:text-foreground'}"
 			>
 				{heading.text}

@@ -19,10 +19,10 @@
 	     recommendation, not an attempt at completeness. -->
 	<header class="mb-10">
 		<h1 class="text-[30px] font-semibold tracking-tight">Models</h1>
-		<p class="text-muted-foreground mt-2.5 text-[13px] tabular-nums">
+		<p class="mt-2.5 text-[13px] text-muted-foreground tabular-nums">
 			Updated {releasedFor(families[0])}
 		</p>
-		<p class="text-muted-foreground mt-3 max-w-2xl text-[15px]">
+		<p class="mt-3 max-w-2xl text-[15px] text-muted-foreground">
 			A curated selection of open models — every one runs in llama.app.
 		</p>
 	</header>
@@ -33,7 +33,7 @@
 	<div class="flex flex-col">
 		{#each families as f, i (f.name)}
 			{#if i > 0}
-				<div aria-hidden="true" class="border-border/40 border-t"></div>
+				<div aria-hidden="true" class="border-t border-border/40"></div>
 			{/if}
 			<a href="/models/{slugify(f.name)}" class="group flex items-start gap-3.5 py-3.5">
 				<!-- Brand mark in its own leading column, like a bullet: fixed width
@@ -61,20 +61,20 @@
 						{/if}
 						{#each f.sizes as s (s.name)}
 							<span
-								class="bg-muted text-muted-foreground rounded-full px-2 py-1 text-[11px] leading-none font-normal tabular-nums"
+								class="rounded-full bg-muted px-2 py-1 text-[11px] leading-none font-normal text-muted-foreground tabular-nums"
 							>
 								{s.params ?? s.name}
 							</span>
 						{/each}
 					</h3>
-					<p class="text-muted-foreground mt-0.5 line-clamp-1 text-[15px]">{f.description}</p>
+					<p class="mt-0.5 line-clamp-1 text-[15px] text-muted-foreground">{f.description}</p>
 				</div>
 				<!-- Trailing chevron: signals each row is a link to a detail page.
 				     Centered against the whole row (self-center overrides the row's
 				     items-start). -->
 				<ChevronRight
 					aria-hidden="true"
-					class="text-muted-foreground/50 h-5 w-5 shrink-0 self-center"
+					class="h-5 w-5 shrink-0 self-center text-muted-foreground/50"
 				/>
 			</a>
 		{/each}
@@ -83,7 +83,7 @@
 	<!-- Closing escape hatch: the catalog is curated, not exhaustive, so after
 	     the list ends we point at the full GGUF ecosystem for anything we
 	     don't carry. -->
-	<p class="text-muted-foreground mt-10 text-[15px]">
+	<p class="mt-10 text-[15px] text-muted-foreground">
 		Find thousands more GGUF models on
 		<!-- whitespace-nowrap so the link never breaks across lines ("Hugging /
 		     Face ↗" reads badly and strands the arrow). -->
@@ -91,7 +91,7 @@
 			href="https://huggingface.co/models?library=gguf"
 			target="_blank"
 			rel="noopener"
-			class="hover:text-foreground underline underline-offset-4 whitespace-nowrap"
+			class="whitespace-nowrap underline underline-offset-4 hover:text-foreground"
 		>
 			Hugging Face ↗
 		</a>

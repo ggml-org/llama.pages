@@ -16,7 +16,7 @@
 		{#if prev}
 			<a
 				href={resolve('/docs/[...page]', { page: prev.local })}
-				class="text-foreground/70 hover:text-foreground inline-flex items-center gap-2 text-sm transition-colors"
+				class="inline-flex items-center gap-2 text-sm text-foreground/70 transition-colors hover:text-foreground"
 			>
 				<ArrowLeft class="size-4" />
 				{prev.title}
@@ -28,7 +28,7 @@
 		{#if next}
 			<a
 				href={resolve('/docs/[...page]', { page: next.local })}
-				class="text-foreground/70 hover:text-foreground inline-flex items-center gap-2 text-sm transition-colors"
+				class="inline-flex items-center gap-2 text-sm text-foreground/70 transition-colors hover:text-foreground"
 			>
 				{next.title}
 				<ArrowRight class="size-4" />

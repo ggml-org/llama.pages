@@ -22,7 +22,7 @@
 	onclick={copy}
 	aria-label="Copy code"
 	title="Copy code"
-	class="border-border bg-background/80 text-foreground/60 hover:text-foreground absolute top-2 right-2 inline-flex cursor-pointer items-center rounded-md border p-1.5 backdrop-blur-sm transition-opacity md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
+	class="absolute top-2 right-2 inline-flex cursor-pointer items-center rounded-md border border-border bg-background/80 p-1.5 text-foreground/60 backdrop-blur-sm transition-opacity hover:text-foreground md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
 >
 	{#if copied}
 		<Check class="size-3.5 text-green-500" />

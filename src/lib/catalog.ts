@@ -73,9 +73,7 @@ export const catalog = data as Catalog;
 // The catalog in display order: newest first. The website always lists
 // families this way, so we sort once here; `catalog` itself keeps the
 // authored order, since it's served verbatim as the API.
-export const families: Family[] = [...catalog].sort((a, b) =>
-	b.released.localeCompare(a.released)
-);
+export const families: Family[] = [...catalog].sort((a, b) => b.released.localeCompare(a.released));
 
 // URL-safe id for a family name, e.g. "Qwen 3.6" → "qwen-3-6". Lossy but stable,
 // and unique across the catalog since family names are.
@@ -99,8 +97,18 @@ export function releasedFor(f: Family): string {
 	const [y, m] = r.split('-').map(Number);
 	if (!y || !m) return '';
 	const month = [
-		'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-		'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'May',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec'
 	][m - 1];
 	return `${month} ${y}`;
 }

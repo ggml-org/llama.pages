@@ -39,12 +39,12 @@
 			<div class="flex flex-col gap-2 pb-2">
 				{#each reel.items as hw (hw.name)}
 					<div
-						class="text-foreground bg-foreground/6 flex min-h-12 items-center gap-2.5 rounded-md px-3 py-2.5 text-sm whitespace-nowrap"
+						class="flex min-h-12 items-center gap-2.5 rounded-md bg-foreground/6 px-3 py-2.5 text-sm whitespace-nowrap text-foreground"
 					>
 						<img
 							src={hw.img}
 							alt=""
-							class="dark:bg-foreground/8 size-7 shrink-0 rounded-md bg-white object-contain p-1"
+							class="size-7 shrink-0 rounded-md bg-white object-contain p-1 dark:bg-foreground/8"
 						/>
 						<span>{hw.name}</span>
 					</div>

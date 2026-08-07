@@ -15,12 +15,12 @@
 <button
 	type="button"
 	onclick={() => (searchState.open = true)}
-	class="bg-foreground/4 text-foreground/45 hover:bg-foreground/7 hover:text-foreground/70 flex w-full cursor-pointer items-center gap-2 rounded-lg px-2.5 py-2 text-sm transition-colors"
+	class="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-foreground/4 px-2.5 py-2 text-sm text-foreground/45 transition-colors hover:bg-foreground/7 hover:text-foreground/70"
 >
 	<Search class="size-3.5 shrink-0" />
 	Search docs
 	<kbd
-		class="bg-foreground/6 text-foreground/40 ml-auto rounded px-1.5 py-0.5 font-mono text-[10px]"
+		class="ml-auto rounded bg-foreground/6 px-1.5 py-0.5 font-mono text-[10px] text-foreground/40"
 	>
 		⌘K
 	</kbd>

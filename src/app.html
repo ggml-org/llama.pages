@@ -18,7 +18,11 @@
 				function () {
 					(plausible.q = plausible.q || []).push(arguments);
 				};
-			plausible.init = plausible.init || function (i) { plausible.o = i || {}; };
+			plausible.init =
+				plausible.init ||
+				function (i) {
+					plausible.o = i || {};
+				};
 			// No options needed. The .dmg is hosted on github.com, and
 			// Plausible's click handler checks outbound links before file
 			// extensions and returns early -- so cross-domain downloads always

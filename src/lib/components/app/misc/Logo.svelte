@@ -8,7 +8,7 @@
 	let { showName }: Props = $props();
 </script>
 
-<span class="logo text-foreground flex items-center">
+<span class="logo flex items-center text-foreground">
 	<span class="mark text-foreground">{@html logoSvg}</span>
 
 	{#if showName}

@@ -34,10 +34,10 @@
 	     title contains it and the summary opens by naming the publisher. -->
 	<header>
 		<h1 class="text-[30px] font-semibold tracking-tight">{family.name}</h1>
-		<div class="text-muted-foreground mt-2.5 text-[13px]">
+		<div class="mt-2.5 text-[13px] text-muted-foreground">
 			<span class="tabular-nums">{releasedFor(family)}</span>
 		</div>
-		<p class="text-muted-foreground mt-3 max-w-xl text-[15px]">{family.description}</p>
+		<p class="mt-3 max-w-xl text-[15px] text-muted-foreground">{family.description}</p>
 	</header>
 
 	<section class="mt-10">
@@ -46,10 +46,10 @@
 		     explanation lives in the info icon's tooltip -- the one place the
 		     site explains what quantization is. -->
 		<div class="mb-2 flex items-center justify-between">
-			<h2 class="text-muted-foreground text-[13px]">Sizes</h2>
+			<h2 class="text-[13px] text-muted-foreground">Sizes</h2>
 			{#if hasQuantized}
 				<div class="flex items-center gap-1.5">
-					<label class="text-muted-foreground flex cursor-pointer items-baseline gap-2 text-[13px]">
+					<label class="flex cursor-pointer items-baseline gap-2 text-[13px] text-muted-foreground">
 						<input type="checkbox" bind:checked={showQuantized} class="accent-sky-500" />
 						<span>Show smaller quantizations</span>
 					</label>
@@ -57,7 +57,7 @@
 					     tooltip on hover; explicit rather than hiding the hint on the
 					     label itself, so it's discoverable. -->
 					<span
-						class="text-muted-foreground/70 cursor-help"
+						class="cursor-help text-muted-foreground/70"
 						title="Quantized further to run in less memory, at a small cost in quality."
 					>
 						<svg

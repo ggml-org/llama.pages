@@ -1,547 +1,547 @@
 [
-  {
-    "name": "GPT-OSS",
-    "brand": "OpenAI",
-    "description": "OpenAI's first open-weight models since GPT-2. Built for reasoning, agentic tasks, and developer use with function calling and tool use capabilities.",
-    "details": "OpenAI's first open-weight release since GPT-2, GPT-OSS brings frontier-style reasoning to models you can run on your own hardware. Both sizes are trained for chain-of-thought reasoning, function calling, and tool use, with adjustable reasoning effort so you can trade latency for depth.\n\nThe 20B model targets a single consumer GPU, while the 120B model is built for high-memory workstations and servers. Both ship in the efficient MXFP4 format and are released under a permissive license for commercial use.",
-    "released": "2025-08",
-    "license": "Apache 2.0",
-    "featured": true,
-    "sizes": [
-      {
-        "name": "GPT-OSS 20B",
-        "params": "20B",
-        "builds": [
-          {
-            "quant": "mxfp4",
-            "size": "12.1 GB",
-            "sizeBytes": 12109566560,
-            "repo": "ggml-org/gpt-oss-20b-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "GPT-OSS 120B",
-        "params": "120B",
-        "builds": [
-          {
-            "quant": "mxfp4",
-            "size": "63.4 GB",
-            "sizeBytes": 63387346464,
-            "repo": "ggml-org/gpt-oss-120b-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Gemma 3",
-    "brand": "Gemma",
-    "description": "Google's multimodal models built from Gemini technology. Supports 140+ languages, vision, and text tasks with up to 128K context for edge to cloud deployment.",
-    "details": "Gemma 3 is Google's family of open multimodal models, distilled from the same research behind Gemini. The lineup spans from a 270M model light enough for phones to a 27B model that holds its own against far larger systems, with vision support arriving at 4B and above.\n\nEvery size handles text and understands 140+ languages, and the larger ones add image input, with context windows up to 128K tokens. That makes Gemma 3 a flexible base for everything from on-device assistants to cloud deployments.",
-    "released": "2025-03",
-    "license": "Gemma license",
-    "featured": true,
-    "maxMemGb": 8,
-    "sizes": [
-      {
-        "name": "Gemma 3 270M",
-        "params": "270M",
-        "builds": [
-          {
-            "quant": "Q4_0",
-            "size": "241 MB",
-            "sizeBytes": 241410624,
-            "repo": "ggml-org/gemma-3-270m-it-qat-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 3 1B",
-        "params": "1B",
-        "builds": [
-          {
-            "quant": "Q4_0",
-            "size": "720 MB",
-            "sizeBytes": 720425600,
-            "repo": "ggml-org/gemma-3-1b-it-qat-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 3 4B",
-        "params": "4B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q4_0",
-            "size": "2.5 GB",
-            "sizeBytes": 2526080992,
-            "repo": "ggml-org/gemma-3-4b-it-qat-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 3 12B",
-        "params": "12B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q4_0",
-            "size": "7.1 GB",
-            "sizeBytes": 7131017792,
-            "repo": "ggml-org/gemma-3-12b-it-qat-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 3 27B",
-        "params": "27B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q4_0",
-            "size": "15.9 GB",
-            "sizeBytes": 15908791488,
-            "repo": "ggml-org/gemma-3-27b-it-qat-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Gemma 4",
-    "brand": "Gemma",
-    "description": "Google's most capable open models, built from Gemini 3 technology. Supports multimodal reasoning, agentic workflows, and 140+ languages.",
-    "details": "Gemma 4 is Google's most capable open release, built from Gemini 3 technology. It pushes multimodal reasoning and agentic workflows further while keeping the efficient, deployable footprint the Gemma line is known for.\n\nThe family mixes dense and mixture-of-experts designs, so you can choose between the always-on E-series models for edge use and the larger MoE variants for heavier reasoning, all with vision and 140+ language support.",
-    "released": "2026-03",
-    "license": "Apache 2.0",
-    "featured": true,
-    "sizes": [
-      {
-        "name": "Gemma 4 E2B",
-        "params": "E2B",
-        "vision": true,
-        "maxMemGb": 24,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "5.5 GB",
-            "sizeBytes": 5524862368,
-            "repo": "ggml-org/gemma-4-E2B-it-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 4 E4B",
-        "params": "E4B",
-        "vision": true,
-        "maxMemGb": 24,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "8.6 GB",
-            "sizeBytes": 8591114688,
-            "repo": "ggml-org/gemma-4-E4B-it-GGUF"
-          },
-          {
-            "quant": "Q4_0",
-            "size": "4.6 GB",
-            "sizeBytes": 4590807392,
-            "repo": "ggml-org/gemma-4-E4B-it-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 4 12B",
-        "params": "12B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "12.7 GB",
-            "sizeBytes": 12669645728,
-            "repo": "ggml-org/gemma-4-12B-it-GGUF"
-          },
-          {
-            "quant": "Q4_0",
-            "size": "7.2 GB",
-            "sizeBytes": 7219673216,
-            "repo": "ggml-org/gemma-4-12B-it-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 4 26B-A4B",
-        "params": "26B-A4B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "27.7 GB",
-            "sizeBytes": 27666266464,
-            "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
-          },
-          {
-            "quant": "Q4_0",
-            "size": "14.6 GB",
-            "sizeBytes": 14618145824,
-            "repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Gemma 4 31B",
-        "params": "31B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "33.4 GB",
-            "sizeBytes": 33445215840,
-            "repo": "ggml-org/gemma-4-31B-it-GGUF"
-          },
-          {
-            "quant": "Q4_0",
-            "size": "18.0 GB",
-            "sizeBytes": 17992313088,
-            "repo": "ggml-org/gemma-4-31B-it-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Qwen 3.5 Small",
-    "brand": "Qwen",
-    "description": "Alibaba's compact natively multimodal reasoning models. Supports thinking/non-thinking modes for text and vision tasks across 201 languages.",
-    "details": "The small tier of Qwen 3.5 is Alibaba's set of compact, natively multimodal models built for on-device and latency-sensitive use. They understand both text and images out of the box.\n\nEach model supports switchable thinking and non-thinking modes, letting you turn step-by-step reasoning on for hard problems or off for fast replies, with language coverage spanning 201 languages.",
-    "released": "2026-01",
-    "license": "Apache 2.0",
-    "sizes": [
-      {
-        "name": "Qwen 3.5 Small 0.8B",
-        "params": "0.8B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "812 MB",
-            "sizeBytes": 811843488,
-            "repo": "ggml-org/Qwen3.5-0.8B-GGUF"
-          },
-          {
-            "quant": "Q4_0",
-            "size": "563 MB",
-            "sizeBytes": 563036064,
-            "repo": "ggml-org/Qwen3.5-0.8B-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Qwen 3.6",
-    "brand": "Qwen",
-    "description": "Alibaba's next-gen natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
-    "details": "Qwen 3.6 is Alibaba's next-generation multimodal lineup, refining the dense and MoE recipes from 3.5 with stronger coding and agentic performance.\n\nNatively multimodal and reasoning-capable, the models continue to rival systems many times their size while staying practical to run locally.",
-    "released": "2026-04",
-    "license": "Apache 2.0",
-    "featured": true,
-    "sizes": [
-      {
-        "name": "Qwen 3.6 27B",
-        "params": "27B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "28.6 GB",
-            "sizeBytes": 28595762496,
-            "repo": "ggml-org/Qwen3.6-27B-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "19.1 GB",
-            "sizeBytes": 19095766304,
-            "repo": "ggml-org/Qwen3.6-27B-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Qwen 3.6 35B-A3B",
-        "params": "35B-A3B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "36.9 GB",
-            "sizeBytes": 36903139360,
-            "repo": "ggml-org/Qwen3.6-35B-A3B-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "20.4 GB",
-            "sizeBytes": 20419565568,
-            "repo": "ggml-org/Qwen3.6-35B-A3B-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Ministral 3",
-    "brand": "Mistral",
-    "description": "Mistral AI's compact edge models with vision capabilities. Offers best cost-to-performance ratio for on-device deployment in 3B, 8B, 14B sizes.",
-    "details": "Ministral 3 is Mistral AI's family of compact edge models, offered in 3B, 8B, and 14B sizes with both instruct and reasoning variants. Each size is multimodal and tuned for the best cost-to-performance ratio on local hardware.\n\nThe reasoning variants add explicit step-by-step thinking for harder tasks, while the instruct models stay fast and direct, giving you a consistent family to deploy from laptops to small servers.",
-    "released": "2025-12",
-    "license": "Apache 2.0",
-    "sizes": [
-      {
-        "name": "Ministral 3 3B",
-        "params": "3B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "4.1 GB",
-            "sizeBytes": 4099964832,
-            "repo": "ggml-org/Ministral-3-3B-Instruct-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "2.1 GB",
-            "sizeBytes": 2147023008,
-            "repo": "mistralai/Ministral-3-3B-Instruct-2512-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Ministral 3 3B Reasoning",
-        "params": "3B Reasoning",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "4.1 GB",
-            "sizeBytes": 4099963264,
-            "repo": "ggml-org/Ministral-3-3B-Reasoning-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "2.1 GB",
-            "sizeBytes": 2147021472,
-            "repo": "mistralai/Ministral-3-3B-Reasoning-2512-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Ministral 3 8B",
-        "params": "8B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "9.5 GB",
-            "sizeBytes": 9486069920,
-            "repo": "ggml-org/Ministral-3-8B-Instruct-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "5.2 GB",
-            "sizeBytes": 5198911904,
-            "repo": "mistralai/Ministral-3-8B-Instruct-2512-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Ministral 3 8B Reasoning",
-        "params": "8B Reasoning",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "9.5 GB",
-            "sizeBytes": 9486068384,
-            "repo": "ggml-org/Ministral-3-8B-Reasoning-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "5.2 GB",
-            "sizeBytes": 5198910368,
-            "repo": "mistralai/Ministral-3-8B-Reasoning-2512-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Ministral 3 14B",
-        "params": "14B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "14.8 GB",
-            "sizeBytes": 14827658560,
-            "repo": "ggml-org/Ministral-3-14B-Instruct-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "8.2 GB",
-            "sizeBytes": 8239593024,
-            "repo": "mistralai/Ministral-3-14B-Instruct-2512-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Ministral 3 14B Reasoning",
-        "params": "14B Reasoning",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "14.8 GB",
-            "sizeBytes": 14827657024,
-            "repo": "ggml-org/Ministral-3-14B-Reasoning-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "8.2 GB",
-            "sizeBytes": 8239591488,
-            "repo": "mistralai/Ministral-3-14B-Reasoning-2512-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "GLM 4.7",
-    "brand": "GLM",
-    "description": "Zhipu AI's agentic reasoning and coding models. Built for software engineering, browser automation, and multi-turn tool use.",
-    "details": "GLM 4.7 is Zhipu AI's lineup of agentic models built for software engineering and tool use. It's trained for multi-turn workflows like browsing, code editing, and orchestrating external tools.\n\nThe Flash variant balances capability and footprint so the model's agentic strengths stay within reach of a single high-memory GPU.",
-    "released": "2026-02",
-    "license": "MIT",
-    "sizes": [
-      {
-        "name": "GLM 4.7 Flash",
-        "params": "Flash",
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "31.8 GB",
-            "sizeBytes": 31842799232,
-            "repo": "ggml-org/GLM-4.7-Flash-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "18.3 GB",
-            "sizeBytes": 18312339808,
-            "repo": "unsloth/GLM-4.7-Flash-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Devstral 2",
-    "brand": "Mistral",
-    "description": "Mistral AI's agentic coding models for software engineering tasks. Excels at exploring codebases, multi-file editing, and powering code agents.",
-    "details": "Devstral 2 is Mistral AI's agentic coding family, purpose-built for real software engineering rather than isolated snippets. The models excel at exploring large codebases, editing across many files, and driving autonomous code agents.\n\nOffered in a 24B size for local development and a 123B size for maximum capability, Devstral 2 plugs into agent scaffolds and IDE tooling to handle multi-step engineering tasks.",
-    "released": "2026-01",
-    "license": "Apache 2.0 / Modified MIT",
-    "sizes": [
-      {
-        "name": "Devstral 2 24B",
-        "params": "24B",
-        "vision": true,
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "25.1 GB",
-            "sizeBytes": 25055308352,
-            "repo": "ggml-org/Devstral-Small-2-24B-Instruct-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "14.3 GB",
-            "sizeBytes": 14334446752,
-            "repo": "unsloth/Devstral-Small-2-24B-Instruct-2512-GGUF"
-          }
-        ]
-      },
-      {
-        "name": "Devstral 2 123B",
-        "params": "123B",
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "132.9 GB",
-            "sizeBytes": 132854938656,
-            "repo": "ggml-org/Devstral-2-123B-Instruct-2512-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "74.9 GB",
-            "sizeBytes": 74897662400,
-            "repo": "unsloth/Devstral-2-123B-Instruct-2512-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Laguna XS 2.1",
-    "brand": "Laguna",
-    "description": "Poolside's compact mixture-of-experts model for agentic coding. Built for long-horizon work with interleaved reasoning and 262K context.",
-    "details": "Laguna XS 2.1 is Poolside's compact coding model: 33B total parameters with 3B activated per token, so it runs at small-model speed while keeping the capability of a much larger one. It targets agentic software engineering -- exploring repositories, editing across files, and driving terminal workflows over long sessions.\n\nThe model supports interleaved thinking between tool calls, which can be turned on or off per request, and handles a 262K token context. At 33B total parameters it fits comfortably on a high-memory Mac.",
-    "released": "2026-07",
-    "license": "OpenMDW 1.1",
-    "sizes": [
-      {
-        "name": "Laguna XS 2.1 33B-A3B",
-        "params": "33B-A3B",
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "35.6 GB",
-            "sizeBytes": 35597116480,
-            "repo": "ggml-org/Laguna-XS-2.1-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "19.6 GB",
-            "sizeBytes": 19563570240,
-            "repo": "ggml-org/Laguna-XS-2.1-GGUF"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Laguna S 2.1",
-    "brand": "Laguna",
-    "description": "Poolside's mid-size mixture-of-experts model for agentic coding. Built for long-horizon work with interleaved reasoning and a 1M context.",
-    "details": "Laguna S 2.1 is the bigger sibling of Laguna XS 2.1: 118B total parameters with 8B activated per token, a mixture-of-experts design with 256 routed experts. Like the XS, it targets agentic software engineering -- exploring repositories, editing across files, and driving terminal workflows over long sessions.\n\nThe model supports interleaved thinking between tool calls, which can be turned on or off per request, and handles a 1M token context via mixed sliding-window and global attention. At 118B total parameters it needs a high-memory Mac -- the Q4_K_M build wants roughly 70 GB of memory.",
-    "released": "2026-07",
-    "license": "OpenMDW 1.1",
-    "sizes": [
-      {
-        "name": "Laguna S 2.1 118B-A8B",
-        "params": "118B-A8B",
-        "builds": [
-          {
-            "quant": "Q8_0",
-            "size": "125 GB",
-            "sizeBytes": 125022858848,
-            "repo": "ggml-org/Laguna-S-2.1-GGUF"
-          },
-          {
-            "quant": "Q4_K_M",
-            "size": "67.7 GB",
-            "sizeBytes": 67661639264,
-            "repo": "ggml-org/Laguna-S-2.1-GGUF"
-          }
-        ]
-      }
-    ]
-  }
+	{
+		"name": "GPT-OSS",
+		"brand": "OpenAI",
+		"description": "OpenAI's first open-weight models since GPT-2. Built for reasoning, agentic tasks, and developer use with function calling and tool use capabilities.",
+		"details": "OpenAI's first open-weight release since GPT-2, GPT-OSS brings frontier-style reasoning to models you can run on your own hardware. Both sizes are trained for chain-of-thought reasoning, function calling, and tool use, with adjustable reasoning effort so you can trade latency for depth.\n\nThe 20B model targets a single consumer GPU, while the 120B model is built for high-memory workstations and servers. Both ship in the efficient MXFP4 format and are released under a permissive license for commercial use.",
+		"released": "2025-08",
+		"license": "Apache 2.0",
+		"featured": true,
+		"sizes": [
+			{
+				"name": "GPT-OSS 20B",
+				"params": "20B",
+				"builds": [
+					{
+						"quant": "mxfp4",
+						"size": "12.1 GB",
+						"sizeBytes": 12109566560,
+						"repo": "ggml-org/gpt-oss-20b-GGUF"
+					}
+				]
+			},
+			{
+				"name": "GPT-OSS 120B",
+				"params": "120B",
+				"builds": [
+					{
+						"quant": "mxfp4",
+						"size": "63.4 GB",
+						"sizeBytes": 63387346464,
+						"repo": "ggml-org/gpt-oss-120b-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Gemma 3",
+		"brand": "Gemma",
+		"description": "Google's multimodal models built from Gemini technology. Supports 140+ languages, vision, and text tasks with up to 128K context for edge to cloud deployment.",
+		"details": "Gemma 3 is Google's family of open multimodal models, distilled from the same research behind Gemini. The lineup spans from a 270M model light enough for phones to a 27B model that holds its own against far larger systems, with vision support arriving at 4B and above.\n\nEvery size handles text and understands 140+ languages, and the larger ones add image input, with context windows up to 128K tokens. That makes Gemma 3 a flexible base for everything from on-device assistants to cloud deployments.",
+		"released": "2025-03",
+		"license": "Gemma license",
+		"featured": true,
+		"maxMemGb": 8,
+		"sizes": [
+			{
+				"name": "Gemma 3 270M",
+				"params": "270M",
+				"builds": [
+					{
+						"quant": "Q4_0",
+						"size": "241 MB",
+						"sizeBytes": 241410624,
+						"repo": "ggml-org/gemma-3-270m-it-qat-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 3 1B",
+				"params": "1B",
+				"builds": [
+					{
+						"quant": "Q4_0",
+						"size": "720 MB",
+						"sizeBytes": 720425600,
+						"repo": "ggml-org/gemma-3-1b-it-qat-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 3 4B",
+				"params": "4B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q4_0",
+						"size": "2.5 GB",
+						"sizeBytes": 2526080992,
+						"repo": "ggml-org/gemma-3-4b-it-qat-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 3 12B",
+				"params": "12B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q4_0",
+						"size": "7.1 GB",
+						"sizeBytes": 7131017792,
+						"repo": "ggml-org/gemma-3-12b-it-qat-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 3 27B",
+				"params": "27B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q4_0",
+						"size": "15.9 GB",
+						"sizeBytes": 15908791488,
+						"repo": "ggml-org/gemma-3-27b-it-qat-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Gemma 4",
+		"brand": "Gemma",
+		"description": "Google's most capable open models, built from Gemini 3 technology. Supports multimodal reasoning, agentic workflows, and 140+ languages.",
+		"details": "Gemma 4 is Google's most capable open release, built from Gemini 3 technology. It pushes multimodal reasoning and agentic workflows further while keeping the efficient, deployable footprint the Gemma line is known for.\n\nThe family mixes dense and mixture-of-experts designs, so you can choose between the always-on E-series models for edge use and the larger MoE variants for heavier reasoning, all with vision and 140+ language support.",
+		"released": "2026-03",
+		"license": "Apache 2.0",
+		"featured": true,
+		"sizes": [
+			{
+				"name": "Gemma 4 E2B",
+				"params": "E2B",
+				"vision": true,
+				"maxMemGb": 24,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "5.5 GB",
+						"sizeBytes": 5524862368,
+						"repo": "ggml-org/gemma-4-E2B-it-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 4 E4B",
+				"params": "E4B",
+				"vision": true,
+				"maxMemGb": 24,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "8.6 GB",
+						"sizeBytes": 8591114688,
+						"repo": "ggml-org/gemma-4-E4B-it-GGUF"
+					},
+					{
+						"quant": "Q4_0",
+						"size": "4.6 GB",
+						"sizeBytes": 4590807392,
+						"repo": "ggml-org/gemma-4-E4B-it-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 4 12B",
+				"params": "12B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "12.7 GB",
+						"sizeBytes": 12669645728,
+						"repo": "ggml-org/gemma-4-12B-it-GGUF"
+					},
+					{
+						"quant": "Q4_0",
+						"size": "7.2 GB",
+						"sizeBytes": 7219673216,
+						"repo": "ggml-org/gemma-4-12B-it-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 4 26B-A4B",
+				"params": "26B-A4B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "27.7 GB",
+						"sizeBytes": 27666266464,
+						"repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
+					},
+					{
+						"quant": "Q4_0",
+						"size": "14.6 GB",
+						"sizeBytes": 14618145824,
+						"repo": "ggml-org/gemma-4-26B-A4B-it-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Gemma 4 31B",
+				"params": "31B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "33.4 GB",
+						"sizeBytes": 33445215840,
+						"repo": "ggml-org/gemma-4-31B-it-GGUF"
+					},
+					{
+						"quant": "Q4_0",
+						"size": "18.0 GB",
+						"sizeBytes": 17992313088,
+						"repo": "ggml-org/gemma-4-31B-it-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Qwen 3.5 Small",
+		"brand": "Qwen",
+		"description": "Alibaba's compact natively multimodal reasoning models. Supports thinking/non-thinking modes for text and vision tasks across 201 languages.",
+		"details": "The small tier of Qwen 3.5 is Alibaba's set of compact, natively multimodal models built for on-device and latency-sensitive use. They understand both text and images out of the box.\n\nEach model supports switchable thinking and non-thinking modes, letting you turn step-by-step reasoning on for hard problems or off for fast replies, with language coverage spanning 201 languages.",
+		"released": "2026-01",
+		"license": "Apache 2.0",
+		"sizes": [
+			{
+				"name": "Qwen 3.5 Small 0.8B",
+				"params": "0.8B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "812 MB",
+						"sizeBytes": 811843488,
+						"repo": "ggml-org/Qwen3.5-0.8B-GGUF"
+					},
+					{
+						"quant": "Q4_0",
+						"size": "563 MB",
+						"sizeBytes": 563036064,
+						"repo": "ggml-org/Qwen3.5-0.8B-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Qwen 3.6",
+		"brand": "Qwen",
+		"description": "Alibaba's next-gen natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
+		"details": "Qwen 3.6 is Alibaba's next-generation multimodal lineup, refining the dense and MoE recipes from 3.5 with stronger coding and agentic performance.\n\nNatively multimodal and reasoning-capable, the models continue to rival systems many times their size while staying practical to run locally.",
+		"released": "2026-04",
+		"license": "Apache 2.0",
+		"featured": true,
+		"sizes": [
+			{
+				"name": "Qwen 3.6 27B",
+				"params": "27B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "28.6 GB",
+						"sizeBytes": 28595762496,
+						"repo": "ggml-org/Qwen3.6-27B-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "19.1 GB",
+						"sizeBytes": 19095766304,
+						"repo": "ggml-org/Qwen3.6-27B-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Qwen 3.6 35B-A3B",
+				"params": "35B-A3B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "36.9 GB",
+						"sizeBytes": 36903139360,
+						"repo": "ggml-org/Qwen3.6-35B-A3B-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "20.4 GB",
+						"sizeBytes": 20419565568,
+						"repo": "ggml-org/Qwen3.6-35B-A3B-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Ministral 3",
+		"brand": "Mistral",
+		"description": "Mistral AI's compact edge models with vision capabilities. Offers best cost-to-performance ratio for on-device deployment in 3B, 8B, 14B sizes.",
+		"details": "Ministral 3 is Mistral AI's family of compact edge models, offered in 3B, 8B, and 14B sizes with both instruct and reasoning variants. Each size is multimodal and tuned for the best cost-to-performance ratio on local hardware.\n\nThe reasoning variants add explicit step-by-step thinking for harder tasks, while the instruct models stay fast and direct, giving you a consistent family to deploy from laptops to small servers.",
+		"released": "2025-12",
+		"license": "Apache 2.0",
+		"sizes": [
+			{
+				"name": "Ministral 3 3B",
+				"params": "3B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "4.1 GB",
+						"sizeBytes": 4099964832,
+						"repo": "ggml-org/Ministral-3-3B-Instruct-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "2.1 GB",
+						"sizeBytes": 2147023008,
+						"repo": "mistralai/Ministral-3-3B-Instruct-2512-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Ministral 3 3B Reasoning",
+				"params": "3B Reasoning",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "4.1 GB",
+						"sizeBytes": 4099963264,
+						"repo": "ggml-org/Ministral-3-3B-Reasoning-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "2.1 GB",
+						"sizeBytes": 2147021472,
+						"repo": "mistralai/Ministral-3-3B-Reasoning-2512-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Ministral 3 8B",
+				"params": "8B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "9.5 GB",
+						"sizeBytes": 9486069920,
+						"repo": "ggml-org/Ministral-3-8B-Instruct-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "5.2 GB",
+						"sizeBytes": 5198911904,
+						"repo": "mistralai/Ministral-3-8B-Instruct-2512-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Ministral 3 8B Reasoning",
+				"params": "8B Reasoning",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "9.5 GB",
+						"sizeBytes": 9486068384,
+						"repo": "ggml-org/Ministral-3-8B-Reasoning-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "5.2 GB",
+						"sizeBytes": 5198910368,
+						"repo": "mistralai/Ministral-3-8B-Reasoning-2512-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Ministral 3 14B",
+				"params": "14B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "14.8 GB",
+						"sizeBytes": 14827658560,
+						"repo": "ggml-org/Ministral-3-14B-Instruct-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "8.2 GB",
+						"sizeBytes": 8239593024,
+						"repo": "mistralai/Ministral-3-14B-Instruct-2512-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Ministral 3 14B Reasoning",
+				"params": "14B Reasoning",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "14.8 GB",
+						"sizeBytes": 14827657024,
+						"repo": "ggml-org/Ministral-3-14B-Reasoning-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "8.2 GB",
+						"sizeBytes": 8239591488,
+						"repo": "mistralai/Ministral-3-14B-Reasoning-2512-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "GLM 4.7",
+		"brand": "GLM",
+		"description": "Zhipu AI's agentic reasoning and coding models. Built for software engineering, browser automation, and multi-turn tool use.",
+		"details": "GLM 4.7 is Zhipu AI's lineup of agentic models built for software engineering and tool use. It's trained for multi-turn workflows like browsing, code editing, and orchestrating external tools.\n\nThe Flash variant balances capability and footprint so the model's agentic strengths stay within reach of a single high-memory GPU.",
+		"released": "2026-02",
+		"license": "MIT",
+		"sizes": [
+			{
+				"name": "GLM 4.7 Flash",
+				"params": "Flash",
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "31.8 GB",
+						"sizeBytes": 31842799232,
+						"repo": "ggml-org/GLM-4.7-Flash-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "18.3 GB",
+						"sizeBytes": 18312339808,
+						"repo": "unsloth/GLM-4.7-Flash-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Devstral 2",
+		"brand": "Mistral",
+		"description": "Mistral AI's agentic coding models for software engineering tasks. Excels at exploring codebases, multi-file editing, and powering code agents.",
+		"details": "Devstral 2 is Mistral AI's agentic coding family, purpose-built for real software engineering rather than isolated snippets. The models excel at exploring large codebases, editing across many files, and driving autonomous code agents.\n\nOffered in a 24B size for local development and a 123B size for maximum capability, Devstral 2 plugs into agent scaffolds and IDE tooling to handle multi-step engineering tasks.",
+		"released": "2026-01",
+		"license": "Apache 2.0 / Modified MIT",
+		"sizes": [
+			{
+				"name": "Devstral 2 24B",
+				"params": "24B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "25.1 GB",
+						"sizeBytes": 25055308352,
+						"repo": "ggml-org/Devstral-Small-2-24B-Instruct-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "14.3 GB",
+						"sizeBytes": 14334446752,
+						"repo": "unsloth/Devstral-Small-2-24B-Instruct-2512-GGUF"
+					}
+				]
+			},
+			{
+				"name": "Devstral 2 123B",
+				"params": "123B",
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "132.9 GB",
+						"sizeBytes": 132854938656,
+						"repo": "ggml-org/Devstral-2-123B-Instruct-2512-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "74.9 GB",
+						"sizeBytes": 74897662400,
+						"repo": "unsloth/Devstral-2-123B-Instruct-2512-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Laguna XS 2.1",
+		"brand": "Laguna",
+		"description": "Poolside's compact mixture-of-experts model for agentic coding. Built for long-horizon work with interleaved reasoning and 262K context.",
+		"details": "Laguna XS 2.1 is Poolside's compact coding model: 33B total parameters with 3B activated per token, so it runs at small-model speed while keeping the capability of a much larger one. It targets agentic software engineering -- exploring repositories, editing across files, and driving terminal workflows over long sessions.\n\nThe model supports interleaved thinking between tool calls, which can be turned on or off per request, and handles a 262K token context. At 33B total parameters it fits comfortably on a high-memory Mac.",
+		"released": "2026-07",
+		"license": "OpenMDW 1.1",
+		"sizes": [
+			{
+				"name": "Laguna XS 2.1 33B-A3B",
+				"params": "33B-A3B",
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "35.6 GB",
+						"sizeBytes": 35597116480,
+						"repo": "ggml-org/Laguna-XS-2.1-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "19.6 GB",
+						"sizeBytes": 19563570240,
+						"repo": "ggml-org/Laguna-XS-2.1-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Laguna S 2.1",
+		"brand": "Laguna",
+		"description": "Poolside's mid-size mixture-of-experts model for agentic coding. Built for long-horizon work with interleaved reasoning and a 1M context.",
+		"details": "Laguna S 2.1 is the bigger sibling of Laguna XS 2.1: 118B total parameters with 8B activated per token, a mixture-of-experts design with 256 routed experts. Like the XS, it targets agentic software engineering -- exploring repositories, editing across files, and driving terminal workflows over long sessions.\n\nThe model supports interleaved thinking between tool calls, which can be turned on or off per request, and handles a 1M token context via mixed sliding-window and global attention. At 118B total parameters it needs a high-memory Mac -- the Q4_K_M build wants roughly 70 GB of memory.",
+		"released": "2026-07",
+		"license": "OpenMDW 1.1",
+		"sizes": [
+			{
+				"name": "Laguna S 2.1 118B-A8B",
+				"params": "118B-A8B",
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "125 GB",
+						"sizeBytes": 125022858848,
+						"repo": "ggml-org/Laguna-S-2.1-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "67.7 GB",
+						"sizeBytes": 67661639264,
+						"repo": "ggml-org/Laguna-S-2.1-GGUF"
+					}
+				]
+			}
+		]
+	}
 ]

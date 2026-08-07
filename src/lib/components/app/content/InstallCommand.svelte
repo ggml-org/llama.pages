@@ -23,16 +23,16 @@
 </script>
 
 <div class="w-full max-w-2xl">
-	<div class="bg-foreground/4 border-secondary w-full overflow-hidden rounded-xl border">
+	<div class="w-full overflow-hidden rounded-xl border border-secondary bg-foreground/4">
 		<div class="flex items-stretch justify-between">
 			<code
-				class="text-foreground/90 block min-w-0 flex-1 overflow-x-auto p-4 font-mono text-[15px] whitespace-nowrap"
+				class="block min-w-0 flex-1 overflow-x-auto p-4 font-mono text-[15px] whitespace-nowrap text-foreground/90"
 			>
 				{installCommand}
 			</code>
 
 			<button
-				class="text-foreground/70 hover:text-foreground border-secondary flex shrink-0 cursor-pointer items-center border-l px-4"
+				class="flex shrink-0 cursor-pointer items-center border-l border-secondary px-4 text-foreground/70 hover:text-foreground"
 				aria-label={copied ? 'Copied command' : 'Copy command'}
 				onclick={handleCopy}
 			>
@@ -46,7 +46,7 @@
 	</div>
 
 	<div
-		class="text-foreground/60 mt-2 flex w-full flex-col items-center justify-center gap-1 text-xs sm:flex-row sm:gap-2"
+		class="mt-2 flex w-full flex-col items-center justify-center gap-1 text-xs text-foreground/60 sm:flex-row sm:gap-2"
 	>
 		<span>
 			Prefer Brew or Winget?
@@ -54,13 +54,13 @@
 				href="https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md"
 				target="_blank"
 				rel="noreferrer"
-				class="hover:text-foreground font-medium underline underline-offset-4"
+				class="font-medium underline underline-offset-4 hover:text-foreground"
 			>
 				Package managers
 			</a>
 		</span>
 
-		<span class="text-foreground/40 hidden sm:inline">·</span>
+		<span class="hidden text-foreground/40 sm:inline">·</span>
 
 		<span>
 			Rather build from source?
@@ -68,7 +68,7 @@
 				href="https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md"
 				target="_blank"
 				rel="noreferrer"
-				class="hover:text-foreground font-medium underline underline-offset-4"
+				class="font-medium underline underline-offset-4 hover:text-foreground"
 			>
 				Follow instructions
 			</a>

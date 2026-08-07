@@ -15,7 +15,7 @@
      it supports cmd/middle-click to open in a new tab, "copy link", etc. -->
 <a
 	href="/models/{slugify(family.name)}"
-	class="border-foreground/6 bg-foreground/2 hover:border-foreground/12 flex h-full flex-col rounded-2xl border p-5 transition-colors"
+	class="flex h-full flex-col rounded-2xl border border-foreground/6 bg-foreground/2 p-5 transition-colors hover:border-foreground/12"
 >
 	<!-- Brand mark on its own row at the top, so the name and description
 	     below share the same left edge -- no inline icon pushing the title
@@ -31,5 +31,5 @@
 		{/if}
 	</h3>
 
-	<p class="text-muted-foreground mt-1 line-clamp-2 text-[14px]">{family.description}</p>
+	<p class="mt-1 line-clamp-2 text-[14px] text-muted-foreground">{family.description}</p>
 </a>

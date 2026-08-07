@@ -59,7 +59,7 @@
 
 	<div class="flex min-h-screen w-full min-w-0 grow gap-x-8 px-4 pt-6 lg:pt-10 lg:pr-10 lg:pl-16">
 		<main class="mx-auto w-full max-w-xl min-w-0 pb-10 xl:w-[calc(100%-28rem)] 2xl:max-w-2xl">
-			<details class="border-border mb-6 rounded-md border lg:hidden">
+			<details class="mb-6 rounded-md border border-border lg:hidden">
 				<summary class="cursor-pointer px-3 py-2 text-sm font-medium">Documentation</summary>
 				<div class="px-3 pb-3">
 					<DocsSidebar toctree={data.toctree} active={data.local} />

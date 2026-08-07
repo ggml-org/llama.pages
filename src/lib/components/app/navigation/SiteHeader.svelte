@@ -32,7 +32,7 @@
 			<Logo --logo-height="1.5rem" />
 		</a>
 
-		<span aria-hidden="true" class="bg-border h-5 w-px"></span>
+		<span aria-hidden="true" class="h-5 w-px bg-border"></span>
 
 		<a
 			href="/models"
@@ -49,7 +49,7 @@
 		<button
 			type="button"
 			onclick={cycleMode}
-			class="text-foreground/70 hover:text-foreground hover:bg-foreground/8 -m-1.5 inline-flex cursor-pointer items-center rounded-md p-1.5 transition-colors"
+			class="-m-1.5 inline-flex cursor-pointer items-center rounded-md p-1.5 text-foreground/70 transition-colors hover:bg-foreground/8 hover:text-foreground"
 			aria-label="Theme: {userPrefersMode.current} (click to change)"
 			title="Theme: {userPrefersMode.current}"
 		>
