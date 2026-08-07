@@ -43,6 +43,7 @@
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.4.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
+		"prismjs": "^1.30.0",
 		"rehype-slug": "^6.0.0",
 		"shadcn-svelte": "^1.2.7",
 		"svelte": "^5.54.0",
