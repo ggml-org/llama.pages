@@ -8,7 +8,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import '$lib/styles/prism-theme.css';
+/* Relative rather than `$lib` so prettier-plugin-tailwindcss can resolve this
+   file on its own -- it reads app.css as its `tailwindStylesheet` (see
+   .prettierrc) and doesn't know about Vite aliases. */
+@import './lib/styles/prism-theme.css';
 
 :root {
 	--radius: 0.625rem;
