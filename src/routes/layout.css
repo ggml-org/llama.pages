@@ -1,3 +1,9 @@
+/* Not imported by the app -- this exists solely as the `tailwindStylesheet`
+   entry point for prettier-plugin-tailwindcss (see .prettierrc), which needs a
+   stylesheet it can resolve on its own to know the class universe when sorting.
+   src/app.css can't serve that role because it imports through the `$lib`
+   alias, which the plugin can't resolve. Tools that only look at runtime
+   imports will report this file as unused -- it isn't. */
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
