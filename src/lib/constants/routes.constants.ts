@@ -5,7 +5,9 @@ export const ROUTES = {
 	/** Explicit index page so relative links between markdown pages resolve. */
 	DOCS_INDEX: '/docs/index',
 	/** The model catalog index. */
-	MODELS: '/models'
+	MODELS: '/models',
+	/** The site root (also an empty base URL path). */
+	ROOT: '/'
 } as const;
 
 /** API route served by the site (and the llama-server path probed for liveness). */

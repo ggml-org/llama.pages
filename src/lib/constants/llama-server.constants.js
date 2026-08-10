@@ -15,8 +15,6 @@ export const DEFAULT_URL = `http://${DEFAULT_HOST}:${DEFAULT_PORT}`;
 const NUMERIC_PORT_RE = /^\d+$/;
 const PROTOCOL_RE = /^https?:\/\//;
 const TRAILING_SLASHES_RE = /\/+$/;
-const HTTP_SCHEME = 'http';
-const HTTPS_SCHEME = 'https';
 const HTTPS_PORT = '443';
 const HTTP_PORT = '80';
 const MIN_PORT = 1;
@@ -30,8 +28,6 @@ export {
 	NUMERIC_PORT_RE,
 	PROTOCOL_RE,
 	TRAILING_SLASHES_RE,
-	HTTP_SCHEME,
-	HTTPS_SCHEME,
 	HTTPS_PORT,
 	HTTP_PORT,
 	MIN_PORT,

@@ -3,9 +3,7 @@ import {
 	DEFAULT_HOST,
 	DEFAULT_URL,
 	HTTP_PORT,
-	HTTP_SCHEME,
 	HTTPS_PORT,
-	HTTPS_SCHEME,
 	LOOPBACK_HOSTS,
 	LOOPBACK_TARGET,
 	MAX_PORT,
@@ -14,9 +12,11 @@ import {
 	NUMERIC_PORT_RE,
 	PROBE_TIMEOUT_MS,
 	PROTOCOL_RE,
+	ROUTES,
 	STORAGE_KEY,
 	TRAILING_SLASHES_RE
 } from '$lib/constants';
+import { UrlProtocol } from '$lib/enums';
 
 /**
  * Client for the user's Llama server (the local menu bar app by default, or
@@ -50,11 +50,11 @@ export class LlamaServerService {
 			const port = Number(trimmed);
 
 			return port >= MIN_PORT && port <= MAX_PORT
-				? `${HTTP_SCHEME}://${DEFAULT_HOST}:${port}`
+				? `${UrlProtocol.HTTP}//${DEFAULT_HOST}:${port}`
 				: null;
 		}
 
-		const withProtocol = PROTOCOL_RE.test(trimmed) ? trimmed : `${HTTPS_SCHEME}://${trimmed}`;
+		const withProtocol = PROTOCOL_RE.test(trimmed) ? trimmed : `${UrlProtocol.HTTPS}//${trimmed}`;
 
 		try {
 			const url = new URL(withProtocol);
@@ -67,7 +67,7 @@ export class LlamaServerService {
 				return null;
 			}
 
-			return url.origin + (url.pathname === '/' ? '' : url.pathname);
+			return url.origin + (url.pathname === ROUTES.ROOT ? '' : url.pathname);
 		} catch {
 			return null;
 		}
@@ -89,7 +89,7 @@ export class LlamaServerService {
 			const url = new URL(base);
 
 			if (LlamaServerService.isLoopback(base)) {
-				return `:${url.port || (url.protocol === `${HTTPS_SCHEME}:` ? HTTPS_PORT : HTTP_PORT)}`;
+				return `:${url.port || (url.protocol === UrlProtocol.HTTPS ? HTTPS_PORT : HTTP_PORT)}`;
 			}
 
 			return url.hostname;
