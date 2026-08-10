@@ -1,5 +1,6 @@
 import type { EntryGenerator, PageLoad } from './$types';
 import { error, redirect } from '@sveltejs/kit';
+import { ROUTES } from '$lib/constants';
 import { DocsService } from '$lib/services/docs.service';
 
 export const entries: EntryGenerator = () => DocsService.listAllEntries();
@@ -8,7 +9,7 @@ export const load: PageLoad = async ({ params }) => {
 	// The index lives at an explicit /docs/index URL so that relative links
 	// between markdown pages resolve correctly.
 	if (!params.page) {
-		redirect(307, '/docs/index');
+		redirect(307, ROUTES.DOCS_INDEX);
 	}
 
 	const local = params.page;

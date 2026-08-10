@@ -3,7 +3,7 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
-	import { LLAMA_PROMPT_MAX_CHARS } from '$lib/constants/docs';
+	import { DEFAULT_PORT, DEFAULT_URL, LLAMA_PROMPT_MAX_CHARS } from '$lib/constants';
 	import { LlamaServerStatus } from '$lib/enums';
 	import { LlamaServerService } from '$lib/services/llama-server.service';
 
@@ -20,7 +20,7 @@
 	let copied = $state(false);
 	let container = $state<HTMLElement>();
 	let markdown = $state('');
-	let llamaBase = $state(LlamaServerService.DEFAULT_URL);
+	let llamaBase = $state(DEFAULT_URL);
 	// Advisory only (see LlamaServerService): 'up' shows a green dot,
 	// 'unknown' an orange one — navigation is never blocked.
 	let llamaStatus = $state<LlamaServerStatus>(LlamaServerStatus.UNKNOWN);
@@ -72,10 +72,8 @@
 		const input = window.prompt(
 			(message ? `${message}\n` : '') +
 				'Enter the port of your local Llama app, or the full URL of a llama-server\n' +
-				`(e.g. ${LlamaServerService.DEFAULT_PORT} or https://llama.example.com):`,
-			llamaBase === LlamaServerService.DEFAULT_URL
-				? String(LlamaServerService.DEFAULT_PORT)
-				: llamaBase
+				`(e.g. ${DEFAULT_PORT} or https://llama.example.com):`,
+			llamaBase === DEFAULT_URL ? String(DEFAULT_PORT) : llamaBase
 		);
 
 		if (input === null) return false;

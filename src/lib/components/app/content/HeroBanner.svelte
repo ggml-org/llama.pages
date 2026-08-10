@@ -3,7 +3,7 @@
 	import appleIcon from '$lib/assets/logos/apple-icon.svg?raw';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import { Button } from '$lib/components/ui/button';
-	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
+	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
 </script>
 

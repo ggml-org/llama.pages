@@ -21,7 +21,7 @@
 	// and the backdrop come for free, no dialog dependency needed.
 	import { Check, Copy, X } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
+	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
 	import { ModelsCatalogService } from '$lib/services';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
 	import type { Build, Size } from '$lib/types';

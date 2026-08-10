@@ -1,5 +1,10 @@
-const GIGABYTE = 1e9;
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+import {
+	COMPACT_DECIMALS,
+	COMPACT_GB_THRESHOLD,
+	GIGABYTE,
+	MONTHS,
+	WIDE_DECIMALS
+} from '$lib/constants';
 
 /**
  * Format a byte count for display. Single GB unit (decimal, matching Hugging
@@ -10,7 +15,7 @@ export function formatGigabytes(size: number | undefined): string {
 
 	const gb = size / GIGABYTE;
 
-	return `${gb.toFixed(gb < 10 ? 2 : 1)} GB`;
+	return `${gb.toFixed(gb < COMPACT_GB_THRESHOLD ? COMPACT_DECIMALS : WIDE_DECIMALS)} GB`;
 }
 
 /** Human-friendly release date, e.g. "Mar 2026". `''` if missing/unparseable. */

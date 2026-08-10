@@ -1,4 +1,4 @@
-import { DEFAULT_PORT } from './src/lib/constants/llama-server.js';
+import { DEFAULT_PORT } from './src/lib/constants/llama-server.constants.js';
 import adapter from '@sveltejs/adapter-static';
 import { mdsvex } from 'mdsvex';
 import { relative, sep } from 'node:path';

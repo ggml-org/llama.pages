@@ -6,7 +6,13 @@
 // {{DEFAULT_PORT}} token (single source of truth in lib/constants/llama-server.js)
 // is replaced here so the raw served .md carries the real port, just like the
 // mdsvex preprocess does for the rendered HTML.
-import { DEFAULT_PORT } from '../src/lib/constants/llama-server.js';
+import { DEFAULT_PORT } from '../src/lib/constants/llama-server.constants.js';
+import {
+	FENCE_RE,
+	HEADING_RE,
+	MARKDOWN_EXT_RE,
+	NEWLINE
+} from '../src/lib/constants/markdown.constants.js';
 import GithubSlugger from 'github-slugger';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -20,7 +26,7 @@ fs.rmSync(STATIC_DIR, { force: true, recursive: true });
 
 const mdFiles = fs
 	.readdirSync(DOCS_SRC, { recursive: true })
-	.filter((entry) => entry.endsWith('.md'));
+	.filter((entry) => MARKDOWN_EXT_RE.test(entry));
 
 for (const entry of mdFiles) {
 	const dest = path.join(STATIC_DIR, entry);
@@ -48,7 +54,7 @@ function plainText(markdown) {
 const sections = [];
 
 for (const entry of mdFiles) {
-	const local = entry.replace(/\.md$/, '');
+	const local = entry.replace(MARKDOWN_EXT_RE, '');
 	const slugger = new GithubSlugger();
 
 	let title = local;
@@ -68,15 +74,15 @@ for (const entry of mdFiles) {
 	};
 
 	for (const line of expandTokens(fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8')).split(
-		'\n'
+		NEWLINE
 	)) {
-		if (/^\s*```/.test(line)) {
+		if (FENCE_RE.test(line)) {
 			inFence = !inFence;
 
 			continue;
 		}
 
-		const match = !inFence && line.match(/^(#{1,6})\s+(.*)$/);
+		const match = !inFence && line.match(HEADING_RE);
 
 		if (match) {
 			const level = match[1].length;

@@ -2,6 +2,7 @@
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { ModelsCatalogFamilyCard } from '$lib/components/app/models-catalog';
+	import { ROUTES } from '$lib/constants';
 	import { ModelsCatalogService } from '$lib/services';
 
 	// A teaser of the catalog on the homepage: the featured families, newest
@@ -21,7 +22,7 @@
 
 	<div class="mt-6 flex justify-center">
 		<a
-			href={resolve('/models')}
+			href={resolve(ROUTES.MODELS)}
 			class="inline-flex items-center gap-1.5 text-sm text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
 		>
 			Browse all models

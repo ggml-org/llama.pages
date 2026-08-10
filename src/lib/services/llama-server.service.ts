@@ -1,20 +1,22 @@
-import { STORAGE_KEY } from '$lib/constants/docs';
-import { DEFAULT_HOST, DEFAULT_PORT, DEFAULT_URL } from '$lib/constants/llama-server';
-
-const NUMERIC_PORT_RE = /^\d+$/;
-const PROTOCOL_RE = /^https?:\/\//;
-const TRAILING_SLASHES_RE = /\/+$/;
-const HTTP_SCHEME = 'http';
-const HTTPS_SCHEME = 'https';
-const HTTPS_PORT = '443';
-const HTTP_PORT = '80';
-const MIN_PORT = 1;
-const MAX_PORT = 65535;
-const LOOPBACK_HOSTS: string[] = ['localhost', '127.0.0.1', '[::1]'];
-const MODELS_PATH = '/v1/models';
-const DATA_KEY = 'data';
-const LOOPBACK_TARGET = 'loopback';
-const PROBE_TIMEOUT_MS = 1500;
+import {
+	DATA_KEY,
+	DEFAULT_HOST,
+	DEFAULT_URL,
+	HTTP_PORT,
+	HTTP_SCHEME,
+	HTTPS_PORT,
+	HTTPS_SCHEME,
+	LOOPBACK_HOSTS,
+	LOOPBACK_TARGET,
+	MAX_PORT,
+	MIN_PORT,
+	MODELS_PATH,
+	NUMERIC_PORT_RE,
+	PROBE_TIMEOUT_MS,
+	PROTOCOL_RE,
+	STORAGE_KEY,
+	TRAILING_SLASHES_RE
+} from '$lib/constants';
 
 /**
  * Client for the user's Llama server (the local menu bar app by default, or
@@ -27,11 +29,8 @@ const PROBE_TIMEOUT_MS = 1500;
  * See https://github.com/ggml-org/llama.pages/pull/30#discussion_r3551723116
  */
 export class LlamaServerService {
-	static readonly DEFAULT_URL = DEFAULT_URL;
-	static readonly DEFAULT_PORT = DEFAULT_PORT;
-
 	static getUrl(): string {
-		return localStorage.getItem(STORAGE_KEY) ?? LlamaServerService.DEFAULT_URL;
+		return localStorage.getItem(STORAGE_KEY) ?? DEFAULT_URL;
 	}
 
 	static saveUrl(base: string): void {

@@ -1,3 +1,4 @@
+import { MARKDOWN_EXT_RE, SOURCE_DIR_RE } from '$lib/constants';
 import type { FlatTocEntry, TocItem } from '$lib/types';
 import type { Component } from 'svelte';
 import { parse } from 'yaml';
@@ -6,8 +7,6 @@ type MdModule = { default: Component };
 
 // Docs source tree. The `import.meta.glob` patterns and the `?raw` suffix MUST
 // stay string literals (vite parses them), so they're not reusable constants.
-const SOURCE_DIR_RE = /^\/src\/docs\//;
-const MARKDOWN_EXT_RE = /\.md$/;
 
 /** '/src/docs/foo/bar.md' → 'foo/bar' */
 function normalizeKey(globPath: string): string {

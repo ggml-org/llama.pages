@@ -1,2 +1,2 @@
-export { MacDeviceType, OsKind, DeviceFormFactor } from './device';
-export { LlamaServerStatus } from './llama-server';
+export { MacDeviceType, OsKind, DeviceFormFactor } from './device.enums';
+export { LlamaServerStatus } from './llama-server.enums';

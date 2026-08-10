@@ -6,7 +6,7 @@
 		DocsSidebar,
 		DocsToc
 	} from '$lib/components/app/docs';
-	import { SITE_TITLE, SITE_URL } from '$lib/constants/site';
+	import { SITE_TITLE, SITE_URL } from '$lib/constants';
 	import { useDocsCodeCopyButtons } from '$lib/hooks/use-docs-code-copy-buttons.svelte';
 
 	let { data } = $props();

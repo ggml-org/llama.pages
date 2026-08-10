@@ -7,7 +7,7 @@
 		SITE_DESCRIPTION,
 		SITE_TITLE,
 		SITE_URL
-	} from '$lib/constants/site';
+	} from '$lib/constants';
 
 	function updateFavicon() {
 		const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
