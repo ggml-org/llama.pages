@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import ModelsCatalogFamilyCard from '$lib/components/app/catalog/ModelsCatalogFamilyCard.svelte';
+	import ModelsCatalogFamilyCard from '$lib/components/app/models-catalog/ModelsCatalogFamilyCard.svelte';
 	import { ModelsCatalogService } from '$lib/services';
 
 	// A teaser of the catalog on the homepage: the featured families, newest

@@ -6,7 +6,7 @@
 	// pages.
 	import { resolve } from '$app/paths';
 	import { logoFor } from '$lib/assets/logos';
-	import ModelsCatalogVisionBadge from '$lib/components/app/catalog/ModelsCatalogVisionBadge.svelte';
+	import ModelsCatalogVisionBadge from '$lib/components/app/models-catalog/ModelsCatalogVisionBadge.svelte';
 	import { ModelsCatalogService } from '$lib/services';
 	import type { Family } from '$lib/types';
 

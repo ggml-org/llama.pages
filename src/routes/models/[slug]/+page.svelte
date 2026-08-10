@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import ModelsCatalogInstallDialog from '$lib/components/app/catalog/ModelsCatalogInstallDialog.svelte';
-	import ModelsCatalogSizeRow from '$lib/components/app/catalog/ModelsCatalogSizeRow.svelte';
+	import ModelsCatalogInstallDialog from '$lib/components/app/models-catalog/ModelsCatalogInstallDialog.svelte';
+	import ModelsCatalogSizeRow from '$lib/components/app/models-catalog/ModelsCatalogSizeRow.svelte';
 	import { ModelsCatalogService } from '$lib/services';
 	import type { Build, Size } from '$lib/types';
 
