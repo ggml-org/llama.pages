@@ -7,7 +7,7 @@
 	import { resolve } from '$app/paths';
 	import { type Family, slugify } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
-	import { logoFor } from '$lib/logos';
+	import { logoFor } from '$lib/assets/logos';
 
 	let { family }: { family: Family } = $props();
 </script>

@@ -3,7 +3,7 @@
 	import { resolve } from '$app/paths';
 	import { families, releasedFor, slugify } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
-	import { logoFor } from '$lib/logos';
+	import { logoFor } from '$lib/assets/logos';
 </script>
 
 <svelte:head>

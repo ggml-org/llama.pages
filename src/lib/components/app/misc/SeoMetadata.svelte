@@ -1,6 +1,6 @@
 <script lang="ts">
-	import iconDark from '$lib/assets/icon-dark.svg?url';
-	import iconLight from '$lib/assets/icon-light.svg?url';
+	import iconDark from '$lib/assets/brand/icon-dark.svg?url';
+	import iconLight from '$lib/assets/brand/icon-light.svg?url';
 	import {
 		OG_IMAGE_ALT,
 		OG_IMAGE_PATH,
