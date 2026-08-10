@@ -1,9 +1,9 @@
 <script lang="ts">
-	import MiniSearch from 'minisearch';
 	import { CornerDownLeft, Search } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { searchState } from '$lib/docs/search.svelte';
+	import MiniSearch from 'minisearch';
 
 	interface Section {
 		id: number;
@@ -33,8 +33,10 @@
 
 	async function ensureIndex() {
 		if (mini) return;
+
 		const res = await fetch('/docs/search-index.json');
 		const docs: Section[] = await res.json();
+
 		for (const doc of docs) sections[doc.id] = doc;
 		mini = new MiniSearch<Section>({ fields: ['title', 'heading', 'text'] });
 		mini.addAll(docs);
@@ -48,29 +50,34 @@
 
 	/** A short window of `text` around the first matched term, split for <mark>. */
 	function fragmentParts(text: string, terms: string[]): { text: string; match: boolean }[] {
-		if (terms.length === 0 || !text) return [{ text: text.slice(0, 140), match: false }];
+		if (terms.length === 0 || !text) return [{ match: false, text: text.slice(0, 140) }];
+
 		const re = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
 		const first = text.search(re);
 		const start = first === -1 ? 0 : Math.max(0, first - 40);
 		const window = (start > 0 ? '…' : '') + text.slice(start, start + 160);
-		return window.split(re).map((part, i) => ({ text: part, match: i % 2 === 1 }));
+
+		return window.split(re).map((part, i) => ({ match: i % 2 === 1, text: part }));
 	}
 
 	const results: Result[] = $derived.by(() => {
 		const q = query.trim();
+
 		if (!mini || !q) return [];
+
 		return mini
-			.search(q, { prefix: true, fuzzy: 0.2, boost: { title: 3, heading: 2 } })
+			.search(q, { boost: { heading: 2, title: 3 }, fuzzy: 0.2, prefix: true })
 			.slice(0, 10)
 			.map((hit) => {
 				const section = sections[hit.id as number];
+
 				return {
+					fragment: fragmentParts(section.text, hit.terms),
+					hash: section.anchor ? `#${section.anchor}` : '',
+					heading: section.heading,
 					id: `docs-search-result-${hit.id}`,
 					page: section.local,
-					hash: section.anchor ? `#${section.anchor}` : '',
-					title: section.title,
-					heading: section.heading,
-					fragment: fragmentParts(section.text, hit.terms)
+					title: section.title
 				};
 			});
 	});
@@ -82,6 +89,7 @@
 
 	$effect(() => {
 		if (!dialog) return;
+
 		if (searchState.open && !dialog.open) {
 			query = '';
 			dialog.showModal();
@@ -102,8 +110,11 @@
 	function onInputKeydown(event: KeyboardEvent) {
 		if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
 			event.preventDefault();
+
 			if (results.length === 0) return;
+
 			const delta = event.key === 'ArrowDown' ? 1 : -1;
+
 			active = (active + delta + results.length) % results.length;
 			// Keyboard-only: pointer hover also sets `active` and must not scroll.
 			document.getElementById(results[active].id)?.scrollIntoView({ block: 'nearest' });

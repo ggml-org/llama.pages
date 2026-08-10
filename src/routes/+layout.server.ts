@@ -4,10 +4,13 @@ export const prerender = true;
 
 export const load: LayoutServerLoad = async ({ fetch }) => {
 	let stars: number | null = null;
+
 	try {
 		const res = await fetch('https://api.github.com/repos/ggml-org/llama.cpp');
+
 		if (res.ok) {
 			const json = (await res.json()) as { stargazers_count?: number };
+
 			if (typeof json.stargazers_count === 'number') {
 				stars = json.stargazers_count;
 			}
@@ -15,5 +18,6 @@ export const load: LayoutServerLoad = async ({ fetch }) => {
 	} catch {
 		// keep null on failure
 	}
+
 	return { stars };
 };

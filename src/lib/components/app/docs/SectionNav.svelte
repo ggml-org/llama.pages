@@ -10,7 +10,7 @@
 		depth?: number;
 	}
 
-	let { item, active, depth = 0 }: Props = $props();
+	let { active, depth = 0, item }: Props = $props();
 
 	function hasActive(node: TocItem): boolean {
 		return node.local === active || (node.sections?.some(hasActive) ?? false);

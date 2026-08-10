@@ -6,6 +6,7 @@ test('home page loads with expected content', async ({ page }) => {
 	await expect(page.getByText('curl -LsSf https://llama.app/install.sh | sh')).toBeVisible();
 
 	const packageManagersLink = page.getByRole('link', { name: 'Package managers' });
+
 	await expect(packageManagersLink).toBeVisible();
 	await expect(packageManagersLink).toHaveAttribute(
 		'href',

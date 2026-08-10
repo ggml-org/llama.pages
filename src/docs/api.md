@@ -45,22 +45,22 @@ Constrain the response to valid JSON, or to a specific schema:
 
 ```json
 {
-  "messages": [{"role": "user", "content": "Extract the name and date: ..."}],
-  "response_format": {
-    "type": "json_schema",
-    "schema": {
-      "type": "object",
-      "properties": {
-        "name": {"type": "string"},
-        "date": {"type": "string"}
-      },
-      "required": ["name", "date"]
-    }
-  }
+	"messages": [{ "role": "user", "content": "Extract the name and date: ..." }],
+	"response_format": {
+		"type": "json_schema",
+		"schema": {
+			"type": "object",
+			"properties": {
+				"name": { "type": "string" },
+				"date": { "type": "string" }
+			},
+			"required": ["name", "date"]
+		}
+	}
 }
 ```
 
-Use `{"type": "json_object"}` for free-form JSON. 
+Use `{"type": "json_object"}` for free-form JSON.
 
 ### Tool calling
 
@@ -72,13 +72,15 @@ Vision and audio models accept typed content parts in messages:
 
 ```json
 {
-  "messages": [{
-    "role": "user",
-    "content": [
-      {"type": "text", "text": "What is in this image?"},
-      {"type": "image_url", "image_url": {"url": "https://example.com/photo.jpg"}}
-    ]
-  }]
+	"messages": [
+		{
+			"role": "user",
+			"content": [
+				{ "type": "text", "text": "What is in this image?" },
+				{ "type": "image_url", "image_url": { "url": "https://example.com/photo.jpg" } }
+			]
+		}
+	]
 }
 ```
 
@@ -94,13 +96,13 @@ Responses include a standard OpenAI `usage` object, plus a llama.cpp `timings` o
 
 ## Other OpenAI-compatible endpoints
 
-| Endpoint | Purpose |
-| --- | --- |
-| `POST /v1/completions` | Text completion from a raw `prompt` |
-| `POST /v1/responses` | OpenAI Responses API (translated to chat completions internally) |
-| `POST /v1/embeddings` | Embeddings — requires a pooling-enabled model (see [serving](serve)) |
-| `POST /v1/rerank` | Rank documents against a query — requires a reranker model |
-| `GET /v1/models` | Model metadata (id, context size, parameters) |
+| Endpoint               | Purpose                                                              |
+| ---------------------- | -------------------------------------------------------------------- |
+| `POST /v1/completions` | Text completion from a raw `prompt`                                  |
+| `POST /v1/responses`   | OpenAI Responses API (translated to chat completions internally)     |
+| `POST /v1/embeddings`  | Embeddings — requires a pooling-enabled model (see [serving](serve)) |
+| `POST /v1/rerank`      | Rank documents against a query — requires a reranker model           |
+| `GET /v1/models`       | Model metadata (id, context size, parameters)                        |
 
 The model `id` reported by `/v1/models` defaults to the model file path; set a friendly name with `--alias`.
 
@@ -125,17 +127,17 @@ curl http://localhost:8080/v1/messages \
 
 These expose llama.cpp features beyond the OpenAI surface:
 
-| Endpoint | Purpose |
-| --- | --- |
-| `GET /health` | Liveness check: `200` when ready, `503` while loading |
-| `POST /completion` | Native completion with the full llama.cpp option set (token arrays, `n_probs` logprobs, `id_slot` pinning, per-request LoRA scales, ...) |
-| `POST /tokenize` / `POST /detokenize` | Convert between text and tokens |
-| `POST /apply-template` | Apply the model's chat template without running inference |
-| `POST /infill` | Fill-in-the-middle code completion from `input_prefix` and `input_suffix` |
-| `GET /props` | Server and model properties (context size, chat template, modalities) |
-| `GET /slots` | Current state of each processing slot |
-| `GET /metrics` | Prometheus metrics (requires `--metrics`) |
-| `GET /lora-adapters` / `POST /lora-adapters` | List and set LoRA adapter scales at runtime |
+| Endpoint                                     | Purpose                                                                                                                                  |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /health`                                | Liveness check: `200` when ready, `503` while loading                                                                                    |
+| `POST /completion`                           | Native completion with the full llama.cpp option set (token arrays, `n_probs` logprobs, `id_slot` pinning, per-request LoRA scales, ...) |
+| `POST /tokenize` / `POST /detokenize`        | Convert between text and tokens                                                                                                          |
+| `POST /apply-template`                       | Apply the model's chat template without running inference                                                                                |
+| `POST /infill`                               | Fill-in-the-middle code completion from `input_prefix` and `input_suffix`                                                                |
+| `GET /props`                                 | Server and model properties (context size, chat template, modalities)                                                                    |
+| `GET /slots`                                 | Current state of each processing slot                                                                                                    |
+| `GET /metrics`                               | Prometheus metrics (requires `--metrics`)                                                                                                |
+| `GET /lora-adapters` / `POST /lora-adapters` | List and set LoRA adapter scales at runtime                                                                                              |
 
 A minimal native completion request:
 
@@ -155,11 +157,11 @@ Errors use the OpenAI format:
 
 ```json
 {
-  "error": {
-    "code": 401,
-    "message": "Invalid API Key",
-    "type": "authentication_error"
-  }
+	"error": {
+		"code": 401,
+		"message": "Invalid API Key",
+		"type": "authentication_error"
+	}
 }
 ```
 

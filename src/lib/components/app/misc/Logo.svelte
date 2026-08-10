@@ -9,6 +9,8 @@
 </script>
 
 <span class="logo flex items-center text-foreground">
+	<!-- logoSvg is a trusted static SVG asset imported via ?raw -->
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	<span class="mark text-foreground">{@html logoSvg}</span>
 
 	{#if showName}

@@ -1,17 +1,18 @@
 <script lang="ts">
-	import {
-		SITE_URL,
-		SITE_TITLE,
-		SITE_DESCRIPTION,
-		OG_IMAGE_PATH,
-		OG_IMAGE_ALT
-	} from '$lib/constants/site';
-	import iconLight from '$lib/assets/icon-light.svg?url';
 	import iconDark from '$lib/assets/icon-dark.svg?url';
+	import iconLight from '$lib/assets/icon-light.svg?url';
+	import {
+		OG_IMAGE_ALT,
+		OG_IMAGE_PATH,
+		SITE_DESCRIPTION,
+		SITE_TITLE,
+		SITE_URL
+	} from '$lib/constants/site';
 
 	function updateFavicon() {
 		const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 		const link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
+
 		if (link) {
 			link.href = dark ? iconDark : iconLight;
 		}

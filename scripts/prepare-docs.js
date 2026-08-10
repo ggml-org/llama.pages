@@ -2,15 +2,15 @@
 //   - mirrors src/docs/*.md into static/docs/ so /docs/{page}.md URLs are
 //     served as plain static files
 //   - builds the section-level search index consumed by the ⌘K search modal
+import GithubSlugger from 'github-slugger';
 import fs from 'node:fs';
 import path from 'node:path';
-import GithubSlugger from 'github-slugger';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DOCS_SRC = path.join(ROOT, 'src/docs');
 const STATIC_DIR = path.join(ROOT, 'static/docs');
 
-fs.rmSync(STATIC_DIR, { recursive: true, force: true });
+fs.rmSync(STATIC_DIR, { force: true, recursive: true });
 
 const mdFiles = fs
 	.readdirSync(DOCS_SRC, { recursive: true })
@@ -18,6 +18,7 @@ const mdFiles = fs
 
 for (const entry of mdFiles) {
 	const dest = path.join(STATIC_DIR, entry);
+
 	fs.mkdirSync(path.dirname(dest), { recursive: true });
 	fs.copyFileSync(path.join(DOCS_SRC, entry), dest);
 }
@@ -39,31 +40,41 @@ function plainText(markdown) {
  * document order so duplicate suffixes match.
  */
 const sections = [];
+
 for (const entry of mdFiles) {
 	const local = entry.replace(/\.md$/, '');
 	const slugger = new GithubSlugger();
+
 	let title = local;
 	let heading = '';
 	let anchor = '';
 	let inFence = false;
 	let buffer = [];
+
 	const flush = () => {
 		const text = plainText(buffer.join(' '));
+
 		if (text || heading) {
-			sections.push({ id: sections.length, local, title, heading, anchor, text });
+			sections.push({ anchor, heading, id: sections.length, local, text, title });
 		}
+
 		buffer = [];
 	};
+
 	for (const line of fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8').split('\n')) {
 		if (/^\s*```/.test(line)) {
 			inFence = !inFence;
+
 			continue;
 		}
+
 		const match = !inFence && line.match(/^(#{1,6})\s+(.*)$/);
+
 		if (match) {
 			const level = match[1].length;
 			const text = plainText(match[2]);
 			const slug = slugger.slug(text);
+
 			if (level === 1) {
 				title = text;
 			} else if (level <= 3) {
@@ -73,8 +84,10 @@ for (const entry of mdFiles) {
 			} else {
 				buffer.push(text);
 			}
+
 			continue;
 		}
+
 		buffer.push(line);
 	}
 	flush();

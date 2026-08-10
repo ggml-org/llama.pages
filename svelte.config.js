@@ -1,7 +1,7 @@
-import { mdsvex } from 'mdsvex';
-import rehypeSlug from 'rehype-slug';
 import adapter from '@sveltejs/adapter-static';
+import { mdsvex } from 'mdsvex';
 import { relative, sep } from 'node:path';
+import rehypeSlug from 'rehype-slug';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -15,6 +15,7 @@ const config = {
 			return isExternalLibrary ? undefined : true;
 		}
 	},
+	extensions: ['.svelte', '.svx', '.md'],
 	kit: {
 		adapter: adapter(),
 		output: {
@@ -24,8 +25,7 @@ const config = {
 			entries: ['*']
 		}
 	},
-	preprocess: [mdsvex({ extensions: ['.svx', '.md'], rehypePlugins: [rehypeSlug] })],
-	extensions: ['.svelte', '.svx', '.md']
+	preprocess: [mdsvex({ extensions: ['.svx', '.md'], rehypePlugins: [rehypeSlug] })]
 };
 
 export default config;

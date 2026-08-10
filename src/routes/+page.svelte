@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { SITE_TITLE, SITE_DESCRIPTION } from '$lib/constants/site';
 	import HeroBanner from '$lib/components/app/content/HeroBanner.svelte';
-	import ShowcaseSections from '$lib/components/app/content/ShowcaseSections.svx';
 	import RunYourFirstModel from '$lib/components/app/content/RunYourFirstModel.svelte';
+	import ShowcaseSections from '$lib/components/app/content/ShowcaseSections.svx';
+	import { SITE_DESCRIPTION, SITE_TITLE } from '$lib/constants/site';
 </script>
 
 <svelte:head>

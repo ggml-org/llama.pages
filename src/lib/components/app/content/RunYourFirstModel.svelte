@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ArrowUpRight } from '@lucide/svelte';
+	import { resolve } from '$app/paths';
 	import { families } from '$lib/catalog';
 	import FamilyCard from '$lib/components/app/catalog/FamilyCard.svelte';
 
@@ -20,7 +21,7 @@
 
 	<div class="mt-6 flex justify-center">
 		<a
-			href="/models"
+			href={resolve('/models')}
 			class="inline-flex items-center gap-1.5 text-sm text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
 		>
 			Browse all models

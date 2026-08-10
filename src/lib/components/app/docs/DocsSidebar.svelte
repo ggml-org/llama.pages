@@ -1,7 +1,7 @@
 <script lang="ts">
+	import SectionNav from './SectionNav.svelte';
 	import { Search } from '@lucide/svelte';
 	import { searchState } from '$lib/docs/search.svelte';
-	import SectionNav from './SectionNav.svelte';
 	import type { TocItem } from '$lib/docs/types';
 
 	interface Props {
@@ -9,7 +9,7 @@
 		active: string;
 	}
 
-	let { toctree, active }: Props = $props();
+	let { active, toctree }: Props = $props();
 </script>
 
 <button

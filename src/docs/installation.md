@@ -26,4 +26,4 @@ To pair with a coding agent, install with a package manager or build yourself, p
 llama cli --version
 ```
 
-If this prints the version and build info, you are ready to go. Continue with the [Quickstart](quickstart) to download and run your first model. 
+If this prints the version and build info, you are ready to go. Continue with the [Quickstart](quickstart) to download and run your first model.
