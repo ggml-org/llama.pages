@@ -4,14 +4,7 @@
 	import type { Pathname } from '$app/types';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import { LLAMA_PROMPT_MAX_CHARS } from '$lib/constants/docs';
-	import {
-		DEFAULT_LLAMA_SERVER_URL,
-		getLlamaServerUrl,
-		llamaServerLabel,
-		parseLlamaServerInput,
-		probeLlamaServer,
-		saveLlamaServerUrl
-	} from '$lib/docs/llama-app';
+	import { LlamaServerService } from '$lib/services/llama-server.service';
 
 	interface Props {
 		local: string;
@@ -26,8 +19,8 @@
 	let copied = $state(false);
 	let container = $state<HTMLElement>();
 	let markdown = $state('');
-	let llamaBase = $state(DEFAULT_LLAMA_SERVER_URL);
-	// Advisory only (see $lib/docs/llama-app): 'up' shows a green dot,
+	let llamaBase = $state(LlamaServerService.DEFAULT_URL);
+	// Advisory only (see LlamaServerService): 'up' shows a green dot,
 	// 'unknown' an orange one — navigation is never blocked.
 	let llamaStatus = $state<'unknown' | 'up'>('unknown');
 
@@ -53,7 +46,7 @@
 	async function probe() {
 		llamaStatus = 'unknown';
 
-		if (await probeLlamaServer(llamaBase)) llamaStatus = 'up';
+		if (await LlamaServerService.probe(llamaBase)) llamaStatus = 'up';
 	}
 
 	// A function read defeats TS's control-flow narrowing, which can't see
@@ -67,7 +60,7 @@
 
 		if (!open) return;
 
-		llamaBase = getLlamaServerUrl();
+		llamaBase = LlamaServerService.getUrl();
 		probe();
 		markdown = (await fetchMarkdown()).slice(0, LLAMA_PROMPT_MAX_CHARS);
 	}
@@ -78,12 +71,12 @@
 			(message ? `${message}\n` : '') +
 				'Enter the port of your local Llama app, or the full URL of a llama-server\n' +
 				'(e.g. 8080 or https://llama.example.com):',
-			llamaBase === DEFAULT_LLAMA_SERVER_URL ? '8080' : llamaBase
+			llamaBase === LlamaServerService.DEFAULT_URL ? '8080' : llamaBase
 		);
 
 		if (input === null) return false;
 
-		const base = parseLlamaServerInput(input);
+		const base = LlamaServerService.parseInput(input);
 
 		if (!base) {
 			window.alert(`"${input}" is not a valid port or URL.`);
@@ -91,7 +84,7 @@
 			return false;
 		}
 
-		saveLlamaServerUrl(base);
+		LlamaServerService.saveUrl(base);
 		llamaBase = base;
 		await probe();
 
@@ -108,7 +101,7 @@
 
 		event.preventDefault();
 		const saved = await editLlamaServer(
-			`Couldn't verify a Llama server at ${llamaServerLabel(llamaBase)}.`
+			`Couldn't verify a Llama server at ${LlamaServerService.label(llamaBase)}.`
 		);
 
 		if (!saved) return;
@@ -207,7 +200,7 @@
 					</span>
 					Open in Llama
 					<span class="ml-auto truncate text-xs text-foreground/40">
-						{llamaServerLabel(llamaBase)}
+						{LlamaServerService.label(llamaBase)}
 					</span>
 					<span
 						class="size-1.5 shrink-0 rounded-full {llamaStatus === 'up'
