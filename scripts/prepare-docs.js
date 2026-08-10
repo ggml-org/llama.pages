@@ -2,10 +2,16 @@
 //   - mirrors src/docs/*.md into static/docs/ so /docs/{page}.md URLs are
 //     served as plain static files
 //   - builds the section-level search index consumed by the ⌘K search modal
+// The mirrored files are a build-time expansion of the source docs: the shared
+// {{DEFAULT_PORT}} token (single source of truth in lib/constants/llama-server.js)
+// is replaced here so the raw served .md carries the real port, just like the
+// mdsvex preprocess does for the rendered HTML.
+import { DEFAULT_PORT } from '../src/lib/constants/llama-server.js';
 import GithubSlugger from 'github-slugger';
 import fs from 'node:fs';
 import path from 'node:path';
 
+const expandTokens = (markdown) => markdown.replaceAll('{{DEFAULT_PORT}}', String(DEFAULT_PORT));
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DOCS_SRC = path.join(ROOT, 'src/docs');
 const STATIC_DIR = path.join(ROOT, 'static/docs');
@@ -20,7 +26,7 @@ for (const entry of mdFiles) {
 	const dest = path.join(STATIC_DIR, entry);
 
 	fs.mkdirSync(path.dirname(dest), { recursive: true });
-	fs.copyFileSync(path.join(DOCS_SRC, entry), dest);
+	fs.writeFileSync(dest, expandTokens(fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8')));
 }
 console.log(`[prepare-docs] mirrored ${mdFiles.length} markdown files into static/docs`);
 
@@ -61,7 +67,9 @@ for (const entry of mdFiles) {
 		buffer = [];
 	};
 
-	for (const line of fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8').split('\n')) {
+	for (const line of expandTokens(fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8')).split(
+		'\n'
+	)) {
 		if (/^\s*```/.test(line)) {
 			inFence = !inFence;
 

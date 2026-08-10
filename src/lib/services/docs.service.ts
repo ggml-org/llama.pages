@@ -4,9 +4,14 @@ import { parse } from 'yaml';
 
 type MdModule = { default: Component };
 
+// Docs source tree. The `import.meta.glob` patterns and the `?raw` suffix MUST
+// stay string literals (vite parses them), so they're not reusable constants.
+const SOURCE_DIR_RE = /^\/src\/docs\//;
+const MARKDOWN_EXT_RE = /\.md$/;
+
 /** '/src/docs/foo/bar.md' → 'foo/bar' */
 function normalizeKey(globPath: string): string {
-	return globPath.replace(/^\/src\/docs\//, '').replace(/\.md$/, '');
+	return globPath.replace(SOURCE_DIR_RE, '').replace(MARKDOWN_EXT_RE, '');
 }
 
 /**

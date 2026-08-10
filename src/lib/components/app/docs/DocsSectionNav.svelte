@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Self from './SectionNav.svelte';
+	import Self from './DocsSectionNav.svelte';
 	import { ChevronRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import type { TocItem } from '$lib/types';

@@ -1,4 +1,4 @@
-import CodeCopyButton from '$lib/components/app/docs/CodeCopyButton.svelte';
+import { DocsCodeCopyButton } from '$lib/components/app/docs';
 import { mount, unmount } from 'svelte';
 
 /**
@@ -7,7 +7,7 @@ import { mount, unmount } from 'svelte';
  * mounted imperatively here. Re-runs when the page changes (walks a getter so
  * reactive reads stay tracked), and tears the buttons down on cleanup.
  */
-export function useCodeCopyButtons(
+export function useDocsCodeCopyButtons(
 	getArticle: () => HTMLElement | undefined,
 	getPageKey: () => string
 ) {
@@ -24,7 +24,7 @@ export function useCodeCopyButtons(
 			wrapper.className = 'group relative';
 			pre.replaceWith(wrapper);
 			wrapper.appendChild(pre);
-			const button = mount(CodeCopyButton, {
+			const button = mount(DocsCodeCopyButton, {
 				props: { getText: () => pre.innerText },
 				target: wrapper
 			});

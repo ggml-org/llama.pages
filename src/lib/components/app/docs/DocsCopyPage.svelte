@@ -4,6 +4,7 @@
 	import type { Pathname } from '$app/types';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import { LLAMA_PROMPT_MAX_CHARS } from '$lib/constants/docs';
+	import { LlamaServerStatus } from '$lib/enums';
 	import { LlamaServerService } from '$lib/services/llama-server.service';
 
 	interface Props {
@@ -22,7 +23,7 @@
 	let llamaBase = $state(LlamaServerService.DEFAULT_URL);
 	// Advisory only (see LlamaServerService): 'up' shows a green dot,
 	// 'unknown' an orange one — navigation is never blocked.
-	let llamaStatus = $state<'unknown' | 'up'>('unknown');
+	let llamaStatus = $state<LlamaServerStatus>(LlamaServerStatus.UNKNOWN);
 
 	const llamaHref = $derived.by(() => {
 		const prompt = `Answer questions about this documentation page:\n\n${markdown}`;
@@ -33,7 +34,8 @@
 	async function fetchMarkdown(): Promise<string> {
 		const res = await fetch(mdPath);
 
-		return res.text();
+		// prepare-docs.js already expanded {{DEFAULT_PORT}} in the mirrored file.
+		return await res.text();
 	}
 
 	async function copyMarkdown() {
@@ -44,15 +46,15 @@
 	}
 
 	async function probe() {
-		llamaStatus = 'unknown';
+		llamaStatus = LlamaServerStatus.UNKNOWN;
 
-		if (await LlamaServerService.probe(llamaBase)) llamaStatus = 'up';
+		if (await LlamaServerService.probe(llamaBase)) llamaStatus = LlamaServerStatus.UP;
 	}
 
 	// A function read defeats TS's control-flow narrowing, which can't see
 	// that awaited calls above mutate llamaStatus.
 	function llamaIsUp(): boolean {
-		return llamaStatus === 'up';
+		return llamaStatus === LlamaServerStatus.UP;
 	}
 
 	async function toggleMenu() {
@@ -70,8 +72,10 @@
 		const input = window.prompt(
 			(message ? `${message}\n` : '') +
 				'Enter the port of your local Llama app, or the full URL of a llama-server\n' +
-				'(e.g. 8080 or https://llama.example.com):',
-			llamaBase === LlamaServerService.DEFAULT_URL ? '8080' : llamaBase
+				`(e.g. ${LlamaServerService.DEFAULT_PORT} or https://llama.example.com):`,
+			llamaBase === LlamaServerService.DEFAULT_URL
+				? String(LlamaServerService.DEFAULT_PORT)
+				: llamaBase
 		);
 
 		if (input === null) return false;
@@ -93,7 +97,7 @@
 
 	/** When the server is unverified, ask for it before navigating. */
 	async function openInLlama(event: MouseEvent) {
-		if (llamaStatus === 'up') {
+		if (llamaStatus === LlamaServerStatus.UP) {
 			open = false;
 
 			return; // let the <a> navigate normally
@@ -203,10 +207,10 @@
 						{LlamaServerService.label(llamaBase)}
 					</span>
 					<span
-						class="size-1.5 shrink-0 rounded-full {llamaStatus === 'up'
+						class="size-1.5 shrink-0 rounded-full {llamaStatus === LlamaServerStatus.UP
 							? 'bg-green-500'
 							: 'bg-orange-400'}"
-						title={llamaStatus === 'up'
+						title={llamaStatus === LlamaServerStatus.UP
 							? `Llama server detected at ${llamaBase}`
 							: `Couldn't verify a Llama server at ${llamaBase} — it may still be running (some browsers block local checks)`}
 					></span>

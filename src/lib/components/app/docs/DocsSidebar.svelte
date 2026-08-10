@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SectionNav from './SectionNav.svelte';
+	import DocsSectionNav from './DocsSectionNav.svelte';
 	import { Search } from '@lucide/svelte';
 	import { searchState } from '$lib/stores/search/index.svelte';
 	import type { TocItem } from '$lib/types';
@@ -29,7 +29,7 @@
 <nav class="mt-4 flex flex-col gap-0.5" aria-label="Documentation">
 	{#key active}
 		{#each toctree as item (item.title)}
-			<SectionNav {item} {active} />
+			<DocsSectionNav {item} {active} />
 		{/each}
 	{/key}
 </nav>

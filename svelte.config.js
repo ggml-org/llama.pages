@@ -1,3 +1,4 @@
+import { DEFAULT_PORT } from './src/lib/constants/llama-server.js';
 import adapter from '@sveltejs/adapter-static';
 import { mdsvex } from 'mdsvex';
 import { relative, sep } from 'node:path';
@@ -25,7 +26,16 @@ const config = {
 			entries: ['*']
 		}
 	},
-	preprocess: [mdsvex({ extensions: ['.svx', '.md'], rehypePlugins: [rehypeSlug] })]
+	preprocess: [
+		// Expand {{DEFAULT_PORT}} in markdown docs from the shared constant, so
+		// the port is defined once and docs can't drift from the app.
+		{
+			markup: ({ content }) => ({
+				code: String(content).replaceAll('{{DEFAULT_PORT}}', String(DEFAULT_PORT))
+			})
+		},
+		mdsvex({ extensions: ['.svx', '.md'], rehypePlugins: [rehypeSlug] })
+	]
 };
 
 export default config;

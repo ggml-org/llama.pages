@@ -1,5 +1,26 @@
 import data from '../models-catalog.json';
 import type { Build, Family, ModelsCatalog } from '$lib/types';
+import { formatGigabytes, formatMonthYear, slugify } from '$lib/utils';
+
+const GIB_BYTES = 1_048_576;
+const MB_PER_GB = 1024;
+// Compatibility budget (mirrors the app's Model+Compatibility.swift):
+//   budget      = RAM × RAM_BUDGET_RATIO − RAM_OVERHEAD_MB
+//   weightBytes = fileBytes × QUANT_WEIGHT
+// fits when weightBytes ≤ budget.
+const RAM_BUDGET_RATIO = 0.75;
+const RAM_OVERHEAD_MB = 2048;
+const QUANT_WEIGHT = 1.05;
+const INSTALL_SCHEME = 'llama';
+const INSTALL_PATH = 'install';
+const CLI_PARAMS_FLAG = 'serve -hf';
+const deeplink = (repo: string, quant?: string): string => {
+	const params = new URLSearchParams({ repo });
+
+	if (quant) params.set('quant', quant);
+
+	return `${INSTALL_SCHEME}://${INSTALL_PATH}?${params.toString()}`;
+};
 
 // Vocabulary (shared with the apps):
 //   family — the named release line, e.g. "Gemma 3". Holds the shared metadata.
@@ -23,15 +44,9 @@ export class ModelsCatalogService {
 		b.released.localeCompare(a.released)
 	);
 
-	/**
-	 * URL-safe id for a family name, e.g. "Qwen 3.6" → "qwen-3-6". Lossy but
-	 * stable, and unique since family names are.
-	 */
+	/** URL-safe id for a family name (see utils/slug). Kept for callers. */
 	static slugify(family: string): string {
-		return family
-			.toLowerCase()
-			.replace(/[^a-z0-9]+/g, '-')
-			.replace(/^-+|-+$/g, '');
+		return slugify(family);
 	}
 
 	/** The family for a given slug, or undefined if no family matches. */
@@ -41,42 +56,12 @@ export class ModelsCatalogService {
 
 	/** Human-friendly release date, e.g. "Mar 2026". '' if missing/unparseable. */
 	static releasedFor(f: Family): string {
-		const r = f.released;
-
-		if (!r) return '';
-
-		const [y, m] = r.split('-').map(Number);
-
-		if (!y || !m) return '';
-
-		const month = [
-			'Jan',
-			'Feb',
-			'Mar',
-			'Apr',
-			'May',
-			'Jun',
-			'Jul',
-			'Aug',
-			'Sep',
-			'Oct',
-			'Nov',
-			'Dec'
-		][m - 1];
-
-		return `${month} ${y}`;
+		return formatMonthYear(f.released);
 	}
 
-	/**
-	 * Format a download size (bytes) for display. Single GB unit (decimal,
-	 * matching Hugging Face/Finder) keeps the column comparable at a glance.
-	 */
+	/** Format a download size (bytes) for display (see utils/format). */
 	static displaySize(size: number | undefined): string {
-		if (!size) return '—';
-
-		const gb = size / 1e9;
-
-		return `${gb.toFixed(gb < 10 ? 2 : 1)} GB`;
+		return formatGigabytes(size);
 	}
 
 	// Memory tiers Macs ship with (GB). Tiers past 512 extrapolate Apple's
@@ -95,10 +80,10 @@ export class ModelsCatalogService {
 	static minMemForBuild(b: Build): number | null {
 		if (!b.sizeBytes) return null;
 
-		const weightMb = (b.sizeBytes / 1_048_576) * 1.05;
+		const weightMb = (b.sizeBytes / GIB_BYTES) * QUANT_WEIGHT;
 
 		for (const tier of ModelsCatalogService.MAC_MEM_TIERS) {
-			const budgetMb = tier * 1024 * 0.75 - 2048;
+			const budgetMb = tier * MB_PER_GB * RAM_BUDGET_RATIO - RAM_OVERHEAD_MB;
 
 			if (weightMb <= budgetMb) return tier;
 		}
@@ -119,24 +104,16 @@ export class ModelsCatalogService {
 		return tiers.length ? Math.min(...tiers) : null;
 	}
 
-	// URL scheme the install deeplinks target. Production points at the
-	// shipping app (`llama://`); switch to `llama-dev` when testing dev builds.
-	private static readonly INSTALL_SCHEME = 'llama';
-
 	/**
 	 * Deeplink that Llama's `LlamabarnURL.parse` accepts.
 	 * Shape (RFC 017): llama://install?repo={org}/{repo}[&quant={QUANT}]
 	 */
 	static deeplink(b: Build): string {
-		const params = new URLSearchParams({ repo: b.repo });
-
-		if (b.quant) params.set('quant', b.quant);
-
-		return `${ModelsCatalogService.INSTALL_SCHEME}://install?${params.toString()}`;
+		return deeplink(b.repo, b.quant);
 	}
 
 	/** CLI equivalent of the deeplink; llama.cpp resolves `-hf {org}/{repo}[:{QUANT}]`. */
 	static cliCommand(b: Build): string {
-		return `llama serve -hf ${b.repo}${b.quant ? `:${b.quant}` : ''}`;
+		return `llama ${CLI_PARAMS_FLAG} ${b.repo}${b.quant ? `:${b.quant}` : ''}`;
 	}
 }
