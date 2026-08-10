@@ -1,5 +1,3 @@
-import type { MacDeviceType } from './mac-models';
-export type { MacDeviceType };
 import {
 	detectBrowser,
 	detectFormFactor,
@@ -7,21 +5,8 @@ import {
 	getChromeDeviceModel
 } from './detection';
 import { getMacModelFromHeuristics, parseMacModelFromRenderer } from './mac-models';
-
-export type OsKind = 'mac' | 'windows' | 'linux' | 'ios' | 'android' | 'unknown';
-export type DeviceFormFactor = 'desktop' | 'mobile' | 'tablet';
-
-export interface DeviceInfo {
-	os: OsKind;
-	osName: string;
-	macDeviceType: MacDeviceType;
-	appleChip: string | null;
-	isMac: boolean;
-	isWindows: boolean;
-	isLinux: boolean;
-	isMobile: boolean;
-	browser: string;
-}
+import { DeviceFormFactor, MacDeviceType, OsKind } from '$lib/enums';
+import type { DeviceInfo } from '$lib/types';
 
 const deviceInfo = $state<DeviceInfo>({
 	appleChip: null,
@@ -30,8 +15,8 @@ const deviceInfo = $state<DeviceInfo>({
 	isMac: false,
 	isMobile: false,
 	isWindows: false,
-	macDeviceType: 'unknown',
-	os: 'unknown',
+	macDeviceType: MacDeviceType.UNKNOWN,
+	os: OsKind.UNKNOWN,
 	osName: 'your device'
 });
 
@@ -57,14 +42,14 @@ async function detectAndSet() {
 	const isLinuxDesktop = !isAndroid && !isIOS && /Linux/i.test(platformFromData);
 
 	deviceInfo.os = isIOS
-		? 'ios'
+		? OsKind.IOS
 		: isMacDesktop
-			? 'mac'
+			? OsKind.MAC
 			: isWindows
-				? 'windows'
+				? OsKind.WINDOWS
 				: isLinuxDesktop
-					? 'linux'
-					: 'unknown';
+					? OsKind.LINUX
+					: OsKind.UNKNOWN;
 	deviceInfo.osName = isIOS
 		? 'your computer'
 		: isMacDesktop
@@ -78,7 +63,7 @@ async function detectAndSet() {
 	deviceInfo.isMac = isMacDesktop;
 	deviceInfo.isWindows = isWindows;
 	deviceInfo.isLinux = isLinuxDesktop;
-	deviceInfo.isMobile = detectFormFactor() === 'mobile';
+	deviceInfo.isMobile = detectFormFactor() === DeviceFormFactor.MOBILE;
 	deviceInfo.browser = detectBrowser();
 
 	if (isMacDesktop) {
@@ -100,7 +85,7 @@ async function detectAndSet() {
 				const battery = await batteryNav.getBattery();
 				const isDesktop = battery.chargingTime === 0 && battery.dischargingTime === Infinity;
 
-				deviceInfo.macDeviceType = isDesktop ? 'desktop' : 'macbook';
+				deviceInfo.macDeviceType = isDesktop ? MacDeviceType.DESKTOP : MacDeviceType.MACBOOK;
 			} catch (e) {
 				throw e instanceof Error ? e : new Error('Battery API failed');
 			}
@@ -113,7 +98,7 @@ async function detectAndSet() {
 			const parsed = parseMacModelFromRenderer(renderer);
 
 			if (parsed) {
-				if (deviceInfo.macDeviceType === 'unknown') {
+				if (deviceInfo.macDeviceType === MacDeviceType.UNKNOWN) {
 					deviceInfo.macDeviceType = parsed.type;
 				}
 
@@ -122,7 +107,7 @@ async function detectAndSet() {
 		}
 
 		// Step 4: Heuristics
-		if (deviceInfo.macDeviceType === 'unknown') {
+		if (deviceInfo.macDeviceType === MacDeviceType.UNKNOWN) {
 			const memNav = navigator as Navigator & {
 				deviceMemory?: number;
 				hardwareConcurrency?: number;
@@ -138,11 +123,11 @@ async function detectAndSet() {
 		}
 
 		// Step 5: Determine friendly name
-		if (deviceInfo.macDeviceType === 'macbook') {
+		if (deviceInfo.macDeviceType === MacDeviceType.MACBOOK) {
 			deviceInfo.osName = 'your MacBook';
-		} else if (deviceInfo.macDeviceType === 'desktop' && deviceInfo.appleChip) {
+		} else if (deviceInfo.macDeviceType === MacDeviceType.DESKTOP && deviceInfo.appleChip) {
 			deviceInfo.osName = deviceInfo.appleChip;
-		} else if (deviceInfo.macDeviceType === 'desktop') {
+		} else if (deviceInfo.macDeviceType === MacDeviceType.DESKTOP) {
 			deviceInfo.osName = 'your Mac';
 		} else {
 			deviceInfo.osName = 'your Mac';

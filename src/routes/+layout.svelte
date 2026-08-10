@@ -4,7 +4,7 @@
 	import 'prismjs/themes/prism-dark.css';
 	import SeoMetadata from '$lib/components/app/misc/SeoMetadata.svelte';
 	import SiteHeader from '$lib/components/app/navigation/SiteHeader.svelte';
-	import { Toaster } from '$lib/components/ui/sonner/index.js';
+	import { Toaster } from '$lib/components/ui/sonner';
 	import * as deviceStore from '$lib/stores/device/index.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import { onMount } from 'svelte';

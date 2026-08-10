@@ -2,10 +2,22 @@
 //   - mirrors src/docs/*.md into static/docs/ so /docs/{page}.md URLs are
 //     served as plain static files
 //   - builds the section-level search index consumed by the ⌘K search modal
+// The mirrored files are a build-time expansion of the source docs: the shared
+// {{DEFAULT_PORT}} token (single source of truth in lib/constants/llama-server.constants.js)
+// is replaced here so the raw served .md carries the real port, just like the
+// mdsvex preprocess does for the rendered HTML.
+import { DEFAULT_PORT } from '../src/lib/constants/llama-server.constants.js';
+import {
+	FENCE_RE,
+	HEADING_RE,
+	MARKDOWN_EXT_RE,
+	NEWLINE
+} from '../src/lib/constants/markdown.constants.js';
 import GithubSlugger from 'github-slugger';
 import fs from 'node:fs';
 import path from 'node:path';
 
+const expandTokens = (markdown) => markdown.replaceAll('{{DEFAULT_PORT}}', String(DEFAULT_PORT));
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DOCS_SRC = path.join(ROOT, 'src/docs');
 const STATIC_DIR = path.join(ROOT, 'static/docs');
@@ -14,13 +26,13 @@ fs.rmSync(STATIC_DIR, { force: true, recursive: true });
 
 const mdFiles = fs
 	.readdirSync(DOCS_SRC, { recursive: true })
-	.filter((entry) => entry.endsWith('.md'));
+	.filter((entry) => MARKDOWN_EXT_RE.test(entry));
 
 for (const entry of mdFiles) {
 	const dest = path.join(STATIC_DIR, entry);
 
 	fs.mkdirSync(path.dirname(dest), { recursive: true });
-	fs.copyFileSync(path.join(DOCS_SRC, entry), dest);
+	fs.writeFileSync(dest, expandTokens(fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8')));
 }
 console.log(`[prepare-docs] mirrored ${mdFiles.length} markdown files into static/docs`);
 
@@ -42,7 +54,7 @@ function plainText(markdown) {
 const sections = [];
 
 for (const entry of mdFiles) {
-	const local = entry.replace(/\.md$/, '');
+	const local = entry.replace(MARKDOWN_EXT_RE, '');
 	const slugger = new GithubSlugger();
 
 	let title = local;
@@ -61,14 +73,16 @@ for (const entry of mdFiles) {
 		buffer = [];
 	};
 
-	for (const line of fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8').split('\n')) {
-		if (/^\s*```/.test(line)) {
+	for (const line of expandTokens(fs.readFileSync(path.join(DOCS_SRC, entry), 'utf8')).split(
+		NEWLINE
+	)) {
+		if (FENCE_RE.test(line)) {
 			inFence = !inFence;
 
 			continue;
 		}
 
-		const match = !inFence && line.match(/^(#{1,6})\s+(.*)$/);
+		const match = !inFence && line.match(HEADING_RE);
 
 		if (match) {
 			const level = match[1].length;

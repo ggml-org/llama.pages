@@ -1,8 +1,8 @@
 <script lang="ts">
 	import DocsSectionNav from './DocsSectionNav.svelte';
 	import { Search } from '@lucide/svelte';
-	import { searchState } from '$lib/docs/search.svelte';
-	import type { TocItem } from '$lib/docs/types';
+	import { searchState } from '$lib/stores/search/index.svelte';
+	import type { TocItem } from '$lib/types';
 
 	interface Props {
 		toctree: TocItem[];

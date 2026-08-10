@@ -8,3 +8,7 @@ export const LLAMA_PROMPT_MAX_CHARS = 6000;
 
 /** How long (ms) the "copied" feedback stays visible on a copy button. */
 export const COPY_FEEDBACK_MS = 2000;
+
+// Matches the /src/docs/** glob base in docs.service.ts; the glob patterns
+// themselves must stay string literals, only this prefix regex is a constant.
+export const SOURCE_DIR_RE = /^\/src\/docs\//;

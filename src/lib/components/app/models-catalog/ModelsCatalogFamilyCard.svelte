@@ -6,8 +6,9 @@
 	// pages.
 	import { resolve } from '$app/paths';
 	import { logoFor } from '$lib/assets/logos';
-	import { type Family, slugify } from '$lib/catalog';
 	import ModelsCatalogVisionBadge from '$lib/components/app/models-catalog/ModelsCatalogVisionBadge.svelte';
+	import { ModelsCatalogService } from '$lib/services';
+	import type { Family } from '$lib/types';
 
 	let { family }: { family: Family } = $props();
 </script>
@@ -15,7 +16,7 @@
 <!-- The whole tile is a link to the family's detail page. As a real <a href>
      it supports cmd/middle-click to open in a new tab, "copy link", etc. -->
 <a
-	href={resolve(`/models/${slugify(family.name)}`)}
+	href={resolve(`/models/${ModelsCatalogService.slugify(family.name)}`)}
 	class="flex h-full flex-col rounded-2xl border border-foreground/6 bg-foreground/2 p-5 transition-colors hover:border-foreground/12"
 >
 	<!-- Brand mark on its own row at the top, so the name and description

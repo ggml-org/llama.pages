@@ -21,9 +21,10 @@
 	// and the backdrop come for free, no dialog dependency needed.
 	import { Check, Copy, X } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import { type Build, cliCommand, displaySize, minMemForBuild, type Size } from '$lib/catalog';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
+	import { ModelsCatalogService } from '$lib/services';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import type { Build, Size } from '$lib/types';
 
 	// The build being installed plus its size (for the title), or null when the
 	// dialog is closed. Owned by the page (bindable) so closing the dialog
@@ -50,9 +51,9 @@
 
 		if (run.build.quant) parts.push(run.build.quant.toUpperCase());
 
-		if (run.build.sizeBytes) parts.push(displaySize(run.build.sizeBytes));
+		if (run.build.sizeBytes) parts.push(ModelsCatalogService.displaySize(run.build.sizeBytes));
 
-		const mem = minMemForBuild(run.build);
+		const mem = ModelsCatalogService.minMemForBuild(run.build);
 
 		if (mem) parts.push(`requires ${mem} GB+ memory`);
 
@@ -143,12 +144,12 @@
 					<code
 						class="block min-w-0 flex-1 overflow-x-auto px-4 py-3 text-left font-mono text-[13px] whitespace-nowrap text-foreground/90"
 					>
-						{cliCommand(run.build)}
+						{ModelsCatalogService.cliCommand(run.build)}
 					</code>
 					<button
 						class="flex shrink-0 cursor-pointer items-center border-l border-secondary px-4 text-foreground/70 hover:text-foreground"
 						aria-label={copied ? 'Copied command' : 'Copy command'}
-						onclick={() => run && copyCli(cliCommand(run.build))}
+						onclick={() => run && copyCli(ModelsCatalogService.cliCommand(run.build))}
 					>
 						{#if copied}
 							<Check class="size-4" />
