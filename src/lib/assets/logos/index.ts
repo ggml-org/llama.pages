@@ -1,14 +1,14 @@
 // Per-brand logos, mirroring LlamaBarn's ModelLogos asset set.
 // SVGs are inlined (?raw) so they inherit text color via `currentColor`.
-import gemma from './logos/gemma.svg?raw';
+import gemma from './gemma.svg?raw';
 // GLM models are made by Z.ai, so we use the Z brand logo for that brand.
-import glm from './logos/glm.svg?raw';
-import mistral from './logos/mistral.svg?raw';
-import nvidia from './logos/nvidia.svg?raw';
-import openai from './logos/openai.svg?raw';
+import glm from './glm.svg?raw';
+import mistral from './mistral.svg?raw';
+import nvidia from './nvidia.svg?raw';
+import openai from './openai.svg?raw';
 // Laguna models are made by Poolside, so we use the Poolside logo for that brand.
-import poolside from './logos/poolside.svg?raw';
-import qwen from './logos/qwen.svg?raw';
+import poolside from './poolside.svg?raw';
+import qwen from './qwen.svg?raw';
 
 // Keyed by the `brand` label used in catalog.json.
 const byBrand: Record<string, string> = {

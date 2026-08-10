@@ -3,7 +3,7 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
-	import { LLAMA_PROMPT_MAX_CHARS } from '$lib/constants/docs';
+	import { LLAMA_PROMPT_MAX_CHARS } from '$lib/constants';
 	import {
 		DEFAULT_LLAMA_SERVER_URL,
 		getLlamaServerUrl,

@@ -7,7 +7,7 @@
 // requests behind the Local Network Access permission).
 // See https://github.com/ggml-org/llama.pages/pull/30#discussion_r3551723116
 
-import { STORAGE_KEY } from '$lib/constants/docs';
+import { STORAGE_KEY } from '$lib/constants';
 
 export const DEFAULT_LLAMA_SERVER_URL = 'http://localhost:8080';
 

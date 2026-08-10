@@ -5,9 +5,9 @@
 	// invite a click, not carry specs; sizes live on the index and detail
 	// pages.
 	import { resolve } from '$app/paths';
+	import { logoFor } from '$lib/assets/logos';
 	import { type Family, slugify } from '$lib/catalog';
-	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
-	import { logoFor } from '$lib/logos';
+	import ModelsCatalogVisionBadge from '$lib/components/app/models-catalog/ModelsCatalogVisionBadge.svelte';
 
 	let { family }: { family: Family } = $props();
 </script>
@@ -29,7 +29,7 @@
 	<h3 class="flex min-w-0 items-center gap-1.5 text-[16px] font-medium">
 		<span class="truncate">{family.name}</span>
 		{#if family.sizes.some((s) => s.vision)}
-			<VisionBadge />
+			<ModelsCatalogVisionBadge />
 		{/if}
 	</h3>
 
