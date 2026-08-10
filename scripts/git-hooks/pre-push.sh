@@ -10,7 +10,7 @@
 needs_check=false
 
 # Read refs from stdin: local_ref local_sha remote_ref remote_sha
-while read local_ref local_sha remote_ref remote_sha; do
+while read -r local_ref local_sha remote_ref remote_sha; do
 	# New branch or force-push — always check
 	if [ "$local_sha" = "0000000000000000000000000000000000000000" ] || \
 	   [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
