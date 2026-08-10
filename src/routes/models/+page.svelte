@@ -2,7 +2,7 @@
 	import { ChevronRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { logoFor } from '$lib/assets/logos';
-	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+	import ModelsCatalogVisionBadge from '$lib/components/app/catalog/ModelsCatalogVisionBadge.svelte';
 	import { ModelsCatalogService } from '$lib/services';
 </script>
 
@@ -62,7 +62,7 @@
 					<h3 class="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[16px] font-medium">
 						<span class="mr-0.5">{f.name}</span>
 						{#if f.sizes.some((s) => s.vision)}
-							<VisionBadge />
+							<ModelsCatalogVisionBadge />
 						{/if}
 						{#each f.sizes as s (s.name)}
 							<span

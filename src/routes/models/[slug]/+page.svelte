@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import InstallDialog from '$lib/components/app/catalog/InstallDialog.svelte';
-	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
+	import ModelsCatalogInstallDialog from '$lib/components/app/catalog/ModelsCatalogInstallDialog.svelte';
+	import ModelsCatalogSizeRow from '$lib/components/app/catalog/ModelsCatalogSizeRow.svelte';
 	import { ModelsCatalogService } from '$lib/services';
 	import type { Build, Size } from '$lib/types';
 
@@ -10,7 +10,7 @@
 
 	// The build (plus its size, for the title) the install dialog is showing;
 	// null when closed. Same modal on every platform -- it varies its own copy
-	// by platform, see InstallDialog.
+	// by platform, see ModelsCatalogInstallDialog.
 	let run = $state<{ build: Build; size: Size } | null>(null);
 
 	// Whether to also show each size's smaller quantized builds. Off by default:
@@ -83,11 +83,15 @@
 		<table class="w-full text-left">
 			<tbody>
 				{#each family.sizes as s (s.name)}
-					<SizeRow size={s} {showQuantized} oninstall={(build, size) => (run = { build, size })} />
+					<ModelsCatalogSizeRow
+						size={s}
+						{showQuantized}
+						oninstall={(build, size) => (run = { build, size })}
+					/>
 				{/each}
 			</tbody>
 		</table>
 	</section>
 </main>
 
-<InstallDialog bind:run />
+<ModelsCatalogInstallDialog bind:run />

@@ -22,7 +22,7 @@
 	{#if deviceInfo.isMac}
 		<div class="-mb-8 flex flex-col items-center gap-6">
 			<!-- Tags the click as the "Download" goal; source separates it from
-			     the other download link in InstallDialog -->
+			     the other download link in ModelsCatalogInstallDialog -->
 			<Button
 				href={MACOS_DOWNLOAD_URL}
 				size="lg"

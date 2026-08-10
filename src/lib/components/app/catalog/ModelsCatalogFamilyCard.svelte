@@ -6,7 +6,7 @@
 	// pages.
 	import { resolve } from '$app/paths';
 	import { logoFor } from '$lib/assets/logos';
-	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+	import ModelsCatalogVisionBadge from '$lib/components/app/catalog/ModelsCatalogVisionBadge.svelte';
 	import { ModelsCatalogService } from '$lib/services';
 	import type { Family } from '$lib/types';
 
@@ -30,7 +30,7 @@
 	<h3 class="flex min-w-0 items-center gap-1.5 text-[16px] font-medium">
 		<span class="truncate">{family.name}</span>
 		{#if family.sizes.some((s) => s.vision)}
-			<VisionBadge />
+			<ModelsCatalogVisionBadge />
 		{/if}
 	</h3>
 
