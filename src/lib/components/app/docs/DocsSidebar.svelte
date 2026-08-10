@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SectionNav from './SectionNav.svelte';
 	import { Search } from '@lucide/svelte';
-	import { searchState } from '$lib/docs/search.svelte';
+	import { searchState } from '$lib/stores/search/index.svelte';
 	import type { TocItem } from '$lib/types';
 
 	interface Props {

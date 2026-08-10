@@ -2,7 +2,7 @@
 	import { CornerDownLeft, Search } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { searchState } from '$lib/docs/search.svelte';
+	import { searchState } from '$lib/stores/search/index.svelte';
 	import MiniSearch from 'minisearch';
 
 	interface Section {
