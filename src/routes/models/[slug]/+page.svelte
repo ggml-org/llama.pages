@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { releasedFor } from '$lib/catalog';
 	import InstallDialog from '$lib/components/app/catalog/InstallDialog.svelte';
 	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
+	import { ModelsCatalogService } from '$lib/services';
 	import type { Build, Size } from '$lib/types';
 
 	let { data }: { data: PageData } = $props();
@@ -36,7 +36,7 @@
 	<header>
 		<h1 class="text-[30px] font-semibold tracking-tight">{family.name}</h1>
 		<div class="mt-2.5 text-[13px] text-muted-foreground">
-			<span class="tabular-nums">{releasedFor(family)}</span>
+			<span class="tabular-nums">{ModelsCatalogService.releasedFor(family)}</span>
 		</div>
 		<p class="mt-3 max-w-xl text-[15px] text-muted-foreground">{family.description}</p>
 	</header>

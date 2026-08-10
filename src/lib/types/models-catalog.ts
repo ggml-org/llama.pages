@@ -38,4 +38,7 @@ export type Family = {
 };
 
 // Just the list of families — no top-level wrapper; per-consumer extras live in the consumer.
-export type Catalog = Family[];
+export type ModelsCatalog = Family[];
+
+/** @deprecated use ModelsCatalog. */
+export type Catalog = ModelsCatalog;

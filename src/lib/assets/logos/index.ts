@@ -10,7 +10,7 @@ import openai from './openai.svg?raw';
 import poolside from './poolside.svg?raw';
 import qwen from './qwen.svg?raw';
 
-// Keyed by the `brand` label used in catalog.json.
+// Keyed by the `brand` label used in models-catalog.json.
 const byBrand: Record<string, string> = {
 	Gemma: gemma,
 	GLM: glm,
