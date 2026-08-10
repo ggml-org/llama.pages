@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
 # Pre-push hook for llama.pages
-# Runs: lint + test.
+# Runs: lint. Tests run in CI.
 #
-# Nothing is stashed: `prettier --check`, `eslint` and the test suite are
-# read-only over tracked files, so unstaged working-tree changes are never
-# moved or lost (stashing risks exactly that).
+# Nothing is stashed: `prettier --check` and `eslint` are read-only over
+# tracked files, so unstaged working-tree changes are never moved or lost
+# (stashing risks exactly that).
 
 needs_check=false
 
@@ -44,12 +44,6 @@ echo "Running pre-push checks for llama.pages..."
 # Lint
 if ! npm run lint; then
 	echo "❌ Lint failed"
-	exit 1
-fi
-
-# Test
-if ! npm test; then
-	echo "❌ Tests failed"
 	exit 1
 fi
 
