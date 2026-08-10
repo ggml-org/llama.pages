@@ -7,7 +7,7 @@ const PAGES: { path: string; marker: string }[] = [
 	{ marker: 'https://llama.app/install.sh', path: '/' },
 	{ marker: 'A curated selection of open models', path: '/models' },
 	{ marker: 'GPT-OSS', path: '/models/gpt-oss' },
-	{ marker: 'Introduction', path: '/docs/index' },
+	{ marker: 'Introduction', path: '/docs/introduction' },
 	{ marker: 'Running a server', path: '/docs/serve' },
 	{ marker: 'API server', path: '/docs/api' }
 ];
@@ -21,9 +21,9 @@ for (const { marker, path } of PAGES) {
 	});
 }
 
-test('GET /docs redirects to /docs/index', async ({ page }) => {
+test('GET /docs redirects to /docs/introduction', async ({ page }) => {
 	await page.goto('/docs');
-	await page.waitForURL('**/docs/index');
+	await page.waitForURL('**/docs/introduction');
 
 	await expect(page.locator('body')).toContainText('Introduction');
 });

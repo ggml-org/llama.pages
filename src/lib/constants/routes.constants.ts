@@ -3,7 +3,7 @@ export const ROUTES = {
 	/** Docs base — clients are redirected to DOCS_INDEX. */
 	DOCS: '/docs',
 	/** Explicit index page so relative links between markdown pages resolve. */
-	DOCS_INDEX: '/docs/index',
+	DOCS_INDEX: '/docs/introduction',
 	/** The model catalog index. */
 	MODELS: '/models',
 	/** The site root (also an empty base URL path). */

@@ -15,6 +15,12 @@
 		page.url.pathname === ROUTES.MODELS || page.url.pathname.startsWith(`${ROUTES.MODELS}/`)
 	);
 
+	// Whether we're anywhere in the Docs section, which highlights the permanent
+	// "Docs" nav link.
+	const onDocs = $derived(
+		page.url.pathname === ROUTES.DOCS || page.url.pathname.startsWith(`${ROUTES.DOCS}/`)
+	);
+
 	const NEXT_MODE = { dark: 'system', light: 'dark', system: 'light' } as const;
 
 	function cycleMode() {
@@ -41,6 +47,14 @@
 			class={onModels ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}
 		>
 			Models
+		</a>
+
+		<a
+			href={resolve(ROUTES.DOCS)}
+			aria-current={onDocs ? 'page' : undefined}
+			class={onDocs ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}
+		>
+			Docs
 		</a>
 	</nav>
 
