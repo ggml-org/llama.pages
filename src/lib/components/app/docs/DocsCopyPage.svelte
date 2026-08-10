@@ -3,15 +3,9 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import { Logo } from '$lib/components/app';
-	import { LLAMA_PROMPT_MAX_CHARS } from '$lib/constants';
-	import {
-		DEFAULT_LLAMA_SERVER_URL,
-		getLlamaServerUrl,
-		llamaServerLabel,
-		parseLlamaServerInput,
-		probeLlamaServer,
-		saveLlamaServerUrl
-	} from '$lib/docs/llama-app';
+	import { DEFAULT_PORT, DEFAULT_URL, LLAMA_PROMPT_MAX_CHARS } from '$lib/constants';
+	import { LlamaServerStatus } from '$lib/enums';
+	import { LlamaServerService } from '$lib/services/llama-server.service';
 
 	interface Props {
 		local: string;
@@ -26,10 +20,10 @@
 	let copied = $state(false);
 	let container = $state<HTMLElement>();
 	let markdown = $state('');
-	let llamaBase = $state(DEFAULT_LLAMA_SERVER_URL);
-	// Advisory only (see $lib/docs/llama-app): 'up' shows a green dot,
+	let llamaBase = $state(DEFAULT_URL);
+	// Advisory only (see LlamaServerService): 'up' shows a green dot,
 	// 'unknown' an orange one — navigation is never blocked.
-	let llamaStatus = $state<'unknown' | 'up'>('unknown');
+	let llamaStatus = $state<LlamaServerStatus>(LlamaServerStatus.UNKNOWN);
 
 	const llamaHref = $derived.by(() => {
 		const prompt = `Answer questions about this documentation page:\n\n${markdown}`;
@@ -40,7 +34,8 @@
 	async function fetchMarkdown(): Promise<string> {
 		const res = await fetch(mdPath);
 
-		return res.text();
+		// prepare-docs.js already expanded {{DEFAULT_PORT}} in the mirrored file.
+		return await res.text();
 	}
 
 	async function copyMarkdown() {
@@ -51,15 +46,15 @@
 	}
 
 	async function probe() {
-		llamaStatus = 'unknown';
+		llamaStatus = LlamaServerStatus.UNKNOWN;
 
-		if (await probeLlamaServer(llamaBase)) llamaStatus = 'up';
+		if (await LlamaServerService.probe(llamaBase)) llamaStatus = LlamaServerStatus.UP;
 	}
 
 	// A function read defeats TS's control-flow narrowing, which can't see
 	// that awaited calls above mutate llamaStatus.
 	function llamaIsUp(): boolean {
-		return llamaStatus === 'up';
+		return llamaStatus === LlamaServerStatus.UP;
 	}
 
 	async function toggleMenu() {
@@ -67,7 +62,7 @@
 
 		if (!open) return;
 
-		llamaBase = getLlamaServerUrl();
+		llamaBase = LlamaServerService.getUrl();
 		probe();
 		markdown = (await fetchMarkdown()).slice(0, LLAMA_PROMPT_MAX_CHARS);
 	}
@@ -77,13 +72,13 @@
 		const input = window.prompt(
 			(message ? `${message}\n` : '') +
 				'Enter the port of your local Llama app, or the full URL of a llama-server\n' +
-				'(e.g. 8080 or https://llama.example.com):',
-			llamaBase === DEFAULT_LLAMA_SERVER_URL ? '8080' : llamaBase
+				`(e.g. ${DEFAULT_PORT} or https://llama.example.com):`,
+			llamaBase === DEFAULT_URL ? String(DEFAULT_PORT) : llamaBase
 		);
 
 		if (input === null) return false;
 
-		const base = parseLlamaServerInput(input);
+		const base = LlamaServerService.parseInput(input);
 
 		if (!base) {
 			window.alert(`"${input}" is not a valid port or URL.`);
@@ -91,7 +86,7 @@
 			return false;
 		}
 
-		saveLlamaServerUrl(base);
+		LlamaServerService.saveUrl(base);
 		llamaBase = base;
 		await probe();
 
@@ -100,7 +95,7 @@
 
 	/** When the server is unverified, ask for it before navigating. */
 	async function openInLlama(event: MouseEvent) {
-		if (llamaStatus === 'up') {
+		if (llamaStatus === LlamaServerStatus.UP) {
 			open = false;
 
 			return; // let the <a> navigate normally
@@ -108,7 +103,7 @@
 
 		event.preventDefault();
 		const saved = await editLlamaServer(
-			`Couldn't verify a Llama server at ${llamaServerLabel(llamaBase)}.`
+			`Couldn't verify a Llama server at ${LlamaServerService.label(llamaBase)}.`
 		);
 
 		if (!saved) return;
@@ -207,13 +202,13 @@
 					</span>
 					Open in Llama
 					<span class="ml-auto truncate text-xs text-foreground/40">
-						{llamaServerLabel(llamaBase)}
+						{LlamaServerService.label(llamaBase)}
 					</span>
 					<span
-						class="size-1.5 shrink-0 rounded-full {llamaStatus === 'up'
+						class="size-1.5 shrink-0 rounded-full {llamaStatus === LlamaServerStatus.UP
 							? 'bg-green-500'
 							: 'bg-orange-400'}"
-						title={llamaStatus === 'up'
+						title={llamaStatus === LlamaServerStatus.UP
 							? `Llama server detected at ${llamaBase}`
 							: `Couldn't verify a Llama server at ${llamaBase} — it may still be running (some browsers block local checks)`}
 					></span>

@@ -1,4 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
+import { ROUTES } from '$lib/constants';
 
 // Content negotiation for docs pages: clients preferring markdown are
 // redirected to the raw .md mirror (see scripts/prepare-docs.js). Runs in
@@ -9,11 +10,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const accept = event.request.headers.get('accept') ?? '';
 
 	if (
-		pathname.startsWith('/docs') &&
+		pathname.startsWith(ROUTES.DOCS) &&
 		!pathname.endsWith('.md') &&
 		accept.includes('text/markdown')
 	) {
-		const target = pathname === '/docs' ? '/docs/introduction.md' : `${pathname}.md`;
+		const target = pathname === ROUTES.DOCS ? `${ROUTES.DOCS_INDEX}.md` : `${pathname}.md`;
 
 		return new Response(null, { headers: { location: target }, status: 307 });
 	}

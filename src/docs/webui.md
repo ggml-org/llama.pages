@@ -10,7 +10,7 @@ Start the server with a model and open it in your browser:
 llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 -c 0
 ```
 
-Then visit http://localhost:8080 to start chatting. If the server cannot bind to 8080, pass another port with `port --8081`.
+Then visit http://localhost:{{DEFAULT_PORT}} to start chatting. If the server cannot bind to {{DEFAULT_PORT}}, pass another port with `--port 8081`.
 
 A few launch tips:
 

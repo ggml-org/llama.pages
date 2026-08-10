@@ -1,14 +1,15 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { type Build, releasedFor, type Size } from '$lib/catalog';
 	import { ModelsCatalogInstallDialog, ModelsCatalogSizeRow } from '$lib/components/app';
+	import { ModelsCatalogService } from '$lib/services';
+	import type { Build, Size } from '$lib/types';
 
 	let { data }: { data: PageData } = $props();
 	const family = $derived(data.family);
 
 	// The build (plus its size, for the title) the install dialog is showing;
 	// null when closed. Same modal on every platform -- it varies its own copy
-	// by platform, see InstallDialog.
+	// by platform, see ModelsCatalogInstallDialog.
 	let run = $state<{ build: Build; size: Size } | null>(null);
 
 	// Whether to also show each size's smaller quantized builds. Off by default:
@@ -34,7 +35,7 @@
 	<header>
 		<h1 class="text-[30px] font-semibold tracking-tight">{family.name}</h1>
 		<div class="mt-2.5 text-[13px] text-muted-foreground">
-			<span class="tabular-nums">{releasedFor(family)}</span>
+			<span class="tabular-nums">{ModelsCatalogService.releasedFor(family)}</span>
 		</div>
 		<p class="mt-3 max-w-xl text-[15px] text-muted-foreground">{family.description}</p>
 	</header>

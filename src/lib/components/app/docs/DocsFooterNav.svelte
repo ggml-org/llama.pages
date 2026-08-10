@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ArrowLeft, ArrowRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import type { FlatTocEntry } from '$lib/docs/types';
+	import type { FlatTocEntry } from '$lib/types';
 
 	interface Props {
 		prev?: FlatTocEntry;

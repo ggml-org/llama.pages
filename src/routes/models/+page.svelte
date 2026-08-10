@@ -2,8 +2,8 @@
 	import { ChevronRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { logoFor } from '$lib/assets/logos';
-	import { families, releasedFor, slugify } from '$lib/catalog';
 	import { ModelsCatalogVisionBadge } from '$lib/components/app';
+	import { ModelsCatalogService } from '$lib/services';
 </script>
 
 <svelte:head>
@@ -21,7 +21,7 @@
 	<header class="mb-10">
 		<h1 class="text-[30px] font-semibold tracking-tight">Models</h1>
 		<p class="mt-2.5 text-[13px] text-muted-foreground tabular-nums">
-			Updated {releasedFor(families[0])}
+			Updated {ModelsCatalogService.releasedFor(ModelsCatalogService.families[0])}
 		</p>
 		<p class="mt-3 max-w-2xl text-[15px] text-muted-foreground">
 			A curated selection of open models — every one runs in llama.app.
@@ -32,11 +32,14 @@
 	     legible from each row's name and icon, so we don't group by publisher.
 	     Flush full-width rows separated by subtle hairlines. -->
 	<div class="flex flex-col">
-		{#each families as f, i (f.name)}
+		{#each ModelsCatalogService.families as f, i (f.name)}
 			{#if i > 0}
 				<div aria-hidden="true" class="border-t border-border/40"></div>
 			{/if}
-			<a href={resolve(`/models/${slugify(f.name)}`)} class="group flex items-start gap-3.5 py-3.5">
+			<a
+				href={resolve(`/models/${ModelsCatalogService.slugify(f.name)}`)}
+				class="group flex items-start gap-3.5 py-3.5"
+			>
 				<!-- Brand mark in its own leading column, like a bullet: fixed width
 				     so every row's text block starts at the same x, vertically
 				     centered against the 16px name line. -->

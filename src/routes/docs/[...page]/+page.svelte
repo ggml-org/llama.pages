@@ -1,14 +1,7 @@
 <script lang="ts">
-	import {
-		DocsCodeCopyButton,
-		DocsCopyPage,
-		DocsFooterNav,
-		DocsSearch,
-		DocsSidebar,
-		DocsToc
-	} from '$lib/components/app';
+	import { DocsCopyPage, DocsFooterNav, DocsSearch, DocsSidebar, DocsToc } from '$lib/components/app';
 	import { SITE_TITLE, SITE_URL } from '$lib/constants';
-	import { mount, unmount } from 'svelte';
+	import { useDocsCodeCopyButtons } from '$lib/hooks/use-docs-code-copy-buttons.svelte';
 
 	let { data } = $props();
 
@@ -19,33 +12,10 @@
 
 	// Give every code block a hover copy button. The markdown HTML is rendered
 	// by <Content />, so the buttons are mounted imperatively onto each <pre>.
-	$effect(() => {
-		void data.local;
-
-		if (!article) return;
-
-		const buttons = [...article.querySelectorAll('pre')].map((pre) => {
-			const wrapper = document.createElement('div');
-
-			wrapper.className = 'group relative';
-			pre.replaceWith(wrapper);
-			wrapper.appendChild(pre);
-			const button = mount(DocsCodeCopyButton, {
-				props: { getText: () => pre.innerText },
-				target: wrapper
-			});
-
-			return { button, pre, wrapper };
-		});
-
-		return () => {
-			for (const { button, pre, wrapper } of buttons) {
-				unmount(button);
-
-				if (wrapper.isConnected) wrapper.replaceWith(pre);
-			}
-		};
-	});
+	useDocsCodeCopyButtons(
+		() => article,
+		() => data.local
+	);
 </script>
 
 <svelte:head>

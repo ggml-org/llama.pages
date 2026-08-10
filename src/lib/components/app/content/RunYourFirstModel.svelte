@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import { families } from '$lib/catalog';
 	import { ModelsCatalogFamilyCard } from '$lib/components/app';
+	import { ROUTES } from '$lib/constants';
+	import { ModelsCatalogService } from '$lib/services';
 
 	// A teaser of the catalog on the homepage: the featured families, newest
 	// first (`families` is already in that order), as a grid of tiles. The
 	// full, browsable catalog lives at /models.
-	const featured = families.filter((f) => f.featured);
+	const featured = ModelsCatalogService.families.filter((f) => f.featured);
 </script>
 
 <section class="py-24">
@@ -21,7 +22,7 @@
 
 	<div class="mt-6 flex justify-center">
 		<a
-			href={resolve('/models')}
+			href={resolve(ROUTES.MODELS)}
 			class="inline-flex items-center gap-1.5 text-sm text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
 		>
 			Browse all models

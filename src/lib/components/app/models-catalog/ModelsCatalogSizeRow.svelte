@@ -5,8 +5,9 @@
 	// an install that may already be underway.
 	import ModelsCatalogVisionBadge from './ModelsCatalogVisionBadge.svelte';
 	import { Terminal } from '@lucide/svelte';
-	import { type Build, deeplink, displaySize, minMemForBuild, type Size } from '$lib/catalog';
+	import { ModelsCatalogService } from '$lib/services';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import type { Build, Size } from '$lib/types';
 
 	let {
 		oninstall,
@@ -20,7 +21,7 @@
 	// exist, so skip the deeplink. Either way the page owns the follow-up
 	// via oninstall.
 	function install(b: Build) {
-		if (deviceInfo.isMac) location.href = deeplink(b);
+		if (deviceInfo.isMac) location.href = ModelsCatalogService.deeplink(b);
 
 		oninstall(b, size);
 	}
@@ -53,16 +54,18 @@
 					<ModelsCatalogVisionBadge />
 				{/if}
 			</span>
-			{#if minMemForBuild(build)}
+			{#if ModelsCatalogService.minMemForBuild(build)}
 				<span class="block text-[13px] text-muted-foreground/70 tabular-nums">
-					requires {minMemForBuild(build)} GB+ memory
+					requires {ModelsCatalogService.minMemForBuild(build)} GB+ memory
 				</span>
 			{/if}
 		</td>
 
 		<!-- Download size, right-aligned so magnitudes line up for comparison. -->
 		<td class="py-1.5 pr-3 text-right">
-			<span class="text-muted-foreground tabular-nums">{displaySize(build.sizeBytes)}</span>
+			<span class="text-muted-foreground tabular-nums"
+				>{ModelsCatalogService.displaySize(build.sizeBytes)}</span
+			>
 		</td>
 
 		<td class="py-1.5">

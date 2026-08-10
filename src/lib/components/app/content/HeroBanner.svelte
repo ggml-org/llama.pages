@@ -1,6 +1,6 @@
 <script lang="ts">
 	import InstallCommand from './InstallCommand.svelte';
-	import appleIcon from '$lib/assets/apple-icon.svg?raw';
+	import appleIcon from '$lib/assets/logos/apple-icon.svg?raw';
 	import { Logo } from '$lib/components/app';
 	import { Button } from '$lib/components/ui/button';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
@@ -22,7 +22,7 @@
 	{#if deviceInfo.isMac}
 		<div class="-mb-8 flex flex-col items-center gap-6">
 			<!-- Tags the click as the "Download" goal; source separates it from
-			     the other download link in InstallDialog -->
+			     the other download link in ModelsCatalogInstallDialog -->
 			<Button
 				href={MACOS_DOWNLOAD_URL}
 				size="lg"

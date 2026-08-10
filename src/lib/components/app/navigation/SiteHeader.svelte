@@ -3,6 +3,7 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { GitHubLink, Logo } from '$lib/components/app';
+	import { ROUTES } from '$lib/constants';
 	import { setMode, userPrefersMode } from 'mode-watcher';
 
 	const stars = $derived(page.data.stars as number | null | undefined);
@@ -10,7 +11,7 @@
 	// Whether we're anywhere in the Models section (the catalog index or a family
 	// detail page), which highlights the permanent "Models" nav link.
 	const onModels = $derived(
-		page.url.pathname === '/models' || page.url.pathname.startsWith('/models/')
+		page.url.pathname === ROUTES.MODELS || page.url.pathname.startsWith(`${ROUTES.MODELS}/`)
 	);
 
 	// Whether we're anywhere in the Docs section, which highlights the permanent
@@ -38,7 +39,7 @@
 		<span aria-hidden="true" class="h-5 w-px bg-border"></span>
 
 		<a
-			href={resolve('/models')}
+			href={resolve(ROUTES.MODELS)}
 			aria-current={onModels ? 'page' : undefined}
 			class={onModels ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}
 		>

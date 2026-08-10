@@ -1,64 +1,64 @@
-export type MacDeviceType = 'macbook' | 'desktop' | 'unknown';
+import { MacDeviceType } from '$lib/enums';
 
 export const MAC_MODEL_MAP: Record<string, { type: MacDeviceType; chip: string }> = {
 	// iMac
-	'iMac21,1': { chip: 'M1', type: 'desktop' },
-	'iMac21,2': { chip: 'M1', type: 'desktop' },
-	'iMac22,1': { chip: 'M3', type: 'desktop' },
-	'iMac22,2': { chip: 'M3', type: 'desktop' },
-	'iMac23,1': { chip: 'M4', type: 'desktop' },
-	'iMac23,2': { chip: 'M4', type: 'desktop' },
+	'iMac21,1': { chip: 'M1', type: MacDeviceType.DESKTOP },
+	'iMac21,2': { chip: 'M1', type: MacDeviceType.DESKTOP },
+	'iMac22,1': { chip: 'M3', type: MacDeviceType.DESKTOP },
+	'iMac22,2': { chip: 'M3', type: MacDeviceType.DESKTOP },
+	'iMac23,1': { chip: 'M4', type: MacDeviceType.DESKTOP },
+	'iMac23,2': { chip: 'M4', type: MacDeviceType.DESKTOP },
 	// MacBook
-	'MacBook10,1': { chip: 'M3', type: 'macbook' },
-	'MacBook11,1': { chip: 'M4', type: 'macbook' },
+	'MacBook10,1': { chip: 'M3', type: MacDeviceType.MACBOOK },
+	'MacBook11,1': { chip: 'M4', type: MacDeviceType.MACBOOK },
 	// MacBook Air
-	'MacBookAir10,1': { chip: 'M2', type: 'macbook' },
-	'MacBookAir11,1': { chip: 'M3', type: 'macbook' },
-	'MacBookAir12,1': { chip: 'M4', type: 'macbook' },
+	'MacBookAir10,1': { chip: 'M2', type: MacDeviceType.MACBOOK },
+	'MacBookAir11,1': { chip: 'M3', type: MacDeviceType.MACBOOK },
+	'MacBookAir12,1': { chip: 'M4', type: MacDeviceType.MACBOOK },
 	// MacBook Pro
-	'MacBookPro16,1': { chip: 'M1 Pro', type: 'macbook' },
-	'MacBookPro16,2': { chip: 'M1 Pro', type: 'macbook' },
-	'MacBookPro17,1': { chip: 'M1 Max', type: 'macbook' },
-	'MacBookPro18,1': { chip: 'M1 Max', type: 'macbook' },
-	'MacBookPro18,2': { chip: 'M1 Pro', type: 'macbook' },
-	'MacBookPro18,3': { chip: 'M1 Max', type: 'macbook' },
-	'MacBookPro18,4': { chip: 'M1 Ultra', type: 'macbook' },
-	'MacBookPro19,1': { chip: 'M2 Pro', type: 'macbook' },
+	'MacBookPro16,1': { chip: 'M1 Pro', type: MacDeviceType.MACBOOK },
+	'MacBookPro16,2': { chip: 'M1 Pro', type: MacDeviceType.MACBOOK },
+	'MacBookPro17,1': { chip: 'M1 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro18,1': { chip: 'M1 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro18,2': { chip: 'M1 Pro', type: MacDeviceType.MACBOOK },
+	'MacBookPro18,3': { chip: 'M1 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro18,4': { chip: 'M1 Ultra', type: MacDeviceType.MACBOOK },
+	'MacBookPro19,1': { chip: 'M2 Pro', type: MacDeviceType.MACBOOK },
 
-	'MacBookPro19,2': { chip: 'M2 Max', type: 'macbook' },
-	'MacBookPro19,3': { chip: 'M2 Max', type: 'macbook' },
-	'MacBookPro19,4': { chip: 'M2 Pro', type: 'macbook' },
+	'MacBookPro19,2': { chip: 'M2 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro19,3': { chip: 'M2 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro19,4': { chip: 'M2 Pro', type: MacDeviceType.MACBOOK },
 
-	'MacBookPro20,1': { chip: 'M3 Pro', type: 'macbook' },
-	'MacBookPro20,2': { chip: 'M3 Max', type: 'macbook' },
+	'MacBookPro20,1': { chip: 'M3 Pro', type: MacDeviceType.MACBOOK },
+	'MacBookPro20,2': { chip: 'M3 Max', type: MacDeviceType.MACBOOK },
 
-	'MacBookPro20,3': { chip: 'M3 Max', type: 'macbook' },
-	'MacBookPro20,4': { chip: 'M3 Pro', type: 'macbook' },
-	'MacBookPro21,1': { chip: 'M4 Pro', type: 'macbook' },
-	'MacBookPro21,2': { chip: 'M4 Max', type: 'macbook' },
-	'MacBookPro21,3': { chip: 'M4 Max', type: 'macbook' },
-	'MacBookPro21,4': { chip: 'M4 Pro', type: 'macbook' },
+	'MacBookPro20,3': { chip: 'M3 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro20,4': { chip: 'M3 Pro', type: MacDeviceType.MACBOOK },
+	'MacBookPro21,1': { chip: 'M4 Pro', type: MacDeviceType.MACBOOK },
+	'MacBookPro21,2': { chip: 'M4 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro21,3': { chip: 'M4 Max', type: MacDeviceType.MACBOOK },
+	'MacBookPro21,4': { chip: 'M4 Pro', type: MacDeviceType.MACBOOK },
 
 	// Mac Mini
-	'MacMini9,1': { chip: 'M1', type: 'desktop' },
-	'MacMini10,1': { chip: 'M2', type: 'desktop' },
-	'MacMini10,2': { chip: 'M2', type: 'desktop' },
-	'MacMini11,1': { chip: 'M3', type: 'desktop' },
-	'MacMini11,2': { chip: 'M4', type: 'desktop' },
-	'MacMini11,3': { chip: 'M4', type: 'desktop' },
+	'MacMini9,1': { chip: 'M1', type: MacDeviceType.DESKTOP },
+	'MacMini10,1': { chip: 'M2', type: MacDeviceType.DESKTOP },
+	'MacMini10,2': { chip: 'M2', type: MacDeviceType.DESKTOP },
+	'MacMini11,1': { chip: 'M3', type: MacDeviceType.DESKTOP },
+	'MacMini11,2': { chip: 'M4', type: MacDeviceType.DESKTOP },
+	'MacMini11,3': { chip: 'M4', type: MacDeviceType.DESKTOP },
 
 	// Mac Pro
-	'MacPro7,1': { chip: 'Intel', type: 'desktop' },
+	'MacPro7,1': { chip: 'Intel', type: MacDeviceType.DESKTOP },
 	// Mac Studio
-	'MacStudio1,1': { chip: 'M1 Max', type: 'desktop' },
-	'MacStudio1,2': { chip: 'M1 Ultra', type: 'desktop' },
-	'MacStudio2,1': { chip: 'M2 Max', type: 'desktop' },
-	'MacStudio2,2': { chip: 'M2 Ultra', type: 'desktop' },
-	'MacStudio3,1': { chip: 'M3 Max', type: 'desktop' },
-	'MacStudio3,2': { chip: 'M3 Ultra', type: 'desktop' },
-	'MacStudio4,1': { chip: 'M4 Max', type: 'desktop' },
+	'MacStudio1,1': { chip: 'M1 Max', type: MacDeviceType.DESKTOP },
+	'MacStudio1,2': { chip: 'M1 Ultra', type: MacDeviceType.DESKTOP },
+	'MacStudio2,1': { chip: 'M2 Max', type: MacDeviceType.DESKTOP },
+	'MacStudio2,2': { chip: 'M2 Ultra', type: MacDeviceType.DESKTOP },
+	'MacStudio3,1': { chip: 'M3 Max', type: MacDeviceType.DESKTOP },
+	'MacStudio3,2': { chip: 'M3 Ultra', type: MacDeviceType.DESKTOP },
+	'MacStudio4,1': { chip: 'M4 Max', type: MacDeviceType.DESKTOP },
 
-	'MacStudio4,2': { chip: 'M4 Ultra', type: 'desktop' }
+	'MacStudio4,2': { chip: 'M4 Ultra', type: MacDeviceType.DESKTOP }
 };
 
 export function parseMacModelFromRenderer(
@@ -81,7 +81,10 @@ export function parseMacModelFromRenderer(
 	const chip = m[1].trim();
 	const isMaxOrUltra = chip.includes('Max') || chip.includes('Ultra');
 
-	return { chip: `Apple ${chip}`, type: isMaxOrUltra ? 'desktop' : 'macbook' };
+	return {
+		chip: `Apple ${chip}`,
+		type: isMaxOrUltra ? MacDeviceType.DESKTOP : MacDeviceType.MACBOOK
+	};
 }
 
 export function getMacModelFromHeuristics(
@@ -90,13 +93,13 @@ export function getMacModelFromHeuristics(
 ): MacDeviceType | null {
 	if (!deviceMemory || !hardwareConcurrency) return null;
 
-	if (hardwareConcurrency >= 24 && deviceMemory >= 100) return 'desktop';
+	if (hardwareConcurrency >= 24 && deviceMemory >= 100) return MacDeviceType.DESKTOP;
 
-	if (hardwareConcurrency >= 32 && deviceMemory >= 150) return 'desktop';
+	if (hardwareConcurrency >= 32 && deviceMemory >= 150) return MacDeviceType.DESKTOP;
 
-	if (hardwareConcurrency <= 16 && deviceMemory >= 8) return 'macbook';
+	if (hardwareConcurrency <= 16 && deviceMemory >= 8) return MacDeviceType.MACBOOK;
 
-	if (hardwareConcurrency <= 10 && deviceMemory >= 4) return 'macbook';
+	if (hardwareConcurrency <= 10 && deviceMemory >= 4) return MacDeviceType.MACBOOK;
 
 	return null;
 }
