@@ -3,7 +3,7 @@
 //     served as plain static files
 //   - builds the section-level search index consumed by the ⌘K search modal
 // The mirrored files are a build-time expansion of the source docs: the shared
-// {{DEFAULT_PORT}} token (single source of truth in lib/constants/llama-server.js)
+// {{DEFAULT_PORT}} token (single source of truth in lib/constants/llama-server.constants.js)
 // is replaced here so the raw served .md carries the real port, just like the
 // mdsvex preprocess does for the rendered HTML.
 import { DEFAULT_PORT } from '../src/lib/constants/llama-server.constants.js';

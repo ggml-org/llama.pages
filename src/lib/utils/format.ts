@@ -8,7 +8,7 @@ import {
 
 /**
  * Format a byte count for display. Single GB unit (decimal, matching Hugging
- * Face/Finder) keeps column values comparable at a glance. `''` when unknown.
+ * Face/Finder) keeps column values comparable at a glance. `—` when unknown.
  */
 export function formatGigabytes(size: number | undefined): string {
 	if (!size) return '—';

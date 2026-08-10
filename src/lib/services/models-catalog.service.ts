@@ -1,10 +1,10 @@
 import data from '../models-catalog.json';
 import {
 	CLI_PARAMS_FLAG,
-	GIB_BYTES,
 	INSTALL_PATH,
 	INSTALL_SCHEME,
 	MB_PER_GB,
+	MIB_BYTES,
 	QUANT_WEIGHT,
 	RAM_BUDGET_RATIO,
 	RAM_OVERHEAD_MB
@@ -75,7 +75,7 @@ export class ModelsCatalogService {
 	static minMemForBuild(b: Build): number | null {
 		if (!b.sizeBytes) return null;
 
-		const weightMb = (b.sizeBytes / GIB_BYTES) * QUANT_WEIGHT;
+		const weightMb = (b.sizeBytes / MIB_BYTES) * QUANT_WEIGHT;
 
 		for (const tier of ModelsCatalogService.MAC_MEM_TIERS) {
 			const budgetMb = tier * MB_PER_GB * RAM_BUDGET_RATIO - RAM_OVERHEAD_MB;

@@ -1,4 +1,4 @@
-const GIB_BYTES = 1_048_576;
+const MIB_BYTES = 1_048_576;
 const MB_PER_GB = 1024;
 // Compatibility budget (mirrors the app's Model+Compatibility.swift):
 //   budget      = RAM × RAM_BUDGET_RATIO − RAM_OVERHEAD_MB
@@ -12,7 +12,7 @@ const INSTALL_PATH = 'install';
 const CLI_PARAMS_FLAG = 'serve -hf';
 
 export {
-	GIB_BYTES,
+	MIB_BYTES,
 	MB_PER_GB,
 	RAM_BUDGET_RATIO,
 	RAM_OVERHEAD_MB,

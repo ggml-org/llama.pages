@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-// The llama-server port is defined once (lib/constants/llama-server.js) and must
+// The llama-server port is defined once (lib/constants/llama-server.constants.js) and must
 // reach BOTH docs build outputs with the real value:
 //   - the raw /docs/*.md files served for the docs-copy feature, expanded by
 //     scripts/prepare-docs.js
