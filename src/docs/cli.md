@@ -36,14 +36,14 @@ Sampling parameters shape how the model generates text. llama.cpp will choose se
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --temp 0.2 --top-k 40 --top-p 0.95
 ```
 
-| Flag | Default | What it does |
-| --- | --- | --- |
-| `--temp N` | `0.8` | Randomness; lower is more deterministic |
-| `--top-k N` | `40` | Sample only from the K most likely tokens |
-| `--top-p N` | `0.95` | Nucleus sampling probability mass |
-| `--min-p N` | `0.05` | Drop tokens below this relative probability |
-| `-n, --predict N` | `-1` | Max tokens to generate (`-1` = unlimited) |
-| `--repeat-penalty N` | `1.0` | Penalize repeated token sequences |
+| Flag                 | Default | What it does                                |
+| -------------------- | ------- | ------------------------------------------- |
+| `--temp N`           | `0.8`   | Randomness; lower is more deterministic     |
+| `--top-k N`          | `40`    | Sample only from the K most likely tokens   |
+| `--top-p N`          | `0.95`  | Nucleus sampling probability mass           |
+| `--min-p N`          | `0.05`  | Drop tokens below this relative probability |
+| `-n, --predict N`    | `-1`    | Max tokens to generate (`-1` = unlimited)   |
+| `--repeat-penalty N` | `1.0`   | Penalize repeated token sequences           |
 
 ## Performance and memory
 
@@ -69,7 +69,7 @@ Loaded media from 'image.png'
 > describe this image
 ```
 
-For one-off media-text prompts, pass media files alongside your prompt. 
+For one-off media-text prompts, pass media files alongside your prompt.
 
 ```sh
 llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --image "image.png" -p "Describe this image."
@@ -115,4 +115,4 @@ llama cli -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --hf-repo-draft ggml-org/gemma-4
 
 ## Getting help
 
-`llama cli -h` prints every option. The flags shown here are the ones you'll use most; the [full reference](https://github.com/ggml-org/llama.cpp/blob/master/tools/cli/README.md) documents more advanced settings. 
+`llama cli -h` prints every option. The flags shown here are the ones you'll use most; the [full reference](https://github.com/ggml-org/llama.cpp/blob/master/tools/cli/README.md) documents more advanced settings.

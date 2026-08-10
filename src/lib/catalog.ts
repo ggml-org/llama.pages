@@ -93,9 +93,13 @@ export function familyBySlug(slug: string): Family | undefined {
 // Returns '' if the date is missing or unparseable.
 export function releasedFor(f: Family): string {
 	const r = f.released;
+
 	if (!r) return '';
+
 	const [y, m] = r.split('-').map(Number);
+
 	if (!y || !m) return '';
+
 	const month = [
 		'Jan',
 		'Feb',
@@ -110,6 +114,7 @@ export function releasedFor(f: Family): string {
 		'Nov',
 		'Dec'
 	][m - 1];
+
 	return `${month} ${y}`;
 }
 
@@ -118,7 +123,9 @@ export function releasedFor(f: Family): string {
 // at a glance, so sub-GB sizes render as fractions (e.g. "0.24 GB").
 export function displaySize(size: number | undefined): string {
 	if (!size) return '—';
+
 	const gb = size / 1e9;
+
 	// Two decimals under 10 GB so small models still differ visibly;
 	// one decimal above, where the extra digit is noise.
 	return `${gb.toFixed(gb < 10 ? 2 : 1)} GB`;
@@ -138,11 +145,15 @@ const MAC_MEM_TIERS = [8, 16, 24, 32, 48, 64, 96, 128, 192, 256, 512, 768, 1024]
 // fileSize × 1.05 ≤ budget — so the website and the app never disagree.
 export function minMemForBuild(b: Build): number | null {
 	if (!b.sizeBytes) return null;
+
 	const weightMb = (b.sizeBytes / 1_048_576) * 1.05;
+
 	for (const tier of MAC_MEM_TIERS) {
 		const budgetMb = tier * 1024 * 0.75 - 2048;
+
 		if (weightMb <= budgetMb) return tier;
 	}
+
 	return null;
 }
 
@@ -154,6 +165,7 @@ export function minMemGB(f: Family): number | null {
 		.flatMap((s) => s.builds)
 		.map(minMemForBuild)
 		.filter((n): n is number => n !== null);
+
 	return tiers.length ? Math.min(...tiers) : null;
 }
 
@@ -165,7 +177,9 @@ const INSTALL_SCHEME = 'llama';
 // Shape (RFC 017): llama://install?repo={org}/{repo}[&quant={QUANT}]
 export function deeplink(b: Build): string {
 	const params = new URLSearchParams({ repo: b.repo });
+
 	if (b.quant) params.set('quant', b.quant);
+
 	return `${INSTALL_SCHEME}://install?${params.toString()}`;
 }
 

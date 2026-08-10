@@ -19,8 +19,9 @@
 	//
 	// Built on the native <dialog> element: focus trapping, Escape-to-close
 	// and the backdrop come for free, no dialog dependency needed.
-	import { Copy, Check, X } from '@lucide/svelte';
-	import { type Build, type Size, cliCommand, displaySize, minMemForBuild } from '$lib/catalog';
+	import { Check, Copy, X } from '@lucide/svelte';
+	import { resolve } from '$app/paths';
+	import { type Build, cliCommand, displaySize, minMemForBuild, type Size } from '$lib/catalog';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
 
@@ -34,7 +35,9 @@
 	// Open/close the native dialog as `run` comes and goes.
 	$effect(() => {
 		if (!dialog) return;
+
 		if (run && !dialog.open) dialog.showModal();
+
 		if (!run && dialog.open) dialog.close();
 	});
 
@@ -42,11 +45,17 @@
 	// the same facts as the table row, echoed so the dialog stands alone.
 	const byline = $derived.by(() => {
 		if (!run) return '';
+
 		const parts = [];
+
 		if (run.build.quant) parts.push(run.build.quant.toUpperCase());
+
 		if (run.build.sizeBytes) parts.push(displaySize(run.build.sizeBytes));
+
 		const mem = minMemForBuild(run.build);
+
 		if (mem) parts.push(`requires ${mem} GB+ memory`);
+
 		return parts.join(' · ');
 	});
 
@@ -102,6 +111,7 @@
 				     the hero banner's download link -->
 				<a
 					href={MACOS_DOWNLOAD_URL}
+					rel="external"
 					class="plausible-event-name=Download plausible-event-source=dialog mt-4 flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-2.5 text-[14px] font-medium text-primary-foreground hover:bg-primary/80"
 				>
 					<svg
@@ -159,7 +169,9 @@
 				     is already the answer and a second install link only competes. -->
 				<p class="mt-1 text-[13px] text-muted-foreground">
 					Don’t have the CLI?
-					<a href="/" class="text-foreground underline underline-offset-4">Install it first</a>.
+					<a href={resolve('/')} class="text-foreground underline underline-offset-4"
+						>Install it first</a
+					>.
 				</p>
 			{/if}
 		</div>

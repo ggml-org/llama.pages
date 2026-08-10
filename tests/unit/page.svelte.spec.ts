@@ -1,7 +1,7 @@
-import { page } from 'vitest/browser';
-import { describe, expect, it, vi } from 'vitest';
-import { render } from 'vitest-browser-svelte';
 import HomePage from '../../src/routes/+page.svelte';
+import { describe, expect, it, vi } from 'vitest';
+import { page } from 'vitest/browser';
+import { render } from 'vitest-browser-svelte';
 
 const INSTALL_COMMAND = 'curl -LsSf https://llama.app/install.sh | sh';
 
@@ -12,6 +12,7 @@ describe('+page.svelte', () => {
 		await expect.element(page.getByText(INSTALL_COMMAND)).toBeInTheDocument();
 
 		const packageManagersLink = page.getByRole('link', { name: 'Package managers' });
+
 		await expect
 			.element(packageManagersLink)
 			.toHaveAttribute('href', 'https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md');
@@ -28,14 +29,15 @@ describe('+page.svelte', () => {
 			vi.spyOn(navigator.clipboard, 'writeText').mockImplementation(writeText);
 		} else {
 			Object.defineProperty(navigator, 'clipboard', {
-				value: { writeText },
-				configurable: true
+				configurable: true,
+				value: { writeText }
 			});
 		}
 
 		render(HomePage);
 
 		const copyButton = page.getByRole('button', { name: 'Copy command' });
+
 		await expect.element(copyButton).toBeInTheDocument();
 		await copyButton.click();
 

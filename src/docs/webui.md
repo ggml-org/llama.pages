@@ -10,7 +10,7 @@ Start the server with a model and open it in your browser:
 llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 -c 0
 ```
 
-Then visit http://localhost:8080 to start chatting. If the server cannot bind to 8080, pass another port with `port --8081`. 
+Then visit http://localhost:8080 to start chatting. If the server cannot bind to 8080, pass another port with `port --8081`.
 
 A few launch tips:
 
@@ -44,8 +44,7 @@ The UI knows each model's capabilities and prevents sending e.g. an image to a t
 
 - **Branching:** edit any earlier message or regenerate any response to fork the conversation at that point, navigate between branches freely, nothing is lost
 - **Search:** find conversations by title or content
-- **Import/Export:**  back up or share conversations as JSON files
-
+- **Import/Export:** back up or share conversations as JSON files
 
 ## Structured output
 
@@ -55,15 +54,15 @@ In the WebUI: `Settings → Developer → Custom JSON`, and put your schema:
 
 ```json
 {
-  "json_schema": {
-    "type": "object",
-    "properties": {
-      "sentiment": { "type": "string", "enum": ["positive", "neutral", "negative"] },
-      "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
-      "summary": { "type": "string", "maxLength": 200 }
-    },
-    "required": ["sentiment", "confidence", "summary"]
-  }
+	"json_schema": {
+		"type": "object",
+		"properties": {
+			"sentiment": { "type": "string", "enum": ["positive", "neutral", "negative"] },
+			"confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+			"summary": { "type": "string", "maxLength": 200 }
+		},
+		"required": ["sentiment", "confidence", "summary"]
+	}
 }
 ```
 
@@ -80,7 +79,5 @@ llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --ui-config '{"theme": "dark",
 ```
 
 ![UI-flag](https://huggingface.co/buckets/ggml-org/docs-media/resolve/ui_setting.png)
-
-
 
 For the story behind the interface and more usage examples, see the [WebUI guide discussion](https://github.com/ggml-org/llama.cpp/discussions/16938) on GitHub.

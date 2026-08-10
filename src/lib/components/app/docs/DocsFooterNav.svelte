@@ -8,7 +8,7 @@
 		next?: FlatTocEntry;
 	}
 
-	let { prev, next }: Props = $props();
+	let { next, prev }: Props = $props();
 </script>
 
 {#if prev || next}

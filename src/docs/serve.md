@@ -34,15 +34,15 @@ llama serve -m model.gguf \
     --port 8080
 ```
 
-| Flag | What it does |
-| --- | --- |
-| `-c, --ctx-size N` | Context size in tokens; `-c 0` uses the model's full context window |
-| `-ngl, --gpu-layers N` | Layers to offload to GPU (`auto`, `all`, or a number) |
-| `-np, --parallel N` | Number of server slots for concurrent requests (default: auto) |
-| `--host`, `--port` | Bind address and port (default `127.0.0.1:8080`) |
-| `-a, --alias NAME` | Model name reported by the API |
-| `--api-key KEY` | Require an API key (comma-separated list for multiple keys) |
-| `--no-webui` | Disable the web UI, serve the API only |
+| Flag                   | What it does                                                        |
+| ---------------------- | ------------------------------------------------------------------- |
+| `-c, --ctx-size N`     | Context size in tokens; `-c 0` uses the model's full context window |
+| `-ngl, --gpu-layers N` | Layers to offload to GPU (`auto`, `all`, or a number)               |
+| `-np, --parallel N`    | Number of server slots for concurrent requests (default: auto)      |
+| `--host`, `--port`     | Bind address and port (default `127.0.0.1:8080`)                    |
+| `-a, --alias NAME`     | Model name reported by the API                                      |
+| `--api-key KEY`        | Require an API key (comma-separated list for multiple keys)         |
+| `--no-webui`           | Disable the web UI, serve the API only                              |
 
 Every option also has an environment-variable form (shown in `llama serve --help`), which is handy for containers:
 
@@ -51,11 +51,11 @@ services:
   llamacpp-server:
     image: ghcr.io/ggml-org/llama.cpp:server
     ports:
-      - "8080:8080"
+      - '8080:8080'
     volumes:
       - ./models:/models
     environment:
-      LLAMA_ARG_HOST: "0.0.0.0"
+      LLAMA_ARG_HOST: '0.0.0.0'
       LLAMA_ARG_MODEL: /models/my_model.gguf
       LLAMA_ARG_CTX_SIZE: 4096
       LLAMA_ARG_N_PARALLEL: 2
@@ -64,7 +64,7 @@ services:
 
 ## Serving multiple users
 
-The server handles concurrent requests out of the box. Each parallel *slot* holds one conversation; the context is shared across slots:
+The server handles concurrent requests out of the box. Each parallel _slot_ holds one conversation; the context is shared across slots:
 
 ```sh
 # up to 4 concurrent requests
@@ -115,8 +115,8 @@ curl http://127.0.0.1:8080/v1/rerank \
     ]
   }'
 
-# {"model":"ggml-org/Qwen3-reranker-0.6B-Q8_0-GGUF:Q8_0","object":"list","usage":{"prompt_tokens":241,"total_tokens":241},"results":[{"index":2,"relevance_score":0.14964470267295837},{"index":1,"relevance_score":0.0058668069541454315},{"index":0,"relevance_score":0.00028348760679364204}]}%    
-``` 
+# {"model":"ggml-org/Qwen3-reranker-0.6B-Q8_0-GGUF:Q8_0","object":"list","usage":{"prompt_tokens":241,"total_tokens":241},"results":[{"index":2,"relevance_score":0.14964470267295837},{"index":1,"relevance_score":0.0058668069541454315},{"index":0,"relevance_score":0.00028348760679364204}]}%
+```
 
 You can search for [rerankers](https://huggingface.co/models?pipeline_tag=text-ranking&apps=llama.cpp&sort=trending) and [embeddings](https://huggingface.co/models?pipeline_tag=sentence-similarity&apps=llama.cpp&sort=trending) that support llama.cpp on Hugging Face Hub.
 
@@ -136,7 +136,7 @@ Pair the model with a small draft model to speed up generation:
 llama serve -m big-model.gguf -md small-draft-model.gguf --spec-type draft-simple
 ```
 
-For model repositories that contain main model and drafter model (as well as separate repositories), you can serve llama server as follows. 
+For model repositories that contain main model and drafter model (as well as separate repositories), you can serve llama server as follows.
 
 ```bash
 llama serve -hf ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --hf-repo-draft ggml-org/gemma-4-e4b-it-GGUF:Q4_0 --spec-type draft-mtp
@@ -182,6 +182,5 @@ You can list the available model names as follows.
 Server will automatically load it for inference.
 
 ![router](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/llama.cpp/router.png)
-
 
 For the complete flag reference, see [the server README](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md). Continue to the [API documentation](api) for the endpoints, or the [web UI guide](webui) for the browser interface.

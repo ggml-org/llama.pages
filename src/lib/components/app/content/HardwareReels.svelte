@@ -3,31 +3,31 @@
 	const HARDWARE_REELS = [
 		{
 			items: [
-				{ name: 'Apple Silicon', img: `${HW}/apple-silicon.svg` },
-				{ name: 'M Ultra', img: `${HW}/m-ultra.webp` },
-				{ name: 'RTX 5090', img: `${HW}/rtx-series.webp` },
-				{ name: 'CPU', img: `${HW}/cpu.webp` },
-				{ name: 'Jetson', img: `${HW}/jetson.webp` }
+				{ img: `${HW}/apple-silicon.svg`, name: 'Apple Silicon' },
+				{ img: `${HW}/m-ultra.webp`, name: 'M Ultra' },
+				{ img: `${HW}/rtx-series.webp`, name: 'RTX 5090' },
+				{ img: `${HW}/cpu.webp`, name: 'CPU' },
+				{ img: `${HW}/jetson.webp`, name: 'Jetson' }
 			]
 		},
 		{
 			items: [
-				{ name: 'H100', img: `${HW}/h100.webp` },
-				{ name: 'MI300', img: `${HW}/mi300.webp` },
-				{ name: 'RTX 4090', img: `${HW}/rtx-series.webp` },
-				{ name: 'A100', img: `${HW}/gpu.webp` },
-				{ name: 'M Pro', img: `${HW}/m-pro.webp` }
+				{ img: `${HW}/h100.webp`, name: 'H100' },
+				{ img: `${HW}/mi300.webp`, name: 'MI300' },
+				{ img: `${HW}/rtx-series.webp`, name: 'RTX 4090' },
+				{ img: `${HW}/gpu.webp`, name: 'A100' },
+				{ img: `${HW}/m-pro.webp`, name: 'M Pro' }
 			]
 		},
 		{
 			items: [
-				{ name: 'M Max', img: `${HW}/m-max.webp` },
-				{ name: 'DGX Spark', img: `${HW}/spark.webp` },
-				{ name: 'T4', img: `${HW}/t4.webp` },
-				{ name: 'Radeon RX', img: `${HW}/amd-rx.webp` },
-				{ name: 'B200', img: `${HW}/h100.webp` },
-				{ name: 'Intel Arc', img: `${HW}/arc.webp` },
-				{ name: 'RTX 3090', img: `${HW}/rtx-series.webp` }
+				{ img: `${HW}/m-max.webp`, name: 'M Max' },
+				{ img: `${HW}/spark.webp`, name: 'DGX Spark' },
+				{ img: `${HW}/t4.webp`, name: 'T4' },
+				{ img: `${HW}/amd-rx.webp`, name: 'Radeon RX' },
+				{ img: `${HW}/h100.webp`, name: 'B200' },
+				{ img: `${HW}/arc.webp`, name: 'Intel Arc' },
+				{ img: `${HW}/rtx-series.webp`, name: 'RTX 3090' }
 			]
 		}
 	];

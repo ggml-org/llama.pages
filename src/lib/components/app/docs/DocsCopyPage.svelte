@@ -33,11 +33,13 @@
 
 	const llamaHref = $derived.by(() => {
 		const prompt = `Answer questions about this documentation page:\n\n${markdown}`;
+
 		return `${llamaBase}/?q=${encodeURIComponent(prompt)}`;
 	});
 
 	async function fetchMarkdown(): Promise<string> {
 		const res = await fetch(mdPath);
+
 		return res.text();
 	}
 
@@ -50,6 +52,7 @@
 
 	async function probe() {
 		llamaStatus = 'unknown';
+
 		if (await probeLlamaServer(llamaBase)) llamaStatus = 'up';
 	}
 
@@ -61,7 +64,9 @@
 
 	async function toggleMenu() {
 		open = !open;
+
 		if (!open) return;
+
 		llamaBase = getLlamaServerUrl();
 		probe();
 		markdown = (await fetchMarkdown()).slice(0, LLAMA_PROMPT_MAX_CHARS);
@@ -75,15 +80,21 @@
 				'(e.g. 8080 or https://llama.example.com):',
 			llamaBase === DEFAULT_LLAMA_SERVER_URL ? '8080' : llamaBase
 		);
+
 		if (input === null) return false;
+
 		const base = parseLlamaServerInput(input);
+
 		if (!base) {
 			window.alert(`"${input}" is not a valid port or URL.`);
+
 			return false;
 		}
+
 		saveLlamaServerUrl(base);
 		llamaBase = base;
 		await probe();
+
 		return true;
 	}
 
@@ -91,13 +102,17 @@
 	async function openInLlama(event: MouseEvent) {
 		if (llamaStatus === 'up') {
 			open = false;
+
 			return; // let the <a> navigate normally
 		}
+
 		event.preventDefault();
 		const saved = await editLlamaServer(
 			`Couldn't verify a Llama server at ${llamaServerLabel(llamaBase)}.`
 		);
+
 		if (!saved) return;
+
 		if (
 			!llamaIsUp() &&
 			!window.confirm(
@@ -107,10 +122,12 @@
 		) {
 			return;
 		}
+
 		open = false;
 		// No 'noopener' feature: it makes window.open return null even on
 		// success, which would break the popup-blocked fallback below.
 		const popup = window.open(llamaHref, '_blank');
+
 		if (popup) {
 			popup.opener = null;
 		} else {
@@ -181,7 +198,7 @@
 				<a
 					href={llamaHref}
 					target="_blank"
-					rel="noopener"
+					rel="noopener external"
 					onclick={openInLlama}
 					class="flex min-w-0 grow items-center gap-2 px-2 py-1.5"
 				>

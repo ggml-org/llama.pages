@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { userPrefersMode, setMode } from 'mode-watcher';
-	import { Sun, Moon, Monitor } from '@lucide/svelte';
+	import { Monitor, Moon, Sun } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import GitHubLink from '$lib/components/app/navigation/GitHubLink.svelte';
+	import { setMode, userPrefersMode } from 'mode-watcher';
 
 	const stars = $derived(page.data.stars as number | null | undefined);
 
@@ -14,7 +14,7 @@
 		page.url.pathname === '/models' || page.url.pathname.startsWith('/models/')
 	);
 
-	const NEXT_MODE = { light: 'dark', dark: 'system', system: 'light' } as const;
+	const NEXT_MODE = { dark: 'system', light: 'dark', system: 'light' } as const;
 
 	function cycleMode() {
 		setMode(NEXT_MODE[userPrefersMode.current]);
@@ -35,7 +35,7 @@
 		<span aria-hidden="true" class="h-5 w-px bg-border"></span>
 
 		<a
-			href="/models"
+			href={resolve('/models')}
 			aria-current={onModels ? 'page' : undefined}
 			class={onModels ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}
 		>

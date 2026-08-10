@@ -1,12 +1,12 @@
 import type { MacDeviceType } from './mac-models';
 export type { MacDeviceType };
-import { parseMacModelFromRenderer, getMacModelFromHeuristics } from './mac-models';
 import {
-	getAppleSiliconRenderer,
-	getChromeDeviceModel,
 	detectBrowser,
-	detectFormFactor
+	detectFormFactor,
+	getAppleSiliconRenderer,
+	getChromeDeviceModel
 } from './detection';
+import { getMacModelFromHeuristics, parseMacModelFromRenderer } from './mac-models';
 
 export type OsKind = 'mac' | 'windows' | 'linux' | 'ios' | 'android' | 'unknown';
 export type DeviceFormFactor = 'desktop' | 'mobile' | 'tablet';
@@ -24,21 +24,22 @@ export interface DeviceInfo {
 }
 
 const deviceInfo = $state<DeviceInfo>({
-	os: 'unknown',
-	osName: 'your device',
-	macDeviceType: 'unknown',
 	appleChip: null,
-	isMac: false,
-	isWindows: false,
+	browser: 'Unknown',
 	isLinux: false,
+	isMac: false,
 	isMobile: false,
-	browser: 'Unknown'
+	isWindows: false,
+	macDeviceType: 'unknown',
+	os: 'unknown',
+	osName: 'your device'
 });
 
 let _initialized = false;
 
 async function detectAndSet() {
 	if (_initialized) return;
+
 	_initialized = true;
 
 	if (typeof window === 'undefined' || typeof navigator === 'undefined') {
@@ -46,11 +47,9 @@ async function detectAndSet() {
 	}
 
 	const ua = navigator.userAgent;
-
 	const nav = navigator as Navigator & { userAgentData?: { platform: string } };
 	const uaData = nav.userAgentData;
 	const platformFromData = uaData?.platform || ua;
-
 	const isIOS = /(iPhone|iPad|iPod)/i.test(ua);
 	const isAndroid = /Android/i.test(ua);
 	const isMacDesktop = !isIOS && /Macintosh|Mac OS X|macOS/i.test(platformFromData);
@@ -95,10 +94,12 @@ async function detectAndSet() {
 				level: number;
 			}>;
 		};
+
 		if ('getBattery' in batteryNav && batteryNav.getBattery) {
 			try {
 				const battery = await batteryNav.getBattery();
 				const isDesktop = battery.chargingTime === 0 && battery.dischargingTime === Infinity;
+
 				deviceInfo.macDeviceType = isDesktop ? 'desktop' : 'macbook';
 			} catch (e) {
 				throw e instanceof Error ? e : new Error('Battery API failed');
@@ -107,12 +108,15 @@ async function detectAndSet() {
 
 		// Step 3: WebGL renderer
 		const renderer = getAppleSiliconRenderer();
+
 		if (renderer) {
 			const parsed = parseMacModelFromRenderer(renderer);
+
 			if (parsed) {
 				if (deviceInfo.macDeviceType === 'unknown') {
 					deviceInfo.macDeviceType = parsed.type;
 				}
+
 				deviceInfo.appleChip = parsed.chip;
 			}
 		}
@@ -123,7 +127,6 @@ async function detectAndSet() {
 				deviceMemory?: number;
 				hardwareConcurrency?: number;
 			};
-
 			const heuristicType = getMacModelFromHeuristics(
 				memNav.deviceMemory,
 				memNav.hardwareConcurrency

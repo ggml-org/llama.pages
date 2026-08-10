@@ -13,13 +13,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    name: Run tests
+  checks:
+    name: Lint, check & tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
     # Run in the official Playwright image so browsers come preinstalled: `playwright install`
     # hangs at 100% downloading from the CDN on the hosted runner. Tag must match the
-    # @playwright/test version in package-lock.json.
+    # @playwright/test version in package-lock.json. Lint runs in the same container so a
+    # single `npm ci` installs dependencies once and node_modules is reused by every step.
     container:
       image: mcr.microsoft.com/playwright:v1.59.1-noble
 
@@ -34,8 +35,11 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
+      - name: Install dependencies (once, reused for all steps)
         run: npm ci
+
+      - name: Run lint & format check
+        run: npm run lint
 
       - name: Run tests
         run: npm test

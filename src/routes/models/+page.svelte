@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { families, releasedFor, slugify } from '$lib/catalog';
-	import { logoFor } from '$lib/logos';
-	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 	import { ChevronRight } from '@lucide/svelte';
+	import { resolve } from '$app/paths';
+	import { families, releasedFor, slugify } from '$lib/catalog';
+	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+	import { logoFor } from '$lib/logos';
 </script>
 
 <svelte:head>
@@ -35,7 +36,7 @@
 			{#if i > 0}
 				<div aria-hidden="true" class="border-t border-border/40"></div>
 			{/if}
-			<a href="/models/{slugify(f.name)}" class="group flex items-start gap-3.5 py-3.5">
+			<a href={resolve(`/models/${slugify(f.name)}`)} class="group flex items-start gap-3.5 py-3.5">
 				<!-- Brand mark in its own leading column, like a bullet: fixed width
 				     so every row's text block starts at the same x, vertically
 				     centered against the 16px name line. -->
@@ -43,6 +44,7 @@
 					aria-hidden="true"
 					class="mt-0.5 flex h-6 w-4.5 shrink-0 items-center [&>svg]:h-4.5 [&>svg]:w-4.5"
 				>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					{@html logoFor(f.brand)}
 				</span>
 				<div class="min-w-0 flex-1">

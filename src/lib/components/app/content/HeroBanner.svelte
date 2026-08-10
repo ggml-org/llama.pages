@@ -1,10 +1,10 @@
 <script lang="ts">
 	import InstallCommand from './InstallCommand.svelte';
+	import appleIcon from '$lib/assets/apple-icon.svg?raw';
 	import Logo from '$lib/components/app/misc/Logo.svelte';
 	import { Button } from '$lib/components/ui/button';
-	import appleIcon from '$lib/assets/apple-icon.svg?raw';
-	import { deviceInfo } from '$lib/stores/device/index.svelte';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
+	import { deviceInfo } from '$lib/stores/device/index.svelte';
 </script>
 
 <section class="flex flex-col items-center gap-12 py-16 text-balance md:gap-14 md:py-24">
@@ -28,6 +28,7 @@
 				size="lg"
 				class="plausible-event-name=Download plausible-event-source=hero"
 			>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<div class="mb-0.5">{@html appleIcon}</div>
 
 				Download for Mac

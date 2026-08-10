@@ -25,7 +25,7 @@ llama cli -m my-model.gguf
 Running `llama cli` with a model drops you straight into an interactive chat:
 
 ```console
-> hello, who are you? 
+> hello, who are you?
 
 [Start thinking]
 *   Analyze the user request: The user is asking for my identity ("hello, who are you?").
@@ -84,10 +84,10 @@ print(response.choices[0].message.content)
 
 Here are a few useful flags you can use with `llama cli` and `llama serve`:
 
-| Flag | What it does |
-| --- | --- |
+| Flag               | What it does                                                         |
+| ------------------ | -------------------------------------------------------------------- |
 | `-c, --ctx-size N` | Context window size in tokens (`0` = use the model's native maximum) |
-| `-sys "..."` | Set a system prompt (CLI) |
+| `-sys "..."`       | Set a system prompt (CLI)                                            |
 
 By default, llama.cpp automatically adjusts unset options to fit your device memory.
 

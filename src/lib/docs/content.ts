@@ -1,17 +1,16 @@
-import { parse } from 'yaml';
-import type { Component } from 'svelte';
 import type { FlatTocEntry, TocItem } from './types';
+import type { Component } from 'svelte';
+import { parse } from 'yaml';
 
 type MdModule = { default: Component };
 
 const pageModules: Record<string, () => Promise<MdModule>> = import.meta.glob<MdModule>(
 	'/src/docs/**/*.md'
 );
-
 const toctreeFile: Record<string, string> = import.meta.glob('/src/docs/_toctree.yml', {
-	query: '?raw',
+	eager: true,
 	import: 'default',
-	eager: true
+	query: '?raw'
 });
 
 /** '/src/docs/foo/bar.md' → 'foo/bar' */
@@ -28,7 +27,7 @@ export const toctree: TocItem[] = parse(Object.values(toctreeFile)[0]) as TocIte
 /** Depth-first list of linkable toctree entries — powers prev/next and titles. */
 export function flattenToc(items: TocItem[]): FlatTocEntry[] {
 	return items.flatMap((item) => [
-		...(item.local ? [{ title: item.title, local: item.local }] : []),
+		...(item.local ? [{ local: item.local, title: item.title }] : []),
 		...(item.sections ? flattenToc(item.sections) : [])
 	]);
 }

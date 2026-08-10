@@ -6,11 +6,13 @@ export function getAppleSiliconRenderer(): string | null {
 		const gl =
 			(canvas.getContext('webgl') as WebGLRenderingContext) ||
 			(canvas.getContext('experimental-webgl') as WebGLRenderingContext);
+
 		if (!gl) {
 			return null;
 		}
 
 		const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+
 		if (!debugInfo) {
 			return null;
 		}
@@ -28,6 +30,7 @@ export function getChromeDeviceModel(): Promise<string | null> {
 			platform: string;
 		};
 	};
+
 	if (!nav.userAgentData?.getHighEntropyValues) {
 		return Promise.resolve(null);
 	}
@@ -51,17 +54,26 @@ export function getChromeDeviceModel(): Promise<string | null> {
 
 export function detectBrowser(): string {
 	const ua = navigator.userAgent;
+
 	if (ua.includes('Firefox/')) return 'Firefox';
+
 	if (ua.includes('Edg/')) return 'Edge';
+
 	if (ua.includes('OPR/') || ua.includes('Opera')) return 'Opera';
+
 	if (ua.includes('Chrome/')) return 'Chrome';
+
 	if (ua.includes('Safari/')) return 'Safari';
+
 	return 'Unknown';
 }
 
 export function detectFormFactor(): DeviceFormFactor {
 	const width = window.innerWidth;
+
 	if (width < 768) return 'mobile';
+
 	if (width < 1024) return 'tablet';
+
 	return 'desktop';
 }

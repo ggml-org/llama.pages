@@ -3,15 +3,15 @@
 	// the build to the page, which opens the install dialog. On a Mac the
 	// button also fires the app deeplink first, so the dialog lands on top of
 	// an install that may already be underway.
-	import { type Size, type Build, deeplink, displaySize, minMemForBuild } from '$lib/catalog';
+	import { Terminal } from '@lucide/svelte';
+	import { type Build, deeplink, displaySize, minMemForBuild, type Size } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
-	import { Terminal } from '@lucide/svelte';
 
 	let {
-		size,
+		oninstall,
 		showQuantized = false,
-		oninstall
+		size
 	}: { size: Size; showQuantized?: boolean; oninstall: (b: Build, s: Size) => void } = $props();
 
 	// One primary action per row, platform-dependent behind the same label
@@ -21,6 +21,7 @@
 	// via oninstall.
 	function install(b: Build) {
 		if (deviceInfo.isMac) location.href = deeplink(b);
+
 		oninstall(b, size);
 	}
 

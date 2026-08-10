@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Copy, Check } from '@lucide/svelte';
-	import { toast } from 'svelte-sonner';
+	import { Check, Copy } from '@lucide/svelte';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import { toast } from 'svelte-sonner';
 
 	let copied = $state(false);
 
