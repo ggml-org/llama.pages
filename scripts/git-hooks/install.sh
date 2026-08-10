@@ -33,8 +33,9 @@ for hook in pre-commit pre-push; do
 done
 
 echo ""
-echo "Pre-commit:  format + svelte check"
+echo "Pre-commit:  format staged files + svelte check"
 echo "Pre-push:    lint + test"
 echo ""
-echo "Hooks stash unstaged changes temporarily and restore them after."
+echo "Hooks operate on the working tree and never stash, so unstaged"
+echo "changes are left untouched."
 echo "Skip with:  git commit --no-verify / git push --no-verify"

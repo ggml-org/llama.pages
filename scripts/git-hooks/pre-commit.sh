@@ -1,52 +1,64 @@
 #!/usr/bin/env bash
 #
 # Pre-commit hook for llama.pages
-# Runs: format + svelte check
-# Stashes unstaged changes temporarily and restores them after.
+# Formats the staged files, re-stages them, then runs svelte check.
+#
+# Unstaged working-tree changes are left completely untouched — nothing is
+# stashed. Stashing here is dangerous: with staged new files or deletions it
+# can lift staged changes into a stash that is never restored, silently
+# removing them from the working tree (see `git stash push --keep-index`).
 
 # Only run when there are staged changes
 if ! git diff --cached --name-only | grep -q .; then
-    exit 0
+	exit 0
 fi
+
+set -euo pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT"
 
 # Check that node_modules exists
 if [ ! -d "node_modules" ]; then
-    echo "❌ node_modules not found. Run 'npm ci' first."
-    exit 1
+	echo "❌ node_modules not found. Run 'npm ci' first."
+	exit 1
 fi
-
-# Stash unstaged changes so they don't interfere with the checks
-stash_name="pi-pages-precommit"
-git stash push --keep-index -u -m "$stash_name" 2>/dev/null || true
 
 echo "Running pre-commit checks for llama.pages..."
 
-# Format the working tree, then re-stage anything that changed
-npm run format
-format_ok=$?
-if [ $format_ok -eq 0 ]; then
-    git add --update
+# Staged files still on disk (added/modified/renamed — skip deletions).
+staged_names=$(git diff --cached --name-only --diff-filter=ACMR)
+
+ext_code='.(ts|mts|cts|js|mjs|cjs|svelte)$'
+ext_text='.(ts|mts|cts|js|mjs|cjs|svelte|md|mdx|svx|css|scss|json|yaml|yml)$'
+
+# --- Format staged code/text files, then re-stage them -------------------
+if [ -n "$staged_names" ]; then
+	text_files=()
+	while IFS= read -r f; do text_files+=("$f"); done < <(printf '%s\n' "$staged_names" | grep -E "$ext_text" || true)
+	if [ "${#text_files[@]}" -gt 0 ]; then
+		if ! npx prettier --write "${text_files[@]}"; then
+			echo "❌ Prettier failed"
+			exit 1
+		fi
+		git add -- "${text_files[@]}"
+	fi
+
+	code_files=()
+	while IFS= read -r f; do code_files+=("$f"); done < <(printf '%s\n' "$staged_names" | grep -E "$ext_code" || true)
+	if [ "${#code_files[@]}" -gt 0 ]; then
+		if ! npx eslint --fix "${code_files[@]}"; then
+			echo "❌ ESLint failed"
+			exit 1
+		fi
+		git add -- "${code_files[@]}"
+	fi
 fi
 
-# Svelte check on the clean tree
-npm run check
-check_ok=$?
-
-# Restore stashed changes
-if git stash list | grep -q "$stash_name"; then
-    git stash pop 2>/dev/null || true
-fi
-
-if [ $format_ok -ne 0 ]; then
-    echo "❌ Format failed"
-    exit 1
-fi
-if [ $check_ok -ne 0 ]; then
-    echo "❌ Svelte check failed"
-    exit 1
+# --- Svelte check ---------------------------------------------------------
+if ! npm run check; then
+	echo "❌ Svelte check failed"
+	exit 1
 fi
 
 echo "✅ Pre-commit checks passed"
