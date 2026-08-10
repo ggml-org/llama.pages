@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logoSvg from '$lib/assets/icon-light.svg?raw';
+	import logoSvg from '$lib/assets/brand/icon-light.svg?raw';
 
 	interface Props {
 		showName?: boolean;

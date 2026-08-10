@@ -1,11 +1,11 @@
 <script lang="ts">
-	import CodeCopyButton from '$lib/components/app/docs/CodeCopyButton.svelte';
+	import { DocsCodeCopyButton } from '$lib/components/app/docs';
 	import DocsCopyPage from '$lib/components/app/docs/DocsCopyPage.svelte';
 	import DocsFooterNav from '$lib/components/app/docs/DocsFooterNav.svelte';
 	import DocsSearch from '$lib/components/app/docs/DocsSearch.svelte';
 	import DocsSidebar from '$lib/components/app/docs/DocsSidebar.svelte';
 	import DocsToc from '$lib/components/app/docs/DocsToc.svelte';
-	import { SITE_TITLE, SITE_URL } from '$lib/constants/site';
+	import { SITE_TITLE, SITE_URL } from '$lib/constants';
 	import { mount, unmount } from 'svelte';
 
 	let { data } = $props();
@@ -28,7 +28,7 @@
 			wrapper.className = 'group relative';
 			pre.replaceWith(wrapper);
 			wrapper.appendChild(pre);
-			const button = mount(CodeCopyButton, {
+			const button = mount(DocsCodeCopyButton, {
 				props: { getText: () => pre.innerText },
 				target: wrapper
 			});

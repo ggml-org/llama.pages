@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Check, Copy } from '@lucide/svelte';
-	import { COPY_FEEDBACK_MS } from '$lib/constants/docs';
+	import { COPY_FEEDBACK_MS } from '$lib/constants';
 
 	interface Props {
 		getText: () => string;

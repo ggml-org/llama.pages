@@ -5,7 +5,7 @@
 	// an install that may already be underway.
 	import { Terminal } from '@lucide/svelte';
 	import { type Build, deeplink, displaySize, minMemForBuild, type Size } from '$lib/catalog';
-	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+	import ModelsCatalogVisionBadge from '$lib/components/app/models-catalog/ModelsCatalogVisionBadge.svelte';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
 
 	let {
@@ -50,7 +50,7 @@
 					</span>
 				{/if}
 				{#if size.vision}
-					<VisionBadge />
+					<ModelsCatalogVisionBadge />
 				{/if}
 			</span>
 			{#if minMemForBuild(build)}
