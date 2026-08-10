@@ -1,4 +1,4 @@
-import type { FlatTocEntry, TocItem } from './types';
+import type { FlatTocEntry, TocItem } from '$lib/types';
 import type { Component } from 'svelte';
 import { parse } from 'yaml';
 

@@ -2,7 +2,7 @@
 	import Self from './SectionNav.svelte';
 	import { ChevronRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import type { TocItem } from '$lib/docs/types';
+	import type { TocItem } from '$lib/types';
 
 	interface Props {
 		item: TocItem;

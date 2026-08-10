@@ -1,4 +1,4 @@
-import type { DeviceFormFactor } from './index.svelte';
+import { DeviceFormFactor } from '$lib/enums';
 
 export function getAppleSiliconRenderer(): string | null {
 	try {
@@ -71,9 +71,9 @@ export function detectBrowser(): string {
 export function detectFormFactor(): DeviceFormFactor {
 	const width = window.innerWidth;
 
-	if (width < 768) return 'mobile';
+	if (width < 768) return DeviceFormFactor.MOBILE;
 
-	if (width < 1024) return 'tablet';
+	if (width < 1024) return DeviceFormFactor.TABLET;
 
-	return 'desktop';
+	return DeviceFormFactor.DESKTOP;
 }

@@ -2,6 +2,7 @@
 // verbatim at /v1/catalog.json (see src/routes/v1/catalog.json/+server.ts) for
 // the apps to fetch.
 import data from './catalog.json';
+import type { Build, Catalog, Family } from './types';
 
 // Vocabulary (shared with the apps):
 //   family — the named release line, e.g. "Gemma 3". Holds the shared metadata.
@@ -10,63 +11,6 @@ import data from './catalog.json';
 // "brand" (e.g. "Gemma") and "publisher" (e.g. "Google") are attributes of a
 // family, not levels of their own. The data nests these strictly:
 // family → size → build.
-
-// A downloadable quant of a size: the same weights at a given quantization.
-// Each build points at its own repo, since quants sometimes live in different
-// orgs (e.g. Q4 under mistralai, Q8 mirrored under ggml-org).
-export type Build = {
-	quant?: string;
-	// Human size label, e.g. "5.0 GB". Kept for compatibility: shipped app
-	// versions decode `size` as a string from the published catalog.
-	size?: string;
-	// Download size in bytes, as reported by the Hugging Face tree API
-	// (the sum of the build's GGUF files for split models).
-	sizeBytes?: number;
-	repo: string;
-};
-
-export type Size = {
-	name: string;
-	params?: string;
-	vision?: boolean;
-	// Memory cap (in GB) for featuring, like Family.maxMemGb but for one size:
-	// consumers should not suggest this size on machines with more RAM than
-	// this (e.g. the small Gemma 4 E-series on 32 GB+ Macs). Absent means the
-	// family's cap (if any) applies.
-	maxMemGb?: number;
-	builds: Build[];
-};
-
-export type Family = {
-	name: string;
-	// Brand behind the family (e.g. "Gemma"), used for the logo.
-	brand: string;
-	// One-line summary, shown on the catalog cards where space is tight.
-	description: string;
-	// Longer prose about the family, paragraphs separated by a blank line
-	// ("\n\n"). Kept in the published catalog for consumers, but the website
-	// no longer renders it -- the header's one-line summary covers the page.
-	details?: string;
-	// Approximate release month as "YYYY-MM". Not meant to be precise.
-	released: string;
-	// Weights license, as a short display string (e.g. "Apache 2.0", "MIT",
-	// "Gemma license"). Families whose sizes ship under different licenses
-	// list both (e.g. "Apache 2.0 / Modified MIT").
-	license: string;
-	// Whether this family is featured. Exposed in the published catalog API for
-	// consumers to highlight; the website doesn't surface it. Absent means false.
-	featured?: boolean;
-	// Memory cap (in GB) for featuring: consumers should not suggest this family
-	// on machines with more RAM than this. Marks a family as a low-memory pick
-	// (e.g. Gemma 3 for 8 GB Macs). Absent means no cap.
-	maxMemGb?: number;
-	sizes: Size[];
-};
-
-// The catalog is just the list of families — no top-level wrapper. Anything a
-// single consumer needs around it (e.g. the website's page title) lives in that
-// consumer, not in the shared data.
-export type Catalog = Family[];
 
 export const catalog = data as Catalog;
 

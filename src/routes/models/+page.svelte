@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { ChevronRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
+	import { logoFor } from '$lib/assets/logos';
 	import { families, releasedFor, slugify } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
-	import { logoFor } from '$lib/assets/logos';
 </script>
 
 <svelte:head>

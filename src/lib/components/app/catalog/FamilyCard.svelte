@@ -5,9 +5,10 @@
 	// invite a click, not carry specs; sizes live on the index and detail
 	// pages.
 	import { resolve } from '$app/paths';
-	import { type Family, slugify } from '$lib/catalog';
-	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 	import { logoFor } from '$lib/assets/logos';
+	import { slugify } from '$lib/catalog';
+	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
+	import type { Family } from '$lib/types';
 
 	let { family }: { family: Family } = $props();
 </script>

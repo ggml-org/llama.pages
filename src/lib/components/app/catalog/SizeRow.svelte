@@ -4,9 +4,10 @@
 	// button also fires the app deeplink first, so the dialog lands on top of
 	// an install that may already be underway.
 	import { Terminal } from '@lucide/svelte';
-	import { type Build, deeplink, displaySize, minMemForBuild, type Size } from '$lib/catalog';
+	import { deeplink, displaySize, minMemForBuild } from '$lib/catalog';
 	import VisionBadge from '$lib/components/app/catalog/VisionBadge.svelte';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import type { Build, Size } from '$lib/types';
 
 	let {
 		oninstall,

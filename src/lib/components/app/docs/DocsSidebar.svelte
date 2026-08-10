@@ -2,7 +2,7 @@
 	import SectionNav from './SectionNav.svelte';
 	import { Search } from '@lucide/svelte';
 	import { searchState } from '$lib/docs/search.svelte';
-	import type { TocItem } from '$lib/docs/types';
+	import type { TocItem } from '$lib/types';
 
 	interface Props {
 		toctree: TocItem[];

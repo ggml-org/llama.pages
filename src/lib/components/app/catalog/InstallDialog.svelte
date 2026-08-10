@@ -21,9 +21,10 @@
 	// and the backdrop come for free, no dialog dependency needed.
 	import { Check, Copy, X } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import { type Build, cliCommand, displaySize, minMemForBuild, type Size } from '$lib/catalog';
+	import { cliCommand, displaySize, minMemForBuild } from '$lib/catalog';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import type { Build, Size } from '$lib/types';
 
 	// The build being installed plus its size (for the title), or null when the
 	// dialog is closed. Owned by the page (bindable) so closing the dialog
