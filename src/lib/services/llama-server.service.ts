@@ -99,7 +99,6 @@ export class LlamaServerService {
 		}
 	}
 
-	/** Whether a llama-server answers at this base URL. */
 	static async probe(base: string): Promise<boolean> {
 		try {
 			const init: RequestInit & { targetAddressSpace?: 'loopback' } = {

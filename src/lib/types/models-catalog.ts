@@ -21,7 +21,6 @@ export type Family = {
 	name: string;
 	// Brand behind the family (e.g. "Gemma"), used for the logo.
 	brand: string;
-	// One-line summary for the catalog cards.
 	description: string;
 	// Longer prose, kept for consumers; the website renders only `description`.
 	details?: string;

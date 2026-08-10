@@ -39,17 +39,15 @@ export class ModelsCatalogService {
 	/** Authored (API) order — served verbatim as the catalog JSON. */
 	static readonly data = data as ModelsCatalog;
 
-	/** Catalog in display order: newest first. */
 	static readonly families = [...ModelsCatalogService.data].sort((a, b) =>
 		b.released.localeCompare(a.released)
 	);
 
-	/** URL-safe id for a family name (see utils/slug). Kept for callers. */
+	/** Wrapper kept for callers (see utils/slug). */
 	static slugify(family: string): string {
 		return slugify(family);
 	}
 
-	/** The family for a given slug, or undefined if no family matches. */
 	static familyBySlug(slug: string): Family | undefined {
 		return ModelsCatalogService.data.find((f) => ModelsCatalogService.slugify(f.name) === slug);
 	}
@@ -59,7 +57,6 @@ export class ModelsCatalogService {
 		return formatMonthYear(f.released);
 	}
 
-	/** Format a download size (bytes) for display (see utils/format). */
 	static displaySize(size: number | undefined): string {
 		return formatGigabytes(size);
 	}
