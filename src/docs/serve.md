@@ -46,6 +46,7 @@ llama serve -m model.gguf \
 
 Every option also has an environment-variable form (shown in `llama serve --help`), which is handy for containers:
 
+<!-- prettier-ignore -->
 ```yml
 services:
   llamacpp-server:
@@ -59,7 +60,7 @@ services:
       LLAMA_ARG_MODEL: /models/my_model.gguf
       LLAMA_ARG_CTX_SIZE: 4096
       LLAMA_ARG_N_PARALLEL: 2
-      LLAMA_ARG_PORT: { { DEFAULT_PORT } }
+      LLAMA_ARG_PORT: {{DEFAULT_PORT}}
 ```
 
 ## Serving multiple users
