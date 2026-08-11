@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { type Build, releasedFor, type Size } from '$lib/catalog';
-	import InstallDialog from '$lib/components/app/catalog/InstallDialog.svelte';
-	import SizeRow from '$lib/components/app/catalog/SizeRow.svelte';
+	import { ModelsCatalogInstallDialog, ModelsCatalogSizeRow } from '$lib/components/app';
 
 	let { data }: { data: PageData } = $props();
 	const family = $derived(data.family);
@@ -82,11 +81,15 @@
 		<table class="w-full text-left">
 			<tbody>
 				{#each family.sizes as s (s.name)}
-					<SizeRow size={s} {showQuantized} oninstall={(build, size) => (run = { build, size })} />
+					<ModelsCatalogSizeRow
+						size={s}
+						{showQuantized}
+						oninstall={(build, size) => (run = { build, size })}
+					/>
 				{/each}
 			</tbody>
 		</table>
 	</section>
 </main>
 
-<InstallDialog bind:run />
+<ModelsCatalogInstallDialog bind:run />

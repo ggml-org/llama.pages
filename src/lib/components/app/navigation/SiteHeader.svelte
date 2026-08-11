@@ -2,8 +2,7 @@
 	import { Monitor, Moon, Sun } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import Logo from '$lib/components/app/misc/Logo.svelte';
-	import GitHubLink from '$lib/components/app/navigation/GitHubLink.svelte';
+	import { GitHubLink, Logo } from '$lib/components/app';
 	import { setMode, userPrefersMode } from 'mode-watcher';
 
 	const stars = $derived(page.data.stars as number | null | undefined);

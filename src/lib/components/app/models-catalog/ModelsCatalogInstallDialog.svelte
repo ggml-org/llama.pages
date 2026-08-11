@@ -22,7 +22,7 @@
 	import { Check, Copy, X } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { type Build, cliCommand, displaySize, minMemForBuild, type Size } from '$lib/catalog';
-	import { MACOS_DOWNLOAD_URL } from '$lib/constants/site';
+	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
 
 	// The build being installed plus its size (for the title), or null when the

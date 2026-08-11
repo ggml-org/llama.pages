@@ -2,7 +2,7 @@
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { families } from '$lib/catalog';
-	import FamilyCard from '$lib/components/app/catalog/FamilyCard.svelte';
+	import { ModelsCatalogFamilyCard } from '$lib/components/app';
 
 	// A teaser of the catalog on the homepage: the featured families, newest
 	// first (`families` is already in that order), as a grid of tiles. The
@@ -15,7 +15,7 @@
 
 	<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
 		{#each featured as f (f.name)}
-			<FamilyCard family={f} />
+			<ModelsCatalogFamilyCard family={f} />
 		{/each}
 	</div>
 
