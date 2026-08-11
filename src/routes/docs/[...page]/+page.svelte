@@ -1,7 +1,13 @@
 <script lang="ts">
-	import { DocsCopyPage, DocsFooterNav, DocsSearch, DocsSidebar, DocsToc } from '$lib/components/app';
+	import {
+		DocsCopyPage,
+		DocsFooterNav,
+		DocsSearch,
+		DocsSidebar,
+		DocsToc
+	} from '$lib/components/app';
 	import { SITE_TITLE, SITE_URL } from '$lib/constants';
-	import { useDocsCodeCopyButtons } from '$lib/hooks/use-docs-code-copy-buttons.svelte';
+	import { useDocsCodeCopyButtons } from '$lib/hooks';
 
 	let { data } = $props();
 

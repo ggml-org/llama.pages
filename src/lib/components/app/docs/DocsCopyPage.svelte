@@ -5,7 +5,7 @@
 	import { Logo } from '$lib/components/app';
 	import { DEFAULT_PORT, DEFAULT_URL, LLAMA_PROMPT_MAX_CHARS } from '$lib/constants';
 	import { LlamaServerStatus } from '$lib/enums';
-	import { LlamaServerService } from '$lib/services/llama-server.service';
+	import { LlamaServerService } from '$lib/services';
 
 	interface Props {
 		local: string;

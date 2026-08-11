@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DocsSectionNav from './DocsSectionNav.svelte';
 	import { Search } from '@lucide/svelte';
-	import { searchState } from '$lib/stores/search/index.svelte';
+	import { searchStore } from '$lib/stores';
 	import type { TocItem } from '$lib/types';
 
 	interface Props {
@@ -14,7 +14,7 @@
 
 <button
 	type="button"
-	onclick={() => (searchState.open = true)}
+	onclick={() => (searchStore.open = true)}
 	class="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-foreground/4 px-2.5 py-2 text-sm text-foreground/45 transition-colors hover:bg-foreground/7 hover:text-foreground/70"
 >
 	<Search class="size-3.5 shrink-0" />

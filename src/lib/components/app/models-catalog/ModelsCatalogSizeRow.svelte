@@ -6,7 +6,7 @@
 	import ModelsCatalogVisionBadge from './ModelsCatalogVisionBadge.svelte';
 	import { Terminal } from '@lucide/svelte';
 	import { ModelsCatalogService } from '$lib/services';
-	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import { deviceStore } from '$lib/stores';
 	import type { Build, Size } from '$lib/types';
 
 	let {
@@ -21,7 +21,7 @@
 	// exist, so skip the deeplink. Either way the page owns the follow-up
 	// via oninstall.
 	function install(b: Build) {
-		if (deviceInfo.isMac) location.href = ModelsCatalogService.deeplink(b);
+		if (deviceStore.deviceInfo.isMac) location.href = ModelsCatalogService.deeplink(b);
 
 		oninstall(b, size);
 	}
@@ -105,7 +105,7 @@
 					onclick={() => install(build)}
 					class="flex cursor-pointer items-center gap-1.5 rounded-lg bg-primary px-3.5 py-1.5 text-center text-primary-foreground hover:bg-primary/80"
 				>
-					{#if deviceInfo.isMac}
+					{#if deviceStore.deviceInfo.isMac}
 						<svg
 							aria-hidden="true"
 							viewBox="0 0 16 16"

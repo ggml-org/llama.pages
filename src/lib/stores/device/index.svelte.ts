@@ -135,9 +135,13 @@ async function detectAndSet() {
 	}
 }
 
-// Public API — explicitly trigger detection (e.g., from +layout.svelte)
-export function init() {
-	detectAndSet();
-}
-
-export { deviceInfo };
+// Public API — a single facade over the device state and detection.
+// init() explicitly triggers detection (e.g., from +layout.svelte).
+export const deviceStore = {
+	get deviceInfo() {
+		return deviceInfo;
+	},
+	init() {
+		detectAndSet();
+	}
+};

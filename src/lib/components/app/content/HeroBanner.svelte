@@ -4,7 +4,7 @@
 	import { Logo } from '$lib/components/app';
 	import { Button } from '$lib/components/ui/button';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
-	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import { deviceStore } from '$lib/stores';
 </script>
 
 <section class="flex flex-col items-center gap-12 py-16 text-balance md:gap-14 md:py-24">
@@ -19,7 +19,7 @@
 		</p>
 	</div>
 
-	{#if deviceInfo.isMac}
+	{#if deviceStore.deviceInfo.isMac}
 		<div class="-mb-8 flex flex-col items-center gap-6">
 			<!-- Tags the click as the "Download" goal; source separates it from
 			     the other download link in ModelsCatalogInstallDialog -->

@@ -23,7 +23,7 @@
 	import { resolve } from '$app/paths';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
 	import { ModelsCatalogService } from '$lib/services';
-	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import { deviceStore } from '$lib/stores';
 	import type { Build, Size } from '$lib/types';
 
 	// The build being installed plus its size (for the title), or null when the
@@ -92,14 +92,14 @@
 			</button>
 
 			<h2 class="text-[17px] font-semibold tracking-tight">
-				{deviceInfo.isMac ? 'Install' : 'Run'}
+				{deviceStore.deviceInfo.isMac ? 'Install' : 'Run'}
 				{run.size.name}
 			</h2>
 			{#if byline}
 				<p class="mt-1 text-[13px] text-muted-foreground tabular-nums">{byline}</p>
 			{/if}
 
-			{#if deviceInfo.isMac}
+			{#if deviceStore.deviceInfo.isMac}
 				<!-- The deeplink is already away by the time this renders. Whether
 				     anything caught it is unobservable here, so the copy states the
 				     send (past tense, no promise) and then leads with the download,
@@ -163,7 +163,7 @@
 			<p class="mt-4 text-[13px] text-muted-foreground">
 				Downloads the model on first run, then serves it locally.
 			</p>
-			{#if !deviceInfo.isMac}
+			{#if !deviceStore.deviceInfo.isMac}
 				<!-- Answers the newcomer's actual next question -- "I don't have the
 				     llama command" -- with a link home, where the CLI install command
 				     is front and center. Not on a Mac, where the download button above

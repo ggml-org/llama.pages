@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { Check, Copy } from '@lucide/svelte';
-	import { deviceInfo } from '$lib/stores/device/index.svelte';
+	import { deviceStore } from '$lib/stores';
 	import { toast } from 'svelte-sonner';
 
 	let copied = $state(false);
 
 	const installCommand = $derived(
-		deviceInfo.isWindows
+		deviceStore.deviceInfo.isWindows
 			? 'irm https://llama.app/install.ps1 | iex'
 			: 'curl -LsSf https://llama.app/install.sh | sh'
 	);

@@ -2,7 +2,7 @@
 	import { CornerDownLeft, Search } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { searchState } from '$lib/stores/search/index.svelte';
+	import { searchStore } from '$lib/stores';
 	import MiniSearch from 'minisearch';
 
 	interface Section {
@@ -90,12 +90,12 @@
 	$effect(() => {
 		if (!dialog) return;
 
-		if (searchState.open && !dialog.open) {
+		if (searchStore.open && !dialog.open) {
 			query = '';
 			dialog.showModal();
 			ensureIndex();
 			input?.focus();
-		} else if (!searchState.open && dialog.open) {
+		} else if (!searchStore.open && dialog.open) {
 			dialog.close();
 		}
 	});
@@ -103,7 +103,7 @@
 	function onWindowKeydown(event: KeyboardEvent) {
 		if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
 			event.preventDefault();
-			searchState.open = !searchState.open;
+			searchStore.open = !searchStore.open;
 		}
 	}
 
@@ -125,14 +125,14 @@
 	}
 
 	function open(result: Result) {
-		searchState.open = false;
+		searchStore.open = false;
 		// eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() can't express the #anchor fragment
 		goto(resolve('/docs/[...page]', { page: result.page }) + result.hash);
 	}
 
 	function onDialogClick(event: MouseEvent) {
 		// Clicks on the backdrop land on the <dialog> element itself.
-		if (event.target === dialog) searchState.open = false;
+		if (event.target === dialog) searchStore.open = false;
 	}
 </script>
 
@@ -140,7 +140,7 @@
 
 <dialog
 	bind:this={dialog}
-	onclose={() => (searchState.open = false)}
+	onclose={() => (searchStore.open = false)}
 	onclick={onDialogClick}
 	class="mx-auto mt-[12vh] w-full max-w-lg rounded-xl border border-border bg-background p-0 text-foreground shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-xs"
 >
@@ -182,7 +182,7 @@
 					role="option"
 					aria-selected={i === active}
 					href={resolve('/docs/[...page]', { page: result.page }) + result.hash}
-					onclick={() => (searchState.open = false)}
+					onclick={() => (searchStore.open = false)}
 					onpointerenter={() => (active = i)}
 					class="flex flex-col gap-0.5 rounded-md px-3 py-2 {i === active
 						? 'bg-sidebar-accent text-sidebar-accent-foreground'

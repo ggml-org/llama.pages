@@ -1,7 +1,7 @@
 import type { EntryGenerator, PageLoad } from './$types';
 import { error, redirect } from '@sveltejs/kit';
 import { ROUTES } from '$lib/constants';
-import { DocsService } from '$lib/services/docs.service';
+import { DocsService } from '$lib/services';
 
 export const entries: EntryGenerator = () => DocsService.listAllEntries();
 
