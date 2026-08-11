@@ -31,7 +31,11 @@ const config = {
 		// the port is defined once and docs can't drift from the app.
 		{
 			markup: ({ content }) => ({
-				code: String(content).replaceAll('{{DEFAULT_PORT}}', String(DEFAULT_PORT))
+				// prettier ignores the unquoted {{DEFAULT_PORT}} value (else bare braces
+				// get spaced to `{ { } }`); strip the directive so it never reaches HTML.
+				code: String(content)
+					.replaceAll('<!-- prettier-ignore -->', '')
+					.replaceAll('{{DEFAULT_PORT}}', String(DEFAULT_PORT))
 			})
 		},
 		mdsvex({ extensions: ['.svx', '.md'], rehypePlugins: [rehypeSlug] })

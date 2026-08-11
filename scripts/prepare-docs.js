@@ -17,7 +17,13 @@ import GithubSlugger from 'github-slugger';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const expandTokens = (markdown) => markdown.replaceAll('{{DEFAULT_PORT}}', String(DEFAULT_PORT));
+// prettier-ignore comments gate prettier on the unquoted {{DEFAULT_PORT}} value
+// (bare braces otherwise get spaced to `{ { } }`); strip the directive here so it
+// never reaches the raw served .md, leaving only the expanded port.
+const expandTokens = (markdown) =>
+	markdown
+		.replaceAll('<!-- prettier-ignore -->', '')
+		.replaceAll('{{DEFAULT_PORT}}', String(DEFAULT_PORT));
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DOCS_SRC = path.join(ROOT, 'src/docs');
 const STATIC_DIR = path.join(ROOT, 'static/docs');
