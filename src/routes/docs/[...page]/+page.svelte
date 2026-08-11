@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DocsCodeCopyButton } from '$lib/components/app/docs';
+	import DocsCodeCopyButton from '$lib/components/app/docs/DocsCodeCopyButton.svelte';
 	import DocsCopyPage from '$lib/components/app/docs/DocsCopyPage.svelte';
 	import DocsFooterNav from '$lib/components/app/docs/DocsFooterNav.svelte';
 	import DocsSearch from '$lib/components/app/docs/DocsSearch.svelte';
