@@ -5,10 +5,10 @@ import { flattenToc, getPageLoader, listAllEntries, toctree } from '$lib/docs/co
 export const entries: EntryGenerator = () => listAllEntries();
 
 export const load: PageLoad = async ({ params }) => {
-	// The index lives at an explicit /docs/index URL so that relative links
+	// The index lives at an explicit /docs/introduction URL so that relative links
 	// between markdown pages resolve correctly.
 	if (!params.page) {
-		redirect(307, '/docs/index');
+		redirect(307, '/docs/introduction');
 	}
 
 	const local = params.page;

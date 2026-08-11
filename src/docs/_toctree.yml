@@ -1,6 +1,6 @@
 - title: Getting started
   sections:
-    - local: index
+    - local: introduction
       title: Introduction
     - local: installation
       title: Installation
