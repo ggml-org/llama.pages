@@ -1,6 +1,5 @@
 <script lang="ts">
-	import HeroBanner from '$lib/components/app/content/HeroBanner.svelte';
-	import RunYourFirstModel from '$lib/components/app/content/RunYourFirstModel.svelte';
+	import { HeroBanner, RunYourFirstModel } from '$lib/components/app';
 	import ShowcaseSections from '$lib/components/app/content/ShowcaseSections.svx';
 	import { SITE_DESCRIPTION, SITE_TITLE } from '$lib/constants';
 </script>

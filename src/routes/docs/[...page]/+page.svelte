@@ -1,10 +1,12 @@
 <script lang="ts">
-	import DocsCodeCopyButton from '$lib/components/app/docs/DocsCodeCopyButton.svelte';
-	import DocsCopyPage from '$lib/components/app/docs/DocsCopyPage.svelte';
-	import DocsFooterNav from '$lib/components/app/docs/DocsFooterNav.svelte';
-	import DocsSearch from '$lib/components/app/docs/DocsSearch.svelte';
-	import DocsSidebar from '$lib/components/app/docs/DocsSidebar.svelte';
-	import DocsToc from '$lib/components/app/docs/DocsToc.svelte';
+	import {
+		DocsCodeCopyButton,
+		DocsCopyPage,
+		DocsFooterNav,
+		DocsSearch,
+		DocsSidebar,
+		DocsToc
+	} from '$lib/components/app';
 	import { SITE_TITLE, SITE_URL } from '$lib/constants';
 	import { mount, unmount } from 'svelte';
 

@@ -3,9 +3,9 @@
 	// the build to the page, which opens the install dialog. On a Mac the
 	// button also fires the app deeplink first, so the dialog lands on top of
 	// an install that may already be underway.
+	import ModelsCatalogVisionBadge from './ModelsCatalogVisionBadge.svelte';
 	import { Terminal } from '@lucide/svelte';
 	import { type Build, deeplink, displaySize, minMemForBuild, type Size } from '$lib/catalog';
-	import ModelsCatalogVisionBadge from '$lib/components/app/models-catalog/ModelsCatalogVisionBadge.svelte';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';
 
 	let {

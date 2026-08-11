@@ -2,7 +2,7 @@
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
 	import { families } from '$lib/catalog';
-	import ModelsCatalogFamilyCard from '$lib/components/app/models-catalog/ModelsCatalogFamilyCard.svelte';
+	import { ModelsCatalogFamilyCard } from '$lib/components/app';
 
 	// A teaser of the catalog on the homepage: the featured families, newest
 	// first (`families` is already in that order), as a grid of tiles. The

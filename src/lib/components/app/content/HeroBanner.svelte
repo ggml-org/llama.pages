@@ -1,7 +1,7 @@
 <script lang="ts">
 	import InstallCommand from './InstallCommand.svelte';
 	import appleIcon from '$lib/assets/apple-icon.svg?raw';
-	import Logo from '$lib/components/app/misc/Logo.svelte';
+	import { Logo } from '$lib/components/app';
 	import { Button } from '$lib/components/ui/button';
 	import { MACOS_DOWNLOAD_URL } from '$lib/constants';
 	import { deviceInfo } from '$lib/stores/device/index.svelte';

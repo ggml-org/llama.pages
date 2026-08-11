@@ -4,10 +4,10 @@
 	// background the muted chips lose contrast, and the teaser's job is to
 	// invite a click, not carry specs; sizes live on the index and detail
 	// pages.
+	import ModelsCatalogVisionBadge from './ModelsCatalogVisionBadge.svelte';
 	import { resolve } from '$app/paths';
 	import { logoFor } from '$lib/assets/logos';
 	import { type Family, slugify } from '$lib/catalog';
-	import ModelsCatalogVisionBadge from '$lib/components/app/models-catalog/ModelsCatalogVisionBadge.svelte';
 
 	let { family }: { family: Family } = $props();
 </script>

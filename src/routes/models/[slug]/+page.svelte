@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { type Build, releasedFor, type Size } from '$lib/catalog';
-	import ModelsCatalogInstallDialog from '$lib/components/app/models-catalog/ModelsCatalogInstallDialog.svelte';
-	import ModelsCatalogSizeRow from '$lib/components/app/models-catalog/ModelsCatalogSizeRow.svelte';
+	import { ModelsCatalogInstallDialog, ModelsCatalogSizeRow } from '$lib/components/app';
 
 	let { data }: { data: PageData } = $props();
 	const family = $derived(data.family);
