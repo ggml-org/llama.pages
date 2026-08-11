@@ -13,7 +13,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		!pathname.endsWith('.md') &&
 		accept.includes('text/markdown')
 	) {
-		const target = pathname === '/docs' ? '/docs/index.md' : `${pathname}.md`;
+		const target = pathname === '/docs' ? '/docs/introduction.md' : `${pathname}.md`;
 
 		return new Response(null, { headers: { location: target }, status: 307 });
 	}
