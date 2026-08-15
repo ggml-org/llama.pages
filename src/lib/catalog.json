@@ -241,13 +241,42 @@
 		]
 	},
 	{
+		"name": "Qwen 3.8",
+		"brand": "Qwen",
+		"description": "Alibaba's latest multimodal reasoning models. The 27B dense model is tuned for coding, research, and long-horizon agentic work, with 256K native context.",
+		"details": "Qwen 3.8 succeeds the 3.6 line, pairing a very large mixture-of-experts flagship with a 27B dense model -- the size that runs locally. It aims at coding, professional work, research, and long-horizon agentic tasks, and thinking depth is adjustable, so the same weights can answer quickly or reason at length.\n\nIt is natively multimodal, understanding images alongside text, and takes 256K tokens of context natively.",
+		"released": "2026-08",
+		"license": "Apache 2.0",
+		"featured": true,
+		"sizes": [
+			{
+				"name": "Qwen 3.8 27B",
+				"params": "27B",
+				"vision": true,
+				"builds": [
+					{
+						"quant": "Q8_0",
+						"size": "28.6 GB",
+						"sizeBytes": 28595763552,
+						"repo": "ggml-org/Qwen3.8-27B-GGUF"
+					},
+					{
+						"quant": "Q4_K_M",
+						"size": "19.0 GB",
+						"sizeBytes": 18973870432,
+						"repo": "ggml-org/Qwen3.8-27B-GGUF"
+					}
+				]
+			}
+		]
+	},
+	{
 		"name": "Qwen 3.6",
 		"brand": "Qwen",
 		"description": "Alibaba's next-gen natively multimodal reasoning models. Dense and MoE variants that rival models many times their size on coding and vision tasks.",
 		"details": "Qwen 3.6 is Alibaba's next-generation multimodal lineup, refining the dense and MoE recipes from 3.5 with stronger coding and agentic performance.\n\nNatively multimodal and reasoning-capable, the models continue to rival systems many times their size while staying practical to run locally.",
 		"released": "2026-04",
 		"license": "Apache 2.0",
-		"featured": true,
 		"sizes": [
 			{
 				"name": "Qwen 3.6 27B",
@@ -491,8 +520,8 @@
 	{
 		"name": "Laguna XS 2.1",
 		"brand": "Laguna",
-		"description": "Poolside's compact mixture-of-experts model for agentic coding. Built for long-horizon work with interleaved reasoning and 262K context.",
-		"details": "Laguna XS 2.1 is Poolside's compact coding model: 33B total parameters with 3B activated per token, so it runs at small-model speed while keeping the capability of a much larger one. It targets agentic software engineering -- exploring repositories, editing across files, and driving terminal workflows over long sessions.\n\nThe model supports interleaved thinking between tool calls, which can be turned on or off per request, and handles a 262K token context. At 33B total parameters it fits comfortably on a high-memory Mac.",
+		"description": "Poolside's compact mixture-of-experts model for agentic coding. Built for long-horizon work with interleaved reasoning and 256K context.",
+		"details": "Laguna XS 2.1 is Poolside's compact coding model: 33B total parameters with 3B activated per token, so it runs at small-model speed while keeping the capability of a much larger one. It targets agentic software engineering -- exploring repositories, editing across files, and driving terminal workflows over long sessions.\n\nThe model supports interleaved thinking between tool calls, which can be turned on or off per request, and handles a 256K token context. At 33B total parameters it fits comfortably on a high-memory Mac.",
 		"released": "2026-07",
 		"license": "OpenMDW 1.1",
 		"sizes": [
